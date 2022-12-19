@@ -159,15 +159,45 @@ header nav .nav-tools {
   grid-area: tools;
   flex: 0 0 auto;
   height: 22px;
-  display: none;
+  left: 550px;
+  position: relative;
 }
 
 header nav .nav-tools p {
   margin: 0;
 }
 
-header nav[aria-expanded='true'] .nav-tools img {
-  display: unset;
+header nav .nav-tools ul {
+  list-style: none;
+  flex-direction: row;
+  color: #fff;
+  font-size: 16px;
+}
+
+body > header > div > nav > div.nav-tools > ul {
+  display: flex;
+}
+
+header > div > nav > div.nav-tools > ul > li {
+  cursor: pointer;
+}
+
+header nav[aria-expanded='true'] .nav-tools li {
+  padding: 0;
+}
+
+/* this is the dropdown */
+header > div > nav > div.nav-tools > ul > li > ul {
+  display: none;
+  border-radius: 4px;
+  box-shadow: 0 6px 12px rgb(0 0 0 / 18%);
+  font-size: 14px;
+  padding: 5px 0;
+  margin-top: 0;
+}
+
+header > div > nav > div.nav-tools > ul > li > ul > li > a {
+  padding: 3px 20px;
 }
 
 header nav[aria-expanded='true'] .nav-tools ul {
@@ -175,8 +205,25 @@ header nav[aria-expanded='true'] .nav-tools ul {
   flex-direction: column;
 }
 
-header nav[aria-expanded='true'] .nav-tools li {
-  padding: 0;
+header nav .nav-tools > ul > li[aria-expanded='true'] ul {
+  display: block;
+  background-color: #fff;
+  width: 300px;
+  left: 0;
+  color: #000;
+}
+
+header > div > nav > div.nav-tools > ul > li:hover {
+  color: #FFcd00;
+}
+
+header > div > nav > div.nav-tools .active {
+  background-color: #337ab7;
+  color: #fff;
+}
+
+header nav[aria-expanded='true'] .nav-tools img {
+  display: unset;
 }
 
 /* desktop nav styles */
@@ -290,5 +337,5 @@ header nav[aria-expanded='true'] .nav-tools li {
 }
 
 .navbar a:hover {
-  color:#FFcd00;
+  color: #FFcd00;
 }
