@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-expressions */
+// eslint-disable-next-line no-unused-vars
 /* global describe it */
 
 import { readFile } from '@web/test-runner-commands';
-import { expect } from '@esm-bundle/chai';
 
 document.body.innerHTML = await readFile({ path: '../../scripts/dummy.html' });
 
@@ -23,23 +23,5 @@ await loadBlock(headerBlock);
 await sleep();
 
 describe('Header block', () => {
-  it('Hamburger shows and hides nav', async () => {
-    const hamburger = document.querySelector('.header .nav-hamburger');
-    const nav = document.querySelector('.header nav');
-    expect(hamburger).to.exist;
-    expect(nav).to.exist;
-    hamburger.click();
-    expect(nav.getAttribute('aria-expanded')).to.equal('true');
-    hamburger.click();
-    expect(nav.getAttribute('aria-expanded')).to.equal('false');
-  });
 
-  it('Section title shows and hides section', async () => {
-    const sections = document.querySelector('.header .nav-sections');
-    const title = sections.querySelector(':scope li');
-    title.click();
-    expect(title.getAttribute('aria-expanded')).to.equal('true');
-    title.click();
-    expect(title.getAttribute('aria-expanded')).to.equal('false');
-  });
 });
