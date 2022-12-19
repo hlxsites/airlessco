@@ -1,9 +1,9 @@
-# Your Project's Title...
-Your project's description...
+# AIRLESSCO
+Graco's port of AirlessCo.com
 
 ## Environments
-- Preview: https://main--{repo}--{owner}.hlx.page/
-- Live: https://main--{repo}--{owner}.hlx.live/
+- Preview: https://main--airlesssco--hlxsites.hlx.page/
+- Live: https://main--airlesssco--hlxsites.hlx.live/
 
 ## Installation
 
