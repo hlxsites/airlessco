@@ -19,7 +19,7 @@ export default function decorate(block) {
         div.className = 'productcards-productcard-body';
       } else div.className = 'productcards-productcard-body';
     });
-    li.innerHTML = `<a href ="${cardLink}"> ${li.innerHTML} </a>`;
+    li.innerHTML = `<a href ="${cardLink}"><div class ="productcards-productcard-div">  ${li.innerHTML} </div> </a>`;
     ul.append(li);
   });
   ul.querySelectorAll('img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
