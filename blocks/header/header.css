@@ -5,14 +5,15 @@ header nav {
     'hamburger brand tools' var(--nav-height)
     'sections sections sections' 1fr / 50px 1fr 50px;
   align-items: center;
-  padding: 0 2rem;
-  position: fixed;
   z-index: 1;
   background-color: var(--background-color);
   width: 100vw;
   height: var(--nav-height);
-  box-sizing: border-box;
   font-family: var(--body-font-family);
+}
+
+.navbar a {
+  text-decoration: none;
 }
 
 header nav a:any-link {
@@ -28,10 +29,13 @@ header nav[aria-expanded='true'] {
 
 /* brand */
 header .nav-brand {
-  grid-area: brand;
   font-size: 22px;
   font-weight: 700;
   line-height: 1em;
+  position: relative;
+  width: 900px;
+  top: 80px;
+  left: 20px;
 }
 
 header nav .nav-brand p {
@@ -41,6 +45,22 @@ header nav .nav-brand p {
 header nav .nav-brand img {
   width: 128px;
   height: auto;
+}
+
+header nav .nav-brand ul  {
+  font-size: 22px;
+  font-weight: 600;
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  color: #fff;
+  width: 1400px;
+}
+
+header nav .nav-brand li {
+  font-size: 22px;
+  font-weight: 600;
+  width: 300px;
 }
 
 /* hamburger */
@@ -110,20 +130,23 @@ header nav .nav-sections {
   grid-area: sections;
   flex-direction: column;
   display: none;
-  background-color: var(--overlay-color);
   flex: 1 1 auto;
+  color: #fff;
+  position: relative;
+  left: 580px;
+  top: 80px;
 }
 
 header nav .nav-sections ul  {
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 22px;
+  font-weight: 600;
   list-style: none;
   padding-left: 0;
-} 
+}
 
 header nav .nav-sections li {
-  font-size: 20px;
-  font-weight: 500;
+  font-size: 22px;
+  font-weight: 600;
 }
 
 header nav[aria-expanded='true'] .nav-sections {
@@ -136,6 +159,7 @@ header nav .nav-tools {
   grid-area: tools;
   flex: 0 0 auto;
   height: 22px;
+  display: none;
 }
 
 header nav .nav-tools p {
@@ -161,7 +185,6 @@ header nav[aria-expanded='true'] .nav-tools li {
     display: flex;
     justify-content: space-between;
     height: var(--nav-height);
-    padding: 16px 2rem;
   }
 
   header nav .nav-sections > ul > li.nav-drop {
@@ -171,7 +194,6 @@ header nav[aria-expanded='true'] .nav-tools li {
 
   header nav .nav-drop::after {
     content: ' ';
-    border: 1px solid currentolor;
     transform: rotate(135deg);
     border-width: 2px 2px 0 0;
     display: inline-block;
@@ -201,7 +223,7 @@ header nav[aria-expanded='true'] .nav-tools li {
     width: unset;
     margin: 0;
   }
-  
+
   header nav[aria-expanded='true'] .nav-sections ol {
     display: flex;
     min-height: unset;
@@ -210,10 +232,9 @@ header nav[aria-expanded='true'] .nav-tools li {
   header nav .nav-sections > ul > li {
     padding: 0 16px;
     position: relative;
-    font-size: 16px;
+    font-size: 22px;
     margin: 0;
     cursor: pointer;
-    padding-top: 0;
   }
 
   header nav .nav-sections > ul > li > p {
@@ -236,7 +257,7 @@ header nav[aria-expanded='true'] .nav-tools li {
     height: 0;
     position: absolute;
     border-left: 15px solid transparent;
-    border-right: 15px solid transparent;    
+    border-right: 15px solid transparent;
     border-bottom: 15px solid var(--highlight-background-color);
     top: -15px;
     left: 20px;
@@ -255,6 +276,19 @@ header nav[aria-expanded='true'] .nav-tools li {
     width: 300px;
     left: 0;
     padding: 16px;
-    box-shadow: 0 0 5px var(text-color);
   }
+}
+
+.navbar {
+  background-image: url('https://main--airlessco--hlxsites.hlx.page/media_1b84d43edf5cb246e236f600196514d82bbb4c996.jpeg#width=1600&height=284');
+  background-repeat: no-repeat;
+  max-width: 1600px;
+  width: 1600px;
+  margin-left: auto;
+  margin-right: auto;
+  flex-direction: column-reverse;
+}
+
+.navbar a:hover {
+  color:#FFcd00;
 }
