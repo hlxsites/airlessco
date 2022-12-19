@@ -4,3 +4,5 @@ logs/*
 node_modules/*
 .idea
 helix-importer-ui
+styles/airlessco01fprod.css
+styles/bootstrap.css
