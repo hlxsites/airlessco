@@ -2,8 +2,8 @@
 Graco's port of AirlessCo.com
 
 ## Environments
-- Preview: https://main--airlesssco--hlxsites.hlx.page/
-- Live: https://main--airlesssco--hlxsites.hlx.live/
+- Preview: https://main--airlessco--hlxsites.hlx.page/
+- Live: https://main--airlessco--hlxsites.hlx.live/
 
 ## Installation
 
