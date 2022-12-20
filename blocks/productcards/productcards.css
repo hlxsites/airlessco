@@ -47,6 +47,7 @@ padding: 0;
     margin-left: auto;
     overflow-clip-margin: content-box;
     overflow: clip;
+    aspect-ratio: 1/1;
 }
 
 .productcards .productcards-productcard-div {
