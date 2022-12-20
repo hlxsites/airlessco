@@ -229,11 +229,11 @@ main .section.highlight {
   background-color: var(--highlight-background-color);
 }
 
-main .section.card-heading[data-section-status='loaded']{
+main .section.card-heading{
   padding: 0;
 }
 
-main .section.card-heading[data-section-status='loaded'] p{
+main .section.card-heading p{
   position: relative;
   font-weight: 400;
   line-height: 1;
@@ -241,7 +241,7 @@ main .section.card-heading[data-section-status='loaded'] p{
   font-size: 65%;
 }
 
-main .section.card-heading[data-section-status='loaded'] p strong {
+main .section.card-heading p strong {
   font-weight: bold;
   color: #0033ab;
   font-size: 24px;
