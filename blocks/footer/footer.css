@@ -27,9 +27,15 @@ footer .air-footer {
   grid-area: built2last;
 }
 
+.air-footer div:nth-child(1) > picture > img, .air-footer div:nth-child(2) > picture > img, .air-footer div:nth-child(6) > picture > img {
+  max-width: 100%;
+  height: auto;
+}
+
 .air-footer div:nth-child(2)  {
   padding-top: 45px;
   padding-left: 50px;
+  padding-right: 50px;
   grid-area: logo;
 }
 
@@ -77,4 +83,58 @@ footer .air-footer {
 
 .air-footer a {
   color: #000;
+}
+
+@media (max-width: 900px) {
+  .air-footer h3 {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .air-footer ul a {
+    font-size: var(--body-font-size-xs);
+    line-height: 1px;
+  }
+
+  .air-footer ul {
+    line-height: 1.2;
+  }
+
+  .air-footer div:nth-child(7) > p {
+    font-size: var(--body-font-size-xs);
+  }
+
+  .air-footer div:nth-child(2) > picture > img {
+    max-width: 108px;
+    height: auto;
+  }
+
+  .air-footer div:nth-child(6) > picture > img {
+    max-width: 80px;
+    height: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .air-footer div:nth-child(3), .air-footer div:nth-child(4), .air-footer div:nth-child(5) {
+    display: none;
+  }
+
+  .air-footer div:nth-child(2) > picture > img {
+    max-width: 220px;
+    height: auto;
+  }
+
+  .air-footer div:nth-child(6) > picture > img {
+    max-width: 220px;
+    height: auto;
+  }
+
+  .air-footer div:nth-child(2) {
+    padding-top: 0;
+  }
+
+  .air-footer div:nth-child(6) {
+    padding-top: 20px;
+  }
 }
