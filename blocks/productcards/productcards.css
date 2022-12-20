@@ -40,8 +40,7 @@ padding: 0;
 .productcards > ul > li img {
     width: 100%;
     display: block;
-    max-width: 100%;
-    aspect-ratio: 4/3;
+    max-width: 100%;    
     height: auto;
     object-fit: cover;
     margin-right: auto;
