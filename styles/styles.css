@@ -31,12 +31,12 @@
   --body-font-size-xs: 14px;
 
   /* heading sizes */
-  --heading-font-size-xxl: 48px;
-  --heading-font-size-xl: 40px;
-  --heading-font-size-l: 32px;
-  --heading-font-size-m: 24px;
-  --heading-font-size-s: 20px;
-  --heading-font-size-xs: 18px;
+  --heading-font-size-xxl: 36px;
+  --heading-font-size-xl: 43px;
+  --heading-font-size-l: 24px;
+  --heading-font-size-m: 18px;
+  --heading-font-size-s: 14px;
+  --heading-font-size-xs: 12px;
 
   /* nav height */
   --nav-height: 284px;
@@ -165,7 +165,7 @@ main input:hover {
 }
 
 main .section {
-  padding: 64px 16px;
+  padding: 0;
 }
 
 main pre {
@@ -208,20 +208,11 @@ main img {
 
 @media (min-width: 600px) {
   main .section {
-    padding: 64px 32px;
+    padding: 0;
   }
 }
 
 @media (min-width: 900px) {
-  :root {
-    --heading-font-size-xxl: 60px;
-    --heading-font-size-xl: 48px;
-    --heading-font-size-l: 36px;
-    --heading-font-size-m: 30px;
-    --heading-font-size-s: 24px;
-    --heading-font-size-xs: 22px;
-  }
-
   .section > div {
     max-width: 1200px;
     margin: auto;
@@ -236,4 +227,60 @@ main .section[data-section-status='initialized'] {
 
 main .section.highlight {
   background-color: var(--highlight-background-color);
+}
+
+main .section.card-heading{
+  padding: 0;
+}
+
+main .section.card-heading p{
+  position: relative;
+  font-weight: 400;
+  line-height: 1;
+  color: #777;
+  font-size: 65%;
+}
+
+main .section.card-heading p strong {
+  font-weight: bold;
+  color: #0033ab;
+  font-size: 24px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+main .section.productseparator {
+  border-top: 8px solid #eee;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  height: 0;
+  box-sizing: content-box;
+  display: block;
+  width: 1200px;
+  unicode-bidi: isolate;
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+  overflow: hidden;   
+}
+
+main .section.productcategoryseparator {
+  border-top: 8px solid #eee;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  box-sizing: content-box;
+  display: block;
+  width: 1400px;
+  unicode-bidi: isolate;
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+  overflow: hidden;   
+}
+
+main .section.productcategoryseparator h2{
+  margin-left: -100px;
+  font-weight: 700;
 }
