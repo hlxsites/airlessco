@@ -14,12 +14,11 @@ footer .footer p {
 footer .air-footer {
   height: 475px;
   display: grid;
-  grid-template-rows: 91px 1fr 1fr;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-areas:
-    "built2last built2last built2last built2last built2last"
-    "logo products support contact flag"
-    "copyright copyright copyright copyright copyright";
+  grid:
+    "built2last built2last built2last built2last built2last" 91px
+    "logo products support contact flag" 1fr
+    "copyright copyright copyright copyright copyright" 1fr
+    / 1fr 1fr 1fr 1fr;
   background-color: var(--overlay-background-color);
 }
 
