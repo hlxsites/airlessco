@@ -1,7 +1,3 @@
-.section .productcards-container {
-padding: 0;
-}
-
 .productcards > ul {
     list-style: none;   
     padding: 0;
@@ -21,7 +17,7 @@ padding: 0;
 
 .productcards .productcards-productcard-body {
     margin: 16px;
-    font-family: eurostile, 'Titillium Web', sans-serif;
+    font-family: var(--body-font-family);
     max-width: 1600px;   
     font-size: 14px;
     padding: 9px;
