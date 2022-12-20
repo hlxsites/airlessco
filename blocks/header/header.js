@@ -1,4 +1,4 @@
-import { readBlockConfig, decorateIcons } from '../../scripts/lib-franklin.js';
+import { decorateIcons, getMetadata } from '../../scripts/lib-franklin.js';
 
 /**
  * collapses all open nav sections
@@ -17,18 +17,19 @@ function collapseAllNavSections(sections) {
  */
 
 export default async function decorate(block) {
-  const cfg = readBlockConfig(block);
   block.textContent = '';
 
   // fetch nav content
-  const navPath = cfg.nav || '/nav';
-  const resp = await fetch(`${navPath}.plain.html`);
+  const navPath = getMetadata('locale');
+  const resp = await fetch(`${navPath}/nav.plain.html`);
   if (resp.ok) {
     const html = await resp.text();
 
     // decorate nav DOM
     const nav = document.createElement('nav');
+    nav.classList.add('navbar', 'navbar-default');
     nav.innerHTML = html;
+
     decorateIcons(nav);
 
     const classes = ['brand', 'sections', 'tools'];
@@ -48,6 +49,27 @@ export default async function decorate(block) {
         });
       });
     }
+    const langSelector = nav.querySelector('.nav-tools ul li');
+    langSelector.classList.add('nav-drop');
+    langSelector.setAttribute('aria-expanded', 'false');
+    langSelector.addEventListener('click', () => {
+      const lsexpanded = langSelector.getAttribute('aria-expanded') === 'true';
+      langSelector.setAttribute('aria-expanded', lsexpanded ? 'false' : 'true');
+    });
+
+    /* language selector pathing */
+    const langs = langSelector.querySelector('ul');
+    const { pathname } = window.location;
+    const nakedPath = pathname.split('/')[3];
+    const currentRegionLang = pathname.substring(0, pathname.indexOf(nakedPath));
+    const cleanPath = pathname.substring(pathname.indexOf(nakedPath));
+    langs.querySelectorAll('li').forEach((lang) => {
+      const anchor = lang.querySelector('a');
+      anchor.href += cleanPath;
+      if (anchor.href.indexOf(currentRegionLang) > 0) {
+        lang.classList.add('active');
+      }
+    });
 
     // hamburger for mobile
     const hamburger = document.createElement('div');
