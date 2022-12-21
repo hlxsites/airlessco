@@ -1,0 +1,28 @@
+.separator {
+  border-top: 8px solid #eee;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  height: 0;
+  box-sizing: content-box;
+  display: block; 
+  unicode-bidi: isolate;
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+  overflow: hidden;   
+  
+}
+
+.separator.short .separator-style {
+  width: 1200px;
+}
+
+.separator.long .separator-style {
+    width: 1400px;
+}
+
+.separator.long .separator-style h2 {
+  margin-left: -100px;
+  font-weight: 700;
+}
