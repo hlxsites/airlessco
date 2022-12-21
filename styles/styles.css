@@ -280,7 +280,7 @@ main .product-category{
 main .divider-l{
   display:block;
   width: 1400;
-  margin: 20px -100px 20px -100px;  
+  margin: 20px -100px;  
   border-top: 8px solid #eee;
 }
 
