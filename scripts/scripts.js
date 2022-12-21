@@ -27,6 +27,24 @@ function buildHeroBlock(main) {
   }
 }
 
+function buildBreadcrumb(main) {
+  const breadcrumbDiv = document.createElement('div');
+  breadcrumbDiv.classList.add('breadcrumb-div');
+  let pathSegments = window.location.pathname.split('/');
+
+  // remove the last element if there was a / at the end of the pathname
+  pathSegments = pathSegments[pathSegments.length - 1] === '' ? pathSegments.slice(0, pathSegments.length - 1) : pathSegments;
+
+  if (pathSegments.length < 4) {
+    return;
+  }
+
+  if (pathSegments.length > 4) {
+    breadcrumbDiv.append(buildBlock('breadcrumb', { elems: [] }));
+  }
+  main.prepend(breadcrumbDiv);
+}
+
 /**
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
@@ -34,6 +52,7 @@ function buildHeroBlock(main) {
 function buildAutoBlocks(main) {
   try {
     buildHeroBlock(main);
+    buildBreadcrumb(main);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);
@@ -65,6 +84,29 @@ async function loadEager(doc) {
     decorateMain(main);
     await waitForLCP(LCP_BLOCKS);
   }
+}
+
+/**
+ * Helper function to create DOM elements
+ * @param {string} tag DOM element to be created
+ * @param {array} attributes attributes to be added
+ */
+
+export function createTag(tag, attributes, html) {
+  const el = document.createElement(tag);
+  if (html) {
+    if (html instanceof HTMLElement || html instanceof SVGElement) {
+      el.append(html);
+    } else {
+      el.insertAdjacentHTML('beforeend', html);
+    }
+  }
+  if (attributes) {
+    Object.entries(attributes).forEach(([key, val]) => {
+      el.setAttribute(key, val);
+    });
+  }
+  return el;
 }
 
 /**
