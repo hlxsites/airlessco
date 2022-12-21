@@ -27,6 +27,24 @@ function buildHeroBlock(main) {
   }
 }
 
+function buildBreadcrumb(main) {
+  const breadcrumbDiv = document.createElement('div');
+  breadcrumbDiv.classList.add('breadcrumb-div');
+  let pathSegments = window.location.pathname.split('/');
+
+  // remove the last element if there was a / at the end of the pathname
+  pathSegments = pathSegments[pathSegments.length - 1] === '' ? pathSegments.slice(0, pathSegments.length - 1) : pathSegments;
+
+  if (pathSegments.length < 4) {
+    return;
+  }
+
+  if (pathSegments.length > 4) {
+    breadcrumbDiv.append(buildBlock('breadcrumb', { elems: [] }));
+  }
+  main.prepend(breadcrumbDiv);
+}
+
 function buildPageDivider(main) {
   const allPageDivider = main.querySelectorAll('code');
 
@@ -52,6 +70,7 @@ function buildPageDivider(main) {
 function buildAutoBlocks(main) {
   try {
     buildHeroBlock(main);
+    buildBreadcrumb(main);
     buildPageDivider(main);
   } catch (error) {
     // eslint-disable-next-line no-console
