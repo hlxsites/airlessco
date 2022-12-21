@@ -14,6 +14,10 @@
 
 .breadcrumb>li {
     display: inline-block;
+    font-family: eurostile, 'Titillium Web', sans-serif;
+    max-width: 1600px;
+    margin: auto;
+    font-size: 16px;
 }
 
 a {
