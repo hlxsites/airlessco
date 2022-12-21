@@ -1,5 +1,4 @@
 .separator-container h2{
-
     margin-left: -100px;
 }
 
@@ -28,7 +27,6 @@
 }
 
 @media (min-width: 900px) {
-
     .separator.short {
         width: auto;
     }
@@ -40,7 +38,6 @@
 }
 
 @media (min-width: 1200px) {
-
     .separator.short {
         width: 1200px;
     }
