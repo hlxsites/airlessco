@@ -27,6 +27,24 @@ function buildHeroBlock(main) {
   }
 }
 
+function buildPageDivider(main) {
+  const allPageDivider = main.querySelectorAll('code');
+
+  allPageDivider.forEach((el) => {
+    const alt = el.innerText.trim();
+    const lower = alt.toLowerCase();
+    if (lower === 'divider-s') {
+      el.innerText = '';
+      el.classList.add('divider-s');
+    } else if (lower === 'divider-l') {
+      el.innerText = '';
+      el.classList.add('divider-l');
+    } else {
+      el.classList.add('product-category');
+    }
+  });
+}
+
 /**
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
@@ -34,6 +52,7 @@ function buildHeroBlock(main) {
 function buildAutoBlocks(main) {
   try {
     buildHeroBlock(main);
+    buildPageDivider(main);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);
