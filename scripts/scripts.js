@@ -129,6 +129,31 @@ export function createTag(tag, attributes, html) {
 }
 
 /**
+ * Gets details about products in product master sheet
+* @param {String} productFamily,
+* @param {String} productName
+* @param {Array} productFields
+ */
+
+export async function lookupProductData(productFamily, productName, productFields) {
+  const resp = await fetch(`${window.hlx.codeBasePath}/drafts/${productFamily}.json`);
+  const json = await resp.json();
+  window.productData = json.data;
+  const filteredProduct = window.productData.filter((e) => e.Name === productName);
+
+  const productInfo = [];
+
+  filteredProduct.forEach((product) => {
+    productFields.forEach((productField) => {
+      productInfo.push([product[productField]]);
+    });
+  });
+
+  const result = productInfo;
+  return (result);
+}
+
+/**
  * Adds the favicon.
  * @param {string} href The favicon URL
  */
