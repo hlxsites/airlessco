@@ -1,0 +1,52 @@
+.product-details-div{
+    display: flex;
+}
+
+.product-images{
+    width: 50vw;
+    padding: 0 15px;
+}
+
+.product-image{
+    vertical-align: middle;
+    border: 0;
+    max-width: 576px;
+}
+
+.product-image img{
+    width: auto;
+    height: auto;
+}
+
+.product-details{
+    width: 50vw;
+    padding: 0 15px;
+}
+
+
+.product-details .row{
+    display: flex;
+    padding-bottom: 10px;
+}
+
+.product-label{
+    width: 25%;
+    float: left;
+    padding: 0 15px;
+    font-weight: 700;
+    color: #0033ab;
+}
+
+.product-label::after{
+    content: ":\00a0";
+}
+
+.product-field{
+    width: 75%;
+    float: left;
+    padding: 0 15px;
+    font-family: eurostile, 'Titillium Web', sans-serif;
+    margin: auto;
+    font-size: 16px;
+}
+
