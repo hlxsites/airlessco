@@ -136,7 +136,7 @@ export function createTag(tag, attributes, html) {
  */
 
 export async function lookupProductData(productFamily, productName, productFields) {
-  const resp = await fetch(`${window.hlx.codeBasePath}/drafts/${productFamily}.json`);
+  const resp = await fetch(`${window.hlx.codeBasePath}/product-data/${productFamily}.json`);
   const json = await resp.json();
   window.productData = json.data;
   const filteredProduct = window.productData.filter((e) => e.Name === productName);
