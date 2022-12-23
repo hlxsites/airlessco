@@ -1,5 +1,6 @@
 .product-details-div{
     display: flex;
+    padding-bottom: 40px;
 }
 
 .product-images{
@@ -50,3 +51,27 @@
     font-size: 16px;
 }
 
+
+
+
+figure.zoom {
+    background-position: 50% 50%;
+    position: relative;
+    margin: 150px auto;
+    border: 5px solid white;
+    box-shadow: -1px 5px 15px black;
+    height: 300px;
+    width: 500px;
+    overflow: hidden;
+    cursor: zoom-in;
+  }
+
+  figure.zoom img {
+    transition: opacity 0.5s;
+    display: block;
+    width: 100%;
+  }
+
+  figure.zoom img:hover {
+    opacity: 0;
+  }
