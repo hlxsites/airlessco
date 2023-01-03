@@ -135,21 +135,12 @@ export function createTag(tag, attributes, html) {
 * @param {Array} productFields
  */
 
-export async function lookupProductData(productFamilyData, productName, productFields) {
+export async function lookupProductData(productFamilyData, productName) {
   const resp = await fetch(productFamilyData);
   const json = await resp.json();
   window.productFamilyData = json.data;
   const filteredProduct = window.productFamilyData.filter((e) => e.Name === productName);
-
-  const productInfo = [];
-
-  filteredProduct.forEach((product) => {
-    productFields.forEach((productField) => {
-      productInfo.push([product[productField]]);
-    });
-  });
-
-  const result = productInfo;
+  const result = filteredProduct;
   return (result);
 }
 
