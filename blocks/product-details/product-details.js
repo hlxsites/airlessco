@@ -1,12 +1,12 @@
 import { lookupProductData, createTag } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
-  const productFamily = [...block.children][0].innerText.trim('');
+  const productFamilyData = [...block.children][0].innerText.trim('');
   const productName = [...block.children][1].innerText.trim('');
   const productFields = ['Series', 'Applications', 'Spray', 'Usage', 'Features', 'Includes', 'Availability', 'Resources', 'Images'];
 
   // Make a call to the  product datasheet  and get the json for all fields for the product
-  const productData = await lookupProductData(productFamily, productName, productFields);
+  const productData = await lookupProductData(productFamilyData, productName, productFields);
 
   const productDetailsDiv = createTag('div', { class: 'product-details-div' });
   const productImageDiv = createTag('div', { class: 'product-images' });
