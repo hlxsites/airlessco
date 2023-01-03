@@ -138,8 +138,8 @@ export function createTag(tag, attributes, html) {
 export async function lookupProductData(productFamilyData, productName, productFields) {
   const resp = await fetch(productFamilyData);
   const json = await resp.json();
-  window.productData = json.data;
-  const filteredProduct = window.productData.filter((e) => e.Name === productName);
+  window.productFamilyData = json.data;
+  const filteredProduct = window.productFamilyData.filter((e) => e.Name === productName);
 
   const productInfo = [];
 
