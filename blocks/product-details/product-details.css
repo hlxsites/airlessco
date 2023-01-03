@@ -1,10 +1,12 @@
-.product-details-div{
+@media only screen and (min-width: 1200px) {
+    .product-details-div{
     display: flex;
     padding-bottom: 40px;
+    width: var(--section-width-desktop);
 }
 
 .product-images{
-    width: 50vw;
+    width: 50%;
     padding: 0 15px;
 }
 
@@ -20,7 +22,7 @@
 }
 
 .product-details{
-    width: 50vw;
+    width: 50%;
     padding: 0 15px;
 }
 
@@ -75,3 +77,5 @@ figure.zoom {
   figure.zoom img:hover {
     opacity: 0;
   }
+
+}
