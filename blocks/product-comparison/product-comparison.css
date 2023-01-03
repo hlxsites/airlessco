@@ -1,0 +1,58 @@
+@media (min-width: 992px){
+.product-comparison {       
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    display: block;
+    font-family: eurostile, 'Titillium Web', sans-serif;    
+    font-size: 16px;
+    width: 83.33333333%;
+}
+.product-comparison .table{
+    background-color: transparent;
+    border-spacing: 0;
+    border-collapse: collapse;
+    display: table;   
+    text-indent: initial;
+    border-color: grey;
+}
+
+.product-comparison .table .thead{
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+.product-comparison .table .thead .theadrow{
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+
+.product-comparison .table .thead .theadrow .thead-rowdata{
+    display: table-cell;
+    vertical-align: inherit;
+    text-align: center;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.product-cimage{
+    display: block;
+    width: 400px;
+    height: 400px;
+    
+}
+
+.table>tr:nth-of-type(odd) {
+    background-color: #f9f9f9;   
+}
+.table > tr{
+    vertical-align: middle;
+    display: table-row;
+}
+
+
+}
