@@ -191,6 +191,16 @@ async function loadLazy(doc) {
   sampleRUM.observe(main.querySelectorAll('picture > img'));
 }
 
+export async function lookupFiles(fileSource, category, locale) {
+  const resp = await fetch(fileSource);
+  const json = await resp.json();
+  window.fileSource = json.data;
+  const filteredFilesCategory = window.fileSource.filter((e) => e.Category === category);
+  const filteredLocaleFiles = filteredFilesCategory.filter((e) => e.Locale === locale);
+
+  return (filteredLocaleFiles);
+}
+
 /**
  * loads everything that happens a lot later, without impacting
  * the user experience.

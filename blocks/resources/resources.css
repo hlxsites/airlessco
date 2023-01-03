@@ -1,0 +1,38 @@
+@import "../../styles/sortable-theme-bootstrap.css";
+
+.resources-wrapper-1{
+    margin-left: 8.3333%;
+    border-top: 8px solid #eee;
+    padding-bottom: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.resources-section-title{
+    font-weight: 700;
+    color: #0033ab;
+    font-size: 24px;
+    line-height: 1.1;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}
+
+table.resources{
+width :100%;
+}
+
+table.resources > thead > tr > th:nth-child(1){
+    width :70%;
+}
+
+table.resources > thead > tr > th:nth-child(2){
+    width :20%;
+}
+
+table.resources > thead > tr > th:nth-child(3){
+    width :10%;
+}
