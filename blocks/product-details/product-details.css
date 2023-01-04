@@ -47,7 +47,7 @@ figure.zoom {
     .product-details-div{
     display: flex;
     padding-bottom: 40px;
-    width: var(--section-width-desktop);
+    width: 1600px;;
 }
 
 .product-images{
@@ -99,7 +99,7 @@ img.product-image[data-block-status="loaded"]{
     display: flex;
     text-align: left;
     background: #eee;
-    max-width: 576px;
+    width: 576px;
 }
 
 img.product-image-thumbnails{
