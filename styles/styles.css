@@ -41,9 +41,6 @@
   /* nav height */
   --nav-height: 284px;
 
-    /* section widths */
-  --section-width-desktop: 1600px;
-
 }
 
 body {
@@ -217,7 +214,7 @@ main img {
 
 @media (min-width: 900px) {
   .section > div {
-    max-width: var(--section-width-desktop);
+    max-width: 1200px;
     margin: auto;
   }
 }
@@ -279,7 +276,7 @@ main .product-category{
   font-size: var(--heading-font-size-xl)
 }
 
-@media only screen and (min-width: 1200px) {
+@media (min-width: 1200px) {
 main .divider-l{
   display:block;
   width: 1400;
@@ -298,6 +295,4 @@ main .product-category{
   color: var(--airless-blue);
   font-size: var(--heading-font-size-xl)
 }
-
-
 }

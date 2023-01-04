@@ -135,12 +135,21 @@ export function createTag(tag, attributes, html) {
 * @param {Array} productFields
  */
 
-export async function lookupProductData(productFamilyData, productName) {
-  const resp = await fetch(productFamilyData);
+export async function lookupProductData(productFamily, productName, productFields) {
+  const resp = await fetch(`${window.hlx.codeBasePath}/drafts/${productFamily}.json`);
   const json = await resp.json();
-  window.productFamilyData = json.data;
-  const filteredProduct = window.productFamilyData.filter((e) => e.Name === productName);
-  const result = filteredProduct;
+  window.productData = json.data;
+  const filteredProduct = window.productData.filter((e) => e.Name === productName);
+
+  const productInfo = [];
+
+  filteredProduct.forEach((product) => {
+    productFields.forEach((productField) => {
+      productInfo.push([product[productField]]);
+    });
+  });
+
+  const result = productInfo;
   return (result);
 }
 
@@ -203,16 +212,6 @@ async function loadLazy(doc) {
   sampleRUM('lazy');
   sampleRUM.observe(main.querySelectorAll('div[data-block-name]'));
   sampleRUM.observe(main.querySelectorAll('picture > img'));
-}
-
-export async function lookupFiles(fileSource, category, locale) {
-  const resp = await fetch(fileSource);
-  const json = await resp.json();
-  window.fileSource = json.data;
-  const filteredFilesCategory = window.fileSource.filter((e) => e.Category === category);
-  const filteredLocaleFiles = filteredFilesCategory.filter((e) => e.Locale === locale);
-
-  return (filteredLocaleFiles);
 }
 
 /**
