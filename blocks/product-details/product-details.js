@@ -95,7 +95,6 @@ export default async function decorate(block) {
   primaryImage.addEventListener('click', () => {
     const modal = createTag('div', { class: 'product-image-modal' });
     const modalContent = createTag('div', { class: 'product-image-modal-content' });
-    console.log(primaryImage.innerHTML);
     const clonePrimary = primaryImage.cloneNode(true);
     modalContent.appendChild(clonePrimary);
     modal.append(modalContent);
