@@ -91,4 +91,25 @@ export default async function decorate(block) {
       primaryImageZoom.setAttribute('style', `background-image : url(${el.src})`);
     });
   });
+
+  primaryImage.addEventListener('click', () => {
+    const modal = createTag('div', { class: 'product-image-modal' });
+    const modalContent = createTag('div', { class: 'product-image-modal-content' });
+    console.log(primaryImage.innerHTML);
+    const clonePrimary = primaryImage.cloneNode(true);
+    modalContent.appendChild(clonePrimary);
+    modal.append(modalContent);
+    block.append(modal);
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  });
+
+  window.addEventListener('click', (event) => {
+    const modal = block.querySelector('.product-image-modal');
+    if (event.target === modal) {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+      modal.remove();
+    }
+  });
 }
