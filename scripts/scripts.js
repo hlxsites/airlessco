@@ -164,14 +164,14 @@ export async function lookupProductComparisionData(productFamily, productNames) 
   const resp = await fetch(`${window.hlx.codeBasePath}/drafts/${productFamily}.json`);
   const json = await resp.json();
   window.productData = json.data;
-  let filteredProduct =[];
+  const filteredProduct = [];
   const productInfo = [];
-  productNames.forEach((productName, index) => {       
-   filteredProduct[index] = window.productData.filter((e) => e.Name === productName);   
+  productNames.forEach((productName, index) => {
+    filteredProduct[index] = window.productData.filter((e) => e.Name === productName);
   });
-  for(const element of filteredProduct){          
-      productInfo.push([element[0]]);
-  } 
+  filteredProduct.forEach((element) => {
+    productInfo.push([element[0]]);
+  });
   const result = productInfo;
   return (result);
 }
