@@ -43,8 +43,7 @@ figure.zoom {
     opacity: 0;
   }
 
-@media only screen and (min-width: 1200px) {
-    .product-details-div{
+.product-details-div{
     display: flex;
     padding-bottom: 40px;
     width: 1600px;;
@@ -100,6 +99,7 @@ img.product-image[data-block-status="loaded"]{
     text-align: left;
     background: #eee;
     width: 576px;
+    height: 96px;
 }
 
 img.product-image-thumbnails{
@@ -108,4 +108,3 @@ img.product-image-thumbnails{
     border-top: 2px solid #ffcd00;
 }
 
-}
