@@ -45,6 +45,7 @@ figure.zoom {
 
 .product-details-div{
     display: flex;
+    flex-direction: row;
     padding-bottom: 40px;
     width: 1600px;;
 }
@@ -108,3 +109,8 @@ img.product-image-thumbnails{
     border-top: 2px solid #ffcd00;
 }
 
+@media only screen and (max-width: 900px) {
+    .product-details-div{
+        flex-direction: column;
+    }
+  }
