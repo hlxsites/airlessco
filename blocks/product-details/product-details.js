@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-undef */
 import { lookupProductData, createTag } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
@@ -30,7 +32,12 @@ export default async function decorate(block) {
       productImage.setAttribute('alt', 'product-image');
       productImage.setAttribute('src', productImages[0]);
       productImage.setAttribute('alt', 'product-image');
-      productImageDiv.append(productImage);
+
+      const productImageZoom = createTag('figure', { class: 'zoom' });
+      productImageZoom.setAttribute('style', `background-image : url(${productImage.src})`);
+
+      productImageZoom.append(productImage);
+      productImageDiv.append(productImageZoom);
 
       if (productImages.length > 1) {
         const productImageThumbnailWrapper = createTag('div', { class: 'product-image-thumbnail-wrapper' });
@@ -39,7 +46,6 @@ export default async function decorate(block) {
           productImageThumbs.setAttribute('src', img);
           productImageThumbs.setAttribute('alt', 'product-image-thumbnail');
           productImageThumbnailWrapper.append(productImageThumbs);
-          console.log(img);
         });
         productImageDiv.append(productImageThumbnailWrapper);
       }
@@ -65,4 +71,24 @@ export default async function decorate(block) {
   block.innerHTML = '';
   productDetailsDiv.append(productImageDiv, productDetails);
   block.append(productDetailsDiv);
+
+  document.querySelector('.zoom')
+    .addEventListener('mousemove', (event) => {
+      const zoomer = event.currentTarget;
+      const { offsetX } = event;
+      const { offsetY } = event;
+      const x = (offsetX / zoomer.offsetWidth) * 100;
+      const y = (offsetY / zoomer.offsetHeight) * 100;
+      zoomer.style.backgroundPosition = `${x}% ${y}%`;
+    });
+
+  const prodThumbnail = block.querySelectorAll('.product-image-thumbnails');
+  const primaryImage = block.querySelector('.product-image');
+  const primaryImageZoom = block.querySelector('.zoom');
+  prodThumbnail.forEach((el) => {
+    el.addEventListener('click', () => {
+      primaryImage.setAttribute('src', el.src);
+      primaryImageZoom.setAttribute('style', `background-image : url(${el.src})`);
+    });
+  });
 }
