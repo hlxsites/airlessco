@@ -95,14 +95,14 @@ img.product-image[data-block-status="loaded"]{
     font-size: 16px;
 }
 
-.product-image-thumbnail-wrapper[data-block-status="loaded"]{
+.product-image-thumbnail-wrapper{
     display: flex;
     text-align: left;
     background: #eee;
     max-width: 576px;
 }
 
-img.product-image-thumbnails[data-block-status="loaded"]{
+img.product-image-thumbnails{
     width: 96px;
     height: 96px;
     border-top: 2px solid #ffcd00;
