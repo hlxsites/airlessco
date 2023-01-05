@@ -1,0 +1,159 @@
+.product-comparison {       
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    display: block;
+    font-family: var(--body-font-family);    
+    font-size: 16px;
+    width: 100%;
+}
+
+.product-comparison .table{
+    background-color: transparent;
+    border-spacing: 0;
+    border-collapse: collapse;
+    display: table;   
+    text-indent: initial;
+    border-color: grey;
+    width: 100%;   
+}
+
+.product-comparison .table .thead{
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+.table > tr{
+    vertical-align: middle;
+    display: table-row;
+}
+
+.table>tr:nth-of-type(odd) { 
+    background-color: #f9f9f9;   
+}
+
+.product-comparison .table .thead > tr{
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+
+.product-comparison .table .thead > tr > td{
+    display: table-cell;
+    vertical-align: inherit;
+    text-align: center;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;   
+}
+
+.product-comparison .table .thead > tr > td.specheading{
+    text-align: left;
+    padding: 0; 
+}
+
+.product-cimage{
+    display: block;
+    max-width: 100%;
+    height: auto;    
+}
+
+table > tr > td.specname{
+    text-align: left;
+}
+
+.product-comparison .table > tr > td.specdata{
+    text-align: center;
+}
+
+.product-comparison .table > tr > td.highlightspecdata{
+    text-align: center;
+    background-color: #e6e6e6;
+}
+
+.product-comparison .table .thead > tr > td.highlightspecdata{
+    background-color: #e6e6e6;
+}
+
+@media (min-width: 992px){
+.product-comparison {       
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    display: block;
+    font-family: var(--body-font-family);    
+    font-size: 16px;
+    width: 100%;
+}
+
+.product-comparison .table{
+    background-color: transparent;
+    border-spacing: 0;
+    border-collapse: collapse;
+    display: table;   
+    text-indent: initial;
+    border-color: grey;
+    width: 100%;   
+}
+
+.product-comparison .table .thead{
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+.table > tr{
+    vertical-align: middle;
+    display: table-row;
+}
+
+.table>tr:nth-of-type(odd) { 
+    background-color: #f9f9f9;   
+}
+
+.product-comparison .table .thead > tr{
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+
+.product-comparison .table .thead > tr > td{
+    display: table-cell;
+    vertical-align: inherit;
+    text-align: center;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;   
+}
+
+.product-comparison .table .thead > tr > td.specheading{
+    text-align: left;
+    padding: 0; 
+}
+
+.product-cimage{
+    display: block;
+    width: 400px;
+    height: 400px;    
+}
+
+table > tr > td.specname{
+    text-align: left;
+}
+
+.product-comparison .table > tr > td.specdata{
+    text-align: center;
+}
+
+.product-comparison .table > tr > td.highlightspecdata{
+    text-align: center;
+    background-color: #e6e6e6;
+}
+
+.product-comparison .table .thead > tr > td.highlightspecdata{
+    background-color: #e6e6e6;
+}
+}

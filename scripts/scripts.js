@@ -145,6 +145,29 @@ export async function lookupProductData(productFamilyData, productName) {
 }
 
 /**
+ * Gets details about products in product master sheet
+* @param {String} productFamily,
+* @param {String} productName
+* @param {Array} productFields
+ */
+
+export async function lookupProductComparisionData(productFamily, productNames, locale) {
+  const resp = await fetch(`${window.hlx.codeBasePath}/product-data/${productFamily}.json?sheet=${locale}`);
+  const json = await resp.json();
+  window.productData = json.data;
+  const filteredProduct = [];
+  const productInfo = [];
+  productNames.forEach((productName, index) => {
+    filteredProduct[index] = window.productData.filter((e) => e.Name === productName);
+  });
+  filteredProduct.forEach((element) => {
+    productInfo.push([element[0]]);
+  });
+  const result = productInfo;
+  return (result);
+}
+
+/**
  * Adds the favicon.
  * @param {string} href The favicon URL
  */
