@@ -36,3 +36,11 @@ table.resources > thead > tr > th:nth-child(2){
 table.resources > thead > tr > th:nth-child(3){
     width :10%;
 }
+
+@media only screen and  (max-width: 992px){
+    .resources-wrapper-1{
+        margin-left: 0;
+        padding : 0 15px ;
+    }
+
+}
