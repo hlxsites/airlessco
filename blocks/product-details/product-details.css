@@ -1,0 +1,113 @@
+figure.zoom {
+    background-position: 50% 50%;
+    position: relative;
+    border: 5px solid white;
+    max-width: 576px;
+    overflow: hidden;
+    cursor: zoom-in;
+  }
+    
+
+.product-image-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0 0 0);
+    background-color: rgb(0 0 0 / 90%);
+    
+  }
+  
+  .product-image-modal-content img{
+    position: fixed;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border: 2px solid #fff;
+    vertical-align: middle;
+  }
+
+  figure.zoom img {
+    transition: opacity 0.5s;
+    display: block;
+    width: 100%;
+  }
+
+  figure.zoom img:hover {
+    opacity: 0;
+  }
+
+.product-details-div{
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 40px;
+}
+
+.product-images{
+    padding: 0 15px;
+}
+
+img.product-image[data-block-status="loaded"]{
+    vertical-align: middle;
+    border: 0;
+    width : 100%;
+    height : 100%;
+    max-width: 576px;
+}
+
+.product-details{
+    padding: 0 15px;
+}
+
+
+.product-details .row{
+    display: flex;
+    padding-bottom: 10px;
+}
+
+.product-label{
+    width: 25%;
+    float: left;
+    padding: 0 15px;
+    font-weight: 700;
+    color: #0033ab;
+}
+
+.product-label::after{
+    content: ":\00a0";
+}
+
+.product-field{
+    width: 75%;
+    float: left;
+    padding: 0 15px;
+    font-family: eurostile, 'Titillium Web', sans-serif;
+    margin: auto;
+    font-size: 16px;
+}
+
+.product-image-thumbnail-wrapper{
+    display: flex;
+    text-align: left;
+    background: #eee;
+    width: 576px;
+    height: 96px;
+}
+
+img.product-image-thumbnails{
+    width: 96px;
+    height: 96px;
+    border-top: 2px solid #ffcd00;
+}
+
+@media only screen and (max-width: 1198px) {
+    .product-details-div{
+        flex-direction: column;
+    }
+  }

@@ -6,8 +6,6 @@ export default function decorate(block) {
   // remove the last element if there was a / at the end of the pathname
   pathSegments = pathSegments[pathSegments.length - 1] === '' ? pathSegments.slice(0, pathSegments.length - 1) : pathSegments;
 
-  console.log(pathSegments);
-
   if (pathSegments.length < 4) {
     return;
   }
