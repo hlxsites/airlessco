@@ -1,11 +1,12 @@
-const hr = (doc) => doc.createElement('hr');
+import { createMetadataBlock, hr } from './common.js';
+
 let fullProductName = null;
 let productCategory = null;
 /*
   function to clean up the imported product name and make it useful in the data sheet
  */
 function getProductName(longName) {
-  let name = longName;
+  let name;
   name = longName.replace('AIRLESSCO ', '');
   name = name.replace(' de AIRLESSCO', ''); // spanish
   return name;
@@ -20,54 +21,9 @@ const setup = (main) => {
     fullProductName = pnel.childNodes[0].textContent.trim(); // product name + Brand
     productCategory = pnel.childNodes[1].childNodes[1].textContent.trim();
   }
-
-  // eslint-disable-next-line no-console
-  console.log('product name: ' + fullProductName);
-  // eslint-disable-next-line no-console
-  console.log('product category: ' + productCategory);
-};
-const createMetadataBlock = (main, document, url) => {
-  const meta = {};
-
-  // find the <title> element
-  const title = document.querySelector('title');
-  if (title) {
-    meta.Title = title.innerHTML.replace(/[\n\t]/gm, '');
-  }
-
-  // find the <meta property="og:description"> element
-  const desc = document.querySelector('[name="description"]');
-  if (desc) {
-    meta.Description = desc.content;
-  }
-
-  if (fullProductName) {
-    meta.Product = fullProductName;
-  }
-
-  if (productCategory) {
-    meta.category = productCategory;
-  }
-
-  // set the locale meta property
-  const urlNoHost = url.substring(url.indexOf('3001') + 4);
-  const locale = urlNoHost.split('/');
-  meta.Locale = `/${locale[1]}/${locale[2]}`;
-
-  // helper to create the metadata block
-  const block = WebImporter.Blocks.getMetadataBlock(document, meta);
-
-  // append the block to the main element
-  main.append(hr(document));
-  main.append(block);
-
-  // returning the meta object might be useful to other rules
-  return meta;
 };
 
 const makePDPBlock = (main, document) => {
-  const category = null;
-
   if (productCategory) {
     const subhead = document.createElement('p');
     subhead.innerHTML = productCategory;
@@ -84,6 +40,7 @@ const makePDPBlock = (main, document) => {
   });
 
   const cf = main.querySelector('div.container.start > div.row');
+  // eslint-disable-next-line no-undef
   const pdpTable = WebImporter.DOMUtils.createTable([
     ['Product Details'],
     [getProductName(fullProductName)],
@@ -118,6 +75,7 @@ const makeComparisonBlock = (main, document) => {
       li.innerHTML = item;
     });
 
+    // eslint-disable-next-line no-undef
     const compTable = WebImporter.DOMUtils.createTable([
       ['Product Comparison'],
       [getProductName(fullProductName)],
@@ -130,6 +88,7 @@ const makeComparisonBlock = (main, document) => {
 
 const makeAccessoriesBlock = (main, document) => {
   main.querySelectorAll('div.row').forEach((accessories) => {
+    // eslint-disable-next-line no-undef
     const accTable = WebImporter.DOMUtils.createTable([
       ['Accessories Category'],
       [getProductName(fullProductName)],
@@ -156,9 +115,10 @@ export default {
     setup(document.body);
     makePDPBlock(document.body, document);
     makeComparisonBlock(document.body, document);
-    makeAccessoriesBlock(document.body, document, name);
+    makeAccessoriesBlock(document.body, document);
     createMetadataBlock(document.body, document, url);
     // use helper method to remove header, footer, etc.
+    // eslint-disable-next-line no-undef
     WebImporter.DOMUtils.remove(document.body, [
       'header',
       'footer',
