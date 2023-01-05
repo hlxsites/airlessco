@@ -20,7 +20,7 @@ const loadScript = (url, attrs) => {
   return script;
 };
 
-loadScript('../../scripts/sortable.min.js', {
+loadScript('/scripts/sortable.min.js', {
   type: 'text/javascript',
   charset: 'UTF-8',
 });

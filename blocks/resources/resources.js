@@ -2,7 +2,7 @@ import { lookupFiles, createTag } from '../../scripts/scripts.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
 
 export default async function decorate(block) {
-  const fileSource = new URL(block.querySelector('a').href).pathname;
+  const fileSource = new URL(block.querySelector('a').href);
   const category = [...block.children][1].innerText.trim('');
   const locale = getMetadata('locale');
   let resources = null;
