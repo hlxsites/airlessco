@@ -42,6 +42,7 @@
   --nav-height: 284px;
 
     /* section widths */
+  --section-width-tablet: 1198px;
   --section-width-desktop: 1600px;
 
 }

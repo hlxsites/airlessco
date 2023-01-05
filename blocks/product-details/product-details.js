@@ -3,7 +3,7 @@
 import { lookupProductData, createTag } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
-  const productFamilyData = new URL(block.querySelector('a').href).pathname;
+  const productFamilyData = new URL(block.querySelector('a').href);
   const productName = [...block.children][1].innerText.trim('');
   const productFields = ['Series', 'Applications', 'Spray', 'Usage', 'Features', 'Includes', 'Availability', 'Resources', 'Images'];
 
