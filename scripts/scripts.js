@@ -151,8 +151,8 @@ export async function lookupProductData(productFamilyData, productName) {
 * @param {Array} productFields
  */
 
-export async function lookupProductComparisionData(productFamily, productNames) {
-  const resp = await fetch(`${window.hlx.codeBasePath}/drafts/${productFamily}.json`);
+export async function lookupProductComparisionData(productFamily, productNames, locale) {
+  const resp = await fetch(`${window.hlx.codeBasePath}/product-data/${productFamily}.json?sheet=${locale}`);
   const json = await resp.json();
   window.productData = json.data;
   const filteredProduct = [];

@@ -1,4 +1,5 @@
 import { lookupProductComparisionData, createTag } from '../../scripts/scripts.js';
+import { getMetadata } from '../../scripts/lib-franklin.js';
 
 function reterieveSpecs(specification) {
   const specsArray = specification.split(/\r?\n|\r|\n/g);
@@ -35,12 +36,38 @@ function buildItemsArray(itemsArray, productName, position) {
   return productData;
 }
 
+function convertLocale() {
+  const locale = getMetadata('locale');
+  let rerturnArray = [];
+  if (locale === '/na/en') {
+    rerturnArray = ['na_en', 'Specification'];
+  } else if (locale === '/emea/en') {
+    rerturnArray = ['emea_en', 'Specification'];
+  } else if (locale === '/emea/cz') {
+    rerturnArray = ['emea_cz', 'SPECIFIKACE'];
+  } else if (locale === '/emea/de') {
+    rerturnArray = ['emea_de', 'SPEZIFIKATIONEN'];
+  } else if (locale === '/emea/es') {
+    rerturnArray = ['emea_es', 'ESPECIFICACIONES'];
+  } else if (locale === '/emea/fr') {
+    rerturnArray = ['emea_fr', 'SPÉCIFICATIONS'];
+  } else if (locale === '/emea/it') {
+    rerturnArray = ['emea_it', 'SPECIFICHE'];
+  } else if (locale === '/emea/nl') {
+    rerturnArray = ['emea_nl', 'SPECIFICATIES'];
+  } else if (locale === '/emea/pl') {
+    rerturnArray = ['emea_pl', 'DANE TECHNICZNE'];
+  }
+  return rerturnArray;
+}
+
 export default async function decorate(block) {
   const productFamily = [...block.children][0].innerText.trim('');
   const productName = [...block.children][1].innerText.trim('');
   const position = (([...block.children][2].innerText.trim('') === '') ? [...block.children][2].innerText.trim('') : 1);
-  const items2compare = buildItemsArray([...block.children][3].innerText.trim(''), productName, position);
-  const relatedProducts = await lookupProductComparisionData(productFamily, items2compare);
+  const p2compare = buildItemsArray([...block.children][3].innerText.trim(''), productName, position);
+  const locale = convertLocale();
+  const relatedProducts = await lookupProductComparisionData(productFamily, p2compare, locale[0]);
   const Specification = 'Specification';
   const Name = 'Name';
   const Images = 'Images';
@@ -61,7 +88,7 @@ export default async function decorate(block) {
   thead.append(tr);
   tr = createTag('tr');
   td = createTag('td', { class: 'specheading' });
-  td.innerHTML = '<strong>SPECIFICATIONS</strong>';
+  td.innerHTML = `<strong>${locale[1]}</strong>`;
   tr.append(td);
   relatedProducts.forEach((element, index) => {
     if (index === position - 1) {
