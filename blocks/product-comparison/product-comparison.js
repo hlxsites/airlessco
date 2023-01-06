@@ -40,23 +40,23 @@ function convertLocale() {
   const locale = getMetadata('locale');
   let rerturnArray = [];
   if (locale === '/na/en') {
-    rerturnArray = ['na_en', 'Specification'];
+    rerturnArray = ['na_en', 'Specification', 'Series Comparision'];
   } else if (locale === '/emea/en') {
-    rerturnArray = ['emea_en', 'Specification'];
+    rerturnArray = ['emea_en', 'Specification', 'Series Comparision'];
   } else if (locale === '/emea/cz') {
     rerturnArray = ['emea_cz', 'SPECIFIKACE'];
   } else if (locale === '/emea/de') {
-    rerturnArray = ['emea_de', 'SPEZIFIKATIONEN'];
+    rerturnArray = ['emea_de', 'SPEZIFIKATIONEN', 'POROVNÁNÍ ŘADY'];
   } else if (locale === '/emea/es') {
-    rerturnArray = ['emea_es', 'ESPECIFICACIONES'];
+    rerturnArray = ['emea_es', 'ESPECIFICACIONES', 'COMPARACIÓN DE LA GAMA'];
   } else if (locale === '/emea/fr') {
-    rerturnArray = ['emea_fr', 'SPÉCIFICATIONS'];
+    rerturnArray = ['emea_fr', 'SPÉCIFICATIONS', 'COMPARAISON SÉRIE'];
   } else if (locale === '/emea/it') {
-    rerturnArray = ['emea_it', 'SPECIFICHE'];
+    rerturnArray = ['emea_it', 'SPECIFICHE', 'CONFRONTO SERIE', 'VERGLEICH'];
   } else if (locale === '/emea/nl') {
-    rerturnArray = ['emea_nl', 'SPECIFICATIES'];
+    rerturnArray = ['emea_nl', 'SPECIFICATIES', 'VERGELIJKING'];
   } else if (locale === '/emea/pl') {
-    rerturnArray = ['emea_pl', 'DANE TECHNICZNE'];
+    rerturnArray = ['emea_pl', 'DANE TECHNICZNE', 'PORÓWNANIE SERII'];
   }
   return rerturnArray;
 }
@@ -72,7 +72,11 @@ export default async function decorate(block) {
   const Images = 'Images';
   const headingdiv = createTag('div', { class: 'heading' });
   const productSeries = productName.replace(/\d+/g, '');
-  headingdiv.innerHTML = `<strong>${productSeries} Series Comparision</strong>`;
+  if (locale[0] === 'na_en' || locale[0] === 'emea_en') {
+    headingdiv.innerHTML = `<strong>${productSeries} ${locale[2]}</strong>`;
+  } else {
+    headingdiv.innerHTML = `<strong>${locale[2]} ${productSeries}</strong>`;
+  }
   const specs = reterieveSpecs(relatedProducts[1][0][Specification]);
   const table = createTag('table', { class: 'table' });
   const thead = createTag('thead', { class: 'thead' });
