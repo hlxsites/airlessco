@@ -146,13 +146,12 @@ export async function lookupProductData(productFamilyData, productName) {
 
 /**
  * Gets details about products in product master sheet
-* @param {String} productFamily,
-* @param {String} productName
-* @param {Array} productFields
- */
+* @param {String} productSheetURL,
+* @param {Array} productNames
+*/
 
-export async function lookupProductComparisionData(productFamily, productNames, locale) {
-  const resp = await fetch(`${window.hlx.codeBasePath}/product-data/${productFamily}.json?sheet=${locale}`);
+export async function lookupProductComparisionData(productSheetURL, productNames) {
+  const resp = await fetch(productSheetURL);
   const json = await resp.json();
   window.productData = json.data;
   const filteredProduct = [];

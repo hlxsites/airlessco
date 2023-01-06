@@ -23,7 +23,7 @@ function reterieveValue(specification, specKey) {
   return specValue;
 }
 
-function buildItemsArray(itemsArray, productName, position) {
+function buildItemsArray(itemsArray, productName) {
   const productData = [];
   let count = 0;
   itemsArray.split('\n').forEach((element) => {
@@ -32,8 +32,8 @@ function buildItemsArray(itemsArray, productName, position) {
       count += 1;
     }
   });
-  productData.splice(position - 1, 0, productName);
-  return productData;
+  productData.push(productName);
+  return productData.sort();
 }
 
 function convertLocale() {
@@ -62,12 +62,11 @@ function convertLocale() {
 }
 
 export default async function decorate(block) {
-  const productFamily = [...block.children][0].innerText.trim('');
+  const productSheetURL = new URL(block.querySelector('a').href);
   const productName = [...block.children][1].innerText.trim('');
-  const position = (([...block.children][2].innerText.trim('') === '') ? [...block.children][2].innerText.trim('') : 1);
-  const p2compare = buildItemsArray([...block.children][3].innerText.trim(''), productName, position);
+  const p2compare = buildItemsArray([...block.children][2].innerText.trim(''), productName);
   const locale = convertLocale();
-  const relatedProducts = await lookupProductComparisionData(productFamily, p2compare, locale[0]);
+  const relatedProducts = await lookupProductComparisionData(productSheetURL, p2compare);
   const Specification = 'Specification';
   const Name = 'Name';
   const Images = 'Images';
@@ -90,8 +89,8 @@ export default async function decorate(block) {
   td = createTag('td', { class: 'specheading' });
   td.innerHTML = `<strong>${locale[1]}</strong>`;
   tr.append(td);
-  relatedProducts.forEach((element, index) => {
-    if (index === position - 1) {
+  relatedProducts.forEach((element) => {
+    if (element[0][Name] === productName) {
       td = createTag('td', { class: 'highlightspecdata' });
     } else {
       td = createTag('td');
@@ -106,8 +105,8 @@ export default async function decorate(block) {
     td = createTag('td', { class: 'specname' });
     td.innerHTML = `<strong>${key}</strong>`;
     tr.append(td);
-    relatedProducts.forEach((element, index) => {
-      if (index === position - 1) {
+    relatedProducts.forEach((element) => {
+      if (element[0][Name] === productName) {
         td = createTag('td', { class: 'highlightspecdata' });
       } else {
         td = createTag('td', { class: 'specdata' });
