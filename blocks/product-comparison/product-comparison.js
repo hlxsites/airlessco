@@ -70,6 +70,9 @@ export default async function decorate(block) {
   const Specification = 'Specification';
   const Name = 'Name';
   const Images = 'Images';
+  const headingdiv = createTag('div', { class: 'heading' });
+  const productSeries = productName.replace(/\d+/g, '');
+  headingdiv.innerHTML = `<strong>${productSeries} Series Comparision</strong>`;
   const specs = reterieveSpecs(relatedProducts[1][0][Specification]);
   const table = createTag('table', { class: 'table' });
   const thead = createTag('thead', { class: 'thead' });
@@ -117,5 +120,6 @@ export default async function decorate(block) {
     table.append(tr);
   });
   block.innerHTML = '';
+  block.append(headingdiv);
   block.append(table);
 }

@@ -111,3 +111,11 @@ img.product-image-thumbnails{
         flex-direction: column;
     }
   }
+
+.product-details-wrapper{
+    margin-left: 8.3333%;
+    border-top: 8px solid #eee;
+    padding-bottom: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
