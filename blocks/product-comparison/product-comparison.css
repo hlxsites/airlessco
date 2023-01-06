@@ -1,3 +1,11 @@
+.product-comparison-wrapper{
+    margin-left: 8.3333%;
+    border-top: 8px solid #eee;
+    padding-bottom: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 .product-comparison {       
     min-height: 1px;
     padding-right: 15px;
@@ -6,6 +14,10 @@
     font-family: var(--body-font-family);    
     font-size: 16px;
     width: 100%;
+}
+
+.product-comparison .heading{
+    font-size: 30px;
 }
 
 .product-comparison .table{
@@ -78,6 +90,14 @@ table > tr > td.specname{
 }
 
 @media (min-width: 992px){
+.product-comparison-wrapper{
+    margin-left: 8.3333%;
+    border-top: 8px solid #eee;
+    padding-bottom: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 .product-comparison {       
     min-height: 1px;
     padding-right: 15px;

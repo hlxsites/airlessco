@@ -1,3 +1,11 @@
+.productcards-wrapper{
+    margin-left: 8.3333%;
+    border-top: 8px solid #eee;
+    padding-bottom: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 .productcards > ul {
     list-style: none;   
     padding: 0;
