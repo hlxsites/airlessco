@@ -248,7 +248,7 @@ main .section.card-heading p, h3{
 main .section.card-heading p strong  {
   font-weight: bold;
   color: #0033ab;
-  font-size: 24px;
+  font-size: var(--heading-font-size-l);
   margin-top: 20px;
   margin-bottom: 10px;
 }
@@ -256,7 +256,7 @@ main .section.card-heading p strong  {
 main .section.card-heading h3 strong {
   font-weight: bold;
   color: #0033ab;
-  font-size: 24px;
+  font-size: var(--heading-font-size-l);
   margin-top: 20px;
   margin-bottom: 10px;
 }
