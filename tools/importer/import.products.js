@@ -11,6 +11,16 @@ function getProductName(longName) {
   name = name.replace(' de AIRLESSCO', ''); // spanish
   return name;
 }
+
+function getSheet(document) {
+  const base = 'https://main--airlessco--hlxsites.hlx.page/product-data/';
+  const type = 'line-stripers';
+  const sheet = 'na_en';
+  const sheetLink = document.createElement('a');
+  sheetLink.href = `${base}${type}.json?sheet=${sheet}`;
+  sheetLink.innerHTML = `${base}${type}.json?sheet=${sheet}`;
+  return sheetLink;
+}
 const setup = (main) => {
   const pnel = main.querySelector('div.start h1');
 
@@ -43,6 +53,7 @@ const makePDPBlock = (main, document) => {
   // eslint-disable-next-line no-undef
   const pdpTable = WebImporter.DOMUtils.createTable([
     ['Product Details'],
+    [getSheet(document)],
     [getProductName(fullProductName)],
   ], document);
   cf.append(hr(document));
@@ -78,6 +89,7 @@ const makeComparisonBlock = (main, document) => {
     // eslint-disable-next-line no-undef
     const compTable = WebImporter.DOMUtils.createTable([
       ['Product Comparison'],
+      [getSheet(document)],
       [getProductName(fullProductName)],
       ['items', pUL],
     ], document);
@@ -91,6 +103,7 @@ const makeAccessoriesBlock = (main, document) => {
     // eslint-disable-next-line no-undef
     const accTable = WebImporter.DOMUtils.createTable([
       ['Accessories Category'],
+      [getSheet(document)],
       [getProductName(fullProductName)],
     ], document);
     accessories.insertAdjacentElement('beforebegin', hr(document));

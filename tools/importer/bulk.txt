@@ -280,4 +280,8 @@ https://main--airlessco--hlxsites.hlx.page/emea/de/products/texturesprayers/
 https://main--airlessco--hlxsites.hlx.page/emea/de/products/linestripers/
 
 https://main--airlessco--hlxsites.hlx.page/na/en/products/support/
+https://main--airlessco--hlxsites.hlx.page/na/en/products/support/manuals
+https://main--airlessco--hlxsites.hlx.page/na/en/products/support/historicalmanuals
+https://main--airlessco--hlxsites.hlx.page/na/en/products/support/distributorresources
+
 https://main--airlessco--hlxsites.hlx.page/na/en/products/contactus/
