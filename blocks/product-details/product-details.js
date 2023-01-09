@@ -2,6 +2,15 @@
 /* eslint-disable no-undef */
 import { lookupProductData, createTag } from '../../scripts/scripts.js';
 
+function zoom(event) {
+  const zoomer = event.currentTarget;
+  const { offsetX } = event;
+  const { offsetY } = event;
+  const x = (offsetX / zoomer.offsetWidth) * 100;
+  const y = (offsetY / zoomer.offsetHeight) * 100;
+  zoomer.style.backgroundPosition = `${x}% ${y}%`;
+}
+
 export default async function decorate(block) {
   const productFamilyData = new URL(block.querySelector('a').href);
   const productName = [...block.children][1].innerText.trim('');
@@ -74,12 +83,7 @@ export default async function decorate(block) {
 
   document.querySelector('.zoom')
     .addEventListener('mousemove', (event) => {
-      const zoomer = event.currentTarget;
-      const { offsetX } = event;
-      const { offsetY } = event;
-      const x = (offsetX / zoomer.offsetWidth) * 100;
-      const y = (offsetY / zoomer.offsetHeight) * 100;
-      zoomer.style.backgroundPosition = `${x}% ${y}%`;
+      zoom(event);
     });
 
   const prodThumbnail = block.querySelectorAll('.product-image-thumbnails');
