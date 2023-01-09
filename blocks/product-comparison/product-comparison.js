@@ -27,9 +27,11 @@ function buildItemsArray(itemsArray, productName) {
   const productData = [];
   let count = 0;
   itemsArray.split('\n').forEach((element) => {
-    if (element.trim('') !== 'items' && element.trim('') !== '' && element.trim('') !== productName) {
-      productData[count] = element.trim('');
-      count += 1;
+    if (element.trim('') !== 'items' && element.trim('') !== '') {
+      if (element.trim('').toLowerCase() !== productName.toLowerCase()) {
+        productData[count] = element.trim('');
+        count += 1;
+      }
     }
   });
   productData.push(productName);
