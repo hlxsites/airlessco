@@ -87,7 +87,7 @@ export default async function decorate(block) {
   relatedProducts.forEach((element) => {
     td = createTag('td');
     const productImage = createTag('img', { class: 'product-cimage' });
-    productImage.setAttribute('src', element[0][Images]);
+    productImage.setAttribute('src', element[0][Images].trim());
     td.append(productImage);
     tr.append(td);
   });
@@ -97,7 +97,7 @@ export default async function decorate(block) {
   td.innerHTML = `<strong>${locale[1]}</strong>`;
   tr.append(td);
   relatedProducts.forEach((element) => {
-    if (element[0][Name] === productName) {
+    if (element[0][Name].toLowerCase() === productName.toLowerCase()) {
       td = createTag('td', { class: 'highlightspecdata' });
     } else {
       td = createTag('td');
@@ -113,7 +113,7 @@ export default async function decorate(block) {
     td.innerHTML = `<strong>${key}</strong>`;
     tr.append(td);
     relatedProducts.forEach((element) => {
-      if (element[0][Name] === productName) {
+      if (element[0][Name].toLowerCase() === productName.toLowerCase()) {
         td = createTag('td', { class: 'highlightspecdata' });
       } else {
         td = createTag('td', { class: 'specdata' });
