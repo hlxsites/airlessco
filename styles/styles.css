@@ -237,7 +237,7 @@ main .section.card-heading{
   padding: 0;
 }
 
-main .section.card-heading p{
+main .section.card-heading p, h3{
   position: relative;
   font-weight: 400;
   line-height: 1;
@@ -245,7 +245,15 @@ main .section.card-heading p{
   font-size: 65%;
 }
 
-main .section.card-heading p strong {
+main .section.card-heading p strong  {
+  font-weight: bold;
+  color: #0033ab;
+  font-size: 24px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+main .section.card-heading h3 strong {
   font-weight: bold;
   color: #0033ab;
   font-size: 24px;
