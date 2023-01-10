@@ -11,6 +11,8 @@ import {
   waitForLCP,
   loadBlocks,
   loadCSS,
+  getMetadata,
+  fetchPlaceholders,
 } from './lib-franklin.js';
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
@@ -213,6 +215,18 @@ export async function lookupFiles(fileSource, category, locale) {
   const filteredLocaleFiles = filteredFilesCategory.filter((e) => e.Locale === locale);
 
   return (filteredLocaleFiles);
+}
+
+export async function getI18n(key) {
+  const placeholders = await fetchPlaceholders();
+  const dictionary = placeholders.i18ndictionary;
+  const locale = getMetadata('locale');
+  const resp = await fetch(dictionary);
+  const json = await resp.json();
+  window.fileSource = json.data;
+  const i18nValue1 = window.fileSource.filter((e) => e.Key === key);
+  const localizedValue = i18nValue1[0][locale];
+  return (localizedValue);
 }
 
 /**
