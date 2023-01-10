@@ -5,7 +5,7 @@ import { lookupProductData, createTag, getI18n } from '../../scripts/scripts.js'
 export default async function decorate(block) {
   const productFamilyData = new URL(block.querySelector('a').href);
   const productName = [...block.children][1].innerText.trim('');
-  const productFields = ['Series', 'Applications', 'Spray', 'Usage', 'Features', 'Includes', 'Availability', 'Resources', 'Images'];
+  const productFields = ['Description', 'Applications', 'Spray', 'Usage', 'Features', 'Includes', 'Availability', 'Resources', 'Images'];
 
   // Make a call to the  product datasheet  and get the json for all fields for the product
   const productInfo = await lookupProductData(productFamilyData, productName);
@@ -52,6 +52,7 @@ export default async function decorate(block) {
         }
         return;
       }
+
 
       if (productFields[index] === 'Resources') {
         label.innerText = await getI18n(`${productFields[index]}`);
