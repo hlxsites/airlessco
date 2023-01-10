@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-undef */
 import { lookupProductData, createTag } from '../../scripts/scripts.js';
+import { fetchPlaceholders, getMetadata } from '../../scripts/lib-franklin.js';
 
 function zoom(event) {
   const zoomer = event.currentTarget;
@@ -12,9 +13,12 @@ function zoom(event) {
 }
 
 export default async function decorate(block) {
+  const prefix = getMetadata('locale');
+  const placeholders = await fetchPlaceholders(prefix);
+
   const productFamilyData = new URL(block.querySelector('a').href);
   const productName = [...block.children][1].innerText.trim('');
-  const productFields = ['Series', 'Applications', 'Spray', 'Usage', 'Features', 'Includes', 'Availability', 'Resources', 'Images'];
+  const productFields = ['Description', 'Applications', 'Spray', 'Usage', 'Features', 'Includes', 'Availability', 'Resources', 'Images'];
 
   // Make a call to the  product datasheet  and get the json for all fields for the product
   const productInfo = await lookupProductData(productFamilyData, productName);
@@ -62,7 +66,7 @@ export default async function decorate(block) {
     }
 
     if (productFields[index] === 'Resources') {
-      label.innerText = productFields[index];
+      label.innerText = placeholders[`${productFields[index]}`.toLowerCase()];
       const itemText = createTag('div', { class: 'product-field' });
       itemText.innerHTML = item;
       row.append(label, itemText);
@@ -70,7 +74,7 @@ export default async function decorate(block) {
       return;
     }
 
-    label.innerText = productFields[index];
+    label.innerText = placeholders[`${productFields[index]}`.toLowerCase()];
     const itemText = createTag('div', { class: 'product-field' });
     itemText.innerText = item;
     row.append(label, itemText);
