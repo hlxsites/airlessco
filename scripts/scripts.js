@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import {
   sampleRUM,
   buildBlock,
@@ -209,8 +210,8 @@ export async function lookupFiles(fileSource, category, locale) {
   const resp = await fetch(fileSource);
   const json = await resp.json();
   window.fileSource = json.data;
-  const filteredFilesCategory = window.fileSource.filter((e) => e.Category === category);
-  const filteredLocaleFiles = filteredFilesCategory.filter((e) => e.Locale === locale);
+  const filteredFilesCategory = window.fileSource.filter((e) => e.Category.toLowerCase() === category.toLowerCase());
+  const filteredLocaleFiles = filteredFilesCategory.filter((e) => e.Locale.toLowerCase() === locale.toLowerCase());
 
   return (filteredLocaleFiles);
 }
