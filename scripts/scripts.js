@@ -158,8 +158,8 @@ export async function lookupProductComparisionData(productSheetURL, productNames
   const filteredProduct = [];
   const productInfo = [];
   productNames.forEach((productName, index) => {
-    // eslint-disable-next-line max-len
-    filteredProduct[index] = window.productData.filter((e) => e.Name.toLowerCase() === productName.toLowerCase());
+    filteredProduct[index] = window.productData.filter((e) => e.Name.toLowerCase()
+     === productName.toLowerCase());
   });
   filteredProduct.forEach((element) => {
     productInfo.push([element[0]]);
