@@ -57,6 +57,9 @@ export default async function decorate(block) {
   const productSeries = productName.replace(/\d+/g, '');
   if (locale[0] === '/na/en' || locale[0] === '/emea/en') {
     headingdiv.innerHTML = `<strong>${productSeries} ${locale[2]}</strong>`;
+  } else if (locale[0] === '/emea/de' || locale[0] === '/emea/nl') {
+    const seriesComparisionStr = locale[2].split(' ');
+    headingdiv.innerHTML = `<strong>${seriesComparisionStr[0]} ${productSeries}${seriesComparisionStr[1]}</strong>`;
   } else {
     headingdiv.innerHTML = `<strong>${locale[2]} ${productSeries}</strong>`;
   }
