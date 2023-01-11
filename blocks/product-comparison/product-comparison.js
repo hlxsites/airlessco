@@ -1,5 +1,5 @@
 import { lookupProductComparisionData, createTag } from '../../scripts/scripts.js';
-import { getMetadata } from '../../scripts/lib-franklin.js';
+import { fetchPlaceholders, getMetadata } from '../../scripts/lib-franklin.js';
 
 function reterieveSpecs(specification) {
   const specsArray = specification.split(/\r?\n|\r|\n/g);
@@ -16,7 +16,7 @@ function reterieveValue(specification, specKey) {
   let specValue;
   specsArray.forEach((element) => {
     const temp = element.split(':');
-    if (temp[0] === specKey) {
+    if (temp[0].toLowerCase() === specKey.toLowerCase()) {
       [, specValue] = temp;
     }
   });
@@ -38,43 +38,24 @@ function buildItemsArray(itemsArray, productName) {
   return productData.sort();
 }
 
-function convertLocale() {
+async function convertLocale(specification, seriesComparision) {
   const locale = getMetadata('locale');
-  let rerturnArray = [];
-  if (locale === '/na/en') {
-    rerturnArray = ['na_en', 'Specification', 'Series Comparision'];
-  } else if (locale === '/emea/en') {
-    rerturnArray = ['emea_en', 'Specification', 'Series Comparision'];
-  } else if (locale === '/emea/cz') {
-    rerturnArray = ['emea_cz', 'SPECIFIKACE'];
-  } else if (locale === '/emea/de') {
-    rerturnArray = ['emea_de', 'SPEZIFIKATIONEN', 'POROVNÁNÍ ŘADY'];
-  } else if (locale === '/emea/es') {
-    rerturnArray = ['emea_es', 'ESPECIFICACIONES', 'COMPARACIÓN DE LA GAMA'];
-  } else if (locale === '/emea/fr') {
-    rerturnArray = ['emea_fr', 'SPÉCIFICATIONS', 'COMPARAISON SÉRIE'];
-  } else if (locale === '/emea/it') {
-    rerturnArray = ['emea_it', 'SPECIFICHE', 'CONFRONTO SERIE', 'VERGLEICH'];
-  } else if (locale === '/emea/nl') {
-    rerturnArray = ['emea_nl', 'SPECIFICATIES', 'VERGELIJKING'];
-  } else if (locale === '/emea/pl') {
-    rerturnArray = ['emea_pl', 'DANE TECHNICZNE', 'PORÓWNANIE SERII'];
-  }
-  return rerturnArray;
+  const placeholders = await fetchPlaceholders(locale);
+  return [locale, placeholders[specification], placeholders[seriesComparision]];
 }
 
 export default async function decorate(block) {
   const productSheetURL = new URL(block.querySelector('a').href);
   const productName = [...block.children][1].innerText.trim('');
   const p2compare = buildItemsArray([...block.children][2].innerText.trim(''), productName);
-  const locale = convertLocale();
+  const locale = await convertLocale('specification', 'seriesComparision');
   const relatedProducts = await lookupProductComparisionData(productSheetURL, p2compare);
   const Specification = 'Specification';
   const Name = 'Name';
   const Images = 'Images';
   const headingdiv = createTag('div', { class: 'heading' });
   const productSeries = productName.replace(/\d+/g, '');
-  if (locale[0] === 'na_en' || locale[0] === 'emea_en') {
+  if (locale[0] === '/na/en' || locale[0] === '/emea/en') {
     headingdiv.innerHTML = `<strong>${productSeries} ${locale[2]}</strong>`;
   } else {
     headingdiv.innerHTML = `<strong>${locale[2]} ${productSeries}</strong>`;
