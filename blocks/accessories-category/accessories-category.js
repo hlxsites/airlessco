@@ -25,11 +25,12 @@ export default async function decorate(block) {
   if (accessoriesInfo.length > 0) {
     const accessories = accessoriesInfo[0].Accessories.split('\n');
     accessories.forEach((acc) => {
-      const accItem = createTag('li');
       const accLink = placeholders[`${acc}Link`];
       const accImage = placeholders[`${acc}Image`];
       const accLabel = placeholders[`${acc}Label`];
-      accItem.innerHTML = `<a href="${accLink}">
+      if (accLink !== undefined || accImage !== undefined || accLabel !== undefined) {
+        const accItem = createTag('li');
+        accItem.innerHTML = `<a href="${accLink}">
                 <div class="productcards-productcard-div">  
                     <div class="productcards-productcard-image">
                         <picture>
@@ -41,8 +42,9 @@ export default async function decorate(block) {
                     </div>
                 </div> 
            </a>`;
-      accList.append(accItem);
-      accList.querySelectorAll('img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '400' }])));
+        accList.append(accItem);
+        accList.querySelectorAll('img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '400' }])));
+      }
     });
     block.append(accList);
   }
