@@ -1,11 +1,14 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-undef */
 import { lookupProductData, createTag } from '../../scripts/scripts.js';
+import { fetchPlaceholders, getMetadata } from '../../scripts/lib-franklin.js';
 
 export default async function decorate(block) {
+  const prefix = getMetadata('locale');
+  const placeholders = await fetchPlaceholders(prefix);
   const productFamilyData = new URL(block.querySelector('a').href);
   const productName = [...block.children][1].innerText.trim('');
-  const productFields = ['Series', 'Applications', 'Spray', 'Usage', 'Features', 'Includes', 'Availability', 'Resources', 'Images'];
+  const productFields = ['Description', 'Applications', 'Spray', 'Usage', 'Features', 'Includes', 'Availability', 'Resources', 'Images'];
 
   // Make a call to the  product datasheet  and get the json for all fields for the product
   const productInfo = await lookupProductData(productFamilyData, productName);
@@ -23,49 +26,51 @@ export default async function decorate(block) {
   const productDetails = createTag('div', { class: 'product-details' });
 
   productData.forEach((item, index) => {
-    const row = createTag('div', { class: 'row' });
-    const label = createTag('div', { class: 'product-label' });
-    if (productFields[index] === 'Images') {
-      const productImages = item.split('\n');
-      const productImage = createTag('img', { class: 'product-image' });
-      productImage.setAttribute('src', productImages[0]);
-      productImage.setAttribute('alt', 'product-image');
-      productImage.setAttribute('src', productImages[0]);
-      productImage.setAttribute('alt', 'product-image');
+    if (item) {
+      const row = createTag('div', { class: 'row' });
+      const label = createTag('div', { class: 'product-label' });
+      if (productFields[index] === 'Images') {
+        const productImages = item.split('\n');
+        const productImage = createTag('img', { class: 'product-image' });
+        productImage.setAttribute('src', productImages[0]);
+        productImage.setAttribute('alt', 'product-image');
+        productImage.setAttribute('src', productImages[0]);
+        productImage.setAttribute('alt', 'product-image');
 
-      const productImageZoom = createTag('figure', { class: 'zoom' });
-      productImageZoom.setAttribute('style', `background-image : url(${productImage.src})`);
+        const productImageZoom = createTag('figure', { class: 'zoom' });
+        productImageZoom.setAttribute('style', `background-image : url(${productImage.src})`);
 
-      productImageZoom.append(productImage);
-      productImageDiv.append(productImageZoom);
+        productImageZoom.append(productImage);
+        productImageDiv.append(productImageZoom);
 
-      if (productImages.length > 1) {
-        const productImageThumbnailWrapper = createTag('div', { class: 'product-image-thumbnail-wrapper' });
-        productImages.forEach((img) => {
-          const productImageThumbs = createTag('img', { class: 'product-image-thumbnails' });
-          productImageThumbs.setAttribute('src', img);
-          productImageThumbs.setAttribute('alt', 'product-image-thumbnail');
-          productImageThumbnailWrapper.append(productImageThumbs);
-        });
-        productImageDiv.append(productImageThumbnailWrapper);
+        if (productImages.length > 1) {
+          const productImageThumbnailWrapper = createTag('div', { class: 'product-image-thumbnail-wrapper' });
+          productImages.forEach((img) => {
+            const productImageThumbs = createTag('img', { class: 'product-image-thumbnails' });
+            productImageThumbs.setAttribute('src', img);
+            productImageThumbs.setAttribute('alt', 'product-image-thumbnail');
+            productImageThumbnailWrapper.append(productImageThumbs);
+          });
+          productImageDiv.append(productImageThumbnailWrapper);
+        }
+        return;
       }
-      return;
-    }
 
-    if (productFields[index] === 'Resources') {
-      label.innerText = productFields[index];
+      if (productFields[index] === 'Resources') {
+        label.innerText = placeholders[`${productFields[index]}`.toLowerCase()];
+        const itemText = createTag('div', { class: 'product-field' });
+        itemText.innerHTML = item;
+        row.append(label, itemText);
+        productDetails.append(row);
+        return;
+      }
+
+      label.innerText = placeholders[`${productFields[index]}`.toLowerCase()];
       const itemText = createTag('div', { class: 'product-field' });
-      itemText.innerHTML = item;
+      itemText.innerText = item;
       row.append(label, itemText);
       productDetails.append(row);
-      return;
     }
-
-    label.innerText = productFields[index];
-    const itemText = createTag('div', { class: 'product-field' });
-    itemText.innerText = item;
-    row.append(label, itemText);
-    productDetails.append(row);
   });
 
   block.innerHTML = '';
