@@ -47,16 +47,12 @@ function buildBreadcrumb(main) {
 
 function buildPageDivider(main) {
   const allPageDivider = main.querySelectorAll('code');
-
   allPageDivider.forEach((el) => {
     const alt = el.innerText.trim();
     const lower = alt.toLowerCase();
     if (lower === 'divider-s') {
       el.innerText = '';
       el.classList.add('divider-s');
-    } else if (lower === 'divider-l') {
-      el.innerText = '';
-      el.classList.add('divider-l');
     } else {
       el.classList.add('product-category');
     }
