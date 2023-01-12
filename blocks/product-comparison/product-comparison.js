@@ -1,4 +1,4 @@
-import { lookupProductComparisionData, createTag } from '../../scripts/scripts.js';
+import { lookupProductComparisionData, createTag, lookupProductData } from '../../scripts/scripts.js';
 import { fetchPlaceholders, getMetadata } from '../../scripts/lib-franklin.js';
 
 function reterieveSpecs(specification) {
@@ -27,11 +27,9 @@ function buildItemsArray(itemsArray, productName) {
   const productData = [];
   let count = 0;
   itemsArray.split('\n').forEach((element) => {
-    if (element.trim('') !== 'items' && element.trim('') !== '') {
-      if (element.trim('').toLowerCase() !== productName.toLowerCase()) {
-        productData[count] = element.trim('');
-        count += 1;
-      }
+    if (element.trim('').toLowerCase() !== productName.toLowerCase()) {
+      productData[count] = element.trim('');
+      count += 1;
     }
   });
   productData.push(productName);
@@ -47,8 +45,10 @@ async function convertLocale(specification, seriesComparision) {
 export default async function decorate(block) {
   const productSheetURL = new URL(block.querySelector('a').href);
   const productName = [...block.children][1].innerText.trim('');
-  const p2compare = buildItemsArray([...block.children][2].innerText.trim(''), productName);
   const locale = await convertLocale('specification', 'seriesComparision');
+  const productData = await lookupProductData(productSheetURL, productName);
+  const Comparison = 'Comparison';
+  const p2compare = buildItemsArray(productData[0][Comparison], productName);
   const relatedProducts = await lookupProductComparisionData(productSheetURL, p2compare);
   const Specification = 'Specification';
   const Name = 'Name';
