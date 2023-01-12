@@ -269,14 +269,6 @@ main .divider-s{
   border-top: 8px solid #eee;
 }
 
-main .divider-l{
-  display:block;
-  width: auto;
-  margin-top: 20px;
-  margin-bottom: 20px;  
-  border-top: 8px solid #eee;
-}
-
 main .product-category{ 
   font-family: var(--heading-font-family);
   font-weight: 600;
