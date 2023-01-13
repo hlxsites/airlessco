@@ -1,4 +1,4 @@
-
+import { createMetadataBlock, hr } from './common.js';
 /*
  * Copyright 2022 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -12,19 +12,12 @@
  */
 /* global WebImporter */
 /* eslint-disable no-console, class-methods-use-this */
-const hr = (doc) => doc.createElement('hr');
 let landingPage = false;
 
-const base_branch = 'https://main--airlessco--hlxsites.hlx.page';
+const baseBranch = 'https://main--airlessco--hlxsites.hlx.page';
 /*
   function to clean up the imported product name and make it useful in the data sheet
  */
-function getProductName(longName) {
-  let name = longName;
-  name = longName.replace('AIRLESSCO ', '');
-  name = name.replace(' de AIRLESSCO', ''); // spanish
-  return name;
-}
 const setup = (main, url) => {
   if (new URL(url).pathname.endsWith('/products/accessories/')) {
     landingPage = true;
@@ -37,15 +30,15 @@ function makeAccessoriesUrl(url) {
 }
 
 function makeDetailUrl(url, page) {
-  const orig_path = new URL(url).pathname + page.replace('/','');
-  return base_branch + orig_path;
+  const origPath = new URL(url).pathname + page.replace('/', '');
+  return baseBranch + origPath;
 }
 
 function convertUrl(url, path) {
-  const new_path = new URL(url).pathname.replace(new RegExp('[^/]+/?$'),'');
-  const relative = path.replace('../','');
+  const newPath = new URL(url).pathname.replace(/[^/]+\/?$/, '');
+  const relative = path.replace('../', '');
 
-  return base_branch + new_path + relative.replace('/', '');
+  return baseBranch + newPath + relative.replace('/', '');
 }
 
 const createPageHeader = (main, document) => {
@@ -58,13 +51,19 @@ const createPageHeader = (main, document) => {
   }
 };
 
-const createAccessoriesDetailBlock = (main, document) => {
+function getCateogry(url) {
+  const earl = new URL(url).pathname;
+  const category = earl.match(/[^/]+\/?$/)[0].replace('/', '').trim();
+  return category;
+}
+
+const createAccessoriesDetailBlock = (main, document, url) => {
   const accTable = WebImporter.DOMUtils.createTable([
     ['Accessory Detail'],
-    ['fluids'],
+    [getCateogry(url)],
   ], document);
-  const hr = main.querySelector('body > div.container.start > hr');
-  hr.insertAdjacentElement('afterend', accTable);
+  const ahr = main.querySelector('body > div.container.start > hr');
+  ahr.insertAdjacentElement('afterend', accTable);
 };
 
 const createAccessoriesBlock = (main, document, url) => {
@@ -79,8 +78,7 @@ const createAccessoriesBlock = (main, document, url) => {
     accData.push([accImg, accAnchor]);
   });
 
-  const accTable = WebImporter.DOMUtils.createTable(
-    accData, document);
+  const accTable = WebImporter.DOMUtils.createTable(accData, document);
   accdiv.replaceWith(accTable);
   main.querySelectorAll('body > div.container.start > div.row').forEach((items) => {
     items.remove();
@@ -91,7 +89,7 @@ const createAccessoriesBlock = (main, document, url) => {
 
 const createAccessoriesLanding = (main, document, url) => {
   const lands = [];
-  let accessories = [];
+  const accessories = [];
   lands.push(['Columns']);
   main.querySelectorAll('body > div.container.start > div.row > div').forEach((items) => {
     const accImg = items.querySelector('div > img');
@@ -111,41 +109,9 @@ const createAccessoriesLanding = (main, document, url) => {
     }
   });
 
-  const accTable = WebImporter.DOMUtils.createTable(
-      lands, document);
+  const accTable = WebImporter.DOMUtils.createTable(lands, document);
   const prodDiv = main.querySelector('body > div.container.start > div.row');
   prodDiv.replaceWith(accTable);
-};
-
-const createMetadataBlock = (main, document, url) => {
-  const meta = {};
-
-  // find the <title> element
-  const title = document.querySelector('title');
-  if (title) {
-    meta.Title = title.innerHTML.replace(/[\n\t]/gm, '');
-  }
-
-  // find the <meta property="og:description"> element
-  const desc = document.querySelector('[name="description"]');
-  if (desc) {
-    meta.Description = desc.content;
-  }
-
-  // set the locale meta property
-  const urlNoHost = url.substring(url.indexOf('3001') + 4);
-  const locale = urlNoHost.split('/');
-  meta.Locale = `/${locale[1]}/${locale[2]}`;
-
-  // helper to create the metadata block
-  const block = WebImporter.Blocks.getMetadataBlock(document, meta);
-
-  // append the block to the main element
-  main.append(hr(document));
-  main.append(block);
-
-  // returning the meta object might be useful to other rules
-  return meta;
 };
 
 export default {
@@ -167,11 +133,11 @@ export default {
     if (landingPage) {
       createAccessoriesLanding(document.body, document, url);
     } else {
-      createAccessoriesDetailBlock(document.body, document);
+      createAccessoriesDetailBlock(document.body, document, url);
       createAccessoriesBlock(document.body, document, url);
     }
 
-    createMetadataBlock(document.body, document,url);
+    createMetadataBlock(document.body, document, url);
     // use helper method to remove header, footer, etc.
     WebImporter.DOMUtils.remove(document.body, [
       'header',
@@ -197,9 +163,10 @@ export default {
     document, url, html, params,
   }) => {
     if (landingPage) {
+      // eslint-disable-next-line no-param-reassign
       url = makeAccessoriesUrl(url);
       landingPage = false;
     }
-    return new URL(url).pathname.replace(/\.html$/, '').replace(/\/$/, '')
+    return new URL(url).pathname.replace(/\.html$/, '').replace(/\/$/, '');
   },
 };

@@ -7,20 +7,43 @@ let productCategory = null;
  */
 function getProductName(longName) {
   let name;
-  name = longName.replace('AIRLESSCO ', '');
-  name = name.replace(' de AIRLESSCO', ''); // spanish
+  if (longName !== undefined) {
+    name = longName.replace('AIRLESSCO ', '');
+    name = name.replace(' de AIRLESSCO', ''); // spanish
+  }
   return name;
 }
 
-function getSheet(document) {
+function getProductType(url) {
+  let type = 'paint-sprayers';
+  const earl = new URL(url).pathname;
+  if (earl.endsWith('products/ss4350/') || earl.endsWith('products/ss3350/') || earl.endsWith('products/ss3350sp/')) {
+    console.log('line striper');
+    type = 'line-stripers';
+  } else if (earl.endsWith('products/hss9950/') || earl.endsWith('products/ts1750/') || earl.endsWith('products/hss9950gas/') || earl.endsWith('products/hss9950electric/')) {
+    type = 'texture-sprayers';
+    console.log('texture sprayer');
+  }
+  return type;
+}
+
+function getSheetLocale(url) {
+  const earl = new URL(url).pathname;
+  const earlArr = earl.split('/');
+  const locale = `${earlArr[1]}_${earlArr[2]}`;
+  return locale;
+}
+
+function getSheet(document, url) {
   const base = 'https://main--airlessco--hlxsites.hlx.page/product-data/';
-  const type = 'line-stripers';
-  const sheet = 'na_en';
+  const type = getProductType(url);
+  const sheet = getSheetLocale(url);
   const sheetLink = document.createElement('a');
   sheetLink.href = `${base}${type}.json?sheet=${sheet}`;
   sheetLink.innerHTML = `${base}${type}.json?sheet=${sheet}`;
   return sheetLink;
 }
+
 const setup = (main) => {
   const pnel = main.querySelector('div.start h1');
 
@@ -33,7 +56,7 @@ const setup = (main) => {
   }
 };
 
-const makePDPBlock = (main, document) => {
+const makePDPBlock = (main, document, url) => {
   if (productCategory) {
     const subhead = document.createElement('p');
     subhead.innerHTML = productCategory;
@@ -53,7 +76,7 @@ const makePDPBlock = (main, document) => {
   // eslint-disable-next-line no-undef
   const pdpTable = WebImporter.DOMUtils.createTable([
     ['Product Details'],
-    [getSheet(document)],
+    [getSheet(document, url)],
     [getProductName(fullProductName)],
   ], document);
   cf.append(hr(document));
@@ -63,7 +86,7 @@ const makePDPBlock = (main, document) => {
   sub.insertAdjacentElement('afterend', hr(document));
 };
 
-const makeComparisonBlock = (main, document) => {
+const makeComparisonBlock = (main, document, url) => {
   const mobileSpecs = main.querySelector('div.container.start > span.visible-xs');
   if (mobileSpecs) {
     mobileSpecs.remove();
@@ -89,21 +112,20 @@ const makeComparisonBlock = (main, document) => {
     // eslint-disable-next-line no-undef
     const compTable = WebImporter.DOMUtils.createTable([
       ['Product Comparison'],
-      [getSheet(document)],
+      [getSheet(document, url)],
       [getProductName(fullProductName)],
-      ['items', pUL],
     ], document);
     compare.insertAdjacentElement('beforebegin', hr(document));
     compare.replaceWith(compTable);
   });
 };
 
-const makeAccessoriesBlock = (main, document) => {
+const makeAccessoriesBlock = (main, document, url) => {
   main.querySelectorAll('div.row').forEach((accessories) => {
     // eslint-disable-next-line no-undef
     const accTable = WebImporter.DOMUtils.createTable([
       ['Accessories Category'],
-      [getSheet(document)],
+      [getSheet(document, url)],
       [getProductName(fullProductName)],
     ], document);
     accessories.insertAdjacentElement('beforebegin', hr(document));
@@ -126,9 +148,9 @@ export default {
     document, url, html, params,
   }) => {
     setup(document.body);
-    makePDPBlock(document.body, document);
-    makeComparisonBlock(document.body, document);
-    makeAccessoriesBlock(document.body, document);
+    makePDPBlock(document.body, document, url);
+    makeComparisonBlock(document.body, document, url);
+    makeAccessoriesBlock(document.body, document, url);
     createMetadataBlock(document.body, document, url);
     // use helper method to remove header, footer, etc.
     // eslint-disable-next-line no-undef

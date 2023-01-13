@@ -176,6 +176,7 @@ https://main--airlessco--hlxsites.hlx.page/emea/es/products/accessories/fluids
 https://main--airlessco--hlxsites.hlx.page/emea/es/products/accessories/filters
 https://main--airlessco--hlxsites.hlx.page/emea/es/products/accessories/striping
 https://main--airlessco--hlxsites.hlx.page/emea/es/products/accessories/other
+https://main--airlessco--hlxsites.hlx.page/emea/es/products/accessories/hvlp
 https://main--airlessco--hlxsites.hlx.page/emea/cz/products/accessories/sprayguns
 https://main--airlessco--hlxsites.hlx.page/emea/cz/products/accessories/revtipspraytips
 https://main--airlessco--hlxsites.hlx.page/emea/cz/products/accessories/hoses
@@ -184,6 +185,7 @@ https://main--airlessco--hlxsites.hlx.page/emea/cz/products/accessories/fluids
 https://main--airlessco--hlxsites.hlx.page/emea/cz/products/accessories/filters
 https://main--airlessco--hlxsites.hlx.page/emea/cz/products/accessories/striping
 https://main--airlessco--hlxsites.hlx.page/emea/cz/products/accessories/other
+https://main--airlessco--hlxsites.hlx.page/emea/cz/products/accessories/hvlp
 https://main--airlessco--hlxsites.hlx.page/emea/pl/products/accessories/sprayguns
 https://main--airlessco--hlxsites.hlx.page/emea/pl/products/accessories/revtipspraytips
 https://main--airlessco--hlxsites.hlx.page/emea/pl/products/accessories/hoses
@@ -192,6 +194,7 @@ https://main--airlessco--hlxsites.hlx.page/emea/pl/products/accessories/fluids
 https://main--airlessco--hlxsites.hlx.page/emea/pl/products/accessories/filters
 https://main--airlessco--hlxsites.hlx.page/emea/pl/products/accessories/striping
 https://main--airlessco--hlxsites.hlx.page/emea/pl/products/accessories/other
+https://main--airlessco--hlxsites.hlx.page/emea/pl/products/accessories/hvlp
 https://main--airlessco--hlxsites.hlx.page/emea/nl/products/accessories/sprayguns
 https://main--airlessco--hlxsites.hlx.page/emea/nl/products/accessories/revtipspraytips
 https://main--airlessco--hlxsites.hlx.page/emea/nl/products/accessories/hoses
@@ -200,6 +203,7 @@ https://main--airlessco--hlxsites.hlx.page/emea/nl/products/accessories/fluids
 https://main--airlessco--hlxsites.hlx.page/emea/nl/products/accessories/filters
 https://main--airlessco--hlxsites.hlx.page/emea/nl/products/accessories/striping
 https://main--airlessco--hlxsites.hlx.page/emea/nl/products/accessories/other
+https://main--airlessco--hlxsites.hlx.page/emea/nl/products/accessories/hvlp
 https://main--airlessco--hlxsites.hlx.page/emea/it/products/accessories/sprayguns
 https://main--airlessco--hlxsites.hlx.page/emea/it/products/accessories/revtipspraytips
 https://main--airlessco--hlxsites.hlx.page/emea/it/products/accessories/hoses
@@ -208,6 +212,7 @@ https://main--airlessco--hlxsites.hlx.page/emea/it/products/accessories/fluids
 https://main--airlessco--hlxsites.hlx.page/emea/it/products/accessories/filters
 https://main--airlessco--hlxsites.hlx.page/emea/it/products/accessories/striping
 https://main--airlessco--hlxsites.hlx.page/emea/it/products/accessories/other
+https://main--airlessco--hlxsites.hlx.page/emea/it/products/accessories/hvlp
 https://main--airlessco--hlxsites.hlx.page/emea/fr/products/accessories/sprayguns
 https://main--airlessco--hlxsites.hlx.page/emea/fr/products/accessories/revtipspraytips
 https://main--airlessco--hlxsites.hlx.page/emea/fr/products/accessories/hoses
@@ -216,6 +221,7 @@ https://main--airlessco--hlxsites.hlx.page/emea/fr/products/accessories/fluids
 https://main--airlessco--hlxsites.hlx.page/emea/fr/products/accessories/filters
 https://main--airlessco--hlxsites.hlx.page/emea/fr/products/accessories/striping
 https://main--airlessco--hlxsites.hlx.page/emea/fr/products/accessories/other
+https://main--airlessco--hlxsites.hlx.page/emea/fr/products/accessories/hvlp
 https://main--airlessco--hlxsites.hlx.page/emea/en/products/accessories/sprayguns
 https://main--airlessco--hlxsites.hlx.page/emea/en/products/accessories/revtipspraytips
 https://main--airlessco--hlxsites.hlx.page/emea/en/products/accessories/hoses
@@ -224,6 +230,7 @@ https://main--airlessco--hlxsites.hlx.page/emea/en/products/accessories/fluids
 https://main--airlessco--hlxsites.hlx.page/emea/en/products/accessories/filters
 https://main--airlessco--hlxsites.hlx.page/emea/en/products/accessories/striping
 https://main--airlessco--hlxsites.hlx.page/emea/en/products/accessories/other
+https://main--airlessco--hlxsites.hlx.page/emea/en/products/accessories/hvlp
 https://main--airlessco--hlxsites.hlx.page/emea/de/products/accessories/sprayguns
 https://main--airlessco--hlxsites.hlx.page/emea/de/products/accessories/revtipspraytips
 https://main--airlessco--hlxsites.hlx.page/emea/de/products/accessories/hoses
@@ -232,6 +239,7 @@ https://main--airlessco--hlxsites.hlx.page/emea/de/products/accessories/fluids
 https://main--airlessco--hlxsites.hlx.page/emea/de/products/accessories/filters
 https://main--airlessco--hlxsites.hlx.page/emea/de/products/accessories/striping
 https://main--airlessco--hlxsites.hlx.page/emea/de/products/accessories/other
+https://main--airlessco--hlxsites.hlx.page/emea/de/products/accessories/hvlp
 https://main--airlessco--hlxsites.hlx.page/emea/de/products/accessories/
 https://main--airlessco--hlxsites.hlx.page/emea/en/products/accessories/
 https://main--airlessco--hlxsites.hlx.page/emea/fr/products/accessories/
@@ -277,11 +285,14 @@ https://main--airlessco--hlxsites.hlx.page/emea/fr/products/linestripers/
 https://main--airlessco--hlxsites.hlx.page/emea/de/products/paintsprayers/
 https://main--airlessco--hlxsites.hlx.page/emea/de/products/linestripers/
 https://main--airlessco--hlxsites.hlx.page/emea/de/products/texturesprayers/
-https://main--airlessco--hlxsites.hlx.page/emea/de/products/linestripers/
+https://main--airlessco--hlxsites.hlx.page/emea/de/products/accessories/
 
 https://main--airlessco--hlxsites.hlx.page/na/en/products/support/
 https://main--airlessco--hlxsites.hlx.page/na/en/products/support/manuals
 https://main--airlessco--hlxsites.hlx.page/na/en/products/support/historicalmanuals
 https://main--airlessco--hlxsites.hlx.page/na/en/products/support/distributorresources
+https://main--airlessco--hlxsites.hlx.page/na/de/support/
+https://main--airlessco--hlxsites.hlx.page/na/de/support/manuals
+https://main--airlessco--hlxsites.hlx.page/na/de/support/historicalmanuals
 
 https://main--airlessco--hlxsites.hlx.page/na/en/products/contactus/
