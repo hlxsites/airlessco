@@ -36,16 +36,16 @@ function buildItemsArray(itemsArray, productName) {
   return productData.sort();
 }
 
-async function convertLocale(specification, seriesComparision) {
+async function convertLocale(specification, seriesComparison) {
   const locale = getMetadata('locale');
   const placeholders = await fetchPlaceholders(locale);
-  return [locale, placeholders[specification], placeholders[seriesComparision]];
+  return [locale, placeholders[specification], placeholders[seriesComparison]];
 }
 
 export default async function decorate(block) {
   const productSheetURL = new URL(block.querySelector('a').href);
   const productName = [...block.children][1].innerText.trim('');
-  const locale = await convertLocale('specification', 'seriesComparision');
+  const locale = await convertLocale('specification', 'seriesComparison');
   const productData = await lookupProductData(productSheetURL, productName);
   const Comparison = 'Comparison';
   const p2compare = buildItemsArray(productData[0][Comparison], productName);
@@ -58,8 +58,8 @@ export default async function decorate(block) {
   if (locale[0] === '/na/en' || locale[0] === '/emea/en') {
     headingdiv.innerHTML = `<strong>${productSeries} ${locale[2]}</strong>`;
   } else if (locale[0] === '/emea/de' || locale[0] === '/emea/nl') {
-    const seriesComparisionStr = locale[2].split(' ');
-    headingdiv.innerHTML = `<strong>${seriesComparisionStr[0]} ${productSeries}${seriesComparisionStr[1]}</strong>`;
+    const seriesComparisonStr = locale[2].split(' ');
+    headingdiv.innerHTML = `<strong>${seriesComparisonStr[0]} ${productSeries}${seriesComparisonStr[1]}</strong>`;
   } else {
     headingdiv.innerHTML = `<strong>${locale[2]} ${productSeries}</strong>`;
   }
