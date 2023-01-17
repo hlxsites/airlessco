@@ -41,7 +41,7 @@ function buildItemsArray(itemsArray, productName) {
 
 async function convertLocale(specification, seriesComparison) {
   const locale = getMetadata('locale');
-  const placeholders = await fetchPlaceholders(locale);console.log(placeholders)
+  const placeholders = await fetchPlaceholders(locale);
   return [locale, placeholders[specification], placeholders[seriesComparison]];
 }
 
