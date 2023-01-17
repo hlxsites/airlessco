@@ -41,14 +41,14 @@ function buildItemsArray(itemsArray, productName) {
 
 async function convertLocale(specification, seriesComparison) {
   const locale = getMetadata('locale');
-  const placeholders = await fetchPlaceholders(locale);
+  const placeholders = await fetchPlaceholders(locale);console.log(placeholders)
   return [locale, placeholders[specification], placeholders[seriesComparison]];
 }
 
 export default async function decorate(block) {
   const productSheetURL = new URL(block.querySelector('a').href);
   const productName = [...block.children][1].innerText.trim('');
-  const locale = await convertLocale('specification', 'seriesComparision');
+  const locale = await convertLocale('specification', 'seriescomparision');
   const productData = await lookupProductData(productSheetURL, productName);
   const Comparison = 'Comparison';
   const p2compare = buildItemsArray(productData[0][Comparison], productName);
