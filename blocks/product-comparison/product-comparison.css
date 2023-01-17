@@ -174,9 +174,11 @@ table > tr > td.specname{
 .product-comparison .table > tr > td.highlightspecdata{
     text-align: center;
     background-color: #e6e6e6;
+    border-top: .5px solid #f9f9f9;
+    border-bottom: .5px solid #f9f9f9;
 }
 
 .product-comparison .table .thead > tr > td.highlightspecdata{
-    background-color: #e6e6e6;
+    background-color: #e6e6e6;    
 }
 }
