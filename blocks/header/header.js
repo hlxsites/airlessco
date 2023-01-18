@@ -57,6 +57,43 @@ function buildProductsMenu(productsWrapper) {
   return productsWrapper;
 }
 
+function buildMobileButton() {
+  const wrapper = document.createElement('div');
+  wrapper.classList.add('navbar-mobile-toggle-wrapper');
+
+  const button = document.createElement('div');
+  button.classList.add('navbar-mobile-toggle');
+  wrapper.appendChild(button);
+
+  button.setAttribute('data-toggle', 'navbar');
+  button.setAttribute('aria-expanded', 'false');
+  button.setAttribute('aria-controls', 'navbar');
+
+  let span = document.createElement('span');
+  span.classList.add('sr-only');
+  span.appendChild(document.createTextNode('Toggle Navigation')); // TODO: Make this i18n
+  button.appendChild(span);
+  for (let i = 0; i < 3; i += 1) {
+    span = document.createElement('span');
+    span.classList.add('icon-bar');
+    button.append(span);
+  }
+
+  button.addEventListener('click', (e) => {
+    e.preventDefault();
+    const el = e.currentTarget;
+    if (el.getAttribute('aria-expanded') === 'false') {
+      el.setAttribute('aria-expanded', 'true');
+      el.closest(`.${el.getAttribute('data-toggle')}`).classList.add('open');
+    } else {
+      el.setAttribute('aria-expanded', 'false');
+      el.closest(`.${el.getAttribute('data-toggle')}`).classList.remove('open');
+    }
+  });
+
+  return wrapper;
+}
+
 /**
  * decorates the header, mainly the nav
  * @param {Element} block The header block element
@@ -75,71 +112,20 @@ export default async function decorate(block) {
 
     // decorate nav DOM
     const nav = document.createElement('nav');
-    nav.classList.add('navbar', 'navbar-default');
 
-    nav.append(buildLangMenu(tmp.children[2]));
+    const navbar = document.createElement('div');
+    navbar.classList.add('navbar');
+    nav.append(navbar);
 
-    nav.append(buildHelpMenu(tmp.children[1]));
+    navbar.append(buildMobileButton());
+    navbar.append(buildLangMenu(tmp.children[2]));
+    navbar.append(buildHelpMenu(tmp.children[1]));
+    navbar.append(buildProductsMenu(tmp.children[0]));
 
-    nav.append(buildProductsMenu(tmp.children[0]));
+    // const mobileMenu = buildMobileMenu();
+    // appendMobileItems(mobileMenu, defaultNav);
+    // nav.append(mobileMenu);
 
-    // const classes = ['brand', 'help', 'languages'];
-    // classes.forEach((e, j) => {
-    //   const section = nav.children[j];
-    //   if (section) section.classList.add(`nav-${e}`);
-    // });
-
-    // wrapper = document.createElement('div');
-    // wrapper.classList.add('nav-help');
-    //
-    //
-    // wrapper = document.createElement('div');
-    // wrapper.classList.add('nav-brand');
-
-    // const navSections = [...nav.children][1];
-    // if (navSections) {
-    //   navSections.querySelectorAll(':scope > ul > li').forEach((navSection) => {
-    //     if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
-    //     navSection.addEventListener('click', () => {
-    //       const expanded = navSection.getAttribute('aria-expanded') === 'true';
-    //       collapseAllNavSections(navSections);
-    //       navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-    //     });
-    //   });
-    // }
-    // const langSelector = nav.querySelector('.nav-tools ul li');
-    // langSelector.classList.add('nav-drop');
-    // langSelector.setAttribute('aria-expanded', 'false');
-    // langSelector.addEventListener('click', () => {
-    //   const lsexpanded = langSelector.getAttribute('aria-expanded') === 'true';
-    //   langSelector.setAttribute('aria-expanded', lsexpanded ? 'false' : 'true');
-    // });
-    //
-    // /* language selector pathing */
-    // const langs = langSelector.querySelector('ul');
-    // const { pathname } = window.location;
-    // const nakedPath = pathname.split('/')[3];
-    // const currentRegionLang = pathname.substring(0, pathname.indexOf(nakedPath));
-    // const cleanPath = pathname.substring(pathname.indexOf(nakedPath));
-    // langs.querySelectorAll('li').forEach((lang) => {
-    //   const anchor = lang.querySelector('a');
-    //   anchor.href += cleanPath;
-    //   if (anchor.href.indexOf(currentRegionLang) > 0) {
-    //     lang.classList.add('active');
-    //   }
-    // });
-    //
-    // // hamburger for mobile
-    // const hamburger = document.createElement('div');
-    // hamburger.classList.add('nav-hamburger');
-    // hamburger.innerHTML = '<div class="nav-hamburger-icon"></div>';
-    // hamburger.addEventListener('click', () => {
-    //   const expanded = nav.getAttribute('aria-expanded') === 'true';
-    //   document.body.style.overflowY = expanded ? '' : 'hidden';
-    //   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-    // });
-    // nav.prepend(hamburger);
-    // nav.setAttribute('aria-expanded', 'false');
     decorateIcons(nav);
     block.append(nav);
   }
