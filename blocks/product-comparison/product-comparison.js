@@ -20,6 +20,9 @@ function reterieveValue(specification, specKey) {
       [, specValue] = temp;
     }
   });
+  if (specValue.includes('|')) {
+    specValue = specValue.replaceAll('|', '<br>');
+  }
   return specValue;
 }
 
@@ -45,7 +48,7 @@ async function convertLocale(specification, seriesComparison) {
 export default async function decorate(block) {
   const productSheetURL = new URL(block.querySelector('a').href);
   const productName = [...block.children][1].innerText.trim('');
-  const locale = await convertLocale('specification', 'seriesComparison');
+  const locale = await convertLocale('specification', 'seriescomparision');
   const productData = await lookupProductData(productSheetURL, productName);
   const Comparison = 'Comparison';
   const p2compare = buildItemsArray(productData[0][Comparison], productName);
