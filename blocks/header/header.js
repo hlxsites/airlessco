@@ -1,4 +1,4 @@
-import { decorateIcons, getMetadata } from '../../scripts/lib-franklin.js';
+import { fetchPlaceholders, decorateIcons, getMetadata } from '../../scripts/lib-franklin.js';
 
 function buildLangMenu(langWrapper) {
   langWrapper.classList.add('nav-languages');
@@ -57,7 +57,7 @@ function buildProductsMenu(productsWrapper) {
   return productsWrapper;
 }
 
-function buildMobileButton() {
+async function buildMobileButton() {
   const wrapper = document.createElement('div');
   wrapper.classList.add('navbar-mobile-toggle-wrapper');
 
@@ -69,9 +69,13 @@ function buildMobileButton() {
   button.setAttribute('aria-expanded', 'false');
   button.setAttribute('aria-controls', 'navbar');
 
+  const locale = getMetadata('locale');
+  const placeholders = await fetchPlaceholders(locale);
+
+
   let span = document.createElement('span');
   span.classList.add('sr-only');
-  span.appendChild(document.createTextNode('Toggle Navigation')); // TODO: Make this i18n
+  span.appendChild(document.createTextNode(placeholders.navToggleLabel));
   button.appendChild(span);
   for (let i = 0; i < 3; i += 1) {
     span = document.createElement('span');
@@ -117,7 +121,7 @@ export default async function decorate(block) {
     navbar.classList.add('navbar');
     nav.append(navbar);
 
-    navbar.append(buildMobileButton());
+    navbar.append(await buildMobileButton());
     navbar.append(buildLangMenu(tmp.children[2]));
     navbar.append(buildHelpMenu(tmp.children[1]));
     navbar.append(buildProductsMenu(tmp.children[0]));
