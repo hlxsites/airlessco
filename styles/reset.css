@@ -20,6 +20,8 @@ time, mark, audio, video {
   padding: 0;
   border: 0;
   font-size: 100%;
+
+  /* stylelint-disable-next-line declaration-block-no-shorthand-property-overrides */
   font: inherit;
   vertical-align: baseline;
 }
