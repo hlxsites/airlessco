@@ -54,6 +54,7 @@
   --section-width-tablet: 1198px;
   --section-width-desktop: 1600px;
 
+  /* Fixed height of nav to maintain CLS */
   --nav-height: 74px;
 }
 
@@ -185,7 +186,6 @@ main .section.card-heading h3 strong {
 
 
 @media screen and (min-width: 768px) {
-
   :root {
     --nav-height: 159px;
   }
