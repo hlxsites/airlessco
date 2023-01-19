@@ -72,7 +72,6 @@ async function buildMobileButton() {
   const locale = getMetadata('locale');
   const placeholders = await fetchPlaceholders(locale);
 
-
   let span = document.createElement('span');
   span.classList.add('sr-only');
   span.appendChild(document.createTextNode(placeholders.navToggleLabel));
