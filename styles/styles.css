@@ -42,6 +42,7 @@
   --body-font-size-xxs: 12px;
 
   /* heading sizes */
+  --heading-font-size-xxl: 36px;
   --heading-font-size-xl: 30px;
   --heading-font-size-l: 24px;
   --heading-font-size-m: 18px;
@@ -52,6 +53,8 @@
   /* section widths */
   --section-width-tablet: 1198px;
   --section-width-desktop: 1600px;
+
+  --nav-height: 74px;
 }
 
 /** Franklin Required **/
@@ -145,4 +148,86 @@ b, strong {
   border-top: 4px dashed;
   border-right: 4px solid transparent;
   border-left: 4px solid transparent;
+}
+
+header {
+  height: var(--nav-height);
+}
+
+main {
+  margin: 10px 0;
+  padding: 0 15px;
+}
+
+main .section {
+  display: block;
+  border-top: 8px solid var(--overlay-background-color);
+  margin-top: 20px;
+}
+
+main .section.page-header-container {
+  margin-top: 30px;
+}
+
+main .section.card-heading h3 {
+  font-weight: 400;
+  line-height: 1;
+  color: #777;
+  font-size: calc(var(--heading-font-size-l) * .65);
+}
+
+main .section.card-heading h3 strong {
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--airless-blue);
+  font-size: var(--heading-font-size-l);
+}
+
+
+@media screen and (min-width: 768px) {
+
+  :root {
+    --nav-height: 159px;
+  }
+
+  main {
+    box-sizing: border-box;
+    margin: 10px auto;
+    padding: 0 25px;
+    width: 768px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  :root {
+    --nav-height: 190px;
+  }
+
+  main {
+    margin: 20px auto;
+    width: 1024px;
+    padding: 0 40px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  :root {
+    --nav-height: 227px;
+  }
+
+  main {
+    width: 1280px;
+    padding: 0 31px;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  :root {
+    --nav-height: 284px;
+  }
+
+  main {
+    width: 1570px;
+    padding: 0;
+  }
 }
