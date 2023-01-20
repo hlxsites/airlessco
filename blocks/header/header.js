@@ -40,21 +40,12 @@ function buildLangMenu(langWrapper, locale) {
     locale += '/';
   }
 
-  // Find active path
-  let active;
-  Object.values(links).every((a) => {
-    const href = a.getAttribute('href');
-    if (currPath.startsWith(href)) {
-      a.closest('li').classList.add('active');
-      active = href;
-      return false;
-    }
-    return true;
-  });
-
   // Change URL to fully qualified language specific location.
   Object.values(links).forEach((a) => {
     let href = a.getAttribute('href');
+    if (currPath.startsWith(href)) {
+      a.closest('li').classList.add('active');
+    }
     if (!href.endsWith('/')) {
       href += '/';
     }

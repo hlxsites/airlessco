@@ -3,6 +3,7 @@
 header {
   font-family: var(--body-font-family);
   line-height: 1.4286;
+  background-color: #666;
 }
 
 header a {
@@ -16,7 +17,7 @@ nav > .navbar {
   background-position-x: left;
   background-position-y: top;
   width: 100%;
-  min-height: 74px;
+  min-height: var(--nav-height);
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -136,7 +137,8 @@ nav .navbar.open {
 
 .navbar .nav-help,
 .navbar .nav-products {
-  padding: 0 15px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .navbar.open .nav-languages,
@@ -150,7 +152,6 @@ nav .navbar.open {
     background-image: url('../../images/header-bg.jpg');
     background-repeat: repeat-x;
     background-size: auto calc(284px / (1600 / 768));
-    background-color: #666;
   }
 
   nav > .navbar {
@@ -161,7 +162,7 @@ nav .navbar.open {
     background-position-x: center;
     background-position-y: top;
     margin: 0 auto;
-    height: 159px;
+    min-height: var(--nav-height);
     width: 768px;
     position: relative;
   }
@@ -208,19 +209,30 @@ nav .navbar.open {
   }
 
   .navbar .nav-products {
-    padding: 0 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  html[lang="es"] .navbar .nav-products {
+    padding-top: 23px;
   }
 
   .navbar .nav-products > ul {
     display: flex;
     align-items: stretch;
     justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .navbar .nav-products > ul > li {
+    flex-grow: 2;
   }
 
   .navbar .nav-products li > a {
     padding: 18px 24px;
     text-transform: uppercase;
     font-weight: 600;
+    white-space: nowrap;
   }
 
 }
@@ -231,7 +243,7 @@ nav .navbar.open {
   }
 
   nav .navbar {
-    height: 190px;
+    min-height: var(--nav-height);
     width: 1024px;
   }
 
@@ -243,6 +255,10 @@ nav .navbar.open {
   .navbar .nav-help li > a {
     padding: 20px 13px;
     font-size: var(--body-font-size-s);
+  }
+
+  html[lang="es"] .navbar .nav-products {
+    padding-top: 21px;
   }
 
   .navbar .nav-products > ul {
@@ -261,7 +277,7 @@ nav .navbar.open {
   }
 
   nav .navbar {
-    height: 227px;
+    height: var(--nav-height);
     width: 1280px;
   }
 
@@ -271,16 +287,33 @@ nav .navbar.open {
 
   .navbar .nav-help li > a {
     padding: 40px 18px;
-    font-size: var(--body-font-size-m);
   }
 
   .navbar .nav-products > ul {
     padding-top: 13px;
   }
 
+  html[lang="es"] .navbar .nav-products {
+    padding-top: 20px;
+  }
+
   .navbar .nav-products li > a {
     padding: 15px 46px;
     font-size: var(--body-font-size-m);
+  }
+
+  .navbar .nav-help li > a,
+  .navbar .nav-products li > a {
+    font-size: var(--body-font-size-m);
+  }
+
+  html[lang="es"] .navbar .nav-help li > a,
+  html[lang="es"] .navbar .nav-products li > a {
+    font-size: var(--body-font-size-s);
+  }
+
+  html[lang="es"] .navbar .nav-products li > a {
+    padding: 10px 15px;
   }
 }
 
@@ -291,7 +324,7 @@ nav .navbar.open {
   }
 
   nav .navbar {
-    height: 284px;
+    min-height: var(--nav-height);
     width: 1600px;
   }
 
@@ -301,7 +334,10 @@ nav .navbar.open {
 
   .navbar .nav-help li > a {
     padding: 77px 20px 80px;
-    font-size: var(--body-font-size-l);
+  }
+
+  html[lang="es"] .navbar .nav-products {
+    padding-top: 0;
   }
 
   .navbar .nav-products > ul {
@@ -310,6 +346,17 @@ nav .navbar.open {
 
   .navbar .nav-products li > a {
     padding: 16px 80px;
+  }
+
+  html[lang="en"] .navbar .nav-help li > a,
+  html[lang="en"] .navbar .nav-products li > a,
+  html[lang="es"] .navbar .nav-help li > a,
+  html[lang="es"] .navbar .nav-products li > a {
     font-size: var(--body-font-size-l);
   }
+
+  html[lang="es"] .navbar .nav-products li > a {
+    padding: 20px 30px;
+  }
+
 }
