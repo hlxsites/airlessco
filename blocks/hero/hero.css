@@ -1,31 +1,12 @@
-/* block specific CSS goes here */
 
-main .hero-container > div {
-    width: 100%;
-
-}
-
-main .hero-wrapper{
-    padding-bottom:20px;
-    border-bottom: 8px solid #eee;
-} 
-
-main .hero-container {
-height: auto;
-padding : 0 15px;
-margin : 0 auto;
-
-}
-  
-main .hero h1 {
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    color: white;
+main .hero-container.section {
+  margin-top: 0;
+  border-top: none;
 }
 
 main .hero img {
-    object-fit: cover;
-    width: 100%;
-    height: auto;
+  display: block;
+  object-fit: cover;
+  width: 100%;
+  height: auto;
 }

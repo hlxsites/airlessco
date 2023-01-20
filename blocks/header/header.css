@@ -38,6 +38,12 @@ nav .navbar.open {
   background-color: var(--airless-blue);
 }
 
+.navbar li > a:hover,
+.navbar li > a:focus {
+  text-decoration: none;
+  color: #ffcd00;
+}
+
 .navbar .nav-languages {
   font-size: var(--body-font-size-s);
   padding: 0 25px;
@@ -81,12 +87,6 @@ nav .navbar.open {
 .navbar .nav-languages li > a {
   display: block;
   padding: 5px 15px 10px;
-}
-
-.navbar .nav-languages li > a:hover,
-.navbar .nav-languages li > a:focus {
-  text-decoration: none;
-  color: #ffcd00;
 }
 
 .navbar .nav-languages .language-select .language-menu {
