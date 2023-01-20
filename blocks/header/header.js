@@ -1,6 +1,6 @@
 import { fetchPlaceholders, decorateIcons, getMetadata } from '../../scripts/lib-franklin.js';
 
-function buildLangMenu(langWrapper) {
+function buildLangMenu(langWrapper, locale) {
   langWrapper.classList.add('nav-languages');
   const langSelect = langWrapper.querySelector(':scope > ul > li');
 
@@ -34,12 +34,31 @@ function buildLangMenu(langWrapper) {
   languages.classList.add('language-menu');
 
   const links = languages.querySelectorAll(':scope > li > a');
+  const currPath = window.location.pathname;
+  if (!locale.endsWith('/')) {
+    // eslint-disable-next-line no-param-reassign
+    locale += '/';
+  }
+
+  // Find active path
+  let active;
   Object.values(links).every((a) => {
-    if (window.location.pathname.startsWith(a.getAttribute('href'))) {
+    const href = a.getAttribute('href');
+    if (currPath.startsWith(href)) {
       a.closest('li').classList.add('active');
+      active = href;
       return false;
     }
     return true;
+  });
+
+  // Change URL to fully qualified language specific location.
+  Object.values(links).forEach((a) => {
+    let href = a.getAttribute('href');
+    if (!href.endsWith('/')) {
+      href += '/';
+    }
+    a.setAttribute('href', currPath.replace(locale, href));
   });
 
   langSelect.replaceChild(linkLabel, textLabel);
@@ -57,7 +76,7 @@ function buildProductsMenu(productsWrapper) {
   return productsWrapper;
 }
 
-async function buildMobileButton() {
+async function buildMobileButton(locale) {
   const wrapper = document.createElement('div');
   wrapper.classList.add('navbar-mobile-toggle-wrapper');
 
@@ -69,7 +88,6 @@ async function buildMobileButton() {
   button.setAttribute('aria-expanded', 'false');
   button.setAttribute('aria-controls', 'navbar');
 
-  const locale = getMetadata('locale');
   const placeholders = await fetchPlaceholders(locale);
 
   let span = document.createElement('span');
@@ -119,8 +137,9 @@ export default async function decorate(block) {
     navbar.classList.add('navbar');
     nav.append(navbar);
 
-    navbar.append(await buildMobileButton());
-    navbar.append(buildLangMenu(tmp.children[2]));
+    const locale = getMetadata('locale');
+    navbar.append(await buildMobileButton(locale));
+    navbar.append(buildLangMenu(tmp.children[2], locale));
     navbar.append(buildHelpMenu(tmp.children[1]));
     navbar.append(buildProductsMenu(tmp.children[0]));
 
