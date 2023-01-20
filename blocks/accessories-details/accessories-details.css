@@ -1,0 +1,133 @@
+.accessory-div {
+    display: block;
+    padding-bottom: 40px;
+}
+
+.accessories-details {
+    padding-top: 20px;
+}
+
+.accessory-details-div {
+    width: 100%;
+    border-top: 8px solid #eee;
+    padding-bottom: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    line-height: 1.4286;
+
+}
+
+.accessory-img-div {
+    width: 100%;
+}
+
+.key-value-div {
+    display: block;
+}
+
+.keydiv {
+    width: 100%;
+    font-weight: 700;
+    font-size: var(--body-font-size-s);
+    font-family: var(--body-font-family);
+}
+
+.valuediv {
+    width: 100%;
+    font-size: var(--body-font-size-s);
+    padding-bottom: 15px;
+    font-family: var(--body-font-family);
+}
+
+.namediv {
+    font-weight: 700;
+    font-size: var(--heading-font-size-l);
+    padding-right: 15px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    font-family: var(--body-font-family);
+}
+
+.accessory-desc {
+    font-size: var(--body-font-size-s);
+    padding-right: 15px;
+    padding-bottom: 15px;
+    font-family: var(--body-font-family);
+}
+
+.accessory-img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media screen and (min-width: 768px) {
+    .accessory-div {
+        display: flex;
+        padding-bottom: 40px;
+    }
+
+    .accessories-details {
+        padding-top: 20px;
+    }
+
+    .accessory-details-div {
+        width: 75%;
+        border-top: 8px solid #eee;
+        padding-bottom: 40px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        line-height: 1.4286;
+
+    }
+
+    .accessory-img-div {
+        width: 25%;
+        padding-top: 20px;
+    }
+
+    .key-value-div {
+        display: flex;
+    }
+
+    .keydiv {
+        display: 1;
+        width: 33%;
+        font-weight: 700;
+        font-size: var(--body-font-size-s);
+        padding-left: 15px;
+        padding-bottom: 15px;
+        font-family: var(--body-font-family);
+    }
+
+    .valuediv {
+        display: 1;
+        width: 67%;
+        font-size: var(--body-font-size-s);
+        padding-bottom: 15px;
+        font-family: var(--body-font-family);
+    }
+
+    .namediv {
+        font-weight: 700;
+        font-size: var(--heading-font-size-l);
+        padding: 15px;
+        font-family: var(--body-font-family);
+    }
+
+    .accessory-desc {
+        font-size: var(--body-font-size-s);
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-bottom: 15px;
+        font-family: var(--body-font-family);
+    }
+
+    .accessory-img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+    }
+}
