@@ -15,24 +15,17 @@ import {
 } from './lib-franklin.js';
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
-window.hlx.RUM_GENERATION = 'project-1'; // add your RUM generation information here
+window.hlx.RUM_GENERATION = 'airlessco'; // add your RUM generation information here
 
-function buildHeroBlock(main) {
+function buildPageHeader(main) {
   const h1 = main.querySelector('h1');
-  const picture = main.querySelector('picture');
-  // eslint-disable-next-line no-bitwise
-  if (h1 && picture && (h1.compareDocumentPosition(picture) & Node.DOCUMENT_POSITION_PRECEDING)) {
-    const section = document.createElement('div');
-    section.append(buildBlock('hero', { elems: [picture, h1] }));
-    main.prepend(section);
+  if (h1) {
+    h1.parentElement.classList.add('page-header-container');
   }
 }
 
 function buildBreadcrumb(main) {
-  const breadcrumbDiv = document.createElement('div');
-  breadcrumbDiv.classList.add('breadcrumb-div');
   let pathSegments = window.location.pathname.split('/');
-
   // remove the last element if there was a / at the end of the pathname
   pathSegments = pathSegments[pathSegments.length - 1] === '' ? pathSegments.slice(0, pathSegments.length - 1) : pathSegments;
 
@@ -41,9 +34,10 @@ function buildBreadcrumb(main) {
   }
 
   if (pathSegments.length > 4) {
+    const breadcrumbDiv = document.createElement('div');
     breadcrumbDiv.append(buildBlock('breadcrumb', { elems: [] }));
+    main.prepend(breadcrumbDiv);
   }
-  main.prepend(breadcrumbDiv);
 }
 
 function buildPageDivider(main) {
@@ -66,7 +60,7 @@ function buildPageDivider(main) {
  */
 function buildAutoBlocks(main) {
   try {
-    buildHeroBlock(main);
+    buildPageHeader(main);
     buildBreadcrumb(main);
     buildPageDivider(main);
   } catch (error) {

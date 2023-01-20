@@ -1,66 +1,65 @@
-.productcards-wrapper{
-    margin-left: 8.3333%;
-    border-top: 8px solid #eee;
-    padding-bottom: 40px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+
+.productcards-wrapper {
+  margin-left: -15px;
+  margin-right: -15px;
 }
 
-.productcards > ul {
-    list-style: none;   
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    grid-gap: 16px;
-    margin-right: -15px;
-    margin-left: -15px;
+.productcards {
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.productcards > ul > li {   
-    position: relative;
-    min-height: 1px;
-    padding-right: 15px;
-    padding-left: 15px;
+.productcards.last {
+  padding-bottom: 40px;
 }
 
-.productcards .productcards-productcard-body {
-    margin: 16px;
-    font-family: var(--body-font-family);
-    max-width: 1600px;   
-    font-size: 14px;
-    padding: 9px;
-    color: #333;
-    text-decoration: none;
+.productcards .productcard {
+  flex-basis: 50%;
 }
 
-.productcards .productcards-productcard-image {
-    line-height: 0;    
+.productcards .productcard > a {
+  display: block;
+  padding: 4px;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-bottom: 20px;
+  line-height: 1.4286;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: border .2s ease-in-out;
 }
 
-.productcards .productcards-productcard-body > *:first-child {
-    margin-top: 0;
+.productcards .productcard-body {
+  padding: 9px;
+  font-size: var(--body-font-size-xxs);
+  color: #333;
 }
 
-.productcards > ul > li img {
-    width: 100%;
-    display: block;
-    max-width: 100%;    
-    height: auto;
-    object-fit: cover;
-    margin-right: auto;
-    margin-left: auto;
-    overflow-clip-margin: content-box;
-    overflow: clip;
-    aspect-ratio: 1/1;
+.productcards .productcard-image img {
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
 }
 
-.productcards .productcards-productcard-div {
-    display: block;
-    padding: 4px;
-    margin-bottom: 20px;
-    line-height: 1.4286;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    transition: border .2s ease-in-out;        
+@media screen and (min-width: 768px) {
+  .productcards .productcard {
+    flex-basis: 25%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .productcards-container {
+    width: 83.333%;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .productcards .productcard-body {
+    font-size: var(--body-font-size-xs);
+  }
 }
