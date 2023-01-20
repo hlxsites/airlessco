@@ -61,6 +61,7 @@
     height: auto;
     margin-left: auto;
     margin-right: auto;
+    aspect-ratio: 1;
 }
 
 @media screen and (min-width: 768px) {
@@ -129,5 +130,6 @@
         display: block;
         max-width: 100%;
         height: auto;
+        
     }
 }
