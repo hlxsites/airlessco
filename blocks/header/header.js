@@ -105,7 +105,7 @@ export default async function decorate(block) {
   block.textContent = '';
 
   // fetch nav content
-  const navPath = getMetadata('locale') || '/drafts/stopp';
+  const navPath = getMetadata('locale');
   const resp = await fetch(`${navPath}/nav.plain.html`);
   if (resp.ok) {
     const html = await resp.text();
