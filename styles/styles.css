@@ -152,7 +152,7 @@ b, strong {
 }
 
 header {
-  height: var(--nav-height);
+  min-height: var(--nav-height);
 }
 
 main {
@@ -227,7 +227,7 @@ main .section.card-heading h3 strong {
   }
 
   main {
-    width: 1570px;
+    width: 1600px;
     padding: 0;
   }
 }
