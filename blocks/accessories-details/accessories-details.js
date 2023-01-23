@@ -42,7 +42,7 @@ export default async function decorate(block) {
         } else {
           keyDiv.innerHTML = placeHolder[key.toLowerCase()].concat(':');
           if (key === 'Resources') {
-            valueDiv.innerHTML = `<a href = ${accessory[key].split('-')[1].trim()}>${accessory[key].split('-')[0]}</a>`;
+            valueDiv.innerHTML = `<a href = ${accessory[key].split('=')[1].trim()}>${accessory[key].split('=')[0]}</a>`;
           } else if (accessory[key].includes('\n')) {
             valueDiv.innerHTML = accessory[key].replace('\n', '<br>');
           } else {
