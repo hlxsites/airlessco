@@ -44,7 +44,7 @@ export default async function decorate(block) {
           if (key === 'Resources') {
             valueDiv.innerHTML = `<a href = ${accessory[key].split('=')[1].trim()}>${accessory[key].split('=')[0]}</a>`;
           } else if (accessory[key].includes('\n')) {
-            valueDiv.innerHTML = accessory[key].replace('\n', '<br>');
+            valueDiv.innerHTML = accessory[key].replaceAll('\n', '<br>');
           } else {
             valueDiv.innerHTML = accessory[key];
           }
