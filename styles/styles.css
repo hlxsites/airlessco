@@ -48,9 +48,7 @@
   --heading-font-size-m: 18px;
   --heading-font-size-s: 14px;
   --heading-font-size-xs: 12px;
-}
 
-:root {
   /* Fixed height of nav to maintain CLS */
   --nav-height: 74px;
 }
@@ -207,7 +205,6 @@ main .section.card-heading h3 strong {
 }
 
 @media screen and (min-width: 1024px) {
-
   :root[lang="cz"],
   :root[lang="pl"] {
     --nav-height: 266px;
