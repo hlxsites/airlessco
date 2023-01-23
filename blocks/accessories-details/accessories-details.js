@@ -13,52 +13,50 @@ export default async function decorate(block) {
   const resp = await fetch(accessoriesSheetURL);
   const json = await resp.json();
   const accessoriesJsonData = json.data;
-  const accessoriesDiv = createTag('div', { class: 'accessories-div' });
+  const accessories = createTag('div', { class: 'accessories' });
   const placeHolder = await fetchPlaceholderText();
   accessoriesJsonData.forEach((accessory) => {
-    const accessoryDiv = createTag('div', { class: 'accessory-div' });
-    const accessoryDetailsDiv = createTag('div', { class: 'accessory-details-div' });
-    const accessoryImgDiv = createTag('div', { class: 'accessory-img-div' });
+    const accessoryDiv = createTag('div', { class: 'accessory' });
+    const accessoryDetails = createTag('div', { class: 'accessory-details' });
+    const accessoryImg = createTag('div', { class: 'accessory-img' });
     Object.keys(accessory).forEach((key) => {
-      const keyvalueDiv = createTag('div', { class: 'key-value-div' });
-      const keyDiv = createTag('div', { class: 'keydiv' });
-      const valueDiv = createTag('div', { class: 'valuediv' });
-      const accessoryNameDiv = createTag('div', { class: 'accessory-name-div' });
-      const accessoryDesc = createTag('div', { class: 'accessory-desc' });
       if (key === 'Image') {
         if (accessory[key] !== 'NA') {
-          const accessoryImg = createTag('img', { class: 'accessory-img' });
-          accessoryImg.setAttribute('src', accessory[key].trim());
-          accessoryImgDiv.append(accessoryImg);
+          const image = createTag('img');
+          image.setAttribute('src', accessory[key].trim());
+          accessoryImg.append(image);
         }
-        accessoryDiv.append(accessoryImgDiv);
+        accessoryDiv.append(accessoryImg);
       } else if (accessory[key] !== 'NA') {
         if (key === 'NAME') {
-          accessoryNameDiv.innerHTML = accessory[key];
-          accessoryDetailsDiv.insertBefore(accessoryNameDiv, accessoryDetailsDiv.firstChild);
+          const accessoryName = createTag('div', { class: 'accessory-name' });
+          accessoryName.innerHTML = accessory[key];
+          accessoryDetails.insertBefore(accessoryName, accessoryDetails.firstChild);
         } else if (key === 'Subtext') {
           const subtext = `<p>${accessory[key]} </p>`;
-          accessoryDetailsDiv.firstChild.innerHTML = accessoryDetailsDiv.firstChild.innerHTML.concat(subtext);
+          accessoryDetails.firstChild.innerHTML = accessoryDetails.firstChild.innerHTML.concat(subtext);
         } else if (key === 'Description') {
+          const accessoryDesc = createTag('div', { class: 'accessory-desc' });
           accessoryDesc.innerHTML = accessory[key];
-          accessoryDetailsDiv.append(accessoryDesc);
+          accessoryDetails.append(accessoryDesc);
         } else {
-          keyDiv.innerHTML = placeHolder[key.toLowerCase()].concat(':');
+          const keyvalue = createTag('div', { class: 'key-value' });
+          keyvalue.innerHTML = `<strong>${placeHolder[key.toLowerCase()].concat(':')}</strong>`;
+          const value = createTag('div', { class: 'value' });
           if (key === 'Resources') {
-            valueDiv.innerHTML = `<a href = ${accessory[key].split('=')[1].trim()}>${accessory[key].split('=')[0]}</a>`;
+            value.innerHTML = `<a href = ${accessory[key].split('=')[1].trim()}>${accessory[key].split('=')[0]}</a>`;
           } else if (accessory[key].includes('\n')) {
-            valueDiv.innerHTML = accessory[key].replaceAll('\n', '<br>');
+            value.innerHTML = accessory[key].replaceAll('\n', '<br>');
           } else {
-            valueDiv.innerHTML = accessory[key];
+            value.innerHTML = accessory[key];
           }
-          keyvalueDiv.append(keyDiv);
-          keyvalueDiv.append(valueDiv);
-          accessoryDetailsDiv.append(keyvalueDiv);
+          keyvalue.append(value);
+          accessoryDetails.append(keyvalue);
         }
       }
     });
-    accessoryDiv.append(accessoryDetailsDiv);
-    accessoriesDiv.append(accessoryDiv);
-    block.append(accessoriesDiv);
+    accessoryDiv.append(accessoryDetails);
+    accessories.append(accessoryDiv);
+    block.append(accessories);
   });
 }

@@ -2,12 +2,12 @@
     padding-top: 20px;
 }
 
-.accessories-details .accessories-div .accessory-div {
+.accessories-details .accessories .accessory {
     display: block;
     padding-bottom: 40px;
 }
 
-.accessories-details .accessories-div .accessory-div .accessory-details-div {
+.accessories-details .accessories .accessory .accessory-details {
     width: 100%;
     border-top: 8px solid #eee;
     padding-bottom: 40px;
@@ -17,29 +17,29 @@
 
 }
 
-.accessories-details .accessories-div .accessory-div .accessory-img-div {
+.accessories-details .accessories .accessory .accessory-img {
     width: 100%;
 }
 
-.accessories-details .accessories-div .accessory-div .accessory-details-div .key-value-div {
+.accessories-details .accessories .accessory .accessory-details .key-value {
     display: block;
 }
 
-.accessories-details .accessories-div .accessory-div .accessory-details-div .key-value-div  .keydiv {
+.accessories-details .accessories .accessory .accessory-details .key-value  strong {
     width: 100%;
     font-weight: 700;
     font-size: var(--body-font-size-s);
     font-family: var(--body-font-family);
 }
 
-.accessories-details .accessories-div .accessory-div .accessory-details-div .key-value-div  .valuediv {
+.accessories-details .accessories .accessory .accessory-details .key-value  .value {
     width: 100%;
     font-size: var(--body-font-size-s);
     padding-bottom: 15px;
     font-family: var(--body-font-family);
 }
 
-.accessories-details .accessories-div .accessory-div .accessory-details-div .accessory-name-div {
+.accessories-details .accessories .accessory .accessory-details .accessory-name {
     font-weight: 700;
     font-size: var(--heading-font-size-l);
     padding-right: 15px;
@@ -48,14 +48,14 @@
     font-family: var(--body-font-family);    
 }
 
-.accessories-details .accessories-div .accessory-div .accessory-details-div .accessory-desc {
+.accessories-details .accessories .accessory .accessory-details .accessory-desc {
     font-size: var(--body-font-size-s);
     padding-right: 15px;
     padding-bottom: 15px;
     font-family: var(--body-font-family);
 }
 
-.accessories-details .accessories-div .accessory-div .accessory-img-div .accessory-img {
+.accessories-details .accessories .accessory .accessory-img img {
     display: block;
     max-width: 100%;
     height: auto;
@@ -69,12 +69,12 @@
         padding-top: 20px;
     }
 
-    .accessories-details .accessories-div .accessory-div {
+    .accessories-details .accessories .accessory {
         display: flex;
         padding-bottom: 40px;
     }
 
-    .accessories-details .accessories-div .accessory-div .accessory-details-div {
+    .accessories-details .accessories .accessory .accessory-details {
         width: 75%;
         border-top: 8px solid #eee;
         padding-bottom: 40px;
@@ -84,16 +84,16 @@
 
     }
 
-    .accessories-details .accessories-div .accessory-div .accessory-img-div {
+    .accessories-details .accessories .accessory .accessory-img {
         width: 25%;
         padding-top: 20px;
     }
 
-    .accessories-details .accessories-div .accessory-div .accessory-details-div .key-value-div {
+    .accessories-details .accessories .accessory .accessory-details .key-value {
         display: flex;
     }
 
-    .accessories-details .accessories-div .accessory-div .accessory-details-div .key-value-div .keydiv {
+    .accessories-details .accessories .accessory .accessory-details .key-value strong {
         display: 1;
         width: 33%;
         font-weight: 700;
@@ -103,7 +103,7 @@
         font-family: var(--body-font-family);
     }
 
-    .accessories-details .accessories-div .accessory-div .accessory-details-div .key-value-div .valuediv {
+    .accessories-details .accessories .accessory .accessory-details .key-value .value {
         display: 1;
         width: 67%;
         font-size: var(--body-font-size-s);
@@ -111,14 +111,14 @@
         font-family: var(--body-font-family);
     }
 
-    .accessories-details .accessories-div .accessory-div .accessory-details-div .accessory-name-div {
+    .accessories-details .accessories .accessory .accessory-details .accessory-name {
         font-weight: 700;
         font-size: var(--heading-font-size-l);
         padding: 15px;
         font-family: var(--body-font-family);        
     }
 
-    .accessories-details .accessories-div .accessory-div .accessory-details-div .accessory-name-div p {
+    .accessories-details .accessories .accessory .accessory-details .accessory-name p {
         font-weight: 400;
         line-height: 1;
         color: #777;
@@ -127,7 +127,7 @@
         display: inline;
     }
 
-    .accessories-details .accessories-div .accessory-div .accessory-details-div .accessory-desc {
+    .accessories-details .accessories .accessory .accessory-details .accessory-desc {
         font-size: var(--body-font-size-s);
         padding-left: 15px;
         padding-right: 15px;
@@ -135,7 +135,7 @@
         font-family: var(--body-font-family);
     }
 
-    .accessories-details .accessories-div .accessory-div .accessory-img-div .accessory-img .accessory-img {
+    .accessories-details .accessories .accessory .accessory-img .accessory-img img {
         display: block;
         max-width: 100%;
         height: auto;
