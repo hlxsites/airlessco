@@ -1,4 +1,11 @@
 import { createTag } from '../../scripts/scripts.js';
+import { fetchPlaceholders, getMetadata } from '../../scripts/lib-franklin.js';
+
+async function fetchPlaceholderText() {
+  const locale = getMetadata('locale');
+  const placeholders = await fetchPlaceholders(locale);
+  return placeholders;
+}
 
 export default async function decorate(block) {
   const accessoriesSheetURL = new URL(block.querySelector('a').href);
@@ -7,6 +14,7 @@ export default async function decorate(block) {
   const json = await resp.json();
   const accessoriesJsonData = json.data;
   const accessoriesDiv = createTag('div', { class: 'accessories-div' });
+  const placeHolder = await fetchPlaceholderText();
   accessoriesJsonData.forEach((accessory) => {
     const accessoryDiv = createTag('div', { class: 'accessory-div' });
     const accessoryDetailsDiv = createTag('div', { class: 'accessory-details-div' });
@@ -32,7 +40,7 @@ export default async function decorate(block) {
           accessoryDesc.innerHTML = accessory[key];
           accessoryDetailsDiv.append(accessoryDesc);
         } else {
-          keyDiv.innerHTML = key.concat(':');
+          keyDiv.innerHTML = placeHolder[key.toLowerCase()].concat(':');
           if (key === 'Resources') {
             valueDiv.innerHTML = `<a href = ${accessory[key].split('-')[1].trim()}>${accessory[key].split('-')[0]}</a>`;
           } else if (accessory[key].includes('\n')) {
