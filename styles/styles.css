@@ -180,10 +180,12 @@ main .section.card-heading h3 strong {
   font-size: var(--heading-font-size-l);
 }
 
-
 @media screen and (min-width: 768px) {
   :root[lang="cz"],
-  :root[lang="de"] {
+  :root[lang="de"],
+  :root[lang="fr"],
+  :root[lang="nl"],
+  :root[lang="pl"] {
     --nav-height: 238px;
   }
 
@@ -191,7 +193,8 @@ main .section.card-heading h3 strong {
     --nav-height: 159px;
   }
 
-  :root[lang="es"] {
+  :root[lang="es"],
+  :root[lang="it"]{
     --nav-height: 179px;
   }
 
@@ -205,11 +208,15 @@ main .section.card-heading h3 strong {
 
 @media screen and (min-width: 1024px) {
 
-  :root[lang="cz"] {
+  :root[lang="cz"],
+  :root[lang="pl"] {
     --nav-height: 266px;
   }
 
-  :root[lang="de"] {
+  :root[lang="de"],
+  :root[lang="fr"],
+  :root[lang="it"],
+  :root[lang="nl"] {
     --nav-height: 210px;
   }
 
@@ -231,14 +238,17 @@ main .section.card-heading h3 strong {
 @media screen and (min-width: 1280px) {
   :root[lang="cz"],
   :root[lang="es"],
-  :root[lang="de"] {
+  :root[lang="de"],
+  :root[lang="fr"],
+  :root[lang="it"],
+  :root[lang="nl"],
+  :root[lang="pl"] {
     --nav-height: 245px;
   }
 
   :root[lang="en"] {
-    --nav-height: 225px;
+    --nav-height: 227px;
   }
-
 
   main {
     width: 1280px;
@@ -250,12 +260,22 @@ main .section.card-heading h3 strong {
   :root[lang="cz"],
   :root[lang="en"],
   :root[lang="es"],
-  :root[lang="de"] {
+  :root[lang="de"],
+  :root[lang="fr"],
+  :root[lang="it"],
+  :root[lang="nl"],
+  :root[lang="pl"] {
     --nav-height: 284px;
   }
 
   main {
     width: 1600px;
     padding: 0 15px;
+  }
+}
+
+@media screen and (min-width: 1630px) {
+  main {
+    padding: 0;
   }
 }

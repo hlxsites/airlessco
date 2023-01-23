@@ -35,6 +35,7 @@ nav .nav-products {
 }
 
 nav .navbar.open {
+  padding-bottom: 10px;
   background-color: var(--airless-blue);
 }
 
@@ -170,6 +171,10 @@ nav .navbar.open {
     position: relative;
   }
 
+  nav .navbar.open {
+    padding-bottom: 0;
+  }
+
   .navbar > div {
     color: #fff;
     display: flex;
@@ -226,9 +231,17 @@ nav .navbar.open {
 
   html[lang="es"] .navbar .nav-products > ul,
   html[lang="cz"] .navbar .nav-products > ul,
-  html[lang="de"] .navbar .nav-products > ul {
+  html[lang="de"] .navbar .nav-products > ul,
+  html[lang="fr"] .navbar .nav-products > ul,
+  html[lang="fr"] .navbar .nav-products > ul,
+  html[lang="nl"] .navbar .nav-products > ul,
+  html[lang="pl"] .navbar .nav-products > ul {
     padding-top: 23px;
     justify-content: flex-start;
+  }
+
+  html[lang="it"] .navbar .nav-products > ul {
+    padding-top: 23px
   }
 
   .navbar .nav-products li > a {
@@ -237,7 +250,6 @@ nav .navbar.open {
     font-weight: 600;
     white-space: nowrap;
   }
-
 }
 
 @media screen and (min-width: 1024px) {
@@ -264,7 +276,12 @@ nav .navbar.open {
   }
 
   html[lang="cz"] .navbar .nav-products > ul,
-  html[lang="de"] .navbar .nav-products > ul {
+  html[lang="de"] .navbar .nav-products > ul,
+  html[lang="es"] .navbar .nav-products > ul,
+  html[lang="fr"] .navbar .nav-products > ul,
+  html[lang="it"] .navbar .nav-products > ul,
+  html[lang="nl"] .navbar .nav-products > ul,
+  html[lang="pl"] .navbar .nav-products > ul {
     padding-top: 30px;
   }
 
@@ -277,10 +294,6 @@ nav .navbar.open {
     font-size: var(--body-font-size-s);
   }
 
-  html[lang="cz"] .navbar .nav-help li > a,
-  html[lang="cz"] .navbar .nav-products li > a {
-    font-size: var(--body-font-size-xs);
-  }
 }
 
 @media screen and (min-width: 1280px) {
@@ -302,7 +315,12 @@ nav .navbar.open {
   }
 
   html[lang="cz"] .navbar .nav-help li > a,
-  html[lang="de"] .navbar .nav-help li > a {
+  html[lang="de"] .navbar .nav-help li > a,
+  html[lang="es"] .navbar .nav-help li > a,
+  html[lang="fr"] .navbar .nav-help li > a,
+  html[lang="it"] .navbar .nav-help li > a,
+  html[lang="nl"] .navbar .nav-help li > a,
+  html[lang="pl"] .navbar .nav-help li > a {
     font-size: var(--body-font-size-s);
   }
 
@@ -325,25 +343,30 @@ nav .navbar.open {
   }
 
   html[lang="cz"] .navbar .nav-products li > a,
-  html[lang="de"] .navbar .nav-products li > a {
+  html[lang="de"] .navbar .nav-products li > a,
+  html[lang="fr"] .navbar .nav-products li > a,
+  html[lang="it"] .navbar .nav-products li > a,
+  html[lang="nl"] .navbar .nav-products li > a {
     padding: 5px 15px 20px;
     font-size: var(--body-font-size-s);
   }
 
-  html[lang="es"] .navbar .nav-help li > a,
-  html[lang="es"] .navbar .nav-products li > a {
+  html[lang="es"] .navbar .nav-products li > a,
+  html[lang="pl"] .navbar .nav-products li > a {
+    padding: 13px 15px;
     font-size: var(--body-font-size-s);
-  }
-
-  html[lang="es"] .navbar .nav-products li > a {
-    padding: 10px 15px;
   }
 }
 
 @media screen and (min-width: 1600px) {
+  header {
+    background-color: transparent;
+  }
+
   header .header {
     background: none;
-    width: 100%;
+    width: 1600px;
+    margin: auto;
   }
 
   nav .navbar {
@@ -360,7 +383,11 @@ nav .navbar.open {
   }
 
   .navbar .nav-products > ul,
-  html[lang="de"] .navbar .nav-products > ul {
+  html[lang="de"] .navbar .nav-products > ul,
+  html[lang="es"] .navbar .nav-products > ul,
+  html[lang="fr"] .navbar .nav-products > ul,
+  html[lang="it"] .navbar .nav-products > ul,
+  html[lang="nl"] .navbar .nav-products > ul  {
     padding: 0;
   }
 
@@ -373,23 +400,40 @@ nav .navbar.open {
   html[lang="es"] .navbar .nav-help li > a,
   html[lang="es"] .navbar .nav-products li > a,
   html[lang="de"] .navbar .nav-help li > a,
-  html[lang="de"] .navbar .nav-products li > a {
+  html[lang="de"] .navbar .nav-products li > a,
+  html[lang="fr"] .navbar .nav-help li > a,
+  html[lang="fr"] .navbar .nav-products li > a,
+  html[lang="it"] .navbar .nav-help li > a,
+  html[lang="it"] .navbar .nav-products li > a,
+  html[lang="nl"] .navbar .nav-help li > a,
+  html[lang="nl"] .navbar .nav-products li > a {
     font-size: var(--body-font-size-l);
   }
 
   html[lang="cz"] .navbar .nav-help li > a,
-  html[lang="cz"] .navbar .nav-products li > a {
+  html[lang="cz"] .navbar .nav-products li > a,
+  html[lang="pl"] .navbar .nav-help li > a,
+  html[lang="pl"] .navbar .nav-products li > a {
     font-size: var(--body-font-size-m);
   }
 
-  html[lang="cz"] .navbar .nav-products > ul {
+  html[lang="cz"] .navbar .nav-products > ul,
+  html[lang="pl"] .navbar .nav-products > ul {
     padding: 10px 0 0;
   }
 
   html[lang="cz"] .navbar .nav-products li > a,
-  html[lang="es"] .navbar .nav-products li > a,
-  html[lang="de"] .navbar .nav-products li > a {
+  html[lang="pl"] .navbar .nav-products li > a {
     padding: 20px 30px;
   }
+
+  html[lang="de"] .navbar .nav-products li > a ,
+  html[lang="es"] .navbar .nav-products li > a,
+  html[lang="fr"] .navbar .nav-products li > a,
+  html[lang="it"] .navbar .nav-products li > a,
+  html[lang="nl"] .navbar .nav-products li > a {
+    padding: 15px 30px;
+  }
+
 
 }
