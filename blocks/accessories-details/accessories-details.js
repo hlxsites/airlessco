@@ -5,40 +5,40 @@ export default async function decorate(block) {
   block.innerHTML = '';
   const resp = await fetch(accessoriesSheetURL);
   const json = await resp.json();
-  const accessoriesData = json.data;
-  const accessoriesDiv = createTag('div', { class: 'accessoriesaDiv' });
-  accessoriesData.forEach((element) => {
+  const accessoriesJsonData = json.data;
+  const accessoriesDiv = createTag('div', { class: 'accessories-div' });
+  accessoriesJsonData.forEach((accessory) => {
     const accessoryDiv = createTag('div', { class: 'accessory-div' });
     const accessoryDetailsDiv = createTag('div', { class: 'accessory-details-div' });
     const accessoryImgDiv = createTag('div', { class: 'accessory-img-div' });
-    Object.keys(element).forEach((key) => {
+    Object.keys(accessory).forEach((key) => {
       const keyvalueDiv = createTag('div', { class: 'key-value-div' });
       const keyDiv = createTag('div', { class: 'keydiv' });
       const valueDiv = createTag('div', { class: 'valuediv' });
-      const nameDiv = createTag('div', { class: 'namediv' });
+      const accessoryNameDiv = createTag('div', { class: 'accessory-name-div' });
       const accessoryDesc = createTag('div', { class: 'accessory-desc' });
       if (key === 'Image') {
-        if (element[key] !== 'NA') {
+        if (accessory[key] !== 'NA') {
           const accessoryImg = createTag('img', { class: 'accessory-img' });
-          accessoryImg.setAttribute('src', element[key].trim());
+          accessoryImg.setAttribute('src', accessory[key].trim());
           accessoryImgDiv.append(accessoryImg);
         }
         accessoryDiv.append(accessoryImgDiv);
-      } else if (element[key] !== 'NA') {
+      } else if (accessory[key] !== 'NA') {
         if (key === 'NAME') {
-          nameDiv.innerHTML = element[key];
-          accessoryDetailsDiv.insertBefore(nameDiv, accessoryDetailsDiv.firstChild);
+          accessoryNameDiv.innerHTML = accessory[key];
+          accessoryDetailsDiv.insertBefore(accessoryNameDiv, accessoryDetailsDiv.firstChild);
         } else if (key === 'Description') {
-          accessoryDesc.innerHTML = element[key];
+          accessoryDesc.innerHTML = accessory[key];
           accessoryDetailsDiv.append(accessoryDesc);
         } else {
           keyDiv.innerHTML = key.concat(':');
           if (key === 'Resources') {
-            valueDiv.innerHTML = `<a href = ${element[key].split('-')[1].trim()}>${element[key].split('-')[0]}</a>`;
-          } else if (element[key].includes('\n')) {
-            valueDiv.innerHTML = element[key].replace('\n', '<br>');
+            valueDiv.innerHTML = `<a href = ${accessory[key].split('-')[1].trim()}>${accessory[key].split('-')[0]}</a>`;
+          } else if (accessory[key].includes('\n')) {
+            valueDiv.innerHTML = accessory[key].replace('\n', '<br>');
           } else {
-            valueDiv.innerHTML = element[key];
+            valueDiv.innerHTML = accessory[key];
           }
           keyvalueDiv.append(keyDiv);
           keyvalueDiv.append(valueDiv);
