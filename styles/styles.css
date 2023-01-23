@@ -50,7 +50,7 @@
   --heading-font-size-xs: 12px;
 }
 
-:root[lang="en"] {
+:root {
   /* Fixed height of nav to maintain CLS */
   --nav-height: 74px;
 }
@@ -182,6 +182,11 @@ main .section.card-heading h3 strong {
 
 
 @media screen and (min-width: 768px) {
+  :root[lang="cz"],
+  :root[lang="de"] {
+    --nav-height: 238px;
+  }
+
   :root[lang="en"] {
     --nav-height: 159px;
   }
@@ -189,7 +194,6 @@ main .section.card-heading h3 strong {
   :root[lang="es"] {
     --nav-height: 179px;
   }
-
 
   main {
     box-sizing: border-box;
@@ -200,6 +204,15 @@ main .section.card-heading h3 strong {
 }
 
 @media screen and (min-width: 1024px) {
+
+  :root[lang="cz"] {
+    --nav-height: 266px;
+  }
+
+  :root[lang="de"] {
+    --nav-height: 210px;
+  }
+
   :root[lang="en"] {
     --nav-height: 190px;
   }
@@ -216,12 +229,14 @@ main .section.card-heading h3 strong {
 }
 
 @media screen and (min-width: 1280px) {
-  :root[lang="en"] {
-    --nav-height: 225px;
+  :root[lang="cz"],
+  :root[lang="es"],
+  :root[lang="de"] {
+    --nav-height: 245px;
   }
 
-  :root[lang="es"] {
-    --nav-height: 245px;
+  :root[lang="en"] {
+    --nav-height: 225px;
   }
 
 
@@ -232,8 +247,10 @@ main .section.card-heading h3 strong {
 }
 
 @media screen and (min-width: 1600px) {
+  :root[lang="cz"],
   :root[lang="en"],
-  :root[lang="es"]{
+  :root[lang="es"],
+  :root[lang="de"] {
     --nav-height: 284px;
   }
 

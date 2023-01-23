@@ -3,7 +3,6 @@
 header {
   font-family: var(--body-font-family);
   line-height: 1.4286;
-  background-color: #666;
 }
 
 header a {
@@ -148,6 +147,10 @@ nav .navbar.open {
 }
 
 @media screen and (min-width: 768px) {
+  header {
+    background-color: #666;
+  }
+
   header .header {
     background-image: url('../../images/header-bg.jpg');
     background-repeat: repeat-x;
@@ -191,7 +194,8 @@ nav .navbar.open {
     padding: 0
   }
 
-  .navbar .nav-help, .navbar .nav-products {
+  .navbar .nav-help,
+  .navbar .nav-products {
     line-height: 20px;
   }
 
@@ -213,10 +217,6 @@ nav .navbar.open {
     padding-right: 15px;
   }
 
-  html[lang="es"] .navbar .nav-products {
-    padding-top: 23px;
-  }
-
   .navbar .nav-products > ul {
     display: flex;
     align-items: stretch;
@@ -224,8 +224,11 @@ nav .navbar.open {
     flex-wrap: wrap;
   }
 
-  .navbar .nav-products > ul > li {
-    flex-grow: 2;
+  html[lang="es"] .navbar .nav-products > ul,
+  html[lang="cz"] .navbar .nav-products > ul,
+  html[lang="de"] .navbar .nav-products > ul {
+    padding-top: 23px;
+    justify-content: flex-start;
   }
 
   .navbar .nav-products li > a {
@@ -254,20 +257,29 @@ nav .navbar.open {
 
   .navbar .nav-help li > a {
     padding: 20px 13px;
-    font-size: var(--body-font-size-s);
-  }
-
-  html[lang="es"] .navbar .nav-products {
-    padding-top: 21px;
   }
 
   .navbar .nav-products > ul {
     padding-top: 10px;
   }
 
+  html[lang="cz"] .navbar .nav-products > ul,
+  html[lang="de"] .navbar .nav-products > ul {
+    padding-top: 30px;
+  }
+
   .navbar .nav-products li > a {
     padding: 18px 36px;
+  }
+
+  .navbar .nav-help li > a,
+  .navbar .nav-products li > a {
     font-size: var(--body-font-size-s);
+  }
+
+  html[lang="cz"] .navbar .nav-help li > a,
+  html[lang="cz"] .navbar .nav-products li > a {
+    font-size: var(--body-font-size-xs);
   }
 }
 
@@ -289,12 +301,13 @@ nav .navbar.open {
     padding: 40px 18px;
   }
 
-  .navbar .nav-products > ul {
-    padding-top: 13px;
+  html[lang="cz"] .navbar .nav-help li > a,
+  html[lang="de"] .navbar .nav-help li > a {
+    font-size: var(--body-font-size-s);
   }
 
-  html[lang="es"] .navbar .nav-products {
-    padding-top: 20px;
+  .navbar .nav-products > ul {
+    padding-top: 13px;
   }
 
   .navbar .nav-products li > a {
@@ -305,6 +318,16 @@ nav .navbar.open {
   .navbar .nav-help li > a,
   .navbar .nav-products li > a {
     font-size: var(--body-font-size-m);
+  }
+
+  html[lang="cz"] .navbar .nav-products > ul {
+    padding-top: 38px;
+  }
+
+  html[lang="cz"] .navbar .nav-products li > a,
+  html[lang="de"] .navbar .nav-products li > a {
+    padding: 5px 15px 20px;
+    font-size: var(--body-font-size-s);
   }
 
   html[lang="es"] .navbar .nav-help li > a,
@@ -336,11 +359,8 @@ nav .navbar.open {
     padding: 77px 20px 80px;
   }
 
-  html[lang="es"] .navbar .nav-products {
-    padding-top: 0;
-  }
-
-  .navbar .nav-products > ul {
+  .navbar .nav-products > ul,
+  html[lang="de"] .navbar .nav-products > ul {
     padding: 0;
   }
 
@@ -351,11 +371,24 @@ nav .navbar.open {
   html[lang="en"] .navbar .nav-help li > a,
   html[lang="en"] .navbar .nav-products li > a,
   html[lang="es"] .navbar .nav-help li > a,
-  html[lang="es"] .navbar .nav-products li > a {
+  html[lang="es"] .navbar .nav-products li > a,
+  html[lang="de"] .navbar .nav-help li > a,
+  html[lang="de"] .navbar .nav-products li > a {
     font-size: var(--body-font-size-l);
   }
 
-  html[lang="es"] .navbar .nav-products li > a {
+  html[lang="cz"] .navbar .nav-help li > a,
+  html[lang="cz"] .navbar .nav-products li > a {
+    font-size: var(--body-font-size-m);
+  }
+
+  html[lang="cz"] .navbar .nav-products > ul {
+    padding: 10px 0 0;
+  }
+
+  html[lang="cz"] .navbar .nav-products li > a,
+  html[lang="es"] .navbar .nav-products li > a,
+  html[lang="de"] .navbar .nav-products li > a {
     padding: 20px 30px;
   }
 
