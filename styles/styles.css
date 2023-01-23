@@ -13,7 +13,7 @@
 @import url('reset.css');
 
 /* breakpoints
-  sm: 640px;
+  sm: <768px;
   md: 768px;
   lg: 1024px;
   xl: 1280px;
@@ -49,17 +49,11 @@
   --heading-font-size-s: 14px;
   --heading-font-size-xs: 12px;
 
-
-  /* section widths */
-  --section-width-tablet: 1198px;
-  --section-width-desktop: 1600px;
-
   /* Fixed height of nav to maintain CLS */
   --nav-height: 74px;
 }
 
 /** Franklin Required **/
-
 body {
   display: none;
   font-family: var(--body-font-family);
@@ -184,10 +178,22 @@ main .section.card-heading h3 strong {
   font-size: var(--heading-font-size-l);
 }
 
-
 @media screen and (min-width: 768px) {
-  :root {
+  :root[lang="cz"],
+  :root[lang="de"],
+  :root[lang="fr"],
+  :root[lang="nl"],
+  :root[lang="pl"] {
+    --nav-height: 238px;
+  }
+
+  :root[lang="en"] {
     --nav-height: 159px;
+  }
+
+  :root[lang="es"],
+  :root[lang="it"]{
+    --nav-height: 179px;
   }
 
   main {
@@ -199,19 +205,45 @@ main .section.card-heading h3 strong {
 }
 
 @media screen and (min-width: 1024px) {
-  :root {
+  :root[lang="cz"],
+  :root[lang="pl"] {
+    --nav-height: 266px;
+  }
+
+  :root[lang="de"],
+  :root[lang="fr"],
+  :root[lang="it"],
+  :root[lang="nl"] {
+    --nav-height: 210px;
+  }
+
+  :root[lang="en"] {
     --nav-height: 190px;
+  }
+
+  :root[lang="es"] {
+    --nav-height: 265px;
   }
 
   main {
     margin: 20px auto;
     width: 1024px;
-    padding: 0 40px;
+    padding: 0 42px;
   }
 }
 
 @media screen and (min-width: 1280px) {
-  :root {
+  :root[lang="cz"],
+  :root[lang="es"],
+  :root[lang="de"],
+  :root[lang="fr"],
+  :root[lang="it"],
+  :root[lang="nl"],
+  :root[lang="pl"] {
+    --nav-height: 245px;
+  }
+
+  :root[lang="en"] {
     --nav-height: 227px;
   }
 
@@ -222,12 +254,25 @@ main .section.card-heading h3 strong {
 }
 
 @media screen and (min-width: 1600px) {
-  :root {
+  :root[lang="cz"],
+  :root[lang="en"],
+  :root[lang="es"],
+  :root[lang="de"],
+  :root[lang="fr"],
+  :root[lang="it"],
+  :root[lang="nl"],
+  :root[lang="pl"] {
     --nav-height: 284px;
   }
 
   main {
     width: 1600px;
+    padding: 0 15px;
+  }
+}
+
+@media screen and (min-width: 1630px) {
+  main {
     padding: 0;
   }
 }
