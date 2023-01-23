@@ -45,7 +45,7 @@
     padding-right: 15px;
     padding-bottom: 15px;
     padding-top: 15px;
-    font-family: var(--body-font-family);
+    font-family: var(--body-font-family);    
 }
 
 .accessories-details .accessories-div .accessory-div .accessory-details-div .accessory-desc {
@@ -115,7 +115,16 @@
         font-weight: 700;
         font-size: var(--heading-font-size-l);
         padding: 15px;
-        font-family: var(--body-font-family);
+        font-family: var(--body-font-family);        
+    }
+
+    .accessories-details .accessories-div .accessory-div .accessory-details-div .accessory-name-div p {
+        font-weight: 400;
+        line-height: 1;
+        color: #777;
+        padding: 5px;
+        font-size: calc(var(--heading-font-size-l) * .65);
+        display: inline;
     }
 
     .accessories-details .accessories-div .accessory-div .accessory-details-div .accessory-desc {

@@ -36,6 +36,9 @@ export default async function decorate(block) {
         if (key === 'NAME') {
           accessoryNameDiv.innerHTML = accessory[key];
           accessoryDetailsDiv.insertBefore(accessoryNameDiv, accessoryDetailsDiv.firstChild);
+        } else if (key === 'Subtext') {
+          const subtext = `<p>${accessory[key]} </p>`;
+          accessoryDetailsDiv.firstChild.innerHTML = accessoryDetailsDiv.firstChild.innerHTML.concat(subtext);
         } else if (key === 'Description') {
           accessoryDesc.innerHTML = accessory[key];
           accessoryDetailsDiv.append(accessoryDesc);
