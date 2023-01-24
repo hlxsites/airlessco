@@ -42,9 +42,9 @@ function convertUrl(url, path) {
 }
 
 const createPageHeader = (main, document) => {
-  const header = main.querySelector('body > div.container.start > h1');
   if (landingPage) {
-    header.insertAdjacentElement('afterend', hr(document));
+    // const header = main.querySelector('body > div.container.start > h1');
+    // header.insertAdjacentElement('afterend', hr(document));
   } else {
     const subh = main.querySelector('body > div.container.start > div.row.rowpadding');
     subh.insertAdjacentElement('afterend', hr(document));
@@ -53,8 +53,7 @@ const createPageHeader = (main, document) => {
 
 function getCateogry(url) {
   const earl = new URL(url).pathname;
-  const category = earl.match(/[^/]+\/?$/)[0].replace('/', '').trim();
-  return category;
+  return earl.match(/[^/]+\/?$/)[0].replace('/', '').trim();
 }
 
 const createAccessoriesDetailBlock = (main, document, url) => {
@@ -90,7 +89,7 @@ const createAccessoriesBlock = (main, document, url) => {
 const createAccessoriesLanding = (main, document, url) => {
   const lands = [];
   const accessories = [];
-  lands.push(['Columns']);
+  lands.push(['Columns (accessories)']);
   main.querySelectorAll('body > div.container.start > div.row > div').forEach((items) => {
     const accImg = items.querySelector('div > img');
     const accAnchor = items.querySelector('a');
