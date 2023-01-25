@@ -12,8 +12,12 @@ footer .footer p {
 }
 
 footer .air-footer {
-  height: 475px;
+  height: 475px; /* Do we need to set this explicitly? */
   display: grid;
+
+  /* I see products, support, contact are hidden up to 600px.
+  Can the customer add the 3 links as a div above the copyright to hide in 601+ px?
+   */
   grid:
     "built2last built2last built2last built2last built2last" 91px
     "logo products support contact flag" 1fr
@@ -26,6 +30,7 @@ footer .air-footer {
   grid-area: built2last;
 }
 
+/* Can we redo this image as transparent white PNG on a CSS gray background? */
 .air-footer div:nth-child(1) > picture > img, .air-footer div:nth-child(2) > picture > img, .air-footer div:nth-child(6) > picture > img {
   max-width: 100%;
   height: auto;
@@ -114,26 +119,36 @@ footer .air-footer {
   }
 }
 
+/* should this be 640? */
 @media (max-width: 600px) {
   .air-footer div:nth-child(3), .air-footer div:nth-child(4), .air-footer div:nth-child(5) {
     display: none;
   }
 
+  .air-footer div:nth-child(1) {
+    max-width: 132%;
+    margin: 0 -16%;
+  }
+
   .air-footer div:nth-child(2) > picture > img {
-    max-width: 220px;
+    max-width: 160px;
     height: auto;
   }
 
   .air-footer div:nth-child(6) > picture > img {
-    max-width: 220px;
+    max-width: 150px;
     height: auto;
   }
 
   .air-footer div:nth-child(2) {
-    padding-top: 0;
+    padding: 0 25px;
   }
 
   .air-footer div:nth-child(6) {
-    padding-top: 20px;
+    padding: 20px 25px 0 0;
+  }
+
+  .air-footer div:nth-child(7) > p {
+    font-size: 12px; /* Do we need another var, or is this the only 12? */
   }
 }
