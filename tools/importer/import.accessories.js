@@ -89,23 +89,17 @@ const createAccessoriesBlock = (main, document, url) => {
 const createAccessoriesLanding = (main, document, url) => {
   const lands = [];
   const accessories = [];
-  lands.push(['Columns (accessories)']);
+  lands.push(['Cards (accessories)']);
   main.querySelectorAll('body > div.container.start > div.row > div').forEach((items) => {
+    let ax = [];
     const accImg = items.querySelector('div > img');
     const accAnchor = items.querySelector('a');
     items.prepend(accImg);
     accAnchor.href = makeDetailUrl(url, accAnchor.href);
+    ax.push(accImg);
+    ax.push(accAnchor);
+    lands.push(ax);
     accessories.push(items);
-  });
-
-  let ax = [];
-  accessories.forEach((acc, idx) => {
-    ax.push(acc);
-
-    if (idx === 3 || idx === 7) {
-      lands.push(ax);
-      ax = [];
-    }
   });
 
   const accTable = WebImporter.DOMUtils.createTable(lands, document);
