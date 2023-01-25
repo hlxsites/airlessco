@@ -12,7 +12,7 @@ footer .footer p {
 }
 
 footer .air-footer {
-  height: 475px; /* Do we need to set this explicitly? */
+  height: 475px; /* Do we need to set this explicitly? YES for CLS score */
   display: grid;
 
   /* I see products, support, contact are hidden up to 600px.
@@ -149,6 +149,6 @@ footer .air-footer {
   }
 
   .air-footer div:nth-child(7) > p {
-    font-size: 12px; /* Do we need another var, or is this the only 12? */
+    font-size: 12px; /* Do we need another var, or is this the only 12? use  --body-font-size-xxs */
   }
 }
