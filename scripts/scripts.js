@@ -11,7 +11,7 @@ import {
   decorateTemplateAndTheme,
   waitForLCP,
   loadBlocks,
-  loadCSS,
+  loadCSS, getMetadata,
 } from './lib-franklin.js';
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
@@ -87,7 +87,8 @@ export function decorateMain(main) {
  * loads everything needed to get to LCP.
  */
 async function loadEager(doc) {
-  document.documentElement.lang = 'en';
+  const locale = getMetadata('locale');
+  document.documentElement.lang = locale.replace(/\/\w+\/(\w+)\/?/, '$1');
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
