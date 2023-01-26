@@ -24,7 +24,7 @@ export function createMetadataBlock(main, document, url) {
   const block = WebImporter.Blocks.getMetadataBlock(document, meta);
 
   // append the block to the main element
-  main.append(hr(document));
+  // main.append(hr(document));
   main.append(block);
 
   // returning the meta object might be useful to other rules
