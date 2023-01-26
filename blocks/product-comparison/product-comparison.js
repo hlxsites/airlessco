@@ -20,7 +20,7 @@ function retrieveValue(specification, specKey) {
       [, specValue] = temp;
     }
   });
-  if (specValue !== undefined && specValue.includes('|')) {
+  if (specValue && specValue.includes('|')) {
     specValue = specValue.replaceAll('|', '<br>');
   }
   return specValue;
