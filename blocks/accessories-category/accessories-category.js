@@ -15,14 +15,15 @@ export default async function decorate(block) {
   const placeholders = await fetchPlaceholders(prefix);
 
   block.innerHTML = '';
-  const test = createTag('h2');
-  test.innerHTML = placeholders.moreaccessorieslabel;
-  block.append(test);
 
   const accList = createTag('ul');
 
   const accessoriesInfo = await lookupProductData(bc.sheet, bc.product);
   if (accessoriesInfo.length > 0) {
+    const header = createTag('h2');
+    header.innerHTML = placeholders.moreaccessorieslabel || 'MORE ACCESSORIES';
+    block.append(header);
+
     const accessories = accessoriesInfo[0].Accessories.split('\n');
     accessories.forEach((acc) => {
       const accLink = placeholders[`${acc}Link`];
