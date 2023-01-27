@@ -19,12 +19,12 @@ export default async function decorate(block) {
   const accList = createTag('ul');
 
   const accessoriesInfo = await lookupProductData(bc.sheet, bc.product);
-  if (accessoriesInfo.length > 0) {
+  if (accessoriesInfo) {
     const header = createTag('h2');
     header.innerHTML = placeholders.moreaccessorieslabel || 'MORE ACCESSORIES';
     block.append(header);
 
-    const accessories = accessoriesInfo[0].Accessories.split('\n');
+    const accessories = accessoriesInfo.Accessories.split('\n');
     accessories.forEach((acc) => {
       const accLink = placeholders[`${acc}Link`];
       const accImage = placeholders[`${acc}Image`];

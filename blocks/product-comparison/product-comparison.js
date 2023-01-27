@@ -89,30 +89,56 @@ export default async function decorate(block) {
     if (element[0][Name].toLowerCase() === productName.toLowerCase()) {
       td = createTag('td', { class: 'highlightspecdata' });
     } else {
-      td = createTag('td');
+      headingdiv.innerHTML = `<strong>${locale[2]} ${productSeries}</strong>`;
     }
-    td.innerHTML = `<strong>${element[0][Name]}</strong>`;
+    const specs = reterieveSpecs(relatedProducts[1][0][Specification]);
+    const table = createTag('table', { class: 'table' });
+    const thead = createTag('thead', { class: 'thead' });
+    let tr = createTag('tr');
+    let td = createTag('td');
+    td.innerHTML = '<strong>&nbsp;</strong>';
     tr.append(td);
-  });
-  thead.append(tr);
-  table.append(thead);
-  specs.forEach((value, key) => {
+    relatedProducts.forEach((element) => {
+      td = createTag('td');
+      const productImage = createTag('img', { class: 'product-cimage' });
+      productImage.setAttribute('src', element[0][Images].trim());
+      td.append(productImage);
+      tr.append(td);
+    });
+    thead.append(tr);
     tr = createTag('tr');
-    td = createTag('td', { class: 'specname' });
-    td.innerHTML = `<strong>${key}</strong>`;
+    td = createTag('td', { class: 'specheading' });
+    td.innerHTML = `<strong>${locale[1]}</strong>`;
     tr.append(td);
     relatedProducts.forEach((element) => {
       if (element[0][Name].toLowerCase() === productName.toLowerCase()) {
         td = createTag('td', { class: 'highlightspecdata' });
       } else {
-        td = createTag('td', { class: 'specdata' });
+        td = createTag('td');
       }
       td.innerHTML = retrieveValue(element[0][Specification], key);
       tr.append(td);
     });
-    table.append(tr);
-  });
-  block.innerHTML = '';
-  block.append(headingdiv);
-  block.append(table);
+    thead.append(tr);
+    table.append(thead);
+    specs.forEach((value, key) => {
+      tr = createTag('tr');
+      td = createTag('td', { class: 'specname' });
+      td.innerHTML = `<strong>${key}</strong>`;
+      tr.append(td);
+      relatedProducts.forEach((element) => {
+        if (element[0][Name].toLowerCase() === productName.toLowerCase()) {
+          td = createTag('td', { class: 'highlightspecdata' });
+        } else {
+          td = createTag('td', { class: 'specdata' });
+        }
+        td.innerHTML = reterieveValue(element[0][Specification], key);
+        tr.append(td);
+      });
+      table.append(tr);
+    });
+    block.innerHTML = '';
+    block.append(headingdiv);
+    block.append(table);
+  }
 }
