@@ -180,17 +180,31 @@ main .section.card-heading h3 strong {
   font-size: var(--heading-font-size-l);
 }
 
-.accessories > div > div {
-  border: 1px solid var(--airless-border);
-  margin-bottom: 20px;
+.accessories.cards > ul {
+  grid-template-columns: repeat(auto-fill, minmax(22%, 1fr));
+  grid-gap: 20px 30px;
 }
 
-.accessories .button-container {
+.accessories .cards-card-body {
   padding: 9px;
   font-size: 14px;
 }
 
-.accessories .button-container > a {
+.accessories div.cards-card-image > picture {
+  display: inline-block;
+  min-height: auto;
+  min-width: 100%;
+}
+
+.accessories div.cards-card-image > picture > img {
+  object-fit: contain;
+}
+
+.accessories div.cards-card-image {
+  display: flex;
+}
+
+.accessories .cards-card-body > a {
   color: var(--airless-link-dark);
 }
 
