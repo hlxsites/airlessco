@@ -65,23 +65,30 @@ const detailsHtml = (placeholders, productInfo) => {
     details.appendChild(fieldDiv);
   });
 
-  /* Skip Resources until bug fixed
   if (productInfo.Resources) {
     const field = 'Resources';
     const label = placeholders[field.toLowerCase()] ? placeholders[field.toLowerCase()] : field;
     const fieldDiv = document.createElement('div');
-    fieldDiv.classList.add('details-item');
+    fieldDiv.classList.add('details-item', 'resources');
 
     fieldDiv.innerHTML = `
       <div class="label"><strong>${label}:</strong></div>
       <div class="data">${productInfo[field]}</div>
     `;
 
+    /*
+    <a href="../../../../downloads/341491EN-G.pdf" target="new">
+      <i class="fa fa-file-pdf-o"></i>
+    </a>
+    <a href="../../../../downloads/341491EN-G.pdf" target="new">Airlessco Brochure</a>
+     */
     const links = fieldDiv.querySelectorAll('a');
-
+    Object.values(links).forEach((a) => {
+      a.prepend(document.createElement('i'));
+      a.setAttribute('target', 'new');
+    });
     details.appendChild(fieldDiv);
   }
-   */
 
   return details.outerHTML;
 };

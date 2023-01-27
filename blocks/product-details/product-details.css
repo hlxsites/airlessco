@@ -112,6 +112,22 @@ main .product-details-container.section {
   list-style-type: disc;
 }
 
+.product-details .details-wrapper .details-item.resources a {
+  display: block;
+}
+
+
+.product-details .details-wrapper .details-item.resources a > i {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: var(--body-font-size-s);
+  text-rendering: auto;
+  margin-right: 5px;
+}
+
+.product-details .details-wrapper .details-item.resources a > i::before {
+  content: '\f1c1';
+}
 
 .product-details .modal-wrapper.open {
   display: block;
