@@ -5,7 +5,7 @@ function createMobileMenu(footer) {
   mf.classList.add('air-footer-compressed');
   const menuItems = footer.querySelectorAll('h3');
   menuItems.forEach((menu, idx, arr) => {
-    mf.append(menu.firstChild);
+    mf.append(menu.cloneNode(true).firstChild);
     if (idx !== (arr.length - 1)) {
       mf.append(' | ');
     }
