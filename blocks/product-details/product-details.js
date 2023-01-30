@@ -1,11 +1,19 @@
+import { createOptimizedPicture, fetchPlaceholders, getMetadata } from '../../scripts/lib-franklin.js';
 import { lookupProductData } from '../../scripts/scripts.js';
-import { fetchPlaceholders, getMetadata } from '../../scripts/lib-franklin.js';
+
+const breakpoints = [
+  { media: '(min-width: 400px)', width: '768' },
+  { media: '(min-width: 768px)', width: '768' },
+  { media: '(min-width: 1024px)', width: '1024' },
+  { media: '(min-width: 1280px)', width: '1280' },
+  { media: '(min-width: 1600px)', width: '2000' },
+];
 
 const imagesHtml = (placeholders, images) => {
   const image = images[0];
   const figure = `
     <figure class="zoom" style="background-image : url(${image})">
-      <img src="${image}" alt="${placeholders.productImageAltLabel}">
+      ${createOptimizedPicture(image, placeholders.productImageAltLabel, false, breakpoints).outerHTML}
     </figure>
   `;
 
@@ -18,7 +26,8 @@ const imagesHtml = (placeholders, images) => {
     if (i === 0) {
       clazz += ' active';
     }
-    thumbnailHtml += `<a href="${images[i]}" class="${clazz}"><img alt="${placeholders.productImageAltLabel}" src="${images[i]}"></a>`;
+    const dom = createOptimizedPicture(images[i], placeholders.productImageAltLabel, false, breakpoints);
+    thumbnailHtml += `<a href="#" class="${clazz}">${dom.outerHTML}</a>`;
   }
 
   thumbnails.innerHTML = thumbnailHtml;
@@ -96,11 +105,11 @@ const detailsHtml = (placeholders, productInfo) => {
 const modalHtml = (placeholders, images) => {
   let html = '';
   for (let i = 0; i < images.length; i += 1) {
-    let clazz = '';
+    const dom = createOptimizedPicture(images[i], placeholders.productImageAltLabel, false, breakpoints);
     if (i === 0) {
-      clazz = ' active';
+      dom.classList.add('active');
     }
-    html += `<img class="${clazz}" alt="${placeholders.productImageAltLabel}" src="${images[i]}">`;
+    html += dom.outerHTML;
   }
 
   return `
@@ -125,7 +134,7 @@ const html = (placeholders, productInfo) => {
 };
 
 const fixModalNav = (modal) => {
-  const image = modal.querySelector('img.active');
+  const image = modal.querySelector('picture.active');
   if (image.previousElementSibling.tagName.toLowerCase() === 'a') {
     modal.querySelector('.previous').classList.add('disabled');
   } else if (image.nextElementSibling.tagName.toLowerCase() === 'a') {
@@ -142,7 +151,7 @@ export default async function decorate(block) {
   const prefix = getMetadata('locale');
   const placeholders = await fetchPlaceholders(prefix);
   const productFamilyData = new URL(block.querySelector('a').href);
-  const productName = [...block.children][1].innerText.trim();
+  const productName = block.children[0].children[0].textContent.trim();
 
   // Make a call to the  product datasheet  and get the json for all fields for the product
   const productInfo = await lookupProductData(productFamilyData, productName);
@@ -181,9 +190,10 @@ export default async function decorate(block) {
       event.preventDefault();
       block.querySelector('.thumbnail-wrapper a.active').classList.remove('active');
       event.currentTarget.classList.add('active');
-      const href = a.getAttribute('href');
-      zoom.querySelector('img').setAttribute('src', href);
-      zoom.style.backgroundImajge = `url(${href})`;
+      const picture = a.querySelector('picture');
+      const src = picture.querySelector('img').getAttribute('src');
+      zoom.querySelector('picture').replaceWith(picture.cloneNode(true));
+      zoom.style.backgroundImage = `url(${src})`;
     });
   });
 
@@ -199,7 +209,7 @@ export default async function decorate(block) {
     if (prev.classList.contains('disabled')) {
       return;
     }
-    const active = modal.querySelector('img.active');
+    const active = modal.querySelector('picture.active');
     active.previousElementSibling.classList.add('active');
     active.classList.remove('active');
     fixModalNav(modal);
@@ -212,7 +222,7 @@ export default async function decorate(block) {
     if (next.classList.contains('disabled')) {
       return;
     }
-    const active = modal.querySelector('img.active');
+    const active = modal.querySelector('picture.active');
     active.nextElementSibling.classList.add('active');
     active.classList.remove('active');
     fixModalNav(modal);
