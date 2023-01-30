@@ -1,185 +1,87 @@
-.product-comparison-wrapper{
-    margin-left: 8.3333%;
-    border-top: 8px solid #eee;
-    padding-bottom: 40px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+
+.product-specifications,
+.product-comparison-details {
+  padding-bottom: 40px;
+  color: #333;
 }
 
-.product-comparison {       
-    min-height: 1px;
-    padding-right: 15px;
-    padding-left: 15px;
+.product-comparison-details {
+  display: none;
+}
+
+.product-specifications h2 {
+  padding-bottom: 0;
+}
+
+.product-specifications table,
+.product-comparison-details table {
+  width: 100%;
+  line-height: 1.42857;
+}
+
+.product-specifications table thead td {
+  width: 50%;
+}
+
+.product-comparison-details table img {
+  max-height: 266px;
+}
+
+.product-comparison-details table.striped td.current {
+  background-color: rgba(0, 0, 0, .1);
+}
+
+.product-specifications table.striped tbody tr:nth-child(odd),
+.product-comparison-details table.striped tbody tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+.product-comparison-details table.striped thead tr td,
+.product-comparison-details table.striped tbody tr td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.product-comparison-details table.columns-3 thead td {
+  width: calc(100% / 3);
+}
+
+.product-comparison-details table.columns-4 thead td {
+  width: calc(100% / 4);
+}
+
+.product-comparison-details table.columns-5 thead td {
+  width: calc(100% / 5);
+}
+
+.product-comparison-details table.striped thead tr td:first-of-type,
+.product-comparison-details table.striped tbody tr td:first-of-type {
+  text-align: left;
+  vertical-align: middle;
+}
+
+@media screen and (min-width: 768px) {
+  .product-specifications {
+    display: none;
+  }
+
+  .product-comparison-details {
     display: block;
-    font-family: var(--body-font-family);    
-    font-size: 16px;
-    width: 100%;
+  }
+
+  .product-comparison-details table img {
+    max-height: 266px;
+  }
 }
 
-.product-comparison .heading{
-    font-size: 30px;
+@media screen and (min-width: 1024px) {
+  .product-comparison-details table img {
+    max-height: 348px;
+  }
 }
 
-.product-comparison .table{
-    background-color: transparent;
-    border-spacing: 0;
-    border-collapse: collapse;
-    display: table;   
-    text-indent: initial;
-    border-color: grey;
-    width: 100%;   
-}
-
-.product-comparison .table .thead{
-    display: table-header-group;
-    vertical-align: middle;
-    border-color: inherit;
-}
-
-.table > tr{
-    vertical-align: middle;
-    display: table-row;
-}
-
-.table>tr:nth-of-type(odd) { 
-    background-color: #f9f9f9;   
-}
-
-.product-comparison .table .thead > tr{
-    display: table-row;
-    vertical-align: inherit;
-    border-color: inherit;
-}
-
-.product-comparison .table .thead > tr > td{
-    display: table-cell;
-    vertical-align: inherit;
-    text-align: center;
-    position: relative;
-    min-height: 1px;
-    padding-right: 15px;
-    padding-left: 15px;   
-}
-
-.product-comparison .table .thead > tr > td.specheading{
-    text-align: left;
-    padding: 0; 
-}
-
-.product-cimage{
-    display: block;
-    max-width: 100%;
-    height: auto;    
-    text-align: center;
-}
-
-table > tr > td.specname{
-    text-align: left;
-}
-
-.product-comparison .table > tr > td.specdata{
-    text-align: center;
-}
-
-.product-comparison .table > tr > td.highlightspecdata{
-    text-align: center;
-    background-color: #e6e6e6;
-}
-
-.product-comparison .table .thead > tr > td.highlightspecdata{
-    background-color: #e6e6e6;
-}
-
-@media (min-width: 992px){
-.product-comparison-wrapper{
-    margin-left: 8.3333%;
-    border-top: 8px solid #eee;
-    padding-bottom: 40px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-.product-comparison {       
-    min-height: 1px;
-    padding-right: 15px;
-    padding-left: 15px;
-    display: block;
-    font-family: var(--body-font-family);    
-    font-size: 16px;
-    width: 100%;
-}
-
-.product-comparison .table{
-    background-color: transparent;
-    border-spacing: 0;
-    border-collapse: collapse;
-    display: table;   
-    text-indent: initial;
-    border-color: grey;
-    width: 100%;   
-}
-
-.product-comparison .table .thead{
-    display: table-header-group;
-    vertical-align: middle;
-    border-color: inherit;
-}
-
-.table > tr{
-    vertical-align: middle;
-    display: table-row;
-}
-
-.table>tr:nth-of-type(odd) { 
-    background-color: #f9f9f9;   
-}
-
-.product-comparison .table .thead > tr{
-    display: table-row;
-    vertical-align: inherit;
-    border-color: inherit;
-}
-
-.product-comparison .table .thead > tr > td{
-    display: table-cell;
-    vertical-align: inherit;
-    text-align: center;
-    position: relative;
-    min-height: 1px;
-    padding-right: 15px;
-    padding-left: 15px;   
-}
-
-.product-comparison .table .thead > tr > td.specheading{
-    text-align: left;
-    padding: 0; 
-}
-
-.product-cimage{
-   display: block;   
-   max-width: 400px;
-   max-height: 400px;  
-   margin-left: auto;
-   margin-right: auto;
-}
-
-table > tr > td.specname{
-    text-align: left;
-    width: 20%;
-}
-
-.product-comparison .table > tr > td.specdata{
-    text-align: center;
-}
-
-.product-comparison .table > tr > td.highlightspecdata{
-    text-align: center;
-    background-color: #e6e6e6;
-    border-top: .5px solid #f9f9f9;
-    border-bottom: .5px solid #f9f9f9;
-}
-
-.product-comparison .table .thead > tr > td.highlightspecdata{
-    background-color: #e6e6e6;    
-}
+@media screen and (min-width: 1280px) {
+  .product-comparison-details table img {
+    max-height: 400px;
+  }
 }

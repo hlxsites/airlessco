@@ -1,144 +1,140 @@
-import { lookupProductComparisionData, createTag, lookupProductData } from '../../scripts/scripts.js';
-import { fetchPlaceholders, getMetadata } from '../../scripts/lib-franklin.js';
+// import { lookupProductComparisionData, createTag, lookupProductData } from '../../scripts/scripts.js';
+import { createOptimizedPicture, fetchPlaceholders, getMetadata } from '../../scripts/lib-franklin.js';
+import { lookupProductData } from '../../scripts/scripts.js';
 
-function retrieveSpecs(specification) {
-  const specsArray = specification.split(/\r?\n|\r|\n/g);
-  const specs = new Map();
-  specsArray.forEach((element) => {
-    const temp = element.split(':');
-    specs.set(temp[0], temp[1]);
+const buildSpecData = (specifications) => {
+  const map = new Map();
+  specifications.split(/\r?\n|\r|\n/g).forEach((line) => {
+    const [key, value] = line.split(':');
+    const fixed = value.includes('|') ? value.trim().replaceAll('|', '<br/>') : value.trim();
+    map.set(key.trim(), fixed);
   });
-  return specs;
-}
+  return map;
+};
 
-function retrieveValue(specification, specKey) {
-  const specsArray = specification.split(/\r?\n|\r|\n/g);
-  let specValue;
-  specsArray.forEach((element) => {
-    const temp = element.split(':');
-    if (temp[0].toLowerCase() === specKey.toLowerCase()) {
-      [, specValue] = temp;
-    }
+const buildSpecTable = (placeholders, productName, specData) => {
+
+  const tableHeader = `
+    <tr>
+      <td><strong>${placeholders.specifications}</strong></td>
+      <td><strong>${productName}</strong></td>
+    </tr>
+  `;
+  let tableBody = '';
+  specData.forEach((v, k) => {
+    tableBody += `
+    <tr>
+      <td><strong>${k}</strong></td>
+      <td>${v}</td>
+    </tr>`;
   });
-  if (specValue && specValue.includes('|')) {
-    specValue = specValue.replaceAll('|', '<br>');
-  }
-  return specValue;
-}
+  return `
+    <div class="product-specifications">
+      <h2><strong>${productName} ${placeholders.specifications}</strong></h2>
+      <table class="striped">  
+        <thead>
+          ${tableHeader}
+        </thead>
+        <tbody>
+          ${tableBody}
+        </tbody>
+      </table>
+    </div>
+  `;
+};
 
-function buildItemsArray(itemsArray, productName) {
-  const productData = [];
-  let count = 0;
-  itemsArray.split('\n').forEach((element) => {
-    if (element.trim('').toLowerCase() !== productName.toLowerCase()) {
-      productData[count] = element.trim('');
-      count += 1;
-    }
+const buildComparisonTable = (placeholders, title, productInfo, specData, compareTo) => {
+  const compareSpecs = new Map();
+
+  // Build the header row.
+  let [image] = productInfo.Images.split('\n');
+  let productImages = `
+    <tr>
+      <td>&nbsp;</td>
+      <td>${createOptimizedPicture(image, productInfo.Name, false, [{ width: 400 }]).outerHTML}</td>
+  `;
+
+  let productNames = `
+    <tr>
+      <td><strong>${placeholders.specifications}</strong></td>
+      <td class="current"><strong>${productInfo.Name}</strong></td>
+  `;
+
+  compareTo.forEach((product) => {
+    compareSpecs.set(product.Name, buildSpecData(product.Specification));
+    image = product.Images.split('\n');
+    productImages += `<td>${createOptimizedPicture(image, productInfo.Name, false, [{ width: 400 }]).outerHTML}</td>`;
+    productNames += `<td><strong>${product.Name}</strong></td>`;
   });
-  productData.push(productName);
-  return productData.sort();
-}
+  productImages += '</tr>';
+  productNames += '</tr>';
 
-async function convertLocale(specification, seriesComparison) {
-  const locale = getMetadata('locale');
-  const placeholders = await fetchPlaceholders(locale);
-  return [locale, placeholders[specification], placeholders[seriesComparison]];
-}
+  // Build the Body.
+  let tableBody = '';
+  specData.forEach((specValue, specName) => {
+    tableBody += `
+      <tr>
+        <td><strong>${specName}</strong></td>
+        <td class="current">${specValue}</td>
+    `;
+    compareSpecs.forEach((compareValue) => {
+      let value = compareValue.get(specName);
+
+      // Motor/Engine spec has special handling.
+      if (specName === 'Engine' && !value) {
+        value = compareValue.get('Motor');
+      } else if (specName === 'Motor' && !value) {
+        value = compareValue.get('Engine');
+      }
+      tableBody += `<td>${value || '-'}</td>`;
+    });
+    tableBody += '</tr>';
+  });
+
+  return `
+    <div class="product-comparison-details">
+      <h2><strong>${title}</strong></h2>
+      <table class="striped columns-${compareTo.length + 2}">
+        <thead>
+          ${productImages}
+          ${productNames}
+        </thead>
+        <tbody>
+          ${tableBody}
+        </tbody>
+      </table>
+    </table>
+  `;
+};
 
 export default async function decorate(block) {
-  const productSheetURL = new URL(block.querySelector('a').href);
-  const productName = [...block.children][1].innerText.trim('');
-  const locale = await convertLocale('specification', 'seriescomparision');
-  const productData = await lookupProductData(productSheetURL, productName);
-  const Comparison = 'Comparison';
-  const p2compare = buildItemsArray(productData[0][Comparison], productName);
-  const relatedProducts = await lookupProductComparisionData(productSheetURL, p2compare);
-  const Specification = 'Specification';
-  const Name = 'Name';
-  const Images = 'Images';
-  const headingdiv = createTag('div', { class: 'heading' });
-  const productSeries = productName.replace(/\d+/g, '');
-  if (locale[0] === '/na/en' || locale[0] === '/emea/en') {
-    headingdiv.innerHTML = `<strong>${productSeries} ${locale[2]}</strong>`;
-  } else if (locale[0] === '/emea/de' || locale[0] === '/emea/nl') {
-    const seriesComparisonStr = locale[2].split(' ');
-    headingdiv.innerHTML = `<strong>${seriesComparisonStr[0]} ${productSeries}${seriesComparisonStr[1]}</strong>`;
-  } else {
-    headingdiv.innerHTML = `<strong>${locale[2]} ${productSeries}</strong>`;
-  }
-  const specs = retrieveSpecs(relatedProducts[1][0][Specification]);
-  const table = createTag('table', { class: 'table' });
-  const thead = createTag('thead', { class: 'thead' });
-  let tr = createTag('tr');
-  let td = createTag('td');
-  td.innerHTML = '<strong>&nbsp;</strong>';
-  tr.append(td);
-  relatedProducts.forEach((element) => {
-    td = createTag('td');
-    const productImage = createTag('img', { class: 'product-cimage' });
-    productImage.setAttribute('src', element[0][Images].trim());
-    td.append(productImage);
-    tr.append(td);
+  const prefix = getMetadata('locale');
+  const placeholders = await fetchPlaceholders(prefix);
+
+  const productName = block.children[0].children[0].textContent.trim();
+  const productFamilyData = new URL(block.querySelector('a').href);
+
+  const productInfo = await lookupProductData(productFamilyData, productName);
+  const specData = buildSpecData(productInfo.Specification);
+
+  const comparisonTitle = block.children[1].children[1].textContent.trim();
+  const compareTo = block.children[2].children[1].textContent.split(/\r?\n|\r|\n/g);
+
+  const promises = [];
+  compareTo.forEach((name) => {
+    promises.push(lookupProductData(productFamilyData, name.trim()));
   });
-  thead.append(tr);
-  tr = createTag('tr');
-  td = createTag('td', { class: 'specheading' });
-  td.innerHTML = `<strong>${locale[1]}</strong>`;
-  tr.append(td);
-  relatedProducts.forEach((element) => {
-    if (element[0][Name].toLowerCase() === productName.toLowerCase()) {
-      td = createTag('td', { class: 'highlightspecdata' });
-    } else {
-      headingdiv.innerHTML = `<strong>${locale[2]} ${productSeries}</strong>`;
-    }
-    const specs = reterieveSpecs(relatedProducts[1][0][Specification]);
-    const table = createTag('table', { class: 'table' });
-    const thead = createTag('thead', { class: 'thead' });
-    let tr = createTag('tr');
-    let td = createTag('td');
-    td.innerHTML = '<strong>&nbsp;</strong>';
-    tr.append(td);
-    relatedProducts.forEach((element) => {
-      td = createTag('td');
-      const productImage = createTag('img', { class: 'product-cimage' });
-      productImage.setAttribute('src', element[0][Images].trim());
-      td.append(productImage);
-      tr.append(td);
+
+  const comparisonData = [];
+
+  await Promise.all(promises.values()).then((results) => {
+    results.forEach((data) => {
+      comparisonData.push(data);
     });
-    thead.append(tr);
-    tr = createTag('tr');
-    td = createTag('td', { class: 'specheading' });
-    td.innerHTML = `<strong>${locale[1]}</strong>`;
-    tr.append(td);
-    relatedProducts.forEach((element) => {
-      if (element[0][Name].toLowerCase() === productName.toLowerCase()) {
-        td = createTag('td', { class: 'highlightspecdata' });
-      } else {
-        td = createTag('td');
-      }
-      td.innerHTML = retrieveValue(element[0][Specification], key);
-      tr.append(td);
-    });
-    thead.append(tr);
-    table.append(thead);
-    specs.forEach((value, key) => {
-      tr = createTag('tr');
-      td = createTag('td', { class: 'specname' });
-      td.innerHTML = `<strong>${key}</strong>`;
-      tr.append(td);
-      relatedProducts.forEach((element) => {
-        if (element[0][Name].toLowerCase() === productName.toLowerCase()) {
-          td = createTag('td', { class: 'highlightspecdata' });
-        } else {
-          td = createTag('td', { class: 'specdata' });
-        }
-        td.innerHTML = reterieveValue(element[0][Specification], key);
-        tr.append(td);
-      });
-      table.append(tr);
-    });
-    block.innerHTML = '';
-    block.append(headingdiv);
-    block.append(table);
-  }
+  });
+
+  block.innerHTML = `
+    ${buildSpecTable(placeholders, productName, specData)}
+    ${buildComparisonTable(placeholders, comparisonTitle, productInfo, specData, comparisonData)}
+  `;
 }
