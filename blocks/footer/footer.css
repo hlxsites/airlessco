@@ -105,12 +105,12 @@ footer .air-footer {
   }
 
   .air-footer .logo > picture > img {
-    max-width: 95px;
+    width: 95px;
     height: 88px;
   }
 
   .air-footer .flag > picture > img {
-    max-width: 75px;
+    width: 75px;
     height: 51px;
   }
 
