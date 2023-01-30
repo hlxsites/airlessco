@@ -10,28 +10,30 @@ const breakpoints = [
 ];
 
 const imagesHtml = (placeholders, images) => {
-  const image = images[0];
-  const figure = `
-    <figure class="zoom" style="background-image : url(${image})">
+  let figureHtml = '';
+  let thumbnailHtml = '';
+
+  for (let i = 0; i < images.length; i += 1) {
+    const image = images[i];
+    figureHtml += `
+    <figure class="zoom ${i === 0 ? 'active' : ''}" style="background-image : url(${image})" data-figure="figure-${i}">
       ${createOptimizedPicture(image, placeholders.productImageAltLabel, false, breakpoints).outerHTML}
     </figure>
-  `;
+    `;
 
-  const thumbnails = document.createElement('div');
-  thumbnails.classList.add('thumbnail-wrapper');
-
-  let thumbnailHtml = '';
-  for (let i = 0; i < images.length; i += 1) {
-    let clazz = 'product-thumbnail';
-    if (i === 0) {
-      clazz += ' active';
-    }
-    const dom = createOptimizedPicture(images[i], placeholders.productImageAltLabel, false, breakpoints);
-    thumbnailHtml += `<a href="#" class="${clazz}">${dom.outerHTML}</a>`;
+    const dom = createOptimizedPicture(image, placeholders.productImageAltLabel, false, [{ width: 400 }]);
+    thumbnailHtml += `<a href="#" class="product-thumbnail ${i === 0 ? 'active' : ''}" data-figure="figure-${i}">${dom.outerHTML}</a>`;
   }
-
-  thumbnails.innerHTML = thumbnailHtml;
-  return `<div class="images-wrapper">${figure}${thumbnails.outerHTML}</div>`;
+  return `
+    <div class="images-wrapper">
+      <div class="figures">
+        ${figureHtml}
+      </div>
+      <div class="thumbnails">
+        ${thumbnailHtml}
+      </div>
+    </div>
+  `;
 };
 
 const detailsHtml = (placeholders, productInfo) => {
@@ -84,13 +86,6 @@ const detailsHtml = (placeholders, productInfo) => {
       <div class="label"><strong>${label}:</strong></div>
       <div class="data">${productInfo[field]}</div>
     `;
-
-    /*
-    <a href="../../../../downloads/341491EN-G.pdf" target="new">
-      <i class="fa fa-file-pdf-o"></i>
-    </a>
-    <a href="../../../../downloads/341491EN-G.pdf" target="new">Airlessco Brochure</a>
-     */
     const links = fieldDiv.querySelectorAll('a');
     Object.values(links).forEach((a) => {
       a.prepend(document.createElement('i'));
@@ -109,6 +104,7 @@ const modalHtml = (placeholders, images) => {
     if (i === 0) {
       dom.classList.add('active');
     }
+    dom.setAttribute('data-figure', `figure-${i}`);
     html += dom.outerHTML;
   }
 
@@ -158,13 +154,15 @@ export default async function decorate(block) {
 
   block.innerHTML = html(placeholders, productInfo);
 
-  const zoom = block.querySelector('.zoom');
+  const zooms = block.querySelectorAll('.zoom');
 
-  zoom.addEventListener('mousemove', (event) => {
-    const { currentTarget, offsetX, offsetY } = event;
-    const x = (offsetX / currentTarget.offsetWidth) * 100;
-    const y = (offsetY / currentTarget.offsetHeight) * 100;
-    currentTarget.style.backgroundPosition = `${x}% ${y}%`;
+  zooms.forEach((z) => {
+    z.addEventListener('mousemove', (event) => {
+      const { currentTarget, offsetX, offsetY } = event;
+      const x = (offsetX / currentTarget.offsetWidth) * 100;
+      const y = (offsetY / currentTarget.offsetHeight) * 100;
+      currentTarget.style.backgroundPosition = `${x}% ${y}%`;
+    });
   });
 
   // Hide modal if escape pressed.
@@ -178,22 +176,32 @@ export default async function decorate(block) {
 
   const modal = block.querySelector('.modal-wrapper');
 
-  block.querySelector('.images-wrapper img').addEventListener('click', (event) => {
-    event.preventDefault();
-    fixModalNav(modal);
-    modal.classList.add('open');
+  block.querySelectorAll('.images-wrapper .figures img').forEach((img) => {
+    img.addEventListener('click', (event) => {
+      event.preventDefault();
+      fixModalNav(modal);
+      modal.classList.add('open');
+    });
   });
 
-  const thumbnails = block.querySelectorAll('.thumbnail-wrapper a');
+  const thumbnails = block.querySelectorAll('.thumbnails a');
   thumbnails.forEach((a) => {
     a.addEventListener('click', (event) => {
       event.preventDefault();
-      block.querySelector('.thumbnail-wrapper a.active').classList.remove('active');
+      if (event.currentTarget.classList.contains('active')) {
+        return;
+      }
+
+      block.querySelector('.images-wrapper figure.active').classList.remove('active');
+      block.querySelector('.thumbnails a.active').classList.remove('active');
+      block.querySelector('.modal-wrapper picture.active').classList.remove('active');
+
+      const figure = event.currentTarget.getAttribute('data-figure');
       event.currentTarget.classList.add('active');
-      const picture = a.querySelector('picture');
-      const src = picture.querySelector('img').getAttribute('src');
-      zoom.querySelector('picture').replaceWith(picture.cloneNode(true));
-      zoom.style.backgroundImage = `url(${src})`;
+      block.querySelector(`.images-wrapper figure[data-figure=${figure}]`).classList.add('active');
+      block.querySelector(`.modal-wrapper picture[data-figure=${figure}]`).classList.add('active');
+
+      fixModalNav(block.querySelector('.modal-wrapper'));
     });
   });
 
