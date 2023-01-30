@@ -39,4 +39,11 @@ export default async function decorate(block) {
     createMobileMenu(footer);
     block.append(footer);
   }
+  const [built2performDiv, logoDiv, productsDiv, supportDiv, contactDiv, flagDiv] = document.querySelectorAll('div.air-footer>div');
+    built2performDiv.classList.add("built2perform");
+    logoDiv.classList.add("logo");
+    productsDiv.classList.add("products");
+    supportDiv.classList.add("support");
+    contactDiv.classList.add("contact");
+    flagDiv.classList.add("flag");
 }
