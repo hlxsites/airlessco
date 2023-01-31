@@ -2,9 +2,9 @@ import { createOptimizedPicture, fetchPlaceholders, getMetadata } from '../../sc
 import { lookupProductData } from '../../scripts/scripts.js';
 
 const breakpoints = [
-  { media: '(min-width: 400px)', width: '250' },
-  { media: '(min-width: 768px)', width: '300' },
   { media: '(min-width: 1280px)', width: '400' },
+  { media: '(min-width: 768px)', width: '300' },
+  { media: '(min-width: 400px)', width: '250' },
 ];
 
 export default async function decorate(block) {
@@ -40,6 +40,13 @@ export default async function decorate(block) {
       }
     });
     html += '</ul>';
+    // const div = document.createElement('div');
+    // div.innerHTML = html;
+    // div.querySelectorAll('img').forEach((img) => {
+    //   img.setAttribute('height', '400');
+    //   img.setAttribute('width', '400');
+    // });
+    // block.innerHTML = //div.innerHTML;
     block.innerHTML = html;
   }
 }

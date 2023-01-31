@@ -2,11 +2,11 @@ import { createOptimizedPicture, fetchPlaceholders, getMetadata } from '../../sc
 import { lookupProductData } from '../../scripts/scripts.js';
 
 const breakpoints = [
-  { media: '(min-width: 400px)', width: '400' },
-  { media: '(min-width: 768px)', width: '768' },
-  { media: '(min-width: 1024px)', width: '1024' },
-  { media: '(min-width: 1280px)', width: '1280' },
   { media: '(min-width: 1600px)', width: '2000' },
+  { media: '(min-width: 1280px)', width: '1280' },
+  { media: '(min-width: 1024px)', width: '1024' },
+  { media: '(min-width: 768px)', width: '768' },
+  { media: '(min-width: 400px)', width: '400' },
 ];
 
 const imagesHtml = (placeholders, images) => {
@@ -35,7 +35,7 @@ const imagesHtml = (placeholders, images) => {
       </div>
       <div class="thumbnails">
         ${thumbnailHtml}
-      </div>
+      </div>  
     </div>
   `;
 };
