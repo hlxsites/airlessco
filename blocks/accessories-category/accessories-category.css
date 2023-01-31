@@ -31,7 +31,7 @@
 .accessories-category .accessory-card .accessory-body {
   font-size: var(--body-font-size-xxs);
   color: var(--airless-link-dark);
-  padding: 9px 4px 9px;
+  padding: 9px 4px;
 }
 
 @media screen and (min-width: 768px) {
@@ -69,6 +69,7 @@
     height: 272px;
     width: auto;
   }
+  
   .accessories-category .accessory-card .accessory-body {
     font-size: var(--body-font-size-xs)
   }

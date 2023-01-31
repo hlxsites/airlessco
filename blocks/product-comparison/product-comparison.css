@@ -16,7 +16,7 @@
 .product-specifications table,
 .product-comparison-details table {
   width: 100%;
-  line-height: 1.42857;
+  line-height: 1.4286;
 }
 
 .product-specifications table thead td {
@@ -28,7 +28,7 @@
 }
 
 .product-comparison-details table.striped td.current {
-  background-color: rgba(0, 0, 0, .1);
+  background-color: rgba(0 0 0 / 10%);
 }
 
 .product-specifications table.striped tbody tr:nth-child(odd),
@@ -42,15 +42,15 @@
   vertical-align: middle;
 }
 
-.product-comparison-details table.columns-3 thead td {
+.product-comparison-details table.columns-3 thead tr td {
   width: calc(100% / 3);
 }
 
-.product-comparison-details table.columns-4 thead td {
+.product-comparison-details table.columns-4 thead tr td {
   width: calc(100% / 4);
 }
 
-.product-comparison-details table.columns-5 thead td {
+.product-comparison-details table.columns-5 thead tr td {
   width: calc(100% / 5);
 }
 

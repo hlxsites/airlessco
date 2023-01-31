@@ -13,7 +13,6 @@ const buildSpecData = (specifications) => {
 };
 
 const buildSpecTable = (placeholders, productName, specData) => {
-
   const tableHeader = `
     <tr>
       <td><strong>${placeholders.specifications}</strong></td>

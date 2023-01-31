@@ -149,6 +149,15 @@ b, strong {
   border-left: 4px solid transparent;
 }
 
+body.product-details-template h1 strong,
+body.product-details-template h2 strong {
+  color: var(--airless-link-dark);
+}
+
+body.product-details-template h1 small {
+  display: none;
+}
+
 header {
   min-height: var(--nav-height);
 }
@@ -210,14 +219,7 @@ main .section.card-heading h3 strong {
   color: var(--airless-link-dark);
 }
 
-.product-details-template h1 strong,
-.product-details-template h2 strong {
-  color: var(--airless-link-dark);
-}
 
-.product-details-template h1 small {
-  display: none;
-}
 
 @media screen and (min-width: 768px) {
   :root[lang="cz"],
