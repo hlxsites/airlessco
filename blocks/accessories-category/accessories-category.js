@@ -40,13 +40,6 @@ export default async function decorate(block) {
       }
     });
     html += '</ul>';
-    // const div = document.createElement('div');
-    // div.innerHTML = html;
-    // div.querySelectorAll('img').forEach((img) => {
-    //   img.setAttribute('height', '400');
-    //   img.setAttribute('width', '400');
-    // });
-    // block.innerHTML = //div.innerHTML;
     block.innerHTML = html;
   }
 }
