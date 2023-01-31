@@ -4,7 +4,7 @@ import { lookupProductData } from '../../scripts/scripts.js';
 const breakpoints = [
   { media: '(min-width: 1280px)', width: '400' },
   { media: '(min-width: 768px)', width: '300' },
-  { media: '(min-width: 400px)', width: '250' },
+  { width: '250' },
 ];
 
 export default async function decorate(block) {
