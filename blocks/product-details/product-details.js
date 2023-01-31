@@ -15,9 +15,13 @@ const imagesHtml = (placeholders, images) => {
 
   for (let i = 0; i < images.length; i += 1) {
     const image = images[i];
+    let eager = false;
+    if (i === 0) {
+      eager = true;
+    }
     figureHtml += `
     <figure class="zoom ${i === 0 ? 'active' : ''}" style="background-image : url(${image})" data-figure="figure-${i}">
-      ${createOptimizedPicture(image, placeholders.productImageAltLabel, false, breakpoints).outerHTML}
+      ${createOptimizedPicture(image, placeholders.productImageAltLabel, eager, breakpoints).outerHTML}
     </figure>
     `;
 
