@@ -2,7 +2,7 @@ import { createOptimizedPicture, fetchPlaceholders, getMetadata } from '../../sc
 import { lookupProductData } from '../../scripts/scripts.js';
 
 const breakpoints = [
-  { media: '(min-width: 400px)', width: '768' },
+  { media: '(min-width: 400px)', width: '400' },
   { media: '(min-width: 768px)', width: '768' },
   { media: '(min-width: 1024px)', width: '1024' },
   { media: '(min-width: 1280px)', width: '1280' },
@@ -21,7 +21,7 @@ const imagesHtml = (placeholders, images) => {
     </figure>
     `;
 
-    const dom = createOptimizedPicture(image, placeholders.productImageAltLabel, false, [{ width: 400 }]);
+    const dom = createOptimizedPicture(image, placeholders.productImageAltLabel, false, [{ width: 100 }]);
     thumbnailHtml += `<a href="#" class="product-thumbnail ${i === 0 ? 'active' : ''}" data-figure="figure-${i}">${dom.outerHTML}</a>`;
   }
   return `

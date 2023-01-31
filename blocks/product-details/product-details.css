@@ -37,12 +37,12 @@ main .product-details-container.section {
 
 .product-details .images-wrapper figure img {
   display: block;
+  height: 370px;
 }
 
 .product-details .images-wrapper figure.zoom img {
   transition: opacity 0.5s;
   display: block;
-  width: 100%;
 }
 
 .product-details .images-wrapper figure.zoom img:hover {
@@ -225,8 +225,8 @@ main .product-details-container.section {
 }
 
 @media screen and (min-width: 768px) {
-  .product-details .images-wrapper > * {
-    max-width: 576px;
+  .product-details .images-wrapper figure img {
+    height: 576px;
   }
 
   .product-details .images-wrapper .thumbnails {
