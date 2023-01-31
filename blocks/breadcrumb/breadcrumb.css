@@ -33,7 +33,7 @@ main .breadcrumb-container.section {
 
 
 .breadcrumb li:last-of-type > a:last-of-type {
-  color: #777;
+  color: var(--airless-header-gray);
   pointer-events: none;
   cursor: default;
   text-decoration: none;
