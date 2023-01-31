@@ -1,7 +1,7 @@
 import { lookupProductComparisionData, createTag, lookupProductData } from '../../scripts/scripts.js';
 import { fetchPlaceholders, getMetadata } from '../../scripts/lib-franklin.js';
 
-function reterieveSpecs(specification) {
+function retrieveSpecs(specification) {
   const specsArray = specification.split(/\r?\n|\r|\n/g);
   const specs = new Map();
   specsArray.forEach((element) => {
@@ -11,7 +11,7 @@ function reterieveSpecs(specification) {
   return specs;
 }
 
-function reterieveValue(specification, specKey) {
+function retrieveValue(specification, specKey) {
   const specsArray = specification.split(/\r?\n|\r|\n/g);
   let specValue;
   specsArray.forEach((element) => {
@@ -20,6 +20,9 @@ function reterieveValue(specification, specKey) {
       [, specValue] = temp;
     }
   });
+  if (specValue && specValue.includes('|')) {
+    specValue = specValue.replaceAll('|', '<br>');
+  }
   return specValue;
 }
 
@@ -45,7 +48,7 @@ async function convertLocale(specification, seriesComparison) {
 export default async function decorate(block) {
   const productSheetURL = new URL(block.querySelector('a').href);
   const productName = [...block.children][1].innerText.trim('');
-  const locale = await convertLocale('specification', 'seriesComparison');
+  const locale = await convertLocale('specification', 'seriescomparision');
   const productData = await lookupProductData(productSheetURL, productName);
   const Comparison = 'Comparison';
   const p2compare = buildItemsArray(productData[0][Comparison], productName);
@@ -63,7 +66,7 @@ export default async function decorate(block) {
   } else {
     headingdiv.innerHTML = `<strong>${locale[2]} ${productSeries}</strong>`;
   }
-  const specs = reterieveSpecs(relatedProducts[1][0][Specification]);
+  const specs = retrieveSpecs(relatedProducts[1][0][Specification]);
   const table = createTag('table', { class: 'table' });
   const thead = createTag('thead', { class: 'thead' });
   let tr = createTag('tr');
@@ -104,7 +107,7 @@ export default async function decorate(block) {
       } else {
         td = createTag('td', { class: 'specdata' });
       }
-      td.innerHTML = reterieveValue(element[0][Specification], key);
+      td.innerHTML = retrieveValue(element[0][Specification], key);
       tr.append(td);
     });
     table.append(tr);

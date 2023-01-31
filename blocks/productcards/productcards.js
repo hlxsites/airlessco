@@ -1,28 +1,26 @@
-import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
-
 export default function decorate(block) {
-  /* change to ul, li */
-  const ul = document.createElement('ul');
-  [...block.children].forEach((row) => {
-    const li = document.createElement('li');
-    let cardLink;
-    li.innerHTML = row.innerHTML;
-    [...li.children].forEach((div) => {
-      if (div.children.length === 1 && div.querySelector('picture')) {
-        div.className = 'productcards-productcard-image';
-      } else if (div.querySelector('a')) {
-        const cardHref = div.querySelector('a');
-        cardLink = cardHref.href;
-        const caption = document.createElement('p');
-        caption.innerHTML = cardHref.textContent;
-        cardHref.parentNode.replaceChild(caption, cardHref);
-        div.className = 'productcards-productcard-body';
-      } else div.className = 'productcards-productcard-body';
-    });
-    li.innerHTML = `<a href ="${cardLink}"><div class ="productcards-productcard-div">  ${li.innerHTML} </div> </a>`;
-    ul.append(li);
+  // Each child is a product and becomes a list item.
+  Object.values(block.children).forEach((product) => {
+    product.classList.add('productcard');
+    const link = product.querySelector('a');
+
+    const anchor = document.createElement('a');
+    if (link) {
+      anchor.setAttribute('href', link.getAttribute('href'));
+      anchor.setAttribute('title', link.getAttribute('title'));
+    }
+    product.appendChild(anchor);
+
+    const image = product.children[0];
+    const body = product.children[1];
+
+    anchor.appendChild(image);
+    anchor.appendChild(body);
+
+    image.classList.add('productcard-image');
+    body.classList.add('productcard-body');
+
+    const text = document.createTextNode(link.textContent);
+    body.replaceChild(text, link);
   });
-  ul.querySelectorAll('img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
-  block.textContent = '';
-  block.append(ul);
 }
