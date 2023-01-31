@@ -1,6 +1,12 @@
 import { createOptimizedPicture, fetchPlaceholders, getMetadata } from '../../scripts/lib-franklin.js';
 import { lookupProductData } from '../../scripts/scripts.js';
 
+const breakpoints = [
+  { media: '(min-width: 400px)', width: '250' },
+  { media: '(min-width: 768px)', width: '300' },
+  { media: '(min-width: 1280px)', width: '400' },
+];
+
 export default async function decorate(block) {
   const product = block.children[0].children[0].textContent.trim();
   const sheet = block.querySelector('a').href;
@@ -22,7 +28,7 @@ export default async function decorate(block) {
               <a href="${link}">
                 <div class="accessory-card">
                   <div class="accessory-image">
-                    ${createOptimizedPicture(image, label, false, [{ width: '400' }]).outerHTML}
+                    ${createOptimizedPicture(image, label, false, breakpoints).outerHTML}
                   </div>
                   <div class="accessory-body">
                       <p>${label}</p>
