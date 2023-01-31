@@ -3377,20 +3377,19 @@ html,body {
 }
 
 .cmp-adaptiveform-button {
-  color: #666;
+  color: #fff;
   cursor: pointer;
-  background: #fff;
-  border: 2px solid #666;
-  border-radius: 1.5rem;
+  background: #002b92;
   margin-top: 20px;
-  padding: .5rem 1rem;
+  padding: 0 1rem;
   font-size: 1rem;
+  font-weight: bold;
   position: relative
 }
 
 .cmp-adaptiveform-button:hover {
   color: #fff;
-  background: #666
+  background: #002478;
 }
 
 .cmp-adaptiveform-button[data-cmp-enabled]:not([data-cmp-enabled=true]) {
@@ -3500,7 +3499,6 @@ html,body {
   height: 40px;
   color: #666;
   border: 1px solid #666;
-  border-radius: .25rem;
   margin-top: 10px;
   padding-left: 10px;
   font-size: 1rem
@@ -3541,8 +3539,10 @@ html,body {
 .cmp-adaptiveform-dropdown {
   color: #666;
   margin-top: 20px;
-  font-size: 1rem;
-  position: relative
+  font-size: 14px;
+  position: relative;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 .cmp-adaptiveform-dropdown__widget {
@@ -3550,7 +3550,6 @@ html,body {
   min-height: 40px;
   color: #666;
   border: 1px solid #666;
-  border-radius: .25rem;
   margin-top: 10px;
   padding-left: 10px;
   font-size: 1rem
@@ -3610,7 +3609,6 @@ html,body {
   cursor: pointer;
   background: #fff;
   border: 2px solid #666;
-  border-radius: 1.5rem;
   outline: none;
   padding: .5rem 1rem;
   font-size: 1rem;
@@ -3683,7 +3681,6 @@ html,body {
   height: 40px;
   color: #666;
   border: 1px solid #666;
-  border-radius: .25rem;
   margin-top: 10px;
   padding-left: 10px;
   font-size: 1rem
@@ -3740,7 +3737,9 @@ html,body {
 
 .cmp-adaptiveform-radiobutton__label {
   margin-bottom: 10px;
-  display: block
+  display: block;
+  font-weight: bold;
+  line-height: 1.5rem;
 }
 
 .cmp-adaptiveform-radiobutton__longdescription {
@@ -3796,7 +3795,9 @@ html,body {
 .cmp-adaptiveform-textinput {
   color: #666;
   margin-top: 20px;
-  font-size: 1rem;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: bold;
   position: relative
 }
 textarea.cmp-adaptiveform-textinput__widget {
@@ -3807,8 +3808,6 @@ textarea.cmp-adaptiveform-textinput__widget {
   width: calc(100% - 16px);
   height: 40px;
   color: #666;
-  border: 1px solid #666;
-  border-radius: .25rem;
   margin-top: 10px;
   padding-left: 10px;
   font-size: 1rem
@@ -3842,7 +3841,6 @@ textarea.cmp-adaptiveform-textinput__widget {
   right: 8px;
   width: 1rem;
   height: 1rem;
-  border-radius: 9px;
   background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE4LjEuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgogIHdpZHRoPSIyNHB4IiBoZWlnaHQ9IjI0cHgiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMjQgMjQiIHhtbDpzcGFjZT0icHJlc2VydmUiPgo8Zz4KCTxwYXRoIGZpbGw9IiNGRkZGRkYiIGQ9Ik0xNS45LDguOWMwLDEuMy0wLjUsMi0xLjMsMi43Yy0wLjgsMC43LTEuNSwxLjQtMS41LDEuOWMwLDAuNCwwLjEsMC43LDAuMywxYzAsMC4xLDAsMC4yLTAuMSwwLjJoLTIKCQljLTAuMSwwLTAuMiwwLTAuMy0wLjFjLTAuNC0wLjQtMC41LTEtMC41LTEuNGMwLTAuOSwwLjUtMS41LDEuNS0yLjRjMC42LTAuNiwxLTEsMS0xLjVjMC0wLjYtMC40LTEtMS42LTFjLTEuMSwwLTEuOSwwLjMtMi42LDAuNwoJCUM4LjksOSw4LjgsOC45LDguOCw4LjhWNi42YzAtMC4xLDAtMC4yLDAuMS0wLjJjMC41LTAuMiwxLjUtMC43LDMuMi0wLjdDMTQuNSw1LjcsMTUuOSw3LjEsMTUuOSw4Ljl6IE0xMC42LDE3LjYKCQljMC0xLDAuNy0xLjYsMS42LTEuNmMxLDAsMS42LDAuNiwxLjYsMS42YzAsMC45LTAuNiwxLjYtMS42LDEuNkMxMS4zLDE5LjIsMTAuNiwxOC42LDEwLjYsMTcuNnoiLz4KPC9nPgo8L3N2Zz4K) center center / cover no-repeat,#969696;
   cursor: pointer;
 }
@@ -3852,7 +3850,6 @@ textarea.cmp-adaptiveform-textinput__widget {
   font-weight: 400;
   color: #fff;
   background-color: #17252e;
-  border-radius: 5px;
   max-width: 200px;
   padding: 4px 8px;
   text-align: unset;
@@ -4105,7 +4102,6 @@ textarea.cmp-adaptiveform-textinput__widget {
   height: 40px;
   color: #666;
   border: 1px solid #666;
-  border-radius: .25rem;
   margin-top: 10px;
   padding-left: 10px;
   font-size: 1rem
@@ -4159,7 +4155,6 @@ textarea.cmp-adaptiveform-textinput__widget {
 .cmp-adaptiveform-range .cmp-adaptiveform-textinput__widget {
   appearance: none;
   height: 5px;
-  border-radius: 5px;
   border: none;
   outline: 0;
   padding: 0;
@@ -4335,8 +4330,6 @@ textarea.cmp-adaptiveform-textinput__widget {
   }
 
   .adaptiveform-container {
-      border: 1px solid #d5e4e1;
-      border-radius: 20px;
       margin: 0 auto 70px auto;
   }
 
@@ -4389,3 +4382,18 @@ textarea.cmp-adaptiveform-textinput__widget {
       padding-right: 75px;
   }
 }
+#how-can-we-help, #give-us--a-call {
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--airless-blue);
+  font-size: var(--heading-font-size-l);
+}
+
+.section.adaptiveform-container{
+  padding: 0;
+}
+
+div.cmp-adaptiveform-radiobutton__option {
+  padding: 5px 0;
+}
+
