@@ -46,4 +46,16 @@ export default async function decorate(block) {
   supportDiv.classList.add('support');
   contactDiv.classList.add('contact');
   flagDiv.classList.add('flag');
+
+  const el = document.querySelector('div.logo');
+  const parent = el.parentNode;
+  const sibling = el.previousSibling;
+  const frag = document.createDocumentFragment();
+  for (const child of document.querySelectorAll('div.logo,div.products,div.support,div.contact,div.flag,div.air-footer-compressed,div.copyright')) {
+    frag.appendChild(child);
+  }
+  const wrapper = document.createElement("div");
+  wrapper.className = 'footer-elements-wrapper';
+  wrapper.appendChild(frag);
+  parent.insertBefore(wrapper, sibling);
 }
