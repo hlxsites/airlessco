@@ -24,7 +24,7 @@ const imagesHtml = (placeholders, images) => {
     </figure>
     `;
 
-    const dom = createOptimizedPicture(image, placeholders.productImageAltLabel, false, [{ width: 100 }]);
+    const dom = createOptimizedPicture(image, placeholders.productImageAltLabel, false, [{ width: 200 }]);
     thumbnailHtml += `<a href="#" class="product-thumbnail ${i === 0 ? 'active' : ''}" data-figure="figure-${i}">${dom.outerHTML}</a>`;
   }
   return `
