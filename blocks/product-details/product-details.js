@@ -146,13 +146,6 @@ const fixModalNav = (modal) => {
   }
 };
 
-const fixBackgroundImg = (block) => {
-  block.querySelectorAll('figure').forEach((f) => {
-    const src = f.querySelector('img').currentSrc;
-    f.style.backgroundImage = `url(${src})`;
-  });
-};
-
 export default async function decorate(block) {
   const prefix = getMetadata('locale');
   const placeholders = await fetchPlaceholders(prefix);
