@@ -54,7 +54,7 @@ export default async function decorate(block) {
   for (const child of document.querySelectorAll('div.logo,div.products,div.support,div.contact,div.flag,div.air-footer-compressed,div.copyright')) {
     frag.appendChild(child);
   }
-  const wrapper = document.createElement("div");
+  const wrapper = document.createElement('div');
   wrapper.className = 'footer-elements-wrapper';
   wrapper.appendChild(frag);
   parent.insertBefore(wrapper, sibling);
