@@ -21,6 +21,13 @@ function buildPageHeader(main) {
   const h1 = main.querySelector('h1');
   if (h1) {
     h1.parentElement.classList.add('page-header-container');
+    Object.values(h1.childNodes).forEach((node) => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        const small = document.createElement('small');
+        small.appendChild(node);
+        h1.append(small);
+      }
+    });
   }
 }
 
@@ -130,10 +137,8 @@ export function createTag(tag, attributes, html) {
 export async function lookupProductData(productFamilyData, productName) {
   const resp = await fetch(productFamilyData);
   const json = await resp.json();
-  window.productFamilyData = json.data;
-  const filteredProduct = window.productFamilyData.filter((e) => e.Name === productName);
-  const result = filteredProduct;
-  return (result);
+  const filteredProduct = json.data.filter((e) => e.Name === productName);
+  return filteredProduct.length > 0 ? filteredProduct[0] : undefined;
 }
 
 /**

@@ -32,6 +32,7 @@
   --airless-blue: #0033ab;
   --airless-border: #ddd;
   --airless-link-dark: #333;
+  --airless-header-gray: #777;
 
   /* fonts */
   --body-font-family: eurostile, 'Titillium Web', sans-serif;
@@ -148,6 +149,15 @@ b, strong {
   border-left: 4px solid transparent;
 }
 
+body.product-details-template h1 strong,
+body.product-details-template h2 strong {
+  color: var(--airless-link-dark);
+}
+
+body.product-details-template h1 small {
+  display: none;
+}
+
 header {
   min-height: var(--nav-height);
 }
@@ -170,7 +180,7 @@ main .section.page-header-container {
 main .section.card-heading h3 {
   font-weight: 400;
   line-height: 1;
-  color: #777;
+  color: var(--airless-header-gray);
   font-size: calc(var(--heading-font-size-l) * .65);
 }
 
@@ -209,6 +219,8 @@ main .section.card-heading h3 strong {
   color: var(--airless-link-dark);
 }
 
+
+
 @media screen and (min-width: 768px) {
   :root[lang="cz"],
   :root[lang="de"],
@@ -232,6 +244,14 @@ main .section.card-heading h3 strong {
     margin: 10px auto;
     padding: 0 25px;
     width: 768px;
+  }
+
+  .product-details-template h1 small {
+    display: inline;
+    font-size: 65%;
+    font-weight: 400;
+    line-height: 1;
+    color: var(--airless-header-gray);
   }
 }
 
