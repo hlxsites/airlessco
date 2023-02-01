@@ -9,7 +9,7 @@
 .accessories-category > ul {
   display: flex;
   flex-wrap: wrap;
-  column-gap: 10px;
+  justify-content: space-around;
 }
 
 .accessories-category .accessory {
@@ -35,10 +35,6 @@
 }
 
 @media screen and (min-width: 768px) {
-  .accessories-category > ul {
-    column-gap: 25px;
-  }
-
   .accessories-category .accessory .accessory-card {
     margin-bottom: 20px;
   }
@@ -54,10 +50,6 @@
 }
 
 @media screen and (min-width: 1024px) {
-  .accessories-category > ul {
-    column-gap: 30px;
-  }
-
   .accessories-category .accessory-card .accessory-image img {
     height: 202px;
     width: auto;
@@ -69,7 +61,7 @@
     height: 272px;
     width: auto;
   }
-  
+
   .accessories-category .accessory-card .accessory-body {
     font-size: var(--body-font-size-xs)
   }
@@ -80,5 +72,4 @@
     height: 360px;
     width: auto;
   }
-
 }

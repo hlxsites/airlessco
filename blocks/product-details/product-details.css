@@ -17,8 +17,8 @@ main .product-details-container.section {
 .product-details .images-wrapper {
   margin-bottom: 29px;
   display: block;
-  max-width: 576px;
   width: 100%;
+  max-width: 576px;
 }
 
 .product-details .images-wrapper .figures {
@@ -36,11 +36,11 @@ main .product-details-container.section {
   display: block;
 }
 
-
 .product-details .images-wrapper figure img {
   display: block;
-  max-width: 370px;
-  width: 100%;
+  max-height: 576px;
+  height: 100vw;
+  width: auto;
 }
 
 .product-details .images-wrapper figure.zoom img {
@@ -266,6 +266,7 @@ main .product-details-container.section {
 
 @media screen and (min-width: 1024px) {
   .product-details .modal-carousel {
+    column-gap: 20px;
     margin: auto;
   }
 
@@ -284,6 +285,7 @@ main .product-details-container.section {
 
 @media screen and (min-width: 1280px) {
   .product-details {
+    column-gap: 30px;
     flex-wrap: nowrap;
   }
 
