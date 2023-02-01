@@ -6,7 +6,7 @@ const breakpoints = [
   { media: '(min-width: 1280px)', width: '1280' },
   { media: '(min-width: 1024px)', width: '1024' },
   { media: '(min-width: 768px)', width: '768' },
-  {   width: '400' },
+  { width: '400' },
 ];
 
 const imagesHtml = (placeholders, images) => {
