@@ -14,7 +14,7 @@ footer .air-footer {
 
 .footer-elements-wrapper {
   max-width: 500px;
-  margin: 0px auto;
+  margin: 0 auto;
   display: flex;
   flex-flow: row wrap;
 }
@@ -26,11 +26,6 @@ footer .air-footer {
 .air-footer .logo {
   padding-left: unset;
   display:flex;
-}
-
-.air-footer .built2perform > picture > img {
-  max-width: 100%;
-  height: auto;
 }
 
 .air-footer .products, .air-footer .support, .air-footer .contact{
@@ -51,6 +46,7 @@ footer .air-footer {
 .air-footer .built2perform > picture > img {
   max-width: 132%;
   margin: 0 -16%;
+  height: auto;
 }
 
 .air-footer .logo, .air-footer .flag {
