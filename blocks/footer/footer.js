@@ -50,9 +50,9 @@ export default async function decorate(block) {
   const parent = el.parentNode;
   const sibling = el.previousSibling;
   const frag = document.createDocumentFragment();
-  for (const child of document.querySelectorAll('div.logo,div.products,div.support,div.contact,div.flag,div.air-footer-compressed,div.copyright')) {
+  document.querySelectorAll('div.logo,div.products,div.support,div.contact,div.flag,div.air-footer-compressed,div.copyright').forEach((child) => {
     frag.appendChild(child);
-  }
+});
   const wrapper = document.createElement('div');
   wrapper.className = 'footer-elements-wrapper';
   wrapper.appendChild(frag);
