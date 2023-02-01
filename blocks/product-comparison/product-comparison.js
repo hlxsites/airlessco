@@ -121,7 +121,10 @@ export default async function decorate(block) {
 
   const promises = [];
   compareTo.forEach((name) => {
-    promises.push(lookupProductData(productFamilyData, name.trim()));
+    const trimmed = name.trim();
+    if (trimmed.length > 0) {
+      promises.push(lookupProductData(productFamilyData, trimmed));
+    }
   });
 
   const comparisonData = [];
