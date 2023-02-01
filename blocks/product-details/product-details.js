@@ -5,8 +5,7 @@ const breakpoints = [
   { media: '(min-width: 1600px)', width: '2000' },
   { media: '(min-width: 1280px)', width: '1280' },
   { media: '(min-width: 1024px)', width: '1024' },
-  { media: '(min-width: 768px)', width: '768' },
-  { width: '400' },
+  { width: '768' },
 ];
 
 const imagesHtml = (placeholders, images) => {
@@ -20,7 +19,7 @@ const imagesHtml = (placeholders, images) => {
       eager = true;
     }
     figureHtml += `
-    <figure class="zoom ${i === 0 ? 'active' : ''}" style="background-image : url(${image})" data-figure="figure-${i}">
+    <figure class="zoom ${i === 0 ? 'active' : ''}" data-figure="figure-${i}">
       ${createOptimizedPicture(image, placeholders.productImageAltLabel, eager, breakpoints).outerHTML}
     </figure>
     `;
@@ -147,6 +146,13 @@ const fixModalNav = (modal) => {
   }
 };
 
+const fixBackgroundImg = (block) => {
+  block.querySelectorAll('figure').forEach((f) => {
+    const src = f.querySelector('img').currentSrc;
+    f.style.backgroundImage = `url(${src})`;
+  });
+};
+
 export default async function decorate(block) {
   const prefix = getMetadata('locale');
   const placeholders = await fetchPlaceholders(prefix);
@@ -185,6 +191,9 @@ export default async function decorate(block) {
       event.preventDefault();
       fixModalNav(modal);
       modal.classList.add('open');
+    });
+    img.addEventListener('load', () => {
+      img.closest('figure').style.backgroundImage = `url(${img.currentSrc})`;
     });
   });
 
