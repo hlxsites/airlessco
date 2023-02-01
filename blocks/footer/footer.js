@@ -46,7 +46,6 @@ export default async function decorate(block) {
   supportDiv.classList.add('support');
   contactDiv.classList.add('contact');
   flagDiv.classList.add('flag');
-
   const el = document.querySelector('div.logo');
   const parent = el.parentNode;
   const sibling = el.previousSibling;
