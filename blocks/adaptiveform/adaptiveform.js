@@ -42,7 +42,6 @@ export class AdaptiveForm {
    * @param {import("afcore").State<import("afcore").FormJson>} state
    * */
   renderChildren = async (form, state) => {
-    console.time('Rendering childrens');
     const fields = state?.items;
     if (fields && fields.length > 0) {
       // eslint-disable-next-line no-restricted-syntax, guard-for-in
@@ -54,7 +53,6 @@ export class AdaptiveForm {
         form.append(element);
       }
     }
-    console.timeEnd('Rendering childrens');
   };
 }
 
@@ -62,21 +60,12 @@ export class AdaptiveForm {
   * @param {HTMLLinkElement} formLink
   * */
 const createFormContainer = async (placeholder, url) => {
-  console.log('Loading & Converting excel form to Crispr Form');
-
-  console.time('Json Transformation (including Get)');
   const transform = new ExcelToFormModel();
   const convertedData = await transform.getFormModel(url);
-  console.timeEnd('Json Transformation (including Get)');
-  console.log(convertedData);
-
-  console.time('Form Model Instance Creation');
   const adaptiveform = new AdaptiveForm(placeholder, convertedData?.formDef);
   window.adaptiveform = adaptiveform;
   const form = await adaptiveform.render();
   placeholder?.replaceWith(form);
-
-  console.timeEnd('Form Model Instance Creation');
   return adaptiveform;
 };
 
