@@ -1,4 +1,49 @@
-/* sytleslint-disable */
+/* styleslint-disable */
+p {
+  line-height: 1.4;
+}
+
+.default-content-wrapper > ul, .default-content-wrapper > ul > li {
+  display: flex;
+  flex-grow: 1;
+  font-size: var(--body-font-size-m);
+}
+
+.default-content-wrapper > ul > li > ul{
+  padding-left: 25px;
+}
+
+.section.adaptiveform-container{
+  padding: 0;
+}
+
+.cmp-adaptiveform-button__text {
+  padding:0 20px;
+  line-height: 4em;
+  text-transform: uppercase;
+}
+.cmp-adaptiveform-textinput__errorMessage, .cmp-adaptiveform-radiobutton__errorMessage {
+  color: var(--error-color);
+  font-size: var(--body-font-size-xs);
+  text-transform:none;
+  font-weight: normal;
+  padding: 5px 0;
+}
+
+.section:nth-child(4) {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+}
+
+.section:nth-child(5) {
+  border-top: 0;
+}
+
+h1 {
+  font-weight: 700;
+}
+
 .aem-Grid {
   width: 100%;
   display: block
@@ -25,12 +70,6 @@
 
 .aem-GridShowHidden>.aem-Grid>.aem-GridColumn,.aem-GridShowHidden>.cmp-container>.aem-Grid>.aem-GridColumn {
   display: block!important
-}
-
-html,body {
-  color: #666;
-  font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
-  font-size: 1rem
 }
 
 .aem-Grid.aem-Grid--1>.aem-GridColumn.aem-GridColumn--default--1 {
@@ -1705,6 +1744,18 @@ html,body {
 }
 
 @media (max-width: 768px) {
+  .default-content-wrapper > ul {
+    padding-bottom: 10px;
+  }
+  .default-content-wrapper > ul > li {
+    flex-direction: column;
+  }
+
+  .default-content-wrapper > ul > li > ul {
+    padding-left: 0;
+    line-height: 2em;
+  }
+
   .aem-Grid.aem-Grid--1>.aem-GridColumn.aem-GridColumn--phone--1 {
       float:left;
       clear: none;
@@ -3545,7 +3596,7 @@ div.cmp-adaptiveform-radiobutton__option {
 .cmp-adaptiveform-dropdown {
   color: #666;
   margin-top: 20px;
-  font-size: 14px;
+  font-size: var(--body-font-size-xs);
   position: relative;
   text-transform: uppercase;
   font-weight: bold;
@@ -3801,11 +3852,12 @@ div.cmp-adaptiveform-radiobutton__option {
 .cmp-adaptiveform-textinput {
   color: #666;
   margin-top: 20px;
-  font-size: 14px;
+  font-size: var(--body-font-size-xs);
   text-transform: uppercase;
   font-weight: bold;
   position: relative
 }
+
 textarea.cmp-adaptiveform-textinput__widget {
   height: 80px;
 }
@@ -4135,7 +4187,7 @@ textarea.cmp-adaptiveform-textinput__widget {
 .range-info {
   display: inline;
   color: #565c5d;
-  font-size: 14px;
+  font-size: var(--body-font-size-xs);
   line-height: 22px;
   font-family: "Open Sans Regular";
 }
@@ -4153,7 +4205,7 @@ textarea.cmp-adaptiveform-textinput__widget {
 
 .cmp-adaptiveform-range .cmp-adaptiveform-textinput__label {
     line-height: 24px;
-    font-size: 16px;
+    font-size: var(--body-font-size-s);
     margin-bottom: 10px;
     padding-right: 16px;
 }
@@ -4196,7 +4248,7 @@ textarea.cmp-adaptiveform-textinput__widget {
 .cmp-adaptiveform-range .cmp-adaptiveform-textinput__widget-max {
   top: 10px;
   position: relative;
-  font-size: 14px;
+  font-size: var(--body-font-size-xs);
   line-height: 22px;
 }
 
@@ -4262,23 +4314,6 @@ textarea.cmp-adaptiveform-textinput__widget {
   width: 100%;
 }
 
- .personalloan .cmp-adaptiveform-container label {
-  font-size: 16px;
-  line-height: 24px;
-  font-family: "Nedbank Sans Medium";
-  color: #17252e;
-  margin-bottom: 24px;
-}
-
-.personalloan .cmp-adaptiveform-radiobutton__option {
-  margin-bottom: 10px;
-}
-
-.personalloan .cmp-adaptiveform-radiobutton__option span {
-  font-weight: normal;
-  font-family: "Open Sans Regular";
-}
-
 .cmp-adaptiveform-hidden {
   display: none !important;
 }
@@ -4336,7 +4371,7 @@ textarea.cmp-adaptiveform-textinput__widget {
   }
 
   .adaptiveform-container {
-      margin: 0 auto 70px auto;
+      margin: 0 auto 10px auto;
   }
 
    .cmp-adaptiveform-container {
@@ -4396,23 +4431,6 @@ textarea.cmp-adaptiveform-textinput__widget {
   font-size: var(--heading-font-size-l);
 }
 
-.section.adaptiveform-container{
-  padding: 0;
-}
-
 div.submit {
   display: block;
-}
-
-.cmp-adaptiveform-button__text {
-  padding:0 20px;
-  line-height: 4em;
-  text-transform: uppercase;
-}
-.cmp-adaptiveform-textinput__errorMessage, .cmp-adaptiveform-radiobutton__errorMessage {
-  color: var(--error-color);
-  font-size: var(--body-font-size-xs);
-  text-transform:none;
-  font-weight: normal;
-  padding: 5px 0;
 }
