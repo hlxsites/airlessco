@@ -1,3 +1,4 @@
+/* sytleslint-disable */
 .aem-Grid {
   width: 100%;
   display: block
@@ -3379,17 +3380,22 @@ html,body {
 .cmp-adaptiveform-button {
   color: #fff;
   cursor: pointer;
-  background: #002b92;
+  background: var(--airless-blue);
   margin-top: 20px;
   padding: 0 1rem;
   font-size: 1rem;
   font-weight: bold;
-  position: relative
+  position: relative;
+  border: 1px transparent;
 }
 
 .cmp-adaptiveform-button:hover {
   color: #fff;
   background: #002478;
+}
+
+div.cmp-adaptiveform-radiobutton__option {
+  padding: 5px 0;
 }
 
 .cmp-adaptiveform-button[data-cmp-enabled]:not([data-cmp-enabled=true]) {
@@ -3426,7 +3432,7 @@ html,body {
 }
 
 .cmp-adaptiveform-checkbox__errormessage, .cmp-adaptiveform-checkboxgroup__errormessage {
-  color: #eb3c36;
+  color: var(--error-color);
   margin-top: 10px;
   font-size: .875rem
 }
@@ -3445,7 +3451,7 @@ html,body {
 
 .cmp-adaptiveform-checkbox[data-cmp-valid=false], .cmp-adaptiveform-checkboxgroup[data-cmp-valid=false] {
   background: #eb3c360d;
-  border: 0 solid #eb3c36;
+  border: 0 solid var(--error-color);
   border-left-width: 4px;
   padding: 5px
 }
@@ -3518,14 +3524,14 @@ html,body {
 }
 
 .cmp-adaptiveform-datepicker__errormessage {
-  color: #eb3c36;
+  color: var(--error-color);
   margin-top: 10px;
   font-size: .875rem
 }
 
 .cmp-adaptiveform-datepicker[data-cmp-valid=false] {
   background: #eb3c360d;
-  border: 0 solid #eb3c36;
+  border: 0 solid var(--error-color);
   border-left-width: 4px;
   padding: 5px
 }
@@ -3569,14 +3575,14 @@ html,body {
 }
 
 .cmp-adaptiveform-dropdown__errormessage {
-  color: #eb3c36;
+  color: var(--error-color);
   margin-top: 10px;
   font-size: .875rem
 }
 
 .cmp-adaptiveform-dropdown[data-cmp-valid=false] {
   background: #eb3c360d;
-  border: 0 solid #eb3c36;
+  border: 0 solid var(--error-color);
   border-left-width: 4px;
   padding: 5px
 }
@@ -3629,14 +3635,14 @@ html,body {
 }
 
 .cmp-adaptiveform-fileinput__errormessage {
-  color: #eb3c36;
+  color: var(--error-color);
   margin-top: 10px;
   font-size: .875rem
 }
 
 .cmp-adaptiveform-fileinput[data-cmp-valid=false] {
   background: #eb3c360d;
-  border: 0 solid #eb3c36;
+  border: 0 solid var(--error-color);
   border-left-width: 4px;
   padding: 5px
 }
@@ -3700,14 +3706,14 @@ html,body {
 }
 
 .cmp-adaptiveform-numberinput__errormessage {
-  color: #eb3c36;
+  color: var(--error-color);
   margin-top: 10px;
   font-size: .875rem
 }
 
 .cmp-adaptiveform-numberinput[data-cmp-valid=false] {
   background: #eb3c360d;
-  border: 0 solid #eb3c36;
+  border: 0 solid var(--error-color);
   border-left-width: 4px;
   padding: 5px
 }
@@ -3756,7 +3762,7 @@ html,body {
 }
 
 .cmp-adaptiveform-radiobutton__errormessage {
-  color: #eb3c36;
+  color: var(--error-color);
   margin-top: 10px;
   font-size: .875rem
 }
@@ -3775,7 +3781,7 @@ html,body {
 
 .cmp-adaptiveform-radiobutton[data-cmp-valid=false] {
   background: #eb3c360d;
-  border: 0 solid #eb3c36;
+  border: 0 solid var(--error-color);
   border-left-width: 4px;
   padding: 5px
 }
@@ -3909,14 +3915,14 @@ textarea.cmp-adaptiveform-textinput__widget {
 }
 
 .cmp-adaptiveform-textinput__errormessage {
-  color: #eb3c36;
+  color: var(--error-color);
   margin-top: 10px;
   font-size: .875rem
 }
 
 .cmp-adaptiveform-textinput[data-cmp-valid=false] {
   background: #eb3c360d;
-  border: 0 solid #eb3c36;
+  border: 0 solid var(--error-color);
   border-left-width: 4px;
   padding: 5px
 }
@@ -4121,7 +4127,7 @@ textarea.cmp-adaptiveform-textinput__widget {
 }
 
 .cmp-adaptiveform-sliderinput__errormessage {
-  color: #eb3c36;
+  color: var(--error-color);
   margin-top: 10px;
   font-size: .875rem
 }
@@ -4382,6 +4388,7 @@ textarea.cmp-adaptiveform-textinput__widget {
       padding-right: 75px;
   }
 }
+
 #how-can-we-help, #give-us--a-call {
   font-weight: 700;
   line-height: 1.1;
@@ -4393,7 +4400,19 @@ textarea.cmp-adaptiveform-textinput__widget {
   padding: 0;
 }
 
-div.cmp-adaptiveform-radiobutton__option {
-  padding: 5px 0;
+div.submit {
+  display: block;
 }
 
+.cmp-adaptiveform-button__text {
+  padding:0 20px;
+  line-height: 4em;
+  text-transform: uppercase;
+}
+.cmp-adaptiveform-textinput__errorMessage, .cmp-adaptiveform-radiobutton__errorMessage {
+  color: var(--error-color);
+  font-size: var(--body-font-size-xs);
+  text-transform:none;
+  font-weight: normal;
+  padding: 5px 0;
+}
