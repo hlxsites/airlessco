@@ -26,11 +26,13 @@
   --link-hover-color: #136ff6;
   --background-color: #fff;
   --overlay-background-color: #eee;
+  --footer-background-color: #e6e6e6;
   --highlight-background-color: #ccc;
   --text-color: #000;
   --airless-blue: #0033ab;
   --airless-border: #ddd;
   --airless-link-dark: #333;
+  --airless-header-gray: #777;
 
   /* fonts */
   --body-font-family: eurostile, 'Titillium Web', sans-serif;
@@ -147,6 +149,15 @@ b, strong {
   border-left: 4px solid transparent;
 }
 
+body.product-details-template h1 strong,
+body.product-details-template h2 strong {
+  color: var(--airless-link-dark);
+}
+
+body.product-details-template h1 small {
+  display: none;
+}
+
 header {
   min-height: var(--nav-height);
 }
@@ -162,14 +173,14 @@ main .section {
   margin-top: 20px;
 }
 
-main .section.page-header-container {
+main .section.page-title-container {
   margin-top: 30px;
 }
 
 main .section.card-heading h3 {
   font-weight: 400;
   line-height: 1;
-  color: #777;
+  color: var(--airless-header-gray);
   font-size: calc(var(--heading-font-size-l) * .65);
 }
 
@@ -208,6 +219,18 @@ main .section.card-heading h3 strong {
   color: var(--airless-link-dark);
 }
 
+main a.resource-link[href*=".findManual"]::before,
+.resources > .data > a[href*=".findManual"]::before {
+  content: "\f1c1  ";
+  font-family: fontawesome, sans-serif;
+}
+
+main a.resource-link[href$=".pdf"]::before, 
+.resources > .data > a[href$=".pdf"]::before {
+  content: "\f1c1  ";
+  font-family: fontawesome, sans-serif;
+}
+
 @media screen and (min-width: 768px) {
   :root[lang="cz"],
   :root[lang="de"],
@@ -226,12 +249,20 @@ main .section.card-heading h3 strong {
     --nav-height: 179px;
   }
 
+  body.product-details-template h1 small {
+    display: inline;
+    font-size: 65%;
+    font-weight: 400;
+    line-height: 1;
+    color: var(--airless-header-gray);
+  }
+
   main {
     box-sizing: border-box;
     margin: 10px auto;
     padding: 0 25px;
     width: 768px;
-  }
+  } 
 }
 
 @media screen and (min-width: 1024px) {
