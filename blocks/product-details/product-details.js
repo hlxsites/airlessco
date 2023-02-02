@@ -92,7 +92,6 @@ const detailsHtml = (placeholders, productInfo) => {
     `;
     const links = fieldDiv.querySelectorAll('a');
     Object.values(links).forEach((a) => {
-      a.prepend(document.createElement('i'));
       a.setAttribute('target', 'new');
     });
     details.appendChild(fieldDiv);
