@@ -5,8 +5,9 @@ import { lookupProductData } from '../../scripts/scripts.js';
 const buildSpecData = (specifications) => {
   const map = new Map();
   specifications.split(/\r?\n|\r|\n/g).forEach((line) => {
-    const [key, value] = line.split(':');
-    const fixed = value.includes('|') ? value.trim().replaceAll('|', '<br/>') : value.trim();
+    const key = line.substring(0, line.indexOf(':')).trim();
+    const value = line.substring(line.indexOf(':') + 1).trim();
+    const fixed = value.includes('|') ? value.replaceAll('|', '<br/>') : value;
     map.set(key.trim(), fixed);
   });
   return map;

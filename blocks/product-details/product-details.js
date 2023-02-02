@@ -27,14 +27,15 @@ const imagesHtml = (placeholders, images) => {
     const dom = createOptimizedPicture(image, placeholders.productImageAltLabel, false, [{ width: 200 }]);
     thumbnailHtml += `<a href="#" class="product-thumbnail ${i === 0 ? 'active' : ''}" data-figure="figure-${i}">${dom.outerHTML}</a>`;
   }
+
+  const thumbnails = images.length > 1 ? `<div class="thumbnails">${thumbnailHtml}</div>` : '';
+
   return `
     <div class="images-wrapper">
       <div class="figures">
         ${figureHtml}
       </div>
-      <div class="thumbnails">
-        ${thumbnailHtml}
-      </div>  
+      ${thumbnails}
     </div>
   `;
 };
