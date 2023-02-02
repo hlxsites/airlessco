@@ -77,32 +77,36 @@ h1 {
   background: #002478;
 }
 
-div.cmp-adaptiveform-radiobutton__option {
-  padding: 5px 0;
+
+.cmp-adaptiveform-radiobutton__option__widget {
+  margin-top: 10px;
+  margin-right: 10px;
 }
 
 .cmp-adaptiveform-button[data-cmp-enabled]:not([data-cmp-enabled=true]) {
   color: #e6e6e6;
-  background: #888
+  background: #888;
 }
 
 .cmp-adaptiveform-checkbox, .cmp-adaptiveform-checkboxgroup {
   color: #666;
   margin-top: 20px;
   font-size: 1rem;
-  position: relative
+  position: relative;
 }
 
 .cmp-adaptiveform-checkbox__widget, .cmp-adaptiveform-checkboxgroup__widget {
-  margin-top: 10px
+  margin-top: 10px;
+  margin-right: 10px;
 }
 
 .cmp-adaptiveform-checkbox__widget__label, .cmp-adaptiveform-checkboxgroup__widget__label {
-  display: inline
+  display: inline;
 }
 
 .cmp-adaptiveform-checkbox__longdescription, .cmp-adaptiveform-checkboxgroup__longdescription {
-  font-size: .875rem
+  font-size: .875rem;
+  font-weight: normal;
 }
 
 .cmp-adaptiveform-checkbox__shortdescription, .cmp-adaptiveform-checkboxgroup__shortdescription {
@@ -221,9 +225,8 @@ div.cmp-adaptiveform-radiobutton__option {
 .cmp-adaptiveform-dropdown {
   color: #666;
   margin-top: 20px;
-  font-size: var(--body-font-size-xs);
+  font-size: var(--body-font-size-s);
   position: relative;
-  text-transform: uppercase;
   font-weight: bold;
 }
 
@@ -403,7 +406,8 @@ div.cmp-adaptiveform-radiobutton__option {
 .cmp-container {
   color: #666;
   margin-top: 20px;
-  font-size: 1rem
+  font-size: var(--body-font-size-s);
+  font-weight: bold;
 }
 
 .cmp-container__label {
@@ -477,8 +481,7 @@ div.cmp-adaptiveform-radiobutton__option {
 .cmp-adaptiveform-textinput {
   color: #666;
   margin-top: 20px;
-  font-size: var(--body-font-size-xs);
-  text-transform: uppercase;
+  font-size: var(--body-font-size-s);
   font-weight: bold;
   position: relative
 }
@@ -511,6 +514,7 @@ textarea.cmp-adaptiveform-textinput__widget {
 
 .cmp-adaptiveform__longdescription {
   font-size: .875rem;
+  padding-top: 5px;
 }
 
 .cmp-adaptiveform__questionmark {
