@@ -67,7 +67,7 @@ const detailsHtml = (placeholders, productInfo) => {
     fieldDiv.classList.add('details-item');
     const ul = document.createElement('ul');
 
-    productInfo[field].split(/[\n,]/g).forEach((line) => {
+    productInfo[field].split(/\r?\n|\r|\n/g).forEach((line) => {
       const li = document.createElement('li');
       li.append(line);
       ul.appendChild(li);
@@ -92,7 +92,6 @@ const detailsHtml = (placeholders, productInfo) => {
     `;
     const links = fieldDiv.querySelectorAll('a');
     Object.values(links).forEach((a) => {
-      a.prepend(document.createElement('i'));
       a.setAttribute('target', 'new');
     });
     details.appendChild(fieldDiv);
