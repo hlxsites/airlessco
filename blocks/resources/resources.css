@@ -37,22 +37,22 @@ table.resources > thead > tr > th:nth-child(3){
     width :10%;
 }
 
-table.resources .resource-data:not(:first-child) .resource-link[href$=".pdf"]:before {
+table.resources .resource-data:not(:first-child) .resource-link[href$=".pdf"]::before {
     content: "";
 }
 
-table.resources .resource-data:not(:first-child) .resource-link[href*=".findManual"]:before {
+table.resources .resource-data:not(:first-child) .resource-link[href*=".findManual"]::before {
     content: "";
 }
 
-table.resources .resource-data:first-child .resource-link[href$=".zip"]:before {
+table.resources .resource-data:first-child .resource-link[href$=".zip"]::before {
     content: "\f1c6  ";
-    font-family: fontawesome;
+    font-family: fontawesome, sans-serif;
 }
 
-table.resources .resource-data:first-child .resource-link[href$=".jpg"]:before {
+table.resources .resource-data:first-child .resource-link[href$=".jpg"]::before {
     content: "\f1c5  ";
-    font-family: fontawesome;
+    font-family: fontawesome, sans-serif;
 }
 
 @media only screen and  (max-width: 992px){

@@ -6,4 +6,8 @@ node_modules/*
 helix-importer-ui
 styles/airlessco01fprod.css
 styles/bootstrap.css
+<<<<<<< HEAD
 .DS_Store
+=======
+.DS_Store
+>>>>>>> 26e2265 (update to resolve lint issues)
