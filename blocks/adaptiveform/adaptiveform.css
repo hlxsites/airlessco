@@ -23,7 +23,7 @@ p {
   text-transform: uppercase;
 }
 
-.cmp-adaptiveform-textinput__errorMessage, .cmp-adaptiveform-radiobutton__errorMessage {
+.cmp-adaptiveform-textinput__errorMessage, .cmp-adaptiveform-radiobutton__errorMessage, .cmp-adaptiveform-dropdown__errorMessage {
   color: var(--error-color);
   font-size: var(--body-font-size-xs);
   text-transform:none;
