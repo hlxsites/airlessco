@@ -89,7 +89,11 @@ h4, h5, h6 {
 }
 
 h1 {
-  font-size: var(--heading-font-size-xxl)
+  font-size: var(--heading-font-size-xxl);
+}
+
+h1 b, h1 strong {
+  text-transform: uppercase;
 }
 
 h2 {
