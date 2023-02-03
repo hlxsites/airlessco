@@ -16,7 +16,7 @@ export default async function decorate(block) {
   pathSegments.forEach((page) => {
     segments += `${page}/`;
     const label = `${page}NavLabel`;
-    const anchor = createTag('a', { href: `${locale}${segments}`, }, placeholders[label] || label);
+    const anchor = createTag('a', { href: `${locale}${segments}` }, placeholders[label] || label);
     const crumb = createTag('li', { class: 'crumb' }, anchor);
     list.append(crumb);
   });
