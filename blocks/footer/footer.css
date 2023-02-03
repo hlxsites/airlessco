@@ -41,6 +41,7 @@ footer .air-footer {
 
 .copyright {
   font-size: var(--body-font-size-xs);
+  line-height: 1.5;
 }
 
 .air-footer .built2perform > picture > img {
@@ -138,6 +139,7 @@ footer .air-footer {
   .air-footer .products, .air-footer .support {
     display: block;
     flex-grow: 1;
+    padding: 0 5px;
   }
 
   .air-footer .contact {
