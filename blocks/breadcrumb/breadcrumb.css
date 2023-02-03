@@ -20,11 +20,6 @@ main .breadcrumb-container.section {
   font-size: 16px;
 }
 
-a {
-  color: #337ab7;
-  text-decoration: none;
-}
-
 .breadcrumb > li + li::before {
   padding: 0 5px;
   color: #ccc;
@@ -33,7 +28,7 @@ a {
 
 
 .breadcrumb li:last-of-type > a:last-of-type {
-  color: #777;
+  color: var(--airless-header-gray);
   pointer-events: none;
   cursor: default;
   text-decoration: none;
