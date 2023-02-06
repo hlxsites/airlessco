@@ -51,6 +51,8 @@ export default async function decorate(block) {
     if (n === 0) {
       const firstRow = block.querySelectorAll('.accessories-details > div > div');
       firstRow.forEach((element) => {
+        if(element.innerHTML !== '')
+          element.classList.add('row-span');
         element.classList.add('accessories-details-table-heading');
         element.setAttribute('role', 'columnheader');
       });
