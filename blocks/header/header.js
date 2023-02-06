@@ -16,6 +16,7 @@ function buildLangMenu(langWrapper, locale) {
 
   linkLabel.addEventListener('click', (e) => {
     e.preventDefault();
+    e.stopPropagation();
     const el = e.currentTarget;
     if (el.getAttribute('aria-expanded') === 'false') {
       el.setAttribute('aria-expanded', 'true');
@@ -53,7 +54,6 @@ function buildLangMenu(langWrapper, locale) {
   });
 
   langSelect.replaceChild(linkLabel, textLabel);
-
   return langWrapper;
 }
 
@@ -93,6 +93,7 @@ async function buildMobileButton(locale) {
 
   button.addEventListener('click', (e) => {
     e.preventDefault();
+    e.stopPropagation();
     const el = e.currentTarget;
     if (el.getAttribute('aria-expanded') === 'false') {
       el.setAttribute('aria-expanded', 'true');
@@ -140,5 +141,14 @@ export default async function decorate(block) {
 
     decorateIcons(nav);
     block.append(nav);
+
+    document.querySelector('body').addEventListener('click', () => {
+      document.querySelectorAll('header .open').forEach((open) => {
+        open.classList.remove('open');
+      });
+      document.querySelectorAll('header [aria-expanded=true]').forEach((expanded) => {
+        expanded.setAttribute('aria-expanded', 'false');
+      });
+    });
   }
 }
