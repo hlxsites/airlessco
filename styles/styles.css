@@ -57,6 +57,11 @@
   --nav-height: 74px;
 }
 
+b, strong {
+  font-weight: 700;
+}
+
+
 /** Franklin Required **/
 body {
   display: none;
@@ -89,7 +94,11 @@ h4, h5, h6 {
 }
 
 h1 {
-  font-size: var(--heading-font-size-xxl)
+  font-size: var(--heading-font-size-xxl);
+}
+
+h1 b, h1 strong {
+  text-transform: uppercase;
 }
 
 h2 {
@@ -121,10 +130,6 @@ a {
 a:hover, a:focus {
   color: var(--link-hover-color);
   text-decoration: underline;
-}
-
-b, strong {
-  font-weight: 700;
 }
 
 .sr-only {

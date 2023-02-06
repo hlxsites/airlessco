@@ -111,10 +111,11 @@ async function loadEager(doc) {
 /**
  * Helper function to create DOM elements
  * @param {string} tag DOM element to be created
- * @param {array} attributes attributes to be added
+ * @param {Object} attributes attributes to be added
+ * @param {HTMLElement|SVGElement|string} html HTML or SVG to append to/after new element
  */
 
-export function createTag(tag, attributes, html) {
+export function createTag(tag, attributes, html = undefined) {
   const el = document.createElement(tag);
   if (html) {
     if (html instanceof HTMLElement || html instanceof SVGElement) {
