@@ -50,11 +50,14 @@ export default async function decorate(block) {
   rows.forEach((row) => {
     if (n === 0) {
       const firstRow = block.querySelectorAll('.accessories-details > div > div');
-      firstRow.forEach((element) => {
-        if(element.innerHTML !== '')
-          element.classList.add('row-span');
-        element.classList.add('accessories-details-table-heading');
-        element.setAttribute('role', 'columnheader');
+      let previousCell = '';
+      firstRow.forEach((cell) => {
+        if(cell.innerHTML === '') {
+          previousCell.classList.add('row-span');
+        }
+        cell.classList.add('accessories-details-table-heading');
+        cell.setAttribute('role', 'columnheader');
+        previousCell = cell
       });
       row.setAttribute('role', 'row');
       const tableHeadings = createTag('div', { role: 'rowgroup' });
@@ -80,10 +83,10 @@ export default async function decorate(block) {
 
         previousCell = cell;
 
-        const href = cell.querySelector('.button-container>a');
-        if (href) {
+        const anchor = cell.querySelector('.button-container>a');
+        if (anchor && anchor.href.includes('size-chart.json')) {
           cell.removeAttribute('class');
-          cell.replaceChildren(await getSizeChart(href));
+          cell.replaceChildren(await getSizeChart(anchor));
           cell.parentElement.classList.add('size-chart');
         }
       });
