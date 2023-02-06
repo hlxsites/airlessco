@@ -1,32 +1,33 @@
+import { fetchPlaceholders, getMetadata } from '../../scripts/lib-franklin.js';
 import { createTag } from '../../scripts/scripts.js';
 
-export default function decorate(block) {
-  let pathSegments = window.location.pathname.split('/');
+export default async function decorate(block) {
+  const locale = getMetadata('locale');
+  const placeholders = await fetchPlaceholders(locale);
 
-  // remove the last element if there was a / at the end of the pathname
-  pathSegments = pathSegments[pathSegments.length - 1] === '' ? pathSegments.slice(0, pathSegments.length - 1) : pathSegments;
+  const regex = new RegExp(`^${locale}/(.*?)/?$`);
 
-  if (pathSegments.length < 4) {
-    return;
+  const pathSegments = window.location.pathname.replace(regex, '$1').split('/');
+  pathSegments.pop(); // Current Breadcrumb value comes from page title.
+
+  const list = createTag('ol', { class: 'breadcrumb' });
+  let segments = '/';
+
+  pathSegments.forEach((page) => {
+    segments += `${page}/`;
+    const label = `${page}NavLabel`;
+    const anchor = createTag('a', { href: `${locale}${segments}` }, placeholders[label] || label);
+    const crumb = createTag('li', { class: 'crumb' }, anchor);
+    list.append(crumb);
+  });
+
+  let navTitle = getMetadata('nav-title');
+  if (!navTitle) {
+    const header = document.querySelector('h1');
+    const strong = header.querySelector('strong');
+    navTitle = (strong) ? strong.innerText : header.innerText;
   }
-
-  const locale = pathSegments.slice(0, 3).join('/');
-  const breadcrumbOl = createTag('ol', { class: 'breadcrumb' });
-
-  if (pathSegments.length > 4) {
-    for (let index = 3; index < (pathSegments.length); index += 1) {
-      const breadcrumbLi = createTag('li', { class: 'item' });
-      const breadcrumbA = createTag('a', { class: 'anchor' });
-      breadcrumbA.setAttribute('href', `${locale}/${pathSegments[index]}/`);
-
-      // Capitalise the first letter for breadcrumb
-      const anchorText = pathSegments[index].charAt(0).toUpperCase() + pathSegments[index].slice(1);
-      breadcrumbA.innerText = anchorText;
-      breadcrumbLi.append(breadcrumbA);
-      breadcrumbOl.append(breadcrumbLi);
-    }
-
-    block.innerHTML = '';
-    block.append(breadcrumbOl);
-  }
+  const crumb = createTag('li', { class: 'crumb' }, navTitle);
+  list.append(crumb);
+  block.innerHTML = list.outerHTML;
 }

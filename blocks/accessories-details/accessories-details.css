@@ -121,7 +121,7 @@
     .accessories-details .accessories .accessory .accessory-details .accessory-name p {
         font-weight: 400;
         line-height: 1;
-        color: #777;
+        color: var(--airless-header-gray);
         padding: 5px;
         font-size: calc(var(--heading-font-size-l) * .65);
         display: inline;

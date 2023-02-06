@@ -114,6 +114,11 @@ nav .navbar.open {
   font-size: var(--body-font-size-xs);
 }
 
+.navbar .nav-languages .language-select .language-menu li a:hover,
+.navbar .nav-languages .language-select .language-menu li a:focus {
+  background-color: var(--overlay-background-color)
+}
+
 .navbar .nav-languages .language-select .language-menu li.active a {
   text-decoration: none;
   background-color: #337ab7;
