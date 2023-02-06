@@ -2,6 +2,7 @@ import ExcelToFormModel from './libs/afb-transform.js';
 import { createFormInstance, registerFunctions } from './libs/afb-runtime.js';
 import * as builder from './libs/afb-builder.js';
 import { customFunctions } from './customization/custom-functions.js';
+import { Constants } from './libs/constants.js';
 
 export class AdaptiveForm {
   model;
@@ -17,8 +18,20 @@ export class AdaptiveForm {
   constructor(element, formJson) {
     this.element = element;
     this.model = createFormInstance(formJson, undefined);
+    this.model?.subscribe(this.submitSucess, Constants.SUBMIT_SUCCESS);
+    this.model?.subscribe(this.submitFailure, Constants.SUBMIT_FAILURE);
     registerFunctions(customFunctions);
   }
+
+  submitSucess = async () => {
+    const redirect = this.metadata?.redirect || 'thankyou';
+    window.open(redirect, '_self');
+  };
+
+  static submitFailure = async (args) => {
+    console.log('Arg', args);
+    alert('Submit failed');
+  };
 
   /**
    * @param {string} id

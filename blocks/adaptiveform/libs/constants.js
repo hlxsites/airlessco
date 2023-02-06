@@ -1,5 +1,8 @@
 // eslint-disable-next-line import/prefer-default-export
 export class Constants {
+
+  static SUBMIT_SUCCESS = "submitSuccess";
+  static SUBMIT_FAILURE = "submitFailure";
   static NS = 'cmp';
 
   static ERROR_MESSAGE = 'errorMessage';
