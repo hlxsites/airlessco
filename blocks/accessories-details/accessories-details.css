@@ -1,155 +1,51 @@
-
-h2#more-accessories {
-    color: var(--airless-link-dark);
-    font-weight: 700;
+main .accessories-details-container {
+    display: flex;
+    flex-direction: row;
 }
 
-.accessories-details {
-    padding-top: 20px;
-}
-
-.accessories-details .accessories .accessory {
-    display: block;
-    padding-bottom: 40px;
-}
-
-.accessories-details .accessories .accessory .accessory-details {
+main .accessories-details {
+    display: table;
     width: 100%;
-    border-top: 8px solid #eee;
-    padding-bottom: 40px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    border-spacing: 5px;
+}
+
+main .accessories-details>div>div[role="row"] {
+    display: table-row;
+    width: 100%;
+    clear: both;
+}
+
+main .accessories-details>div>div[role="row"]>div {
+    float: left;
+    display: table-cell;
+    width: 50%;
+}
+
+main .accessories-details>div>div[role="row"] > .row-span {
+    width: 100%;
+}
+
+main .accessories-details>div>div[role="row"]> .size-chart {
+    float: unset;
+    display: flex;
+    flex-direction: column;
+}
+
+main .accessories-details>div>div[role="row"].size-chart > div {
+    width: 100%;
+}
+
+main table.accessories {
+    width: 100%;
+}
+
+main table.accessories :is(th, td) {
+    vertical-align: bottom;
+    border: 1px solid #ddd;
+    border-bottom: 2px solid #ddd;
     line-height: 1.4286;
 }
 
-.accessories-details .accessories .accessory .accessory-img {
-    width: 100%;
-}
-
-.accessories-details .accessories .accessory .accessory-details .key-value {
-    display: block;
-}
-
-.accessories-details .accessories .accessory .accessory-details .key-value  strong {
-    width: 100%;
-    font-weight: 700;
-    font-size: var(--body-font-size-s);
-    font-family: var(--body-font-family);
-}
-
-.accessories-details .accessories .accessory .accessory-details .key-value  .value {
-    width: 100%;
-    font-size: var(--body-font-size-s);
-    padding-bottom: 15px;
-    font-family: var(--body-font-family);
-}
-
-.accessories-details .accessories .accessory .accessory-details .accessory-name {
-    font-weight: 700;
-    font-size: var(--heading-font-size-l);
-    padding-right: 15px;
-    padding-bottom: 15px;
-    padding-top: 15px;
-    font-family: var(--body-font-family);
-}
-
-.accessories-details .accessories .accessory .accessory-details .accessory-desc {
-    font-size: var(--body-font-size-s);
-    padding-right: 15px;
-    padding-bottom: 15px;
-    font-family: var(--body-font-family);
-}
-
-.accessories-details .accessories .accessory .accessory-img img {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
-    min-height: 300px;
-}
-
-h1#accessories-title small, h1#accessories-title strong {
-    color: var(--airless-blue);
-    font-weight: 700;
-    font-size: var(--heading-font-size-xxl);
-}
-
-@media screen and (min-width: 768px) {
-    .accessories-details {
-        padding-top: 20px;
-    }
-
-    .accessories-details .accessories .accessory {
-        display: flex;
-        padding-bottom: 40px;
-    }
-
-    .accessories-details .accessories .accessory .accessory-details {
-        width: 75%;
-        border-top: 8px solid #eee;
-        padding-bottom: 40px;
-        margin-top: 20px;
-        margin-bottom: 20px;
-        line-height: 1.4286;
-
-    }
-
-    .accessories-details .accessories .accessory .accessory-img {
-        width: 25%;
-        padding-top: 20px;
-    }
-
-    .accessories-details .accessories .accessory .accessory-details .key-value {
-        display: flex;
-    }
-
-    .accessories-details .accessories .accessory .accessory-details .key-value strong {
-        display: 1;
-        width: 33%;
-        font-weight: 700;
-        font-size: var(--body-font-size-s);
-        padding-left: 15px;
-        padding-bottom: 15px;
-        font-family: var(--body-font-family);
-    }
-
-    .accessories-details .accessories .accessory .accessory-details .key-value .value {
-        display: 1;
-        width: 67%;
-        font-size: var(--body-font-size-s);
-        padding-bottom: 15px;
-        font-family: var(--body-font-family);
-    }
-
-    .accessories-details .accessories .accessory .accessory-details .accessory-name {
-        font-weight: 700;
-        font-size: var(--heading-font-size-l);
-        padding: 15px;
-        font-family: var(--body-font-family);
-    }
-
-    .accessories-details .accessories .accessory .accessory-details .accessory-name p {
-        font-weight: 400;
-        line-height: 1;
-        color: var(--airless-header-gray);
-        padding: 5px;
-        font-size: calc(var(--heading-font-size-l) * .65);
-        display: inline;
-    }
-
-    .accessories-details .accessories .accessory .accessory-details .accessory-desc {
-        font-size: var(--body-font-size-s);
-        padding-left: 15px;
-        padding-right: 15px;
-        padding-bottom: 15px;
-        font-family: var(--body-font-family);
-    }
-
-    .accessories-details .accessories .accessory .accessory-img .accessory-img img {
-        display: block;
-        max-width: 100%;
-        height: auto;
-
-    }
+main .table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
 }

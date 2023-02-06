@@ -1,64 +1,95 @@
 import { createTag } from '../../scripts/scripts.js';
-import { fetchPlaceholders, getMetadata } from '../../scripts/lib-franklin.js';
 
-async function fetchPlaceholderText() {
-  const locale = getMetadata('locale');
-  const placeholders = await fetchPlaceholders(locale);
-  return placeholders;
+async function getSizeChart(link) {
+  const sizeChartURL = new URL(link.href);
+  const resp = await fetch(sizeChartURL);
+  const json = await resp.json();
+
+  const table = createTag('table', { class: 'accessories' });
+  table.setAttribute('id', 'accessories-table');
+  table.classList.add('sortable-theme-bootstrap', 'table-striped');
+  table.setAttribute('data-sortable', '');
+
+  const THead = createTag('thead', { class: 'accessories-thead' });
+  const THeadTR = createTag('tr', { class: 'accessories--thead-tr' });
+
+  Object.keys(json.data[0]).forEach((item) => {
+    const THeadTH = createTag('th', { class: 'accessories--thead-th' });
+    const strong = createTag('strong');
+    THeadTH.append(strong);
+    strong.innerText = item;
+    THeadTR.append(THeadTH);
+  });
+
+  THead.append(THeadTR);
+  const TBody = createTag('tbody', { class: 'accessories-tbody' });
+  table.append(THead, TBody);
+  json.data.forEach((items) => {
+    const TBodyTR = createTag('tr', { class: 'accessories--thead-tr' });
+    Object.values(items).forEach((item) => {
+      const TBodyTD = createTag('td', { class: 'accessory-data' });
+      TBodyTD.append(item);
+      TBodyTR.append(TBodyTD);
+    });
+    TBody.append(TBodyTR);
+  });
+
+  return table;
 }
 
 export default async function decorate(block) {
-  const accessoriesSheetURL = new URL(block.querySelector('a').href);
-  block.innerHTML = '';
-  const resp = await fetch(accessoriesSheetURL);
-  const json = await resp.json();
-  const accessoriesJsonData = json.data;
-  const accessories = createTag('div', { class: 'accessories' });
-  const placeHolder = await fetchPlaceholderText();
-  accessoriesJsonData.forEach((accessory) => {
-    const accessoryDiv = createTag('div', { class: 'accessory' });
-    const accessoryDetails = createTag('div', { class: 'accessory-details' });
-    const accessoryImg = createTag('div', { class: 'accessory-img' });
-    Object.keys(accessory).forEach((key) => {
-      if (key === 'Image') {
-        if (accessory[key] !== 'NA') {
-          const image = createTag('img');
-          image.setAttribute('src', accessory[key].trim());
-          accessoryImg.append(image);
+  const rows = block.querySelectorAll('.accessories-details > div');
+  block.setAttribute('role', 'table');
+  block.setAttribute('aria-label', 'Semantic Elements');
+  block.setAttribute('aria-describedby', 'semantic_elements_table_desc');
+  block.setAttribute('aria-rowcount', rows.length);
+
+  const bodyRowGroup = createTag('div', { role: 'rowgroup' });
+
+  let n = 0;
+  rows.forEach((row) => {
+    if (n === 0) {
+      const firstRow = block.querySelectorAll('.accessories-details > div > div');
+      firstRow.forEach((element) => {
+        element.classList.add('accessories-details-table-heading');
+        element.setAttribute('role', 'columnheader');
+      });
+      row.setAttribute('role', 'row');
+      const tableHeadings = createTag('div', { role: 'rowgroup' });
+      tableHeadings.append(row);
+      block.insertBefore(tableHeadings, block.firstChild);
+      n += 1;
+    } else {
+      row.setAttribute('role', 'row');
+      const cells = row.querySelectorAll('div');
+
+      let previousCell = '';
+      cells.forEach(async (cell) => {
+        cell.setAttribute('role', 'cell');
+        const links = cell.querySelectorAll('a');
+
+        links.forEach((link) => {
+          link.classList.add('resource-link');
+        });
+
+        if (cell.innerHTML === '') {
+          previousCell.classList.add('row-span');
         }
-        accessoryDiv.append(accessoryImg);
-      } else if (accessory[key] !== 'NA') {
-        if (key === 'NAME') {
-          const accessoryName = createTag('div', { class: 'accessory-name' });
-          accessoryName.innerHTML = accessory[key];
-          accessoryDetails.insertBefore(accessoryName, accessoryDetails.firstChild);
-        } else if (key === 'Subtext') {
-          const subtext = `<p>${accessory[key]} </p>`;
-          accessoryDetails.firstChild.innerHTML = accessoryDetails.firstChild.innerHTML.concat(subtext);
-        } else if (key === 'Description') {
-          const accessoryDesc = createTag('div', { class: 'accessory-desc' });
-          accessoryDesc.innerHTML = accessory[key];
-          accessoryDetails.append(accessoryDesc);
-        } else {
-          const keyvalue = createTag('div', { class: 'key-value' });
-          keyvalue.innerHTML = `<strong>${placeHolder[key.toLowerCase()].concat(':')}</strong>`;
-          const value = createTag('div', { class: 'value' });
-          if (key === 'Resources') {
-            value.innerHTML = `<a href = ${accessory[key].split('=')[1].trim()}>${accessory[key].split('=')[0]}</a>`;
-          } else if (accessory[key].includes('\n')) {
-            value.innerHTML = accessory[key].replaceAll('\n', '<br>');
-          } else {
-            value.innerHTML = accessory[key];
-          }
-          keyvalue.append(value);
-          accessoryDetails.append(keyvalue);
+
+        previousCell = cell;
+
+        const href = cell.querySelector('.button-container>a');
+        if (href) {
+          cell.removeAttribute('class');
+          cell.replaceChildren(await getSizeChart(href));
+          cell.parentElement.classList.add('size-chart');
         }
-      }
-    });
-    accessoryDiv.append(accessoryDetails);
-    accessories.append(accessoryDiv);
-    block.append(accessories);
+      });
+
+      bodyRowGroup.append(row);
+    }
   });
+  block.append(bodyRowGroup);
 }
 const accessoriesTitle = document.querySelector('h1');
 accessoriesTitle.id = 'accessories-title';
