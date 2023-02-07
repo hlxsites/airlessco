@@ -198,6 +198,20 @@ main .section.card-heading h3 strong {
   font-size: var(--heading-font-size-l);
 }
 
+main .section.support-links > div {
+  display: flex;
+  flex-wrap: wrap;
+  padding-bottom: 40px;
+}
+
+main .section.support-links > div > h3 {
+  flex-basis: 100%;
+}
+
+main .section.support-links > div > p {
+  flex-basis: 50%;
+}
+
 .accessories.cards > ul {
   grid-template-columns: repeat(auto-fill, minmax(22%, 1fr));
   grid-gap: 20px 30px;
@@ -269,7 +283,12 @@ main a.resource-link[href$=".pdf"]::before,
     margin: 10px auto;
     padding: 0 25px;
     width: 768px;
-  } 
+  }
+
+  main .section.support-links > div > p {
+    flex-basis: 25%;
+  }
+
 }
 
 @media screen and (min-width: 1024px) {
@@ -298,6 +317,13 @@ main a.resource-link[href$=".pdf"]::before,
     width: 1024px;
     padding: 0 42px;
   }
+
+  main .section.productcards-container,
+  main .section.support-links {
+    width: 83.333%;
+    margin: 0 auto;
+  }
+
 }
 
 @media screen and (min-width: 1280px) {
