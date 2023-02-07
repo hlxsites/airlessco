@@ -17,10 +17,21 @@ import {
 const LCP_BLOCKS = []; // add your LCP blocks to the list
 window.hlx.RUM_GENERATION = 'airlessco'; // add your RUM generation information here
 
-function buildPageHeader(main) {
+function buildPageTitle(main) {
   const h1 = main.querySelector('h1');
   if (h1) {
-    h1.parentElement.classList.add('page-header-container');
+    const newHeader = document.createElement('h1');
+    h1.parentElement.classList.add('page-title-container');
+    Object.values(h1.childNodes).forEach((node) => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        const small = document.createElement('small');
+        small.appendChild(node);
+        newHeader.append(small);
+      } else {
+        newHeader.append(node);
+      }
+    });
+    h1.replaceWith(newHeader);
   }
 }
 
@@ -60,7 +71,7 @@ function buildPageDivider(main) {
  */
 function buildAutoBlocks(main) {
   try {
-    buildPageHeader(main);
+    buildPageTitle(main);
     buildBreadcrumb(main);
     buildPageDivider(main);
   } catch (error) {
@@ -100,10 +111,11 @@ async function loadEager(doc) {
 /**
  * Helper function to create DOM elements
  * @param {string} tag DOM element to be created
- * @param {array} attributes attributes to be added
+ * @param {Object} attributes attributes to be added
+ * @param {HTMLElement|SVGElement|string} html HTML or SVG to append to/after new element
  */
 
-export function createTag(tag, attributes, html) {
+export function createTag(tag, attributes, html = undefined) {
   const el = document.createElement(tag);
   if (html) {
     if (html instanceof HTMLElement || html instanceof SVGElement) {
@@ -130,10 +142,8 @@ export function createTag(tag, attributes, html) {
 export async function lookupProductData(productFamilyData, productName) {
   const resp = await fetch(productFamilyData);
   const json = await resp.json();
-  window.productFamilyData = json.data;
-  const filteredProduct = window.productFamilyData.filter((e) => e.Name === productName);
-  const result = filteredProduct;
-  return (result);
+  const filteredProduct = json.data.filter((e) => e.Name === productName);
+  return filteredProduct.length > 0 ? filteredProduct[0] : undefined;
 }
 
 /**

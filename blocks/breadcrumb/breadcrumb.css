@@ -4,37 +4,17 @@ main .breadcrumb-container.section {
   border-top: none;
 }
 
-.breadcrumb {
-  background-color: #FFF;
-  padding: 8px 0;
-  margin-bottom: 20px;
-  list-style: none;
-  border-radius: 4px;
+.breadcrumb-wrapper {
+  padding-top: 10px;
 }
 
 .breadcrumb > li {
   display: inline-block;
-  font-family: eurostile, 'Titillium Web', sans-serif;
-  max-width: 1600px;
-  margin: auto;
-  font-size: 16px;
-}
-
-a {
-  color: #337ab7;
-  text-decoration: none;
+  color: var(--airless-header-gray);
 }
 
 .breadcrumb > li + li::before {
   padding: 0 5px;
-  color: #ccc;
+  color: var(--airless-header-gray);
   content: "/\00a0";
-}
-
-
-.breadcrumb li:last-of-type > a:last-of-type {
-  color: #777;
-  pointer-events: none;
-  cursor: default;
-  text-decoration: none;
 }
