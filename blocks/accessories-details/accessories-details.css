@@ -3,35 +3,69 @@ main .accessories-details-container {
     flex-direction: row;
 }
 
+main .accessories-details-container>.default-content-wrapper {
+    width: 55%;
+    border: unset;
+}
+
+main .accessories-details-container>.accessories-details-wrapper {
+    border-top: 8px solid var(--overlay-background-color);
+    width: auto;
+}
+
 main .accessories-details {
-    display: table;
     width: 100%;
+    display: table;
+    table-layout: fixed;
     border-spacing: 5px;
 }
 
 main .accessories-details>div>div[role="row"] {
-    display: table-row;
+    /* display: table-row; */
     width: 100%;
     clear: both;
+    padding-top: 10px;
+}
+
+main .accessories-details>div>div[role="row"]::before {
+    content: " ";
+    display: table
+}
+
+main .accessories-details>div>div[role="row"]::after {
+    content: " ";
+    display: table
 }
 
 main .accessories-details>div>div[role="row"]>div {
     float: left;
     display: table-cell;
-    width: 50%;
 }
 
-main .accessories-details>div>div[role="row"] > .row-span {
+main .accessories-details>div>div[role="row"]>div:nth-child(1) {
+    width: 30%;
+    text-transform: uppercase;
+}
+
+/* main .accessories-details>div>div[role="row"]>div:nth-child(2) {
+    width: 60%;
+} */
+
+main .accessories-details>div>div>div[role="columnheader"]:nth-child(1) {
     width: 100%;
 }
 
-main .accessories-details>div>div[role="row"]> .size-chart {
+main .accessories-details>div>div[role="row"]>.row-span {
+    width: 100%;
+}
+
+main .accessories-details>div>div[role="row"]>.size-chart {
     float: unset;
     display: flex;
     flex-direction: column;
 }
 
-main .accessories-details>div>div[role="row"].size-chart > div {
+main .accessories-details>div>div[role="row"].size-chart>div {
     width: 100%;
 }
 

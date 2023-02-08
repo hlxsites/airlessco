@@ -52,12 +52,11 @@ export default async function decorate(block) {
       const firstRow = block.querySelectorAll('.accessories-details > div > div');
       let previousCell = '';
       firstRow.forEach((cell) => {
-        if(cell.innerHTML === '') {
+        if (cell.innerHTML === '') {
           previousCell.classList.add('row-span');
         }
-        cell.classList.add('accessories-details-table-heading');
         cell.setAttribute('role', 'columnheader');
-        previousCell = cell
+        previousCell = cell;
       });
       row.setAttribute('role', 'row');
       const tableHeadings = createTag('div', { role: 'rowgroup' });
@@ -69,8 +68,13 @@ export default async function decorate(block) {
       const cells = row.querySelectorAll('div');
 
       let previousCell = '';
+      let x = 0;
       cells.forEach(async (cell) => {
         cell.setAttribute('role', 'cell');
+        if (x === 0) {
+          if (cell.innerHTML.slice(-1) !== ':') cell.innerHTML += ':';
+        }
+        x += 1;
         const links = cell.querySelectorAll('a');
 
         links.forEach((link) => {
