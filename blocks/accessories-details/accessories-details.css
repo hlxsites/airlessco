@@ -1,3 +1,9 @@
+
+
+h2#more-accessories {
+    color: var(--airless-link-dark);
+    font-weight: bold;
+}
 .accessories-details {
     padding-top: 20px;
 }
@@ -14,7 +20,6 @@
     margin-top: 20px;
     margin-bottom: 20px;
     line-height: 1.4286;
-
 }
 
 .accessories-details .accessories .accessory .accessory-img {
@@ -45,7 +50,7 @@
     padding-right: 15px;
     padding-bottom: 15px;
     padding-top: 15px;
-    font-family: var(--body-font-family);    
+    font-family: var(--body-font-family);
 }
 
 .accessories-details .accessories .accessory .accessory-details .accessory-desc {
@@ -115,7 +120,7 @@
         font-weight: 700;
         font-size: var(--heading-font-size-l);
         padding: 15px;
-        font-family: var(--body-font-family);        
+        font-family: var(--body-font-family);
     }
 
     .accessories-details .accessories .accessory .accessory-details .accessory-name p {
@@ -139,6 +144,6 @@
         display: block;
         max-width: 100%;
         height: auto;
-        
+
     }
 }
