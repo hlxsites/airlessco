@@ -16,10 +16,12 @@ h1#accessories-title strong {
 .productcards-container {
   padding-bottom: 50px;
 }
+
 .productcards-container h2 {
   font-weight: bold;
   color: var(--airless-link-dark);
 }
+
 .productcards.last {
   padding-bottom: 40px;
 }
