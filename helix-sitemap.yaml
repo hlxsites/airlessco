@@ -1,0 +1,8 @@
+sitemaps:
+  airlessco:
+    origin: https://www.airlessco.com
+    languages:
+      en:
+        source: /query-index.json
+        destination: /sitemap-en.xml
+        alternate: /na/en{path}
