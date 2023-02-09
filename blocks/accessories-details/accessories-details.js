@@ -38,6 +38,10 @@ async function getSizeChart(link) {
 }
 
 export default async function decorate(block) {
+  if (block.parentElement.parentElement.children.length === 1) {
+    const d = createTag('div', { class: 'default-content-wrapper' });
+    block.parentElement.parentElement.insertBefore(d, block.parentElement.parentElement.children[0]);
+  }
   const rows = block.querySelectorAll('.accessories-details > div');
   block.setAttribute('role', 'table');
   block.setAttribute('aria-label', 'Semantic Elements');
@@ -48,47 +52,29 @@ export default async function decorate(block) {
 
   let n = 0;
   rows.forEach((row) => {
+    row.setAttribute('role', 'row');
+    const cells = row.querySelectorAll('div');
+
+    if (cells.length === 1) cells[0].classList.add('row-span');
+
     if (n === 0) {
-      const firstRow = block.querySelectorAll('.accessories-details > div > div');
-      let previousCell = '';
-      firstRow.forEach((cell) => {
-        if (cell.innerHTML === '') {
-          previousCell.classList.add('row-span');
-        }
+      cells.forEach((cell) => {
         cell.setAttribute('role', 'columnheader');
-        previousCell = cell;
       });
-      row.setAttribute('role', 'row');
       const tableHeadings = createTag('div', { role: 'rowgroup' });
       tableHeadings.append(row);
       block.insertBefore(tableHeadings, block.firstChild);
       n += 1;
     } else {
-      row.setAttribute('role', 'row');
-      const cells = row.querySelectorAll('div');
-
-      let previousCell = '';
-      let x = 0;
       cells.forEach(async (cell) => {
         cell.setAttribute('role', 'cell');
-        if (x === 0) {
-          if (cell.innerHTML.slice(-1) !== ':') cell.innerHTML += ':';
-        }
-        x += 1;
         const links = cell.querySelectorAll('a');
-
         links.forEach((link) => {
           link.classList.add('resource-link');
         });
 
-        if (cell.innerHTML === '') {
-          previousCell.classList.add('row-span');
-        }
-
-        previousCell = cell;
-
         const anchor = cell.querySelector('.button-container>a');
-        if (anchor && anchor.href.includes('size-chart.json')) {
+        if (anchor && anchor.href.includes('.json')) {
           cell.removeAttribute('class');
           cell.replaceChildren(await getSizeChart(anchor));
           cell.parentElement.classList.add('size-chart');

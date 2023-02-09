@@ -1,16 +1,22 @@
 main .accessories-details-container {
     display: flex;
     flex-direction: row;
+    border: unset;
 }
 
 main .accessories-details-container>.default-content-wrapper {
-    width: 55%;
-    border: unset;
+    min-width: 25%;
+}
+
+main .accessories-details-container>.default-content-wrapper img {
+    width: 100%;
+    object-fit: contain;
 }
 
 main .accessories-details-container>.accessories-details-wrapper {
     border-top: 8px solid var(--overlay-background-color);
     width: auto;
+    margin-top: 10px;
 }
 
 main .accessories-details {
@@ -21,7 +27,6 @@ main .accessories-details {
 }
 
 main .accessories-details>div>div[role="row"] {
-    /* display: table-row; */
     width: 100%;
     clear: both;
     padding-top: 10px;
@@ -44,12 +49,19 @@ main .accessories-details>div>div[role="row"]>div {
 
 main .accessories-details>div>div[role="row"]>div:nth-child(1) {
     width: 30%;
+}
+
+main .accessories-details>div>div[role="row"]>div:nth-child(2) {
+    width: 70%;
+}
+
+main .accessories-details>div>div[role="row"]>div:nth-child(1):not(.row-span) {
     text-transform: uppercase;
 }
 
-/* main .accessories-details>div>div[role="row"]>div:nth-child(2) {
-    width: 60%;
-} */
+main .accessories-details>div>div[role="row"]>div[role="columnheader"] {
+    text-transform: uppercase;
+}
 
 main .accessories-details>div>div>div[role="columnheader"]:nth-child(1) {
     width: 100%;
@@ -65,10 +77,6 @@ main .accessories-details>div>div[role="row"]>.size-chart {
     flex-direction: column;
 }
 
-main .accessories-details>div>div[role="row"].size-chart>div {
-    width: 100%;
-}
-
 main table.accessories {
     width: 100%;
 }
@@ -78,8 +86,24 @@ main table.accessories :is(th, td) {
     border: 1px solid #ddd;
     border-bottom: 2px solid #ddd;
     line-height: 1.4286;
+    font-size: smaller;
 }
 
 main .table-striped>tbody>tr:nth-of-type(odd) {
     background-color: #f9f9f9;
+}
+
+main .table-striped>tbody>tr>td {
+    padding: 8px;
+    text-align: center;
+}
+
+main .table-striped>tbody>tr>td:nth-child(1) {
+    width: 32%;
+    text-align: unset;
+}
+
+main .accessories-details h3 {
+    color: var(--text-color);
+    margin: unset;
 }
