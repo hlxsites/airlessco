@@ -5,4 +5,5 @@ sitemaps:
       en:
         source: /query-index.json
         destination: /sitemap-en.xml
+        hreflang: en
         alternate: /na/en{path}
