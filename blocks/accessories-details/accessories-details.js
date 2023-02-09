@@ -60,3 +60,5 @@ export default async function decorate(block) {
     block.append(accessories);
   });
 }
+const accessoriesTitle = document.querySelector('h1');
+accessoriesTitle.id = 'accessories-title';
