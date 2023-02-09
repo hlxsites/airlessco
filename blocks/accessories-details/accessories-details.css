@@ -47,16 +47,13 @@ main .accessories-details>div>div[role="row"]>div {
     display: table-cell;
 }
 
-main .accessories-details>div>div[role="row"]>div:nth-child(1) {
-    width: 30%;
-}
-
 main .accessories-details>div>div[role="row"]>div:nth-child(2) {
     width: 70%;
 }
 
 main .accessories-details>div>div[role="row"]>div:nth-child(1):not(.row-span) {
     text-transform: uppercase;
+    width: 30%;
 }
 
 main .accessories-details>div>div[role="row"]>div[role="columnheader"] {

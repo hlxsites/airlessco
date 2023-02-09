@@ -67,7 +67,6 @@ export default async function decorate(block) {
       n += 1;
     } else {
       cells.forEach(async (cell) => {
-        cell.setAttribute('role', 'cell');
         const links = cell.querySelectorAll('a');
         links.forEach((link) => {
           link.classList.add('resource-link');
@@ -76,6 +75,7 @@ export default async function decorate(block) {
         const anchor = cell.querySelector('.button-container>a');
         if (anchor && anchor.href.includes('.json')) {
           cell.removeAttribute('class');
+          if(cells.length === 1) cell.classList.add('row-span');
           cell.replaceChildren(await getSizeChart(anchor));
           cell.parentElement.classList.add('size-chart');
         }
