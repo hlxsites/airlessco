@@ -5,6 +5,7 @@ indices:
       - '/**'
     exclude:
       - 'drafts/**'
+      - 'images/**'
     target: /query-index.json
     properties:
       lastModified:
