@@ -23,6 +23,3 @@ indices:
       locale:
         select: head > meta[name="locale"]
         value: attribute(el, "content")
-      path:
-        select: head > meta[property="og:url"]
-        value: attribute(el, "content")
