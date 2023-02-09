@@ -75,7 +75,7 @@ export default async function decorate(block) {
         const anchor = cell.querySelector('.button-container>a');
         if (anchor && anchor.href.includes('.json')) {
           cell.removeAttribute('class');
-          if(cells.length === 1) cell.classList.add('row-span');
+          if (cells.length === 1) cell.classList.add('row-span');
           cell.replaceChildren(await getSizeChart(anchor));
           cell.parentElement.classList.add('size-chart');
         }
