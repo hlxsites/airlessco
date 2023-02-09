@@ -23,6 +23,4 @@ export default function decorate(block) {
     const text = document.createTextNode(link.textContent);
     body.replaceChild(text, link);
   });
-  const accessoriesTitle = document.querySelector('h1');
-  accessoriesTitle.id = 'accessories-title';
 }

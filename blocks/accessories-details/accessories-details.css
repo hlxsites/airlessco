@@ -1,8 +1,12 @@
-
+h1#accessories-title small, h1#accessories-title strong {
+    color: var(--airless-blue);
+    font-weight: 700;
+    font-size: var(--heading-font-size-xxl);
+}
 
 h2#more-accessories {
     color: var(--airless-link-dark);
-    font-weight: bold;
+    font-weight: 700;
 }
 
 .accessories-details {
