@@ -1,6 +1,6 @@
 main .accessories-details-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     border: unset;
 }
 
@@ -30,6 +30,8 @@ main .accessories-details>div>div[role="row"] {
     width: 100%;
     clear: both;
     padding-top: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 main .accessories-details>div>div[role="row"]::before {
@@ -43,17 +45,18 @@ main .accessories-details>div>div[role="row"]::after {
 }
 
 main .accessories-details>div>div[role="row"]>div {
-    float: left;
     display: table-cell;
+    width: 100%;
 }
 
-main .accessories-details>div>div[role="row"]>div:nth-child(2) {
-    width: 70%;
+main .accessories-details>div>div[role="row"]>div:has(table) {
+    overflow-y: auto;
+    overflow-x: auto;
+    scroll-behavior: smooth;
 }
 
 main .accessories-details>div>div[role="row"]>div:nth-child(1):not(.row-span) {
     text-transform: uppercase;
-    width: 30%;
 }
 
 main .accessories-details>div>div[role="row"]>div[role="columnheader"] {
@@ -76,6 +79,7 @@ main .accessories-details>div>div[role="row"]>.size-chart {
 
 main table.accessories {
     width: 100%;
+    font-size: var(--body-font-size-xs);
 }
 
 main table.accessories :is(th, td) {
@@ -103,4 +107,55 @@ main .table-striped>tbody>tr>td:nth-child(1) {
 main .accessories-details h3 {
     color: var(--text-color);
     margin: unset;
+}
+
+@media screen and (min-width: 768px) {
+    /* .accessories-category .accessory .accessory-card {
+        margin-bottom: 20px;
+    }
+
+    .accessories-category .accessory-card .accessory-image img {
+        height: 210px;
+        width: auto;
+    }
+
+    .accessories-category .accessory-card .accessory-body {
+        padding: 9px;
+    } */
+
+    /* main .accessories-details>div>div[role="row"]>div:nth-child(1):not(.row-span) {
+        width: 30%;
+    }
+
+    main .accessories-details>div>div[role="row"]>div:nth-child(2) {
+        width: 70%;
+    } */
+}
+
+@media screen and (min-width: 1024px) {
+    main .accessories-details-container {
+        flex-direction: row;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    /* .accessories-category .accessory-card .accessory-image img {
+        height: 272px;
+        width: auto;
+    }
+
+    .accessories-category .accessory-card .accessory-body {
+        font-size: var(--body-font-size-xs)
+    } */
+
+    main table.accessories {
+        
+    }
+}
+
+@media screen and (min-width: 1600px) {
+    /* .accessories-category .accessory-card .accessory-image img {
+        height: 360px;
+        width: auto;
+    } */
 }
