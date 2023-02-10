@@ -9,6 +9,21 @@
   flex-wrap: wrap;
 }
 
+h1#accessories-title strong {
+  color: var(--airless-blue);
+}
+
+.productcards-container {
+  padding-bottom: 50px;
+  width: 83.333%;
+  margin: 0 auto;
+}
+
+.productcards-container h2 {
+  font-weight: bold;
+  color: var(--airless-link-dark);
+}
+
 .productcards.last {
   padding-bottom: 40px;
 }
@@ -53,7 +68,6 @@
 
 @media screen and (min-width: 1024px) {
   .productcards-container {
-    width: 83.333%;
     margin: 0 auto;
   }
 }
