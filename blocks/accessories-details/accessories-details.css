@@ -79,7 +79,7 @@ main .accessories-details>div>div[role="row"]>.size-chart {
 
 main table.accessories {
     width: 100%;
-    font-size: var(--body-font-size-xs);
+    font-size: var(--body-font-size-s);
 }
 
 main table.accessories :is(th, td) {
@@ -88,6 +88,8 @@ main table.accessories :is(th, td) {
     border-bottom: 2px solid #ddd;
     line-height: 1.4286;
     font-size: smaller;
+    padding: 0 5px;
+    min-width: 50px;
 }
 
 main .table-striped>tbody>tr:nth-of-type(odd) {
@@ -101,6 +103,7 @@ main .table-striped>tbody>tr>td {
 
 main .table-striped>tbody>tr>td:nth-child(1) {
     width: 32%;
+    min-width: 136px;
     text-align: unset;
 }
 
@@ -110,52 +113,15 @@ main .accessories-details h3 {
 }
 
 @media screen and (min-width: 768px) {
-    /* .accessories-category .accessory .accessory-card {
-        margin-bottom: 20px;
+    main .accessories-details>div>div[role="row"] {
+        flex-direction: row;
     }
 
-    .accessories-category .accessory-card .accessory-image img {
-        height: 210px;
-        width: auto;
-    }
-
-    .accessories-category .accessory-card .accessory-body {
-        padding: 9px;
-    } */
-
-    /* main .accessories-details>div>div[role="row"]>div:nth-child(1):not(.row-span) {
-        width: 30%;
-    }
-
-    main .accessories-details>div>div[role="row"]>div:nth-child(2) {
-        width: 70%;
-    } */
-}
-
-@media screen and (min-width: 1024px) {
     main .accessories-details-container {
         flex-direction: row;
     }
-}
 
-@media screen and (min-width: 1280px) {
-    /* .accessories-category .accessory-card .accessory-image img {
-        height: 272px;
-        width: auto;
+    main .accessories-details>div>div[role="row"]>div:nth-child(1) {
+        width: 30%;
     }
-
-    .accessories-category .accessory-card .accessory-body {
-        font-size: var(--body-font-size-xs)
-    } */
-
-    main table.accessories {
-        
-    }
-}
-
-@media screen and (min-width: 1600px) {
-    /* .accessories-category .accessory-card .accessory-image img {
-        height: 360px;
-        width: auto;
-    } */
 }
