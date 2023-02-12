@@ -121,8 +121,8 @@ main .accessories-details h3 {
         flex-direction: row;
     }
 
-    main .accessories-details>div>div[role="row"]>div:nth-child(1) {
-        width: 30%;
+    main .accessories-details>div>div[role="row"]>div:nth-child(1):not(.row-span)  {
+        width: 33%;
     }
 
     main .accessories-details>div>div[role="row"]>.row-span {
