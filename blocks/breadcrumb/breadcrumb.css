@@ -1,20 +1,26 @@
 main .breadcrumb-container.section {
-  display: block;
-  margin-top: 0;
-  border-top: none;
+  display: none;
 }
 
-.breadcrumb-wrapper {
-  padding-top: 10px;
-}
+@media screen and (min-width: 768px) {
+  main .breadcrumb-container.section {
+    display: block;
+    margin-top: 0;
+    border-top: none;
+  }
 
-.breadcrumb > li {
-  display: inline-block;
-  color: var(--airless-header-gray);
-}
+  .breadcrumb-wrapper {
+    padding-top: 10px;
+  }
 
-.breadcrumb > li + li::before {
-  padding: 0 5px;
-  color: var(--airless-header-gray);
-  content: "/\00a0";
+  .breadcrumb > li {
+    display: inline-block;
+    color: var(--airless-header-gray);
+  }
+
+  .breadcrumb > li + li::before {
+    padding: 0 5px;
+    color: var(--airless-header-gray);
+    content: "/\00a0";
+  }
 }

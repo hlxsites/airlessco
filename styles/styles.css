@@ -182,6 +182,8 @@ main .section {
 
 main .section.page-title-container {
   margin-top: 30px;
+  line-height: 1.4286;
+  padding-bottom: 10px;
 }
 
 main .section.card-heading h3 {

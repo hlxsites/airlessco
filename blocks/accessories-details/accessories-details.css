@@ -1,135 +1,181 @@
 main .accessories-details-container {
-    display: flex;
-    flex-direction: column;
-    border: unset;
+  display: flex;
+  flex-direction: column;
+  border: unset;
+  margin-top: 10px;
+  padding-bottom: 40px;
 }
 
-main .accessories-details-container>.default-content-wrapper {
-    min-width: 25%;
+main .accessories-details-container > .default-content-wrapper img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  margin: 0 auto;
+  display: block;
 }
 
-main .accessories-details-container>.default-content-wrapper img {
-    width: 100%;
-    object-fit: contain;
-}
-
-main .accessories-details-container>.accessories-details-wrapper {
-    border-top: 8px solid var(--overlay-background-color);
-    width: auto;
-    margin-top: 10px;
+main .accessories-details-container > .accessories-details-wrapper {
+  border-top: 8px solid var(--overlay-background-color);
+  width: auto;
+  margin-top: 20px;
 }
 
 main .accessories-details {
-    width: 100%;
-    display: table;
-    table-layout: fixed;
-    border-spacing: 5px;
+  width: 100%;
+  display: table;
+  table-layout: fixed;
 }
 
-main .accessories-details>div>div[role="row"] {
-    width: 100%;
-    clear: both;
-    padding-top: 10px;
-    display: flex;
-    flex-direction: column;
+main .accessories-details > div > div[role="row"] {
+  width: 100%;
+  clear: both;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 10px;
 }
 
-main .accessories-details>div>div[role="row"]::before {
-    content: " ";
-    display: table
+main .accessories-details > div:first-of-type > div[role="row"] {
+  padding-bottom: unset;
 }
 
-main .accessories-details>div>div[role="row"]::after {
-    content: " ";
-    display: table
+main .accessories-details > div > div[role="row"] > div {
+  line-height: 1.4286;
+  display: table-cell;
+  width: 100%;
 }
 
-main .accessories-details>div>div[role="row"]>div {
-    display: table-cell;
-    width: 100%;
+main .accessories-details > div > div[role="row"] > div:has(table) {
+  overflow-y: auto;
+  overflow-x: auto;
+  scroll-behavior: smooth;
 }
 
-main .accessories-details>div>div[role="row"]>div:has(table) {
-    overflow-y: auto;
-    overflow-x: auto;
-    scroll-behavior: smooth;
+main .accessories-details > div > div[role="row"] > div:nth-child(1):not(.row-span) {
+  text-transform: uppercase;
 }
 
-main .accessories-details>div>div[role="row"]>div:nth-child(1):not(.row-span) {
-    text-transform: uppercase;
+main .accessories-details > div > div[role="row"] > div[role="columnheader"] {
+  text-transform: uppercase;
 }
 
-main .accessories-details>div>div[role="row"]>div[role="columnheader"] {
-    text-transform: uppercase;
+main .accessories-details > div > div > div[role="columnheader"]:nth-child(1) {
+  width: 100%;
 }
 
-main .accessories-details>div>div>div[role="columnheader"]:nth-child(1) {
-    width: 100%;
+main .accessories-details > div > div[role="row"] > .row-span {
+  width: 100%;
 }
 
-main .accessories-details>div>div[role="row"]>.row-span {
-    width: 100%;
-}
-
-main .accessories-details>div>div[role="row"]>.size-chart {
-    float: unset;
-    display: flex;
-    flex-direction: column;
+main .accessories-details > div > div[role="row"] > .size-chart {
+  float: unset;
+  display: flex;
+  flex-direction: column;
 }
 
 main table.accessories {
-    width: 100%;
-    font-size: var(--body-font-size-s);
+  width: 100%;
+  font-size: var(--body-font-size-s);
 }
 
 main table.accessories :is(th, td) {
-    vertical-align: bottom;
-    border: 1px solid #ddd;
-    border-bottom: 2px solid #ddd;
-    line-height: 1.4286;
-    font-size: smaller;
-    padding: 0 5px;
-    min-width: 50px;
+  vertical-align: bottom;
+  border: 1px solid #ddd;
+  border-bottom: 2px solid #ddd;
+  line-height: 1.4286;
+  font-size: smaller;
+  padding: 0 5px;
+  min-width: 50px;
 }
 
-main .table-striped>tbody>tr:nth-of-type(odd) {
-    background-color: #f9f9f9;
+main .table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: #f9f9f9;
 }
 
-main .table-striped>tbody>tr>td {
-    padding: 8px;
-    text-align: center;
+main .table-striped > tbody > tr > td {
+  padding: 8px;
+  text-align: center;
 }
 
-main .table-striped>tbody>tr>td:nth-child(1) {
-    width: 32%;
-    min-width: 136px;
-    text-align: unset;
+main .table-striped > tbody > tr > td:nth-child(1) {
+  width: 32%;
+  min-width: 136px;
+  text-align: unset;
 }
 
 main .accessories-details h3 {
-    color: var(--text-color);
-    margin: unset;
+  color: var(--text-color);
 }
 
 @media screen and (min-width: 768px) {
-    main .accessories-details>div>div[role="row"] {
-        flex-direction: row;
-    }
+  main .accessories-details-container {
+    flex-direction: row;
+  }
 
-    main .accessories-details-container {
-        flex-direction: row;
-    }
+  main .accessories-details-container .default-content-wrapper {
+    flex-basis: 25%;
+  }
 
-    main .accessories-details>div>div[role="row"]>div:nth-child(1):not(.row-span)  {
-        width: 33%;
-    }
+  main .accessories-details-container .accessories-details-wrapper {
+    flex-basis: 75%;
+  }
 
-    main .accessories-details>div>div[role="row"]>.row-span {
-        width: 100%;
-    }
+  main .accessories-details > div > div[role="row"] {
+    flex-direction: row;
+    column-gap: 15px;
+  }
 
-    main .accessories-details>div>div>div[role="columnheader"]:nth-child(1) {
-        width: 100%;
-    }
+  main .accessories-details-container .default-content-wrapper img {
+    padding-top: 10px;
+    height: 158px;
+    width: auto;
+    margin: 0 auto;
+  }
+
+  main .accessories-details > div > div[role="row"] > div:not(.row-span) {
+    flex-basis: 66.6666%;
+  }
+
+  main .accessories-details > div > div[role="row"] > div:first-of-type:not(.row-span) {
+    flex-basis: 33.3333%;
+  }
+
+  main .accessories-details > div > div[role="row"] > .row-span {
+    width: 100%;
+  }
+
+  main .accessories-details > div > div > div[role="columnheader"]:nth-child(1) {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  main .accessories-details-container .default-content-wrapper img {
+    height: 212px;
+  }
+
+  main .accessories-details > div > div[role="row"] > div:not(.row-span) {
+    flex-basis: 75%;
+  }
+
+  main .accessories-details > div > div[role="row"] > div:first-of-type:not(.row-span) {
+    flex-basis: 25%;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  main .accessories-details-container .default-content-wrapper img {
+    height: 282px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  main .accessories-details-container .default-content-wrapper img {
+    height: 282px;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  main .accessories-details-container .default-content-wrapper img {
+    height: 378px;
+  }
 }
