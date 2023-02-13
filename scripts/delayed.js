@@ -33,10 +33,11 @@ loadScript('https://www.google-analytics.com/analytics.js', {
 // Google Analytics Tracking
 const func = 'ga';
 window.GoogleAnalyticsObject = func;
-// eslint-disable-next-line no-unused-expressions
+// eslint-disable-next-line no-unused-expressions,func-names
 window[func] = window[func] || function () {
   // eslint-disable-next-line prefer-rest-params
   (window[func].q = window[func].q || []).push(arguments);
+// eslint-disable-next-line no-sequences
 }, window[func].l = 1 * new Date();
 // eslint-disable-next-line no-undef
 ga('create', 'UA-81622380-1', 'auto');
