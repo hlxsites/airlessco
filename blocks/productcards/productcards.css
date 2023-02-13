@@ -13,13 +13,13 @@ h1#accessories-title strong {
   color: var(--airless-blue);
 }
 
-.productcards-container {
+.card-heading.productcards-container {
   padding-bottom: 50px;
   width: 83.333%;
   margin: 0 auto;
 }
 
-.productcards-container h2 {
+.card-heading.productcards-container h2 {
   font-weight: bold;
   color: var(--airless-link-dark);
 }
