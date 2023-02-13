@@ -1,64 +1,68 @@
 @import url("../../styles/sortable-theme-bootstrap.css");
 
-.resources-wrapper-1{
-    margin-left: 8.3333%;
-    border-top: 8px solid #eee;
-    padding-bottom: 40px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+
+main .section.resources-container {
+  margin-top: 0;
+  border-top: none;
 }
 
-.resources-section-title{
-    font-weight: 700;
-    color: #0033ab;
-    font-size: 24px;
-    line-height: 1.1;
-    padding-top: 20px;
-    padding-bottom: 20px;
+.resources-wrapper {
+  border-top: 8px solid var(--overlay-background-color);
+  padding-bottom: 40px;
 }
 
-.table-striped>tbody>tr:nth-of-type(odd) {
-    background-color: #f9f9f9;
+.resources-wrapper h3 {
+  color: var(--airless-blue);
+  font-size: var(--heading-font-size-l);
+  line-height: 1.1;
 }
 
-table.resources{
-width :100%;
+.resources-wrapper h3 strong {
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
-table.resources > thead > tr > th:nth-child(1){
-    width :70%;
+.resources.block .table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: #f9f9f9;
 }
 
-table.resources > thead > tr > th:nth-child(2){
-    width :20%;
+.resources.block table.resources {
+  width: 100%;
 }
 
-table.resources > thead > tr > th:nth-child(3){
-    width :10%;
+.resources.block table.resources > thead > tr > th:nth-child(1) {
+  width: 70%;
 }
 
-table.resources .resource-data:not(:first-child) .resource-link[href$=".pdf"]::before {
-    content: "";
+.resources.block table.resources > thead > tr > th:nth-child(2) {
+  width: 20%;
 }
 
-table.resources .resource-data:not(:first-child) .resource-link[href*=".findManual"]::before {
-    content: "";
+.resources.block table.resources > thead > tr > th:nth-child(3) {
+  width: 10%;
 }
 
-table.resources .resource-data:first-child .resource-link[href$=".zip"]::before {
-    content: "\f1c6  ";
-    font-family: fontawesome, sans-serif;
+.resources.block table.resources .resource-data:not(:first-child) .resource-link[href$=".pdf"]::before {
+  content: "";
 }
 
-table.resources .resource-data:first-child .resource-link[href$=".jpg"]::before {
-    content: "\f1c5  ";
-    font-family: fontawesome, sans-serif;
+.resources.block table.resources .resource-data:not(:first-child) .resource-link[href*=".findManual"]::before {
+  content: "";
 }
 
-@media only screen and  (max-width: 992px){
-    .resources-wrapper-1{
-        margin-left: 0;
-        padding : 0 15px ;
-    }
+.resources.block table.resources .resource-data:first-child .resource-link[href$=".zip"]::before {
+  content: "\f1c6  ";
+  font-family: fontawesome, sans-serif;
+}
 
+.resources.block table.resources .resource-data:first-child .resource-link[href$=".jpg"]::before {
+  content: "\f1c5  ";
+  font-family: fontawesome, sans-serif;
+}
+
+@media screen and (min-width: 1024px) {
+  .section.resources-container {
+    width: 83.333%;
+    margin: 0 auto;
+  }
 }

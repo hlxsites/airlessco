@@ -1,18 +1,25 @@
-import { lookupFiles, createTag } from '../../scripts/scripts.js';
-import { getMetadata } from '../../scripts/lib-franklin.js';
+import { fetchPlaceholders, getMetadata } from '../../scripts/lib-franklin.js';
+import { createTag } from '../../scripts/scripts.js';
+
+async function lookupFiles(fileSource, category) {
+  const resp = await fetch(fileSource);
+  const json = await resp.json();
+  return json.data.filter((e) => e.Category.toLowerCase() === category.toLowerCase());
+}
 
 export default async function decorate(block) {
-  const fileSource = new URL(block.querySelector('a').href);
-  const category = [...block.children][1].innerText.trim('');
   const locale = getMetadata('locale');
-  let resources = null;
-  let resourcesTableHeaderValues = null;
+  const placeholders = await fetchPlaceholders(locale);
 
-  const resourcesWrapper = createTag('div', { class: 'resources-wrapper' });
-  const resourcesWrapper1 = createTag('div', { class: 'resources-wrapper-1' });
-  resourcesWrapper.append(resourcesWrapper1);
-  const resourcesSectionTitle = createTag('div', { class: 'resources-section-title' });
-  resourcesSectionTitle.innerText = category;
+  const fileSource = new URL(block.querySelector('a').href);
+  const title = block.children[1].children[1].textContent.trim();
+  const category = block.children[2].children[1].textContent.trim('');
+
+  const resourcesSectionTitle = createTag(
+    'h3',
+    { class: 'resources-section-title', id: title },
+    createTag('strong', {}, title),
+  );
 
   const resourcesTableContainer = createTag('div', { class: 'resources-table-container' });
   const resourcesDiv = createTag('table', { class: 'resources' });
@@ -28,11 +35,14 @@ export default async function decorate(block) {
   const resourcesTBody = createTag('tbody', { class: 'resources-tbody' });
   resourcesDiv.append(resourcesTHead, resourcesTBody);
 
+  const titles = [];
+
   if (block.classList.contains('manuals')) {
     // Make a call to the  product datasheet  and get the json for all fields for the product
-    resources = await lookupFiles(fileSource, category, locale);
-    resourcesTableHeaderValues = ['Title', 'Manual Number', 'Size'];
-    const downloadURL = 'http://www.graco.com/bin.findManual?source=airlessco&manual=';
+    const resources = await lookupFiles(fileSource, category);
+    titles.push('titleLabel', 'manualNumberLabel', 'sizeLabel');
+
+    const downloadURL = 'https://www.graco.com/bin.findManual?source=airlessco&manual=';
     resources.forEach((obj) => {
       const resource = createTag('tr', { class: 'resource' });
       const manualNumber = obj.Manual_Number;
@@ -58,8 +68,9 @@ export default async function decorate(block) {
 
   if (block.classList.contains('distributor')) {
     // Make a call to the  product datasheet  and get the json for all fields for the product
-    resources = await lookupFiles(fileSource, category, locale);
-    resourcesTableHeaderValues = ['Title', 'File Format', 'Size'];
+    const resources = await lookupFiles(fileSource, category);
+    titles.push('titleLabel', 'fileFormatLabel', 'sizeLabel');
+
     resources.forEach((obj) => {
       const resource = createTag('tr', { class: 'resource' });
       const downloadURL = obj.Link;
@@ -83,16 +94,19 @@ export default async function decorate(block) {
     });
   }
 
-  resourcesTableHeaderValues.forEach((item) => {
-    const resourcesTHeadTH = createTag('th', { class: 'resources--thead-th' });
-    resourcesTHeadTH.innerText = item;
+  titles.forEach((t) => {
+    const resourcesTHeadTH = createTag('th', { class: 'resources--thead-th' }, placeholders[t]);
     resourcesTHeadTR.append(resourcesTHeadTH);
   });
 
-  resourcesWrapper1.append(resourcesSectionTitle);
   resourcesTableContainer.append(resourcesDiv);
-  resourcesWrapper1.append(resourcesTableContainer);
 
-  block.innerHTML = '';
-  block.append(resourcesWrapper);
+  block.innerHTML = ` 
+    ${resourcesSectionTitle.outerHTML}
+    ${resourcesTableContainer.outerHTML}
+  `;
+
+  document.querySelector('h1').append(
+    createTag('a', { href: `#${title}` }, createTag('small', {}, title)),
+  );
 }
