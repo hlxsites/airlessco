@@ -71,9 +71,12 @@ export default async function decorate(block) {
     const resources = await lookupFiles(fileSource, category);
     titles.push('titleLabel', 'fileFormatLabel', 'sizeLabel');
 
+    const tmp = document.createElement('div');
+
     resources.forEach((obj) => {
       const resource = createTag('tr', { class: 'resource' });
-      const downloadURL = obj.Link;
+      tmp.innerHTML = obj.Link;
+      const downloadURL = tmp.querySelector('a').getAttribute('href');
       Object.entries(obj).forEach(([key, value]) => {
         if (key === ('Title') || key === ('File_Format')) {
           const resourceData = createTag('td', { class: 'resource-data' });
