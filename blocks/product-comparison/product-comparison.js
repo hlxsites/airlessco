@@ -1,4 +1,3 @@
-// import { lookupProductComparisionData, createTag, lookupProductData } from '../../scripts/scripts.js';
 import { createOptimizedPicture, fetchPlaceholders, getMetadata } from '../../scripts/lib-franklin.js';
 import { lookupProductData } from '../../scripts/scripts.js';
 
