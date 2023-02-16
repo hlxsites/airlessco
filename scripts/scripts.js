@@ -99,7 +99,7 @@ export function decorateMain(main) {
  * loads everything needed to get to LCP.
  */
 async function loadEager(doc) {
-  const locale = getMetadata('locale');
+  const locale = getMetadata('locale') || '/na/en';
   document.documentElement.lang = locale.replace(/\/\w+\/(\w+)\/?/, '$1');
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
