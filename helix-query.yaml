@@ -32,6 +32,9 @@ indices:
       - '/**/accessories/'
     target: /accessory-pages.json
     properties:
+      type:
+        select: head > meta[name="type"]
+        value: attribute(el, "content")
       nav-title:
         select: head > meta[name="nav-title"]
         value: attribute(el, "content")
