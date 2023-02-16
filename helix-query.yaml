@@ -29,7 +29,7 @@ indices:
     include:
       - '/**/accessories/**'
     exclude:
-      - '/**/accessories/index'
+      - '/**/accessories/'
     target: /accessory-pages.json
     properties:
       nav-title:
