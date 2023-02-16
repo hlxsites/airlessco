@@ -24,6 +24,7 @@
 }
 
 .product-comparison-details table img {
+  width: 100%;
   max-height: 266px;
 }
 
@@ -66,7 +67,7 @@
   }
 
   .product-comparison-details {
-    display: block;
+    display: block; 
   }
 
   .product-comparison-details table img {
@@ -75,6 +76,11 @@
 }
 
 @media screen and (min-width: 1024px) {
+  .product-comparison-details table {
+    width: 83.333%;
+    margin: auto;
+  }
+
   .product-comparison-details table img {
     max-height: 348px;
   }
