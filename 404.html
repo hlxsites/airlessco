@@ -11,18 +11,11 @@
   <meta property="og:title" content="Page not found">
   <script src="/scripts/scripts.js" type="module" crossorigin="use-credentials"></script>
   <script type="module">
-    import { fetchPlaceholders, getPlaceholderOrDefault, sampleRUM } from '/scripts/lib-franklin.js';
+    import { sampleRUM } from '/scripts/lib-franklin.js';
 
     window.addEventListener('load', async () => {
-      await fetchPlaceholders(`/${document.documentElement.lang}`);
 
-      const defaultForTitleAndMessage = 'This page not found - default message';
-      const errorTitle = getPlaceholderOrDefault('errorGeneralPageNotFoundTitle', defaultForTitleAndMessage);
-      const errorMessage = getPlaceholderOrDefault('errorGeneralPageNotFound', defaultForTitleAndMessage);
-      const errorMessageContainer = document.querySelector('.error-message');
 
-      document.title = errorTitle;
-      errorMessageContainer.innerHTML = errorMessage;
       if (document.referrer) {
         const {
           origin,
@@ -42,24 +35,8 @@
     });
   </script>
   <link rel="stylesheet" href="/styles/styles.css">
-  <style>
-    main.error {
-      min-height: calc(100vh - var(--nav-height));
-      display: flex;
-      align-items: center;
-    }
-
-    main.error .error-number {
-      width: 100%;
-    }
-
-    main.error .error-number text {
-      font-family: var(--fixed-font-family);
-    }
-  </style>
   <link rel="stylesheet" href="/styles/lazy-styles.css">
 </head>
-
 <body>
 <header></header>
 <main class="error">

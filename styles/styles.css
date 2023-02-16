@@ -277,6 +277,16 @@ main a.resource-link[href$=".pdf"]::before,
   font-family: fontawesome, sans-serif;
 }
 
+main.error {
+  padding: 100px 60px;
+  display: flex;
+  align-items: center;
+}
+
+main.error .error-number {
+  width: 100%;
+}
+
 @media screen and (min-width: 768px) {
   :root[lang="cz"],
   :root[lang="de"],
