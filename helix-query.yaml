@@ -25,3 +25,19 @@ indices:
       locale:
         select: head > meta[name="locale"]
         value: attribute(el, "content")
+  accessories:
+    include:
+      - '/**/accessories/**'
+    exclude:
+      - '/**/accessories/index'
+    target: /accessory-pages.json
+    properties:
+      nav-title:
+        select: head > meta[property="nav-title"]
+        value: attribute(el, "content")
+      image:
+        select: head > meta[property="og:image"]
+        value: match(attribute(el, "content"), "https:\/\/[^/]+(/.*)")
+      locale:
+        select: head > meta[name="locale"]
+        value: attribute(el, "content")
