@@ -33,7 +33,7 @@ indices:
     target: /accessory-pages.json
     properties:
       nav-title:
-        select: head > meta[property="nav-title"]
+        select: head > meta[name="nav-title"]
         value: attribute(el, "content")
       image:
         select: head > meta[property="og:image"]
