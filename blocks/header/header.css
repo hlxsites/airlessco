@@ -258,12 +258,12 @@ nav .navbar.open {
 
 @media screen and (min-width: 1024px) {
   header .header {
-    background-size: auto calc(284px / (1600 / 1024));
+    background-size: auto calc(284px / (1600 / 1004));
   }
 
   nav .navbar {
     min-height: var(--nav-height);
-    width: 1024px;
+    width: 1004px;
   }
 
   .navbar .nav-help > ul {
@@ -302,12 +302,12 @@ nav .navbar.open {
 
 @media screen and (min-width: 1280px) {
   header .header {
-    background-size: auto calc(284px / (1600 / 1280));
+    background-size: auto calc(284px / (1600 / 1260));
   }
 
   nav .navbar {
     height: var(--nav-height);
-    width: 1280px;
+    width: 1260px;
   }
 
   .navbar .nav-help > ul {
@@ -369,13 +369,13 @@ nav .navbar.open {
 
   header .header {
     background: none;
-    width: 1600px;
+    width: 1580px;
     margin: auto;
   }
 
   nav .navbar {
     min-height: var(--nav-height);
-    width: 1600px;
+    width: 1580px;
   }
 
   .navbar .nav-help > ul {
