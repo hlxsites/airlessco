@@ -21,13 +21,13 @@ async function fetchAccessories(locale, types) {
 }
 
 export default async function decorate(block) {
-  const title = block.children[0].children[1].textContent.trim();
+  const title = block.children[0].children[1].outerHTML || '<strong>MORE ACCESSORIES</strong>';
   const locale = getMetadata('locale');
   const types = block.children[1].children[1].textContent.split('\n').map((t) => t.trim());
 
   const accessories = await fetchAccessories(locale, types);
 
-  let html = `<h2><strong>${title || '<strong>MORE ACCESSORIES</strong>'}</strong></h2>`;
+  let html = title;
 
   html += '<ul>';
   accessories.forEach((acc) => {
