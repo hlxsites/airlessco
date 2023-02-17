@@ -47,7 +47,7 @@ max-width: 100%;
 
 @media screen and (min-width: 1280px) {
   .accessories-category > ul {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 
   .accessories-category .accessory-card .accessory-body {
