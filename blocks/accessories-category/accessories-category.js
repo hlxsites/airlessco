@@ -21,6 +21,7 @@ async function fetchAccessories(locale, types) {
 }
 
 export default async function decorate(block) {
+  const eager = getMetadata('template') === 'accessories-landing-template';
   const title = block.children[0].children[1].outerHTML || '<strong>MORE ACCESSORIES</strong>';
   const locale = getMetadata('locale');
   const types = block.children[1].children[1].textContent.split('\n').map((t) => t.trim());
@@ -36,7 +37,7 @@ export default async function decorate(block) {
         <a href="${acc.path}">
           <div class="accessory-card">
             <div class="accessory-image">
-              ${createOptimizedPicture(acc.image, acc['nav-title'], false, breakpoints).outerHTML}
+              ${createOptimizedPicture(acc.image, acc['nav-title'], eager, breakpoints).outerHTML}
             </div>
             <div class="accessory-body">
                 <p>${acc['nav-title']}</p>
