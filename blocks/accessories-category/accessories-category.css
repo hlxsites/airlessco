@@ -24,7 +24,8 @@
 }
 
 .accessories-category .accessory-card .accessory-image img {
-max-width: 100%;
+  max-width: 100%;
+  min-height: 150px;
 }
 
 .accessories-category .accessory-card .accessory-body {
@@ -36,6 +37,11 @@ max-width: 100%;
 @media screen and (min-width: 768px) {
   .accessories-category > ul {
     grid-template-columns: repeat(3, 1fr);
+    grid-gap: 30px;
+  }
+
+  .accessories-category .accessory-card .accessory-image img {
+    min-height: 205px;
   }
 }
 
@@ -43,20 +49,36 @@ max-width: 100%;
   .accessories-category > ul {
     grid-template-columns: repeat(4, 1fr);
   }
+
+  .accessories-category .accessory-card .accessory-image img {
+    min-height: 198px;
+  }
 }
 
 @media screen and (min-width: 1280px) {
   .accessories-category > ul {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
   }
 
   .accessories-category .accessory-card .accessory-body {
     font-size: var(--body-font-size-xs)
+  }
+
+  .accessories-category .accessory-card .accessory-image img {
+    min-height: 205px;
   }
 }
 
 @media screen and (min-width: 1600px) {
   .accessories-category > ul {
     grid-template-columns: repeat(6, 1fr);
+  }
+
+  .accessories-landing-template .accessories-category > ul {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .accessories-category .accessory-card .accessory-image img {
+    min-height: 363px;
   }
 }
