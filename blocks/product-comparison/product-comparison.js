@@ -1,4 +1,3 @@
-// import { lookupProductComparisionData, createTag, lookupProductData } from '../../scripts/scripts.js';
 import { createOptimizedPicture, fetchPlaceholders, getMetadata } from '../../scripts/lib-franklin.js';
 import { lookupProductData } from '../../scripts/scripts.js';
 
@@ -45,9 +44,11 @@ const buildSpecTable = (placeholders, productName, specData) => {
 
 const buildComparisonTable = (placeholders, title, productInfo, specData, compareTo) => {
   const compareSpecs = new Map();
+  const tmp = document.createElement('div');
+  tmp.innerHTML = productInfo.Images;
+  let image = tmp.querySelector('a').getAttribute('href');
 
   // Build the header row.
-  let [image] = productInfo.Images.split('\n');
   let productImages = `
     <tr>
       <td>&nbsp;</td>
@@ -62,7 +63,8 @@ const buildComparisonTable = (placeholders, title, productInfo, specData, compar
 
   compareTo.forEach((product) => {
     compareSpecs.set(product.Name, buildSpecData(product.Specification));
-    image = product.Images.split('\n');
+    tmp.innerHTML = product.Images;
+    image = tmp.querySelector('a').getAttribute('href');
     productImages += `<td>${createOptimizedPicture(image, productInfo.Name, false, [{ width: 400 }]).outerHTML}</td>`;
     productNames += `<td><strong>${product.Name}</strong></td>`;
   });

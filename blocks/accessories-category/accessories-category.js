@@ -1,5 +1,4 @@
-import { createOptimizedPicture, fetchPlaceholders, getMetadata } from '../../scripts/lib-franklin.js';
-import { lookupProductData } from '../../scripts/scripts.js';
+import { createOptimizedPicture, getMetadata } from '../../scripts/lib-franklin.js';
 
 const breakpoints = [
   { media: '(min-width: 1280px)', width: '400' },
@@ -7,39 +6,46 @@ const breakpoints = [
   { width: '250' },
 ];
 
+async function fetchAccessories(locale, types) {
+  const resp = await fetch('/accessory-pages.json');
+  const json = await resp.json();
+  const accessories = [];
+
+  types.forEach((t) => {
+    const found = json.data.find((a) => a.locale.toLowerCase() === locale && a.type === t);
+    if (found) {
+      accessories.push(found);
+    }
+  });
+  return accessories;
+}
+
 export default async function decorate(block) {
-  const product = block.children[0].children[0].textContent.trim();
-  const sheet = block.querySelector('a').href;
+  const title = block.children[0].children[1].textContent.trim();
+  const locale = getMetadata('locale');
+  const types = block.children[1].children[1].textContent.split('\n').map((t) => t.trim());
 
-  const placeholders = await fetchPlaceholders(getMetadata('locale'));
-  const accessoriesInfo = await lookupProductData(sheet, product);
-  if (accessoriesInfo) {
-    let html = `<h2><strong>${block.children[1].children[1].textContent.trim() || '<strong>MORE ACCESSORIES</strong>'}</strong></h2>`;
+  const accessories = await fetchAccessories(locale, types);
 
-    html += '<ul>';
-    const accessories = accessoriesInfo.Accessories.split('\n');
-    accessories.forEach((acc) => {
-      const link = placeholders[`${acc}Link`];
-      const image = placeholders[`${acc}Image`];
-      const label = placeholders[`${acc}Label`];
-      if (link && image && label) {
-        html += `
-            <li class="accessory">
-              <a href="${link}">
-                <div class="accessory-card">
-                  <div class="accessory-image">
-                    ${createOptimizedPicture(image, label, false, breakpoints).outerHTML}
-                  </div>
-                  <div class="accessory-body">
-                      <p>${label}</p>
-                  </div>
-                </div>
-              </a>
-           </li>
-        `;
-      }
-    });
-    html += '</ul>';
-    block.innerHTML = html;
-  }
+  let html = `<h2><strong>${title || '<strong>MORE ACCESSORIES</strong>'}</strong></h2>`;
+
+  html += '<ul>';
+  accessories.forEach((acc) => {
+    html += `
+      <li class="accessory">
+        <a href="${acc.path}">
+          <div class="accessory-card">
+            <div class="accessory-image">
+              ${createOptimizedPicture(acc.image, acc['nav-title'], false, breakpoints).outerHTML}
+            </div>
+            <div class="accessory-body">
+                <p>${acc['nav-title']}</p>
+            </div>
+          </div>
+        </a>
+     </li>
+    `;
+  });
+  html += '</ul>';
+  block.innerHTML = html;
 }
