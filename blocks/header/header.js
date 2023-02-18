@@ -127,7 +127,7 @@ export default async function decorate(block) {
     // decorate nav DOM
     const nav = document.createElement('nav');
     const navbar = document.createElement('div');
-    navbar.setAttribute("id", "navbar");
+    navbar.setAttribute('id', 'navbar');
     navbar.classList.add('navbar');
     nav.append(navbar);
 
