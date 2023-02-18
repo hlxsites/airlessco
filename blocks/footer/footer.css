@@ -213,12 +213,12 @@ footer .air-footer {
   }
 }
 
-@media (min-width: 1600px) {
+@media (min-width: 1620px) {
   footer .air-footer {
     height: 450px;
   }
 
   .footer-elements-wrapper {
-    width: 1580px;
+    width: 1600px;
   }
 }

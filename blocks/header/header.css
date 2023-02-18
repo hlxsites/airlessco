@@ -369,13 +369,13 @@ nav .navbar.open {
 
   header .header {
     background: none;
-    width: 1580px;
+    width: 1600px;
     margin: auto;
   }
 
   nav .navbar {
     min-height: var(--nav-height);
-    width: 1580px;
+    width: 1600px;
   }
 
   .navbar .nav-help > ul {
