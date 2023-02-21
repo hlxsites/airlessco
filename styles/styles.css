@@ -278,13 +278,14 @@ main a.resource-link[href$=".pdf"]::before,
 }
 
 main.error {
-  padding: 100px 60px;
+  padding: 100px 60px 150px;
   display: flex;
   align-items: center;
 }
 
-main.error .error-number {
-  width: 100%;
+main.error h1 {
+  font-size: 100px;
+  color: var(--text-color);
 }
 
 @media screen and (min-width: 768px) {
