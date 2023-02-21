@@ -349,7 +349,7 @@ main.error .error-number {
 
   main {
     margin: 20px auto;
-    width: 1024px;
+    width: 1004px;
     padding: 0 42px;
   }
 
@@ -376,12 +376,12 @@ main.error .error-number {
   }
 
   main {
-    width: 1280px;
+    width: 1260px;
     padding: 0 31px;
   }
 }
 
-@media screen and (min-width: 1600px) {
+@media screen and (min-width: 1620px) {
   :root[lang="cz"],
   :root[lang="en"],
   :root[lang="es"],
