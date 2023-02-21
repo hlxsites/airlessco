@@ -8,6 +8,7 @@ indices:
       - 'images/**'
       - '/**/footer'
       - '/**/nav'
+      - '/**/404'
     target: /query-index.json
     properties:
       lastModified:

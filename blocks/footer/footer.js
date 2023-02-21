@@ -28,7 +28,7 @@ function createMobileMenu(footer) {
 export default async function decorate(block) {
   block.textContent = '';
 
-  const footerPath = getMetadata('locale');
+  const footerPath = getMetadata('locale') || '/na/en';
   const resp = await fetch(`${footerPath}/footer.plain.html`);
   if (resp.ok) {
     const html = await resp.text();

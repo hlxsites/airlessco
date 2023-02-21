@@ -116,7 +116,7 @@ export default async function decorate(block) {
   block.textContent = '';
 
   // fetch nav content
-  const navPath = getMetadata('locale');
+  const navPath = getMetadata('locale') || '/na/en';
   const resp = await fetch(`${navPath}/nav.plain.html`);
   if (resp.ok) {
     const html = await resp.text();
@@ -131,7 +131,7 @@ export default async function decorate(block) {
     navbar.classList.add('navbar');
     nav.append(navbar);
 
-    const locale = getMetadata('locale');
+    const locale = getMetadata('locale') || '/na/en';
     navbar.append(await buildMobileButton(locale));
     navbar.append(buildLangMenu(tmp.children[2], locale));
     navbar.append(buildHelpMenu(tmp.children[1]));
