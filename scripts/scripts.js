@@ -216,19 +216,19 @@ export async function load404() {
   if (html) {
     document.querySelector('main').innerHTML = html;
   }
-
   if (document.referrer) {
     const {
       origin,
       pathname,
     } = new URL(document.referrer);
     if (origin === window.location.origin) {
+      const container = document.querySelector('main .section p.button-container');
       const backBtn = document.createElement('a');
       backBtn.classList.add('button', 'error-button-back');
       backBtn.href = pathname;
       backBtn.textContent = 'Go back';
       backBtn.title = 'Go back';
-      html.append(backBtn);
+      container.append(backBtn);
     }
   }
 }
