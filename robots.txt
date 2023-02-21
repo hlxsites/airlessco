@@ -1,0 +1,4 @@
+user-agent: *
+allow: /
+
+sitemap: https://www.airlessco.com/sitemap.xml
