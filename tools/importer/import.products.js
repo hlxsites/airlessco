@@ -18,11 +18,9 @@ function getProductType(url) {
   let type = 'paint-sprayers';
   const earl = new URL(url).pathname;
   if (earl.endsWith('products/ss4350/') || earl.endsWith('products/ss3350/') || earl.endsWith('products/ss3350sp/')) {
-    console.log('line striper');
     type = 'line-stripers';
   } else if (earl.endsWith('products/hss9950/') || earl.endsWith('products/ts1750/') || earl.endsWith('products/hss9950gas/') || earl.endsWith('products/hss9950electric/')) {
     type = 'texture-sprayers';
-    console.log('texture sprayer');
   }
   return type;
 }

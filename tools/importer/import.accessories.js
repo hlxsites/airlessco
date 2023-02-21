@@ -14,7 +14,6 @@ import { createMetadataBlock, hr } from './common.js';
 /* eslint-disable no-console, class-methods-use-this */
 let landingPage = false;
 
-const baseBranch = 'https://main--airlessco--hlxsites.hlx.page';
 /*
   function to clean up the imported product name and make it useful in the data sheet
  */
@@ -29,82 +28,86 @@ function makeAccessoriesUrl(url) {
   return newUrl.toString();
 }
 
-function makeDetailUrl(url, page) {
-  const origPath = new URL(url).pathname + page.replace('/', '');
-  return baseBranch + origPath;
-}
-
-function convertUrl(url, path) {
-  const newPath = new URL(url).pathname.replace(/[^/]+\/?$/, '');
-  const relative = path.replace('../', '');
-
-  return baseBranch + newPath + relative.replace('/', '');
-}
-
 const createPageHeader = (main, document) => {
-  if (landingPage) {
-    // const header = main.querySelector('body > div.container.start > h1');
-    // header.insertAdjacentElement('afterend', hr(document));
-  } else {
-    const subh = main.querySelector('body > div.container.start > div.row.rowpadding');
-    subh.insertAdjacentElement('afterend', hr(document));
-  }
+  const subh = main.querySelector('body > div.container.start > div.row.rowpadding');
+  subh.insertAdjacentElement('afterend', hr(document));
 };
-
-function getCateogry(url) {
-  const earl = new URL(url).pathname;
-  return earl.match(/[^/]+\/?$/)[0].replace('/', '').trim();
-}
 
 const createAccessoriesDetailBlock = (main, document, url) => {
-  const accTable = WebImporter.DOMUtils.createTable([
-    ['Accessory Detail'],
-    [getCateogry(url)],
-  ], document);
-  const ahr = main.querySelector('body > div.container.start > hr');
-  ahr.insertAdjacentElement('afterend', accTable);
+  const rows = document.querySelectorAll('.container.start > .row');
+  let ahr = document.querySelector('body > div.container.start > hr');
+
+  rows.forEach((row) => {
+    let heading = row.querySelector('.row .row h3');
+    const cells = row.querySelectorAll('.row .row.rowpadding');
+
+    if (heading) {
+      const strong = document.createElement('strong');
+      strong.append(heading.textContent);
+      heading = `<h3><strong>${heading.textContent}</strong></h3>`;
+      const tBody = [
+        ['Accessories Details'],
+        [heading],
+      ];
+      let productId = '';
+      cells.forEach((cell) => {
+        if (cell.querySelector('div.col-sm-4.col-md-3') && cell.querySelector('div.col-sm-8.col-md-9')) {
+          tBody.push([`<strong>${cell.querySelector('div.col-sm-4.col-md-3').textContent}</strong>`, cell.querySelector('div.col-sm-8.col-md-9').textContent]);
+          if (!productId) productId = cell.querySelector('div.col-sm-8.col-md-9').textContent;
+        } else if (cell.querySelector('div.col-sm-4.col-md-3') && cell.querySelector('div.col-sm-12 table')) {
+          tBody.push([cell.querySelector('div.col-sm-4.col-md-3').textContent, 'table']);
+        } else if (cell.querySelector('div.col-sm-4.col-md-3')) {
+          tBody.push([cell.querySelector('div.col-sm-4.col-md-3').textContent]);
+        } else if (cell.querySelector('div.col-xs-12 table')) {
+          const meta = createMetadataBlock(main, document, url);
+          const tblLink = `https://main--airlessco--hlxsites.hlx.page/product-data/accessories/${productId.toLowerCase()}.json?sheet=${meta.Locale.replace('/', '').replace('/', '_').replace('\\', '')}`;
+          tBody.push([tblLink]);
+        } else if (cell.querySelector('div.col-xs-12')) {
+          tBody.push([cell.querySelector('div.col-xs-12').textContent]);
+        }
+      });
+
+      const image = row.querySelector('.img-responsive');
+      if (image) {
+        ahr = ahr.insertAdjacentElement('afterend', image);
+      }
+      ahr = ahr.insertAdjacentElement('afterend', WebImporter.DOMUtils.createTable(tBody, document));
+      ahr = ahr.insertAdjacentElement('afterend', hr(document));
+      row.remove();
+    }
+  });
 };
 
-const createAccessoriesBlock = (main, document, url) => {
-  const accData = [];
+const createAccessoriesBlock = (main, document) => {
   const accdiv = main.querySelector('body > div.container.start > h2 + div');
 
-  accData.push(['productcards']);
-  accdiv.querySelectorAll('div.col-xs-6').forEach((div) => {
-    const accImg = div.querySelector('div > img');
-    const accAnchor = div.querySelector('a');
-    accAnchor.href = convertUrl(url, accAnchor.href);
-    accData.push([accImg, accAnchor]);
-  });
+  const items = `<ul><li>sprayguns</li>
+  <li>hoses</li>
+  <li>spraytips</li>
+  <li>extensions</li>
+  <li>fluids</li>
+  <li>filters</li>
+  <li>hvlp</li>
+  <li>striping</li>
+  <li>other</li></ul>`;
 
-  const accTable = WebImporter.DOMUtils.createTable(accData, document);
-  accdiv.replaceWith(accTable);
-  main.querySelectorAll('body > div.container.start > div.row').forEach((items) => {
-    items.remove();
-  });
-  const headdiv = main.querySelector('body > div.container.start > h2');
-  headdiv.insertAdjacentElement('beforebegin', hr(document));
+  const h2 = main.querySelector('body > div.container.start > h2');
+  const tbl = WebImporter.DOMUtils.createTable([
+    ['accessories-category'],
+    ['title', `<h2><strong>${h2.textContent}</strong></h2>`],
+    ['types', items],
+  ], document);
+  h2.replaceWith('');
+  accdiv.replaceWith(tbl);
 };
 
-const createAccessoriesLanding = (main, document, url) => {
-  const lands = [];
-  const accessories = [];
-  lands.push(['Cards (accessories)']);
-  main.querySelectorAll('body > div.container.start > div.row > div').forEach((items) => {
-    let ax = [];
-    const accImg = items.querySelector('div > img');
-    const accAnchor = items.querySelector('a');
-    items.prepend(accImg);
-    accAnchor.href = makeDetailUrl(url, accAnchor.href);
-    ax.push(accImg);
-    ax.push(accAnchor);
-    lands.push(ax);
-    accessories.push(items);
-  });
-
-  const accTable = WebImporter.DOMUtils.createTable(lands, document);
-  const prodDiv = main.querySelector('body > div.container.start > div.row');
-  prodDiv.replaceWith(accTable);
+const fixH1 = (main, document) => {
+  const h1 = main.querySelector('body > div.container.start > h1');
+  const h1T = h1.textContent;
+  const strong = document.createElement('strong');
+  strong.textContent = h1T;
+  h1.textContent = '';
+  h1.append(strong);
 };
 
 export default {
@@ -123,13 +126,9 @@ export default {
   }) => {
     setup(document.body, url);
     createPageHeader(document.body, document);
-    if (landingPage) {
-      createAccessoriesLanding(document.body, document, url);
-    } else {
-      createAccessoriesDetailBlock(document.body, document, url);
-      createAccessoriesBlock(document.body, document, url);
-    }
-
+    fixH1(document.body, document);
+    createAccessoriesDetailBlock(document.body, document, url);
+    createAccessoriesBlock(document.body, document, url);
     createMetadataBlock(document.body, document, url);
     // use helper method to remove header, footer, etc.
     WebImporter.DOMUtils.remove(document.body, [
