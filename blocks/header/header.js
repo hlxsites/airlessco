@@ -71,13 +71,14 @@ async function buildMobileButton(locale) {
   const wrapper = document.createElement('div');
   wrapper.classList.add('navbar-mobile-toggle-wrapper');
 
-  const button = document.createElement('div');
+  const button = document.createElement('button');
   button.classList.add('navbar-mobile-toggle');
   wrapper.appendChild(button);
 
   button.setAttribute('data-toggle', 'navbar');
   button.setAttribute('aria-expanded', 'false');
   button.setAttribute('aria-controls', 'navbar');
+  button.setAttribute('aria-label', 'nav-mobile');
 
   const placeholders = await fetchPlaceholders(locale);
 
@@ -126,6 +127,7 @@ export default async function decorate(block) {
     // decorate nav DOM
     const nav = document.createElement('nav');
     const navbar = document.createElement('div');
+    navbar.setAttribute('id', 'navbar');
     navbar.classList.add('navbar');
     nav.append(navbar);
 
