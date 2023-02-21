@@ -14,8 +14,6 @@
     import { sampleRUM } from '/scripts/lib-franklin.js';
 
     window.addEventListener('load', async () => {
-
-
       if (document.referrer) {
         const {
           origin,
@@ -53,5 +51,7 @@
   </main>
   <footer></footer>
 </body>
-
+<script type="module">
+  load404();
+</script>
 </html>
