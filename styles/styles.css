@@ -286,6 +286,7 @@ main.error {
 main.error h1 {
   font-size: 100px;
   color: var(--text-color);
+  width: 100%
 }
 
 @media screen and (min-width: 768px) {
