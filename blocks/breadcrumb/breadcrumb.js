@@ -2,7 +2,7 @@ import { fetchPlaceholders, getMetadata } from '../../scripts/lib-franklin.js';
 import { createTag } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
-  const locale = getMetadata('locale');
+  const locale = getMetadata('locale') || '/na/en';
   const placeholders = await fetchPlaceholders(locale);
 
   const regex = new RegExp(`^${locale}/(.*?)/?$`);
@@ -24,10 +24,13 @@ export default async function decorate(block) {
   let navTitle = getMetadata('nav-title');
   if (!navTitle) {
     const header = document.querySelector('h1');
-    const strong = header.querySelector('strong');
-    navTitle = (strong) ? strong.innerText : header.innerText;
+    const strong = header?.querySelector('strong');
+    navTitle = (strong) ? strong.innerText : header?.innerText;
   }
-  const crumb = createTag('li', { class: 'crumb' }, navTitle);
-  list.append(crumb);
-  block.innerHTML = list.outerHTML;
+
+  if (navTitle) {
+    const crumb = createTag('li', { class: 'crumb' }, navTitle);
+    list.append(crumb);
+    block.innerHTML = list.outerHTML;
+  }
 }

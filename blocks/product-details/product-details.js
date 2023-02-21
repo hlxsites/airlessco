@@ -123,7 +123,10 @@ const modalHtml = (placeholders, images) => {
 };
 
 const html = (placeholders, productInfo) => {
-  const images = productInfo.Images.split('\n');
+  const tmp = document.createElement('div');
+  tmp.innerHTML = productInfo.Images;
+  const images = [];
+  tmp.querySelectorAll('a').forEach((a) => images.push(a.getAttribute('href')));
 
   return `
     ${imagesHtml(placeholders, images)}

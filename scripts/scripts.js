@@ -11,7 +11,8 @@ import {
   decorateTemplateAndTheme,
   waitForLCP,
   loadBlocks,
-  loadCSS, getMetadata,
+  loadCSS,
+  getMetadata,
 } from './lib-franklin.js';
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
@@ -98,7 +99,7 @@ export function decorateMain(main) {
  * loads everything needed to get to LCP.
  */
 async function loadEager(doc) {
-  const locale = getMetadata('locale');
+  const locale = getMetadata('locale') || '/na/en';
   document.documentElement.lang = locale.replace(/\/\w+\/(\w+)\/?/, '$1');
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
@@ -134,39 +135,14 @@ export function createTag(tag, attributes, html = undefined) {
 
 /**
  * Gets details about products in product master sheet
-* @param {String} productFamily,
-* @param {String} productName
-* @param {Array} productFields
+ * @param {String} productFamilyData,
+ * @param {String} productName
  */
-
 export async function lookupProductData(productFamilyData, productName) {
   const resp = await fetch(productFamilyData);
   const json = await resp.json();
   const filteredProduct = json.data.filter((e) => e.Name === productName);
   return filteredProduct.length > 0 ? filteredProduct[0] : undefined;
-}
-
-/**
- * Gets details about products in product master sheet
-* @param {String} productSheetURL,
-* @param {Array} productNames
-*/
-
-export async function lookupProductComparisionData(productSheetURL, productNames) {
-  const resp = await fetch(productSheetURL);
-  const json = await resp.json();
-  window.productData = json.data;
-  const filteredProduct = [];
-  const productInfo = [];
-  productNames.forEach((productName, index) => {
-    filteredProduct[index] = window.productData.filter((e) => e.Name.toLowerCase()
-     === productName.toLowerCase());
-  });
-  filteredProduct.forEach((element) => {
-    productInfo.push([element[0]]);
-  });
-  const result = productInfo;
-  return (result);
 }
 
 /**
@@ -201,20 +177,10 @@ async function loadLazy(doc) {
   loadFooter(doc.querySelector('footer'));
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
-  addFavIcon(`${window.hlx.codeBasePath}/styles/favicon.svg`);
+  addFavIcon(`${window.hlx.codeBasePath}/styles/favicon.ico`);
   sampleRUM('lazy');
   sampleRUM.observe(main.querySelectorAll('div[data-block-name]'));
   sampleRUM.observe(main.querySelectorAll('picture > img'));
-}
-
-export async function lookupFiles(fileSource, category, locale) {
-  const resp = await fetch(fileSource);
-  const json = await resp.json();
-  window.fileSource = json.data;
-  const filteredFilesCategory = window.fileSource.filter((e) => e.Category.toLowerCase() === category.toLowerCase());
-  const filteredLocaleFiles = filteredFilesCategory.filter((e) => e.Locale.toLowerCase() === locale.toLowerCase());
-
-  return (filteredLocaleFiles);
 }
 
 /**
@@ -225,6 +191,31 @@ function loadDelayed() {
   // eslint-disable-next-line import/no-cycle
   window.setTimeout(() => import('./delayed.js'), 3000);
   // load anything that can be postponed to the latest here
+}
+
+/**
+ *
+ * @returns {Promise<void>}
+ */
+export async function load404() {
+  const tokens = document.location.pathname.split('/');
+  let html;
+  tokens.pop(); // Remove the missing page.
+
+  while (tokens.length) {
+    // eslint-disable-next-line no-await-in-loop
+    const resp = await fetch(`${tokens.join('/')}/404.plain.html`);
+    if (resp.ok) {
+      // eslint-disable-next-line no-await-in-loop
+      html = await resp.text();
+      break;
+    }
+    tokens.pop();
+  }
+
+  if (html) {
+    document.querySelector('main').innerHTML = html;
+  }
 }
 
 async function loadPage() {

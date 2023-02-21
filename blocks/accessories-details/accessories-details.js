@@ -72,7 +72,7 @@ export default async function decorate(block) {
           link.classList.add('resource-link');
         });
 
-        const anchor = cell.querySelector('.button-container>a');
+        const anchor = cell.querySelector('a');
         if (anchor && anchor.href.includes('.json')) {
           cell.removeAttribute('class');
           if (cells.length === 1) cell.classList.add('row-span');

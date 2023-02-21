@@ -6,45 +6,27 @@
   <script type="text/javascript">
     window.isErrorPage = true;
     window.errorCode = '404';
+
+    // Looking for a better way to do this still...
+    const locale = document.location.pathname.replace(/(\/\w+\/\w+)\/.*/, '$1');
+    const meta = document.createElement('meta');
+    meta.setAttribute('name', 'locale');
+    meta.setAttribute('content', locale);
+    document.querySelector('head').append(meta);
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta property="og:title" content="Page not found">
   <script src="/scripts/scripts.js" type="module" crossorigin="use-credentials"></script>
   <script type="module">
     import { sampleRUM } from '/scripts/lib-franklin.js';
+    import { load404 } from '/scripts/scripts.js';
 
-    window.addEventListener('load', () => {
-      if (document.referrer) {
-        const { origin, pathname } = new URL(document.referrer);
-        if (origin === window.location.origin) {
-          const backBtn = document.createElement('a');
-          backBtn.classList.add('button', 'error-button-back');
-          backBtn.href = pathname;
-          backBtn.textContent = 'Go back';
-          backBtn.title = 'Go back';
-          const btnContainer = document.querySelector('.button-container');
-          btnContainer.append(backBtn);
-        }
-      }
+    window.addEventListener('load', async () => {
       sampleRUM('404', { source: document.referrer, target: window.location.href });
+      await load404();
     });
   </script>
   <link rel="stylesheet" href="/styles/styles.css">
-  <style>
-    main.error {
-      min-height: calc(100vh - var(--nav-height));
-      display: flex;
-      align-items: center;
-    }
-
-    main.error .error-number {
-      width: 100%;
-    }
-
-    main.error .error-number text {
-      font-family: var(--fixed-font-family);
-    }
-  </style>
   <link rel="stylesheet" href="/styles/lazy-styles.css">
 </head>
 
@@ -63,5 +45,4 @@
   </main>
   <footer></footer>
 </body>
-
 </html>

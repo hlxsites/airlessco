@@ -71,13 +71,14 @@ async function buildMobileButton(locale) {
   const wrapper = document.createElement('div');
   wrapper.classList.add('navbar-mobile-toggle-wrapper');
 
-  const button = document.createElement('div');
+  const button = document.createElement('button');
   button.classList.add('navbar-mobile-toggle');
   wrapper.appendChild(button);
 
   button.setAttribute('data-toggle', 'navbar');
   button.setAttribute('aria-expanded', 'false');
   button.setAttribute('aria-controls', 'navbar');
+  button.setAttribute('aria-label', 'nav-mobile');
 
   const placeholders = await fetchPlaceholders(locale);
 
@@ -115,7 +116,7 @@ export default async function decorate(block) {
   block.textContent = '';
 
   // fetch nav content
-  const navPath = getMetadata('locale');
+  const navPath = getMetadata('locale') || '/na/en';
   const resp = await fetch(`${navPath}/nav.plain.html`);
   if (resp.ok) {
     const html = await resp.text();
@@ -126,10 +127,11 @@ export default async function decorate(block) {
     // decorate nav DOM
     const nav = document.createElement('nav');
     const navbar = document.createElement('div');
+    navbar.setAttribute('id', 'navbar');
     navbar.classList.add('navbar');
     nav.append(navbar);
 
-    const locale = getMetadata('locale');
+    const locale = getMetadata('locale') || '/na/en';
     navbar.append(await buildMobileButton(locale));
     navbar.append(buildLangMenu(tmp.children[2], locale));
     navbar.append(buildHelpMenu(tmp.children[1]));
