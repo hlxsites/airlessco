@@ -135,8 +135,8 @@ export function createTag(tag, attributes, html = undefined) {
 
 /**
  * Gets details about products in product master sheet
-* @param {String} productFamilyData,
-* @param {String} productName
+ * @param {String} productFamilyData,
+ * @param {String} productName
  */
 export async function lookupProductData(productFamilyData, productName) {
   const resp = await fetch(productFamilyData);
@@ -191,6 +191,46 @@ function loadDelayed() {
   // eslint-disable-next-line import/no-cycle
   window.setTimeout(() => import('./delayed.js'), 3000);
   // load anything that can be postponed to the latest here
+}
+
+/**
+ *
+ * @returns {Promise<void>}
+ */
+export async function load404() {
+  const tokens = document.location.pathname.split('/');
+  let html;
+  tokens.pop(); // Remove the missing page.
+
+  while (tokens.length) {
+    // eslint-disable-next-line no-await-in-loop
+    const resp = await fetch(`${tokens.join('/')}/404.plain.html`);
+    if (resp.ok) {
+      // eslint-disable-next-line no-await-in-loop
+      html = await resp.text();
+      break;
+    }
+    tokens.pop();
+  }
+
+  if (html) {
+    document.querySelector('main').innerHTML = html;
+  }
+
+  if (document.referrer) {
+    const {
+      origin,
+      pathname,
+    } = new URL(document.referrer);
+    if (origin === window.location.origin) {
+      const backBtn = document.createElement('a');
+      backBtn.classList.add('button', 'error-button-back');
+      backBtn.href = pathname;
+      backBtn.textContent = 'Go back';
+      backBtn.title = 'Go back';
+      html.append(backBtn);
+    }
+  }
 }
 
 async function loadPage() {

@@ -24,10 +24,13 @@ export default async function decorate(block) {
   let navTitle = getMetadata('nav-title');
   if (!navTitle) {
     const header = document.querySelector('h1');
-    const strong = header.querySelector('strong');
-    navTitle = (strong) ? strong.innerText : header.innerText;
+    const strong = header?.querySelector('strong');
+    navTitle = (strong) ? strong.innerText : header?.innerText;
   }
-  const crumb = createTag('li', { class: 'crumb' }, navTitle);
-  list.append(crumb);
-  block.innerHTML = list.outerHTML;
+
+  if (navTitle) {
+    const crumb = createTag('li', { class: 'crumb' }, navTitle);
+    list.append(crumb);
+    block.innerHTML = list.outerHTML;
+  }
 }

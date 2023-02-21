@@ -12,24 +12,11 @@
   <script src="/scripts/scripts.js" type="module" crossorigin="use-credentials"></script>
   <script type="module">
     import { sampleRUM } from '/scripts/lib-franklin.js';
+    import { load404 } from '/scripts/scripts.js';
 
     window.addEventListener('load', async () => {
-      if (document.referrer) {
-        const {
-          origin,
-          pathname
-        } = new URL(document.referrer);
-        if (origin === window.location.origin) {
-          const backBtn = document.createElement('a');
-          backBtn.classList.add('button', 'error-button-back');
-          backBtn.href = pathname;
-          backBtn.textContent = 'Go back';
-          backBtn.title = 'Go back';
-          const btnContainer = document.querySelector('.button-container');
-          btnContainer.append(backBtn);
-        }
-      }
       sampleRUM('404', { source: document.referrer, target: window.location.href });
+      await load404();
     });
   </script>
   <link rel="stylesheet" href="/styles/styles.css">
@@ -51,9 +38,4 @@
   </main>
   <footer></footer>
 </body>
-<script type="module">
-  import { load404 } from '/scripts/scripts.js';
-
-  load404();
-</script>
 </html>
