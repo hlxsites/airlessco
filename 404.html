@@ -6,6 +6,13 @@
   <script type="text/javascript">
     window.isErrorPage = true;
     window.errorCode = '404';
+
+    // Looking for a better way to do this still...
+    const locale = document.location.pathname.replace(/(\/\w+\/\w+)\/.*/, '$1');
+    const meta = document.createElement('meta');
+    meta.setAttribute('name', 'locale');
+    meta.setAttribute('content', locale);
+    document.querySelector('head').append(meta);
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta property="og:title" content="Page not found">
