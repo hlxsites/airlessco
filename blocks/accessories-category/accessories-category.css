@@ -30,6 +30,7 @@
 .accessories-category .accessory-card .accessory-image img {
   max-width: 100%;
   min-height: 150px;
+  width: 100%;
 }
 
 .accessories-category .accessory-card .accessory-body {
@@ -55,7 +56,7 @@
   }
 
   .accessories-category .accessory-card .accessory-image img {
-    min-height: 198px;
+    height: 198px;
   }
 }
 
@@ -69,7 +70,7 @@
   }
 
   .accessories-category .accessory-card .accessory-image img {
-    min-height: 205px;
+    height: 205px;
   }
 }
 
@@ -83,6 +84,6 @@
   }
 
   .accessories-category .accessory-card .accessory-image img {
-    min-height: 227px;
+    height: 227px;
   }
 }
