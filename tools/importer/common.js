@@ -14,11 +14,6 @@ export function createMetadataBlock(main, document, url) {
     meta.Description = desc.content;
   }
 
-  // set the locale meta property
-  const urlNoHost = url.substring(url.indexOf('3001') + 4);
-  const locale = urlNoHost.split('/');
-  meta.Locale = `/${locale[1]}/${locale[2]}`;
-
   // helper to create the metadata block
   // eslint-disable-next-line no-undef
   const block = WebImporter.Blocks.getMetadataBlock(document, meta);
