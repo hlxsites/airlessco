@@ -14,9 +14,7 @@ function createSelect(fd) {
     option.value = o.trim();
     select.append(option);
   });
-  if (fd.Mandatory === 'x') {
-    select.setAttribute('required', 'required');
-  }
+  setConstraints(fd, select);
   return select;
 }
 
@@ -75,10 +73,9 @@ function createInput(fd) {
   const input = document.createElement('input');
   input.type = fd.Type;
   input.id = fd.Field;
+  input.name = fd.Field;
   input.setAttribute('placeholder', fd.Placeholder);
-  if (fd.Mandatory === 'x') {
-    input.setAttribute('required', 'required');
-  }
+  setConstraints(fd, input);
   return input;
 }
 
@@ -86,9 +83,7 @@ function createTextArea(fd) {
   const input = document.createElement('textarea');
   input.id = fd.Field;
   input.setAttribute('placeholder', fd.Placeholder);
-  if (fd.Mandatory === 'x') {
-    input.setAttribute('required', 'required');
-  }
+  setConstraints(fd, input);
   return input;
 }
 
@@ -96,10 +91,27 @@ function createLabel(fd) {
   const label = document.createElement('label');
   label.setAttribute('for', fd.Field);
   label.textContent = fd.Label;
-  if (fd.Mandatory === 'x') {
+  if (fd.Mandatory === 'true') {
     label.classList.add('required');
   }
   return label;
+}
+
+function setConstraints(fd, input) {
+  if (fd.Mandatory === 'true') {
+    input.setAttribute('required', true);
+  }
+}
+
+function createFieldWrapper(fd) {
+  const fieldWrapper = document.createElement('div');
+  const style = fd.Style ? ` form-${fd.Style}` : '';
+  const nameStyle = fd.Name ? ` form-${fd.Name}` : '';
+  const fieldId = `form-${fd.Type}-wrapper${style}${nameStyle}`;
+  fieldWrapper.className = fieldId;
+  fieldWrapper.classList.add('field-wrapper');
+  fieldWrapper.append(createLabel(fd));
+  return fieldWrapper;
 }
 
 function applyRules(form, rules) {
@@ -128,32 +140,27 @@ async function createForm(formURL) {
   form.dataset.action = pathname.split('.json')[0];
   json.data.forEach((fd) => {
     fd.Type = fd.Type || 'text';
-    const fieldWrapper = document.createElement('div');
-    const style = fd.Style ? ` form-${fd.Style}` : '';
-    const fieldId = `form-${fd.Type}-wrapper${style}`;
-    fieldWrapper.className = fieldId;
-    fieldWrapper.classList.add('field-wrapper');
+    const fieldWrapper = createFieldWrapper(fd);
     switch (fd.Type) {
       case 'select':
-        fieldWrapper.append(createLabel(fd));
         fieldWrapper.append(createSelect(fd));
         break;
       case 'heading':
-        fieldWrapper.append(createHeading(fd));
+        fieldWrapper.replaceChildren(createHeading(fd));
         break;
+      case 'radio':
       case 'checkbox':
-        fieldWrapper.append(createInput(fd));
-        fieldWrapper.append(createLabel(fd));
+        fieldWrapper.insertAdjacentElement('afterbegin', createInput(fd));
         break;
       case 'text-area':
-        fieldWrapper.append(createLabel(fd));
         fieldWrapper.append(createTextArea(fd));
         break;
       case 'submit':
-        fieldWrapper.append(createButton(fd));
+        let button = createButton(fd);
+        button.type = "submit";
+        fieldWrapper.replaceChildren(button);
         break;
       default:
-        fieldWrapper.append(createLabel(fd));
         fieldWrapper.append(createInput(fd));
     }
 
