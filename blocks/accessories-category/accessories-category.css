@@ -6,6 +6,10 @@
   padding-bottom: 0;
 }
 
+.accessories-category h2 strong {
+  color: var(--airless-link-dark);
+}
+
 .accessories-category > ul {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

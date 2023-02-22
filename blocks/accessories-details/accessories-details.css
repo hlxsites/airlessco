@@ -54,10 +54,6 @@ main .accessories-details > div > div[role="row"] > div:nth-child(1):not(.row-sp
   text-transform: uppercase;
 }
 
-main .accessories-details > div > div[role="row"] > div[role="columnheader"] {
-  text-transform: uppercase;
-}
-
 main .accessories-details > div > div > div[role="columnheader"]:nth-child(1) {
   width: 100%;
 }
@@ -82,7 +78,6 @@ main table.accessories :is(th, td) {
   border: 1px solid #ddd;
   border-bottom: 2px solid #ddd;
   line-height: 1.4286;
-  font-size: smaller;
   padding: 0 5px;
   min-width: 50px;
 }
@@ -103,7 +98,13 @@ main .table-striped > tbody > tr > td:nth-child(1) {
 }
 
 main .accessories-details h3 {
+  color: var(--airless-header-gray);
+  font-size: var(--body-font-size-s);
+}
+
+main .accessories-details h3 strong {
   color: var(--text-color);
+  font-size: var( --heading-font-size-l);
 }
 
 @media screen and (min-width: 768px) {
@@ -159,6 +160,7 @@ main .accessories-details h3 {
 
   main .accessories-details > div > div[role="row"] > div:first-of-type:not(.row-span) {
     flex-basis: 25%;
+    font-weight: 700;
   }
 }
 
