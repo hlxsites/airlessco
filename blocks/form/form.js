@@ -10,7 +10,7 @@ const validityKeyMsgMap = {
 
 function createSelect(fd) {
   const select = document.createElement('select');
-  select.id = fd.Field;
+  select.id = fd.Name;
   if (fd.Placeholder) {
     const ph = document.createElement('option');
     ph.textContent = fd.Placeholder;
@@ -108,8 +108,8 @@ function createHeading(fd) {
 function createInput(fd) {
   const input = document.createElement('input');
   input.type = fd.Type;
-  input.id = fd.Field;
-  input.name = fd.Field;
+  input.id = fd.Name;
+  input.name = fd.Name;
   input.setAttribute('placeholder', fd.Placeholder);
   setConstraints(fd, input);
   setErrorMessage(fd, input);
@@ -118,7 +118,7 @@ function createInput(fd) {
 
 function createTextArea(fd) {
   const input = document.createElement('textarea');
-  input.id = fd.Field;
+  input.id = fd.Name;
   input.setAttribute('placeholder', fd.Placeholder);
   setConstraints(fd, input);
   setErrorMessage(fd, input);
@@ -127,7 +127,7 @@ function createTextArea(fd) {
 
 function createLabel(fd) {
   const label = document.createElement('label');
-  label.setAttribute('for', fd.Field);
+  label.setAttribute('for', fd.Name);
   label.textContent = fd.Label;
   if (fd.Mandatory === 'true') {
     label.classList.add('required');
