@@ -4,6 +4,7 @@ function createSelect(fd) {
   if (fd.Placeholder) {
     const ph = document.createElement('option');
     ph.textContent = fd.Placeholder;
+    ph.value = "";
     ph.setAttribute('selected', '');
     ph.setAttribute('disabled', '');
     select.append(ph);
@@ -18,20 +19,37 @@ function createSelect(fd) {
   return select;
 }
 
-function constructPayload(form) {
-  const payload = {};
-  [...form.elements].forEach((fe) => {
-    if (fe.type === 'checkbox') {
-      if (fe.checked) payload[fe.id] = fe.value;
-    } else if (fe.id) {
-      payload[fe.id] = fe.value;
-    }
-  });
-  return payload;
+function valdiateElement(el) {
+  const errorSpan = el.parentNode.querySelector('span.error');
+  let valid = el?.checkValidity();
+  if(valid) {
+    el?.classList.remove('invalid');
+    errorSpan ? errorSpan.textContent = '' : null;
+  } else {
+    el?.classList.add('invalid');
+    errorSpan ? errorSpan.textContent = el.validationMessage : null;
+  }
+  return valid;
 }
 
-async function submitForm(form) {
-  const payload = constructPayload(form);
+function constructPayload(form) {
+  let invalid = false;
+  const payload = {};
+  [...form.elements].forEach((fe) => {
+    if(valdiateElement(fe)) {
+      if (fe.type === 'checkbox') {
+        if (fe.checked) payload[fe.id] = fe.value;
+      } else if (fe.id) {
+        payload[fe.id] = fe.value;
+      }
+    } else {
+      invalid = true;
+    }
+  });
+  return invalid ? false : payload;
+}
+
+async function submitForm(form, payload, redirectTo) {
   const resp = await fetch(form.dataset.action, {
     method: 'POST',
     cache: 'no-cache',
@@ -41,7 +59,7 @@ async function submitForm(form) {
     body: JSON.stringify({ data: payload }),
   });
   await resp.text();
-  return payload;
+  window.location.href = redirectTo;
 }
 
 function createButton(fd) {
@@ -51,12 +69,13 @@ function createButton(fd) {
   if (fd.Type === 'submit') {
     button.addEventListener('click', async (event) => {
       const form = button.closest('form');
-      if (form.checkValidity()) {
-        event.preventDefault();
-        button.setAttribute('disabled', '');
-        await submitForm(form);
-        const redirectTo = fd.Extra;
-        window.location.href = redirectTo;
+      event.preventDefault();
+      button.setAttribute('disabled', '');
+      const payload = constructPayload(form);
+      if(payload) {
+        await submitForm(form, payload, fd.Extra);
+      } else {
+        button.removeAttribute('disabled');
       }
     });
   }
@@ -114,6 +133,12 @@ function createFieldWrapper(fd) {
   return fieldWrapper;
 }
 
+function createErrorWrapper(fd) {
+  const span = document.createElement('span');
+  span.classList = 'error';
+  return span;
+}
+
 async function createForm(formURL) {
   const { pathname } = new URL(formURL);
   const resp = await fetch(pathname);
@@ -127,6 +152,7 @@ async function createForm(formURL) {
     switch (fd.Type) {
       case 'select':
         fieldWrapper.append(createSelect(fd));
+        fieldWrapper.append(createErrorWrapper());
         break;
       case 'heading':
         fieldWrapper.replaceChildren(createHeading(fd));
@@ -134,9 +160,11 @@ async function createForm(formURL) {
       case 'radio':
       case 'checkbox':
         fieldWrapper.insertAdjacentElement('afterbegin', createInput(fd));
+        fieldWrapper.append(createErrorWrapper());
         break;
       case 'text-area':
         fieldWrapper.append(createTextArea(fd));
+        fieldWrapper.append(createErrorWrapper());
         break;
       case 'submit':
         let button = createButton(fd);
@@ -145,9 +173,11 @@ async function createForm(formURL) {
         break;
       default:
         fieldWrapper.append(createInput(fd));
+        fieldWrapper.append(createErrorWrapper());
     }
 
     form.append(fieldWrapper);
+    form.addEventListener("change", (event) => valdiateElement(event.target))
   });
 
   return (form);
