@@ -1,9 +1,21 @@
+:root {
+    --form-invalid-border-color: #ff5f3f;
+}
+
 main .form {
     background-color: white;
     padding: var(--spacing-m);
-    box-shadow: 0 1px 6px rgb(34 34 34 / 10%);
 }
 
+main .form form {
+    display: grid;
+    grid-template-columns: 1fr;
+    column-gap: 130px;
+}
+
+main .form form .field-wrapper {
+    margin-top: 20px;
+}
 main .form h2 {
     padding: var(--spacing-m) 0;
     font-size: var(--type-heading-l-lh);
@@ -17,16 +29,29 @@ main .form h3 {
     text-transform: uppercase;
 }
 
+.error {
+    display: inline-block;
+    padding: 5px 0;
+    color: var(--form-invalid-border-color);
+}
+
+.invalid {
+    border: 2px solid var(--form-invalid-border-color);
+}
 main .form input,
 main .form textarea,
 main .form select {
-    border: 1px solid rgb(193 193 195);
-    padding: 11px;
-    border-radius: 0;
-    width: 100%;
-    max-width: 50rem;
-    box-sizing: border-box;
-    margin-top: 4px;
+    width: calc(100% - 16px);
+    height: 40px;
+    color: #666;
+    margin-top: 10px;
+    padding-left: 10px;
+    font-size: 1rem;
+}
+main .form input[type='checkbox'],
+main .form input[type='radio'] {
+    width: auto;
+    height: auto;
 }
 
 main .form textarea {
@@ -40,23 +65,18 @@ main .form select:hover {
 
 main .form label {
     width: 100%;
-    display: block;
     font-size: var(--type-body-s-size);
     line-height: var(--type-body-s-lh);
     padding-bottom: var(--spacing-xs);
-    text-transform: uppercase;
     box-sizing: border-box;
     font-weight: 800;
+    color: #666;
 }
 
 main .form label.required::after {
     content: "*";
-    color: red;
+    color: black;
     padding-left: 5px;
-}
-
-main .form .field-wrapper {
-    margin-bottom: 20px;
 }
 
 main .form .form-checkbox-wrapper {
@@ -92,20 +112,72 @@ main .form .form-checkbox-wrapper label {
     text-transform: none;
     display: block;
 }
+h1 {
+    font-weight: 700;
+}
 
 main .form .button {
+    color: #fff;
     cursor: pointer;
-    background: rgb(20 115 230);
-    color: white;
-    border-radius: 16px;
-    font-size: var(--type-body-s-size);
-    font-weight: 300;
-    padding: 6px 16px;
-    border: none;
-    font-family: adobe-clean, 'Trebuchet MS', sans-serif;
+    background: var(--airless-blue);
+    margin-top: 20px;
+    padding: 0 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    position: relative;
+    border: 1px transparent
 }
 
-main .form .form-submit-wrapper {
-    display: flex;
-    justify-content: flex-end;
+
+@media (min-width: 576px) {
+    
+    .form-container {
+        max-width: 540px;
+    }
 }
+  
+  @media (min-width: 768px) {
+    .form-container {
+        max-width: 720px;
+        margin: 0 auto 10px;
+    }
+  
+     form {
+        width: unset;
+        column-gap: 30px;
+        flex-flow: wrap row;
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .form-container {
+        max-width: 960px;
+        row-gap: 58px;
+    }
+    
+    main .form form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+  
+     h5 {
+        font-size: 20px;
+        line-height: 28px;
+    }
+  
+     form {
+        column-gap: 130px;
+    }
+  }
+  
+  @media (min-width: 1200px) {
+    .form-container {
+        max-width: 1140px;
+    }
+    
+    main .form form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+  }
+  
