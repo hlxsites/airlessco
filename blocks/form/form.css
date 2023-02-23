@@ -181,3 +181,24 @@ main .form .button {
     }
   }
   
+
+  #how-can-we-help, #give-us--a-call {
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--airless-blue);
+    font-size: var(--heading-font-size-l);
+  }
+
+  .form-question {
+    grid-row: 7/10;
+  }
+
+  main .form form  .form-sign_up {
+    margin: 0px;
+  }
+
+.form-submit-wrapper button{
+    padding: 0 20px;
+    line-height: 4em;
+    text-transform: uppercase;
+}
