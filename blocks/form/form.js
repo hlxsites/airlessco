@@ -1,4 +1,5 @@
 const validityKeyMsgMap = {
+  typeMismatch: "ErrorMessageInvalid",
   badInput: "ErrorMessageRequired",
   patternMismatch: "ErrorMessagePattern",
   rangeOverflow: "ErrorMessageMax",
@@ -49,7 +50,7 @@ function valdiateElement(el) {
   return valid;
 }
 
-function constructPayload(form) {
+function validateAndConstructPayload(form) {
   let invalid = false;
   const payload = {};
   [...form.elements].forEach((fe) => {
@@ -82,20 +83,10 @@ async function submitForm(form, payload, redirectTo) {
 function createButton(fd) {
   const button = document.createElement('button');
   button.textContent = fd.Label;
+  button.type = fd.Type;
   button.classList.add('button');
-  if (fd.Type === 'submit') {
-    button.addEventListener('click', async (event) => {
-      const form = button.closest('form');
-      event.preventDefault();
-      button.setAttribute('disabled', '');
-      const payload = constructPayload(form);
-      if(payload) {
-        await submitForm(form, payload, fd.Extra);
-      } else {
-        button.removeAttribute('disabled');
-      }
-    });
-  }
+  button.dataset.redirect = fd.redirect || "thankyou";
+  button.name = fd.Name;
   return button;
 }
 
@@ -185,6 +176,7 @@ async function createForm(formURL) {
   const resp = await fetch(pathname);
   const json = await resp.json();
   const form = document.createElement('form');
+  form.setAttribute('novalidate', 'true');
   // eslint-disable-next-line prefer-destructuring
   form.dataset.action = pathname.split('.json')[0];
   json.data.forEach((fd) => {
@@ -195,7 +187,7 @@ async function createForm(formURL) {
         fieldWrapper.append(createSelect(fd));
         fieldWrapper.append(createErrorWrapper());
         break;
-      case 'label': 
+      case 'label':
         break;
       case 'heading':
         fieldWrapper.replaceChildren(createHeading(fd));
@@ -223,7 +215,15 @@ async function createForm(formURL) {
     form.addEventListener("change", (event) => valdiateElement(event.target))
   });
 
-  return (form);
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let payload = validateAndConstructPayload(form);
+    if (payload) {
+      e.submitter?.setAttribute('disabled', '');
+      submitForm(form, payload, e.submitter.dataset?.redirect)
+    }
+  });
+  return form;
 }
 
 export default async function decorate(block) {
