@@ -1,3 +1,13 @@
+const validityKeyMsgMap = {
+  badInput: "ErrorMessageRequired",
+  patternMismatch: "ErrorMessagePattern",
+  rangeOverflow: "ErrorMessageMax",
+  rangeUnderflow: "ErrorMessageMin",
+  tooLong: "ErrorMessageMax",
+  tooShort: "ErrorMessageMin",
+  valueMissing: "ErrorMessageRequired"
+}
+
 function createSelect(fd) {
   const select = document.createElement('select');
   select.id = fd.Field;
@@ -16,6 +26,7 @@ function createSelect(fd) {
     select.append(option);
   });
   setConstraints(fd, select);
+  setErrorMessage(fd, select);
   return select;
 }
 
@@ -27,7 +38,13 @@ function valdiateElement(el) {
     errorSpan ? errorSpan.textContent = '' : null;
   } else {
     el?.classList.add('invalid');
-    errorSpan ? errorSpan.textContent = el.validationMessage : null;
+    Object.keys(validityKeyMsgMap)?.every((key) => {
+      if(el.validity[key] && errorSpan) {
+        errorSpan.textContent = el?.dataset[validityKeyMsgMap[key]] || el.validationMessage
+        return false
+      }
+      return true;
+    });
   }
   return valid;
 }
@@ -95,6 +112,7 @@ function createInput(fd) {
   input.name = fd.Field;
   input.setAttribute('placeholder', fd.Placeholder);
   setConstraints(fd, input);
+  setErrorMessage(fd, input);
   return input;
 }
 
@@ -103,6 +121,7 @@ function createTextArea(fd) {
   input.id = fd.Field;
   input.setAttribute('placeholder', fd.Placeholder);
   setConstraints(fd, input);
+  setErrorMessage(fd, input);
   return input;
 }
 
@@ -120,6 +139,14 @@ function setElementProps(element, key, value) {
   if(value) {
     element.setAttribute(key, value);
   }
+}
+
+function setErrorMessage(fd, element) {
+  Object.keys(fd).forEach((key) => {
+    if(key?.startsWith("Error Message") && fd[key]) {
+      element.dataset[key?.replaceAll(" ","")] = fd[key]
+    }
+  });
 }
 
 function setConstraints(fd, element) {
