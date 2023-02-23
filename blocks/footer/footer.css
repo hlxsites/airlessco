@@ -35,12 +35,12 @@ footer .air-footer {
 .air-footer-compressed, .copyright {
   width: 100%;
   text-align: center;
-  font-size: var(--body-font-size-m);
+  font-size: var(--body-font-size-xs);
   margin: 10px 5px;
 }
 
 .copyright {
-  font-size: var(--body-font-size-xs);
+  font-size: var(--body-font-size-xxs);
   line-height: 1.5;
 }
 
@@ -62,13 +62,13 @@ footer .air-footer {
 }
 
 .air-footer .logo > picture > img {
-  width: 202px;
-  height: 187px;
+  width: 165px;
+  height: 153px;
 }
 
 .air-footer .flag > picture > img {
-  width: 192px;
-  height: 130px;
+  width: 145px;
+  height: 98px;
 }
 
 .air-footer .air-footer-compressed > p {

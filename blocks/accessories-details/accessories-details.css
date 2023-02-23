@@ -92,9 +92,12 @@ main .table-striped > tbody > tr > td {
 }
 
 main .table-striped > tbody > tr > td:nth-child(1) {
-  width: 32%;
-  min-width: 136px;
   text-align: unset;
+}
+
+main .table-striped > thead > tr > th:nth-child(1) {
+  text-align: left;
+  padding-left: 8px;
 }
 
 main .accessories-details h3 {
@@ -150,6 +153,11 @@ main .accessories-details h3 strong {
 }
 
 @media screen and (min-width: 1024px) {
+  main .table-striped > tbody > tr > td:nth-child(1) {
+    width: 32%;
+    min-width: 136px;
+  }
+
   main .accessories-details-container .default-content-wrapper img {
     height: 212px;
   }

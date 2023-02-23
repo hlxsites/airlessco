@@ -102,6 +102,7 @@ h1 {
 h1 b, h1 strong {
   text-transform: uppercase;
   padding-right: 5px;
+  word-wrap: break-word;
 }
 
 h1 a {
@@ -211,7 +212,7 @@ main .section.page-title-container {
 
 main .section.card-heading h3 {
   font-weight: 400;
-  line-height: 1;
+  line-height: 1.6;
   color: var(--airless-header-gray);
   font-size: calc(var(--heading-font-size-l) * .65);
 }
