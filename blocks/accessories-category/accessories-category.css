@@ -6,6 +6,10 @@
   padding-bottom: 0;
 }
 
+.accessories-category h2 strong {
+  color: var(--airless-link-dark);
+}
+
 .accessories-category > ul {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -41,7 +45,8 @@
   }
 
   .accessories-category .accessory-card .accessory-image img {
-    min-height: 205px;
+    height: 205px;
+    width: 205px;
   }
 }
 
@@ -51,7 +56,8 @@
   }
 
   .accessories-category .accessory-card .accessory-image img {
-    min-height: 198px;
+    height: 194px;
+    width: 194px;
   }
 }
 
@@ -65,7 +71,8 @@
   }
 
   .accessories-category .accessory-card .accessory-image img {
-    min-height: 205px;
+    height: 205px;
+    width: 205px;
   }
 }
 
@@ -79,6 +86,12 @@
   }
 
   .accessories-category .accessory-card .accessory-image img {
-    min-height: 363px;
+  height: 227px;
+    width: 227px;
+  }
+
+  .accessories-landing-template .accessories-category .accessory-card .accessory-image img {
+    height: 363px;
+    width: 363px;
   }
 }

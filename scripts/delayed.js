@@ -25,21 +25,17 @@ loadScript('/scripts/sortable.min.js', {
   charset: 'UTF-8',
 });
 
-loadScript('https://www.google-analytics.com/analytics.js', {
-  type: 'text/javascript',
-  charset: 'UTF-8',
-});
+//  Load Google Tag Manager
 
-// Google Analytics Tracking
-const func = 'ga';
-window.GoogleAnalyticsObject = func;
-// eslint-disable-next-line no-unused-expressions,func-names
-window[func] = window[func] || function () {
-  // eslint-disable-next-line prefer-rest-params
-  (window[func].q = window[func].q || []).push(arguments);
-// eslint-disable-next-line no-sequences
-}, window[func].l = 1 * new Date();
-// eslint-disable-next-line no-undef
-ga('create', 'UA-81622380-1', 'auto');
-// eslint-disable-next-line no-undef
-ga('send', 'pageview');
+const fireGTM = (w, d, s, l, i) => {
+  w[l] = w[l] || [];
+  w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+  const f = d.getElementsByTagName(s)[0];
+  const j = d.createElement(s);
+  const dl = l !== 'dataLayer' ? `&l=${l}` : '';
+  j.async = true;
+  j.src = `https://www.googletagmanager.com/gtm.js?id=${i}${dl}`;
+  f.parentNode.insertBefore(j, f);
+};
+
+fireGTM(window, document, 'script', 'dataLayer', 'GTM-WZ7D96C');
