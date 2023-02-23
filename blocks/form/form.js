@@ -195,6 +195,8 @@ async function createForm(formURL) {
         fieldWrapper.append(createSelect(fd));
         fieldWrapper.append(createErrorWrapper());
         break;
+      case 'label': 
+        break;
       case 'heading':
         fieldWrapper.replaceChildren(createHeading(fd));
         break;
