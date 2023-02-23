@@ -116,9 +116,23 @@ function createLabel(fd) {
   return label;
 }
 
-function setConstraints(fd, input) {
+function setElementProps(element, key, value) {
+  if(value) {
+    element.setAttribute(key, value);
+  }
+}
+
+function setConstraints(fd, element) {
   if (fd.Mandatory === 'true') {
-    input.setAttribute('required', true);
+    element.setAttribute('required', true);
+  }
+  setElementProps(element, "pattern", fd.pattern);
+  if(element.type == 'number') {
+    setElementProps(element, "max", fd.Max);
+    setElementProps(element, "min", fd.Min);
+  } else {
+    setElementProps(element, "maxlength", fd.Max);
+    setElementProps(element, "minlength", fd.Min);
   }
 }
 
