@@ -1,12 +1,40 @@
 const validityKeyMsgMap = {
-  typeMismatch: "ErrorMessageInvalid",
-  badInput: "ErrorMessageRequired",
-  patternMismatch: "ErrorMessagePattern",
-  rangeOverflow: "ErrorMessageMax",
-  rangeUnderflow: "ErrorMessageMin",
-  tooLong: "ErrorMessageMax",
-  tooShort: "ErrorMessageMin",
-  valueMissing: "ErrorMessageRequired"
+  typeMismatch: 'ErrorMessageInvalid',
+  badInput: 'ErrorMessageRequired',
+  patternMismatch: 'ErrorMessagePattern',
+  rangeOverflow: 'ErrorMessageMax',
+  rangeUnderflow: 'ErrorMessageMin',
+  tooLong: 'ErrorMessageMax',
+  tooShort: 'ErrorMessageMin',
+  valueMissing: 'ErrorMessageRequired',
+};
+
+function setElementProps(element, key, value) {
+  if (value) {
+    element.setAttribute(key, value);
+  }
+}
+
+function setConstraints(fd, element) {
+  if (fd.Mandatory === 'true') {
+    element.setAttribute('required', true);
+  }
+  setElementProps(element, 'pattern', fd.pattern);
+  if (element.type === 'number') {
+    setElementProps(element, 'max', fd.Max);
+    setElementProps(element, 'min', fd.Min);
+  } else {
+    setElementProps(element, 'maxlength', fd.Max);
+    setElementProps(element, 'minlength', fd.Min);
+  }
+}
+
+function setErrorMessage(fd, element) {
+  Object.keys(fd).forEach((key) => {
+    if (key?.startsWith('Error Message') && fd[key]) {
+      element.dataset[key?.replaceAll(' ', '')] = fd[key];
+    }
+  });
 }
 
 function createSelect(fd) {
@@ -15,7 +43,7 @@ function createSelect(fd) {
   if (fd.Placeholder) {
     const ph = document.createElement('option');
     ph.textContent = fd.Placeholder;
-    ph.value = "";
+    ph.value = '';
     ph.setAttribute('selected', '');
     ph.setAttribute('disabled', '');
     select.append(ph);
@@ -33,16 +61,18 @@ function createSelect(fd) {
 
 function valdiateElement(el) {
   const errorSpan = el.parentNode.querySelector('span.error');
-  let valid = el?.checkValidity();
-  if(valid) {
+  const valid = el?.checkValidity();
+  if (valid) {
     el?.classList.remove('invalid');
-    errorSpan ? errorSpan.textContent = '' : null;
+    if (errorSpan) {
+      errorSpan.textContent = '';
+    }
   } else {
     el?.classList.add('invalid');
     Object.keys(validityKeyMsgMap)?.every((key) => {
-      if(el.validity[key] && errorSpan) {
-        errorSpan.textContent = el?.dataset[validityKeyMsgMap[key]] || el.validationMessage
-        return false
+      if (el.validity[key] && errorSpan) {
+        errorSpan.textContent = el?.dataset[validityKeyMsgMap[key]] || el.validationMessage;
+        return false;
       }
       return true;
     });
@@ -54,7 +84,7 @@ function validateAndConstructPayload(form) {
   let invalid = false;
   const payload = {};
   [...form.elements].forEach((fe) => {
-    if(valdiateElement(fe)) {
+    if (valdiateElement(fe)) {
       if (fe.type === 'checkbox') {
         if (fe.checked) payload[fe.id] = fe.value;
       } else if (fe.id) {
@@ -85,7 +115,7 @@ function createButton(fd) {
   button.textContent = fd.Label;
   button.type = fd.Type;
   button.classList.add('button');
-  button.dataset.redirect = fd.redirect || "thankyou";
+  button.dataset.redirect = fd.redirect || 'thankyou';
   button.name = fd.Name;
   return button;
 }
@@ -126,34 +156,6 @@ function createLabel(fd) {
   return label;
 }
 
-function setElementProps(element, key, value) {
-  if(value) {
-    element.setAttribute(key, value);
-  }
-}
-
-function setErrorMessage(fd, element) {
-  Object.keys(fd).forEach((key) => {
-    if(key?.startsWith("Error Message") && fd[key]) {
-      element.dataset[key?.replaceAll(" ","")] = fd[key]
-    }
-  });
-}
-
-function setConstraints(fd, element) {
-  if (fd.Mandatory === 'true') {
-    element.setAttribute('required', true);
-  }
-  setElementProps(element, "pattern", fd.pattern);
-  if(element.type == 'number') {
-    setElementProps(element, "max", fd.Max);
-    setElementProps(element, "min", fd.Min);
-  } else {
-    setElementProps(element, "maxlength", fd.Max);
-    setElementProps(element, "minlength", fd.Min);
-  }
-}
-
 function createFieldWrapper(fd) {
   const fieldWrapper = document.createElement('div');
   const style = fd.Style ? ` form-${fd.Style}` : '';
@@ -165,7 +167,7 @@ function createFieldWrapper(fd) {
   return fieldWrapper;
 }
 
-function createErrorWrapper(fd) {
+function createErrorWrapper() {
   const span = document.createElement('span');
   span.classList = 'error';
   return span;
@@ -182,6 +184,7 @@ async function createForm(formURL) {
   json.data.forEach((fd) => {
     fd.Type = fd.Type || 'text';
     const fieldWrapper = createFieldWrapper(fd);
+    let tmp;
     switch (fd.Type) {
       case 'select':
         fieldWrapper.append(createSelect(fd));
@@ -202,9 +205,9 @@ async function createForm(formURL) {
         fieldWrapper.append(createErrorWrapper());
         break;
       case 'submit':
-        let button = createButton(fd);
-        button.type = "submit";
-        fieldWrapper.replaceChildren(button);
+        tmp = createButton(fd);
+        tmp.type = 'submit';
+        fieldWrapper.replaceChildren(tmp);
         break;
       default:
         fieldWrapper.append(createInput(fd));
@@ -212,22 +215,22 @@ async function createForm(formURL) {
     }
 
     form.append(fieldWrapper);
-    form.addEventListener("change", (event) => valdiateElement(event.target))
+    form.addEventListener('change', (event) => valdiateElement(event.target));
   });
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    let payload = validateAndConstructPayload(form);
+    const payload = validateAndConstructPayload(form);
     if (payload) {
       e.submitter?.setAttribute('disabled', '');
-      submitForm(form, payload, e.submitter.dataset?.redirect)
+      submitForm(form, payload, e.submitter.dataset?.redirect);
     }
   });
   return form;
 }
 
 export default async function decorate(block) {
-  const form = block.querySelector('a[href$=".json"]');
+  const form = block.querySelector("a[href$='.json']");
   if (form) {
     form.replaceWith(await createForm(form.href));
   }

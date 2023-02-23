@@ -16,6 +16,7 @@ main .form form {
 main .form form .field-wrapper {
     margin-top: 20px;
 }
+
 main .form h2 {
     padding: var(--spacing-m) 0;
     font-size: var(--type-heading-l-lh);
@@ -38,6 +39,7 @@ main .form h3 {
 .invalid {
     border: 2px solid var(--form-invalid-border-color);
 }
+
 main .form input,
 main .form textarea,
 main .form select {
@@ -48,6 +50,7 @@ main .form select {
     padding-left: 10px;
     font-size: 1rem;
 }
+
 main .form input[type='checkbox'],
 main .form input[type='radio'] {
     width: auto;
@@ -112,6 +115,7 @@ main .form .form-checkbox-wrapper label {
     text-transform: none;
     display: block;
 }
+
 h1 {
     font-weight: 700;
 }
@@ -128,9 +132,7 @@ main .form .button {
     border: 1px transparent
 }
 
-
 @media (min-width: 576px) {
-    
     .form-container {
         max-width: 540px;
     }
@@ -154,6 +156,10 @@ main .form .button {
         max-width: 960px;
         row-gap: 58px;
     }
+  
+    form {
+       column-gap: 130px;
+   }
     
     main .form form {
         display: grid;
@@ -163,10 +169,6 @@ main .form .button {
      h5 {
         font-size: 20px;
         line-height: 28px;
-    }
-  
-     form {
-        column-gap: 130px;
     }
   }
   
@@ -180,8 +182,8 @@ main .form .button {
         grid-template-columns: 1fr 1fr;
     }
   }
-  
 
+  /* eslint-disable-next-line, selector-id-pattern */
   #how-can-we-help, #give-us--a-call {
     font-weight: 700;
     line-height: 1.1;
@@ -193,8 +195,8 @@ main .form .button {
     grid-row: 7/10;
   }
 
-  main .form form  .form-sign_up {
-    margin: 0px;
+  main .form form .form-radio-wrapper{
+    margin: 0;
   }
 
 .form-submit-wrapper button{
