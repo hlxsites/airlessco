@@ -266,13 +266,13 @@ main .section.support-links > div > p {
 }
 
 main a.resource-link[href*=".findManual"]::before,
-.resources > .data > a[href*=".findManual"]::before {
+.resources > .data a[href*=".findManual"]::before {
   content: "\f1c1  ";
   font-family: fontawesome, sans-serif;
 }
 
 main a.resource-link[href$=".pdf"]::before,
-.resources > .data > a[href$=".pdf"]::before {
+.resources > .data a[href$=".pdf"]::before {
   content: "\f1c1  ";
   font-family: fontawesome, sans-serif;
 }
