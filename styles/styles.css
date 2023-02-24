@@ -211,7 +211,7 @@ main .section.page-title-container {
 
 main .section.card-heading h3 {
   font-weight: 400;
-  line-height: 1;
+  line-height: 1.6;
   color: var(--airless-header-gray);
   font-size: calc(var(--heading-font-size-l) * .65);
 }
@@ -266,13 +266,13 @@ main .section.support-links > div > p {
 }
 
 main a.resource-link[href*=".findManual"]::before,
-.resources > .data > a[href*=".findManual"]::before {
+.resources > .data a[href*=".findManual"]::before {
   content: "\f1c1  ";
   font-family: fontawesome, sans-serif;
 }
 
 main a.resource-link[href$=".pdf"]::before,
-.resources > .data > a[href$=".pdf"]::before {
+.resources > .data a[href$=".pdf"]::before {
   content: "\f1c1  ";
   font-family: fontawesome, sans-serif;
 }

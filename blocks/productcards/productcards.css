@@ -11,7 +11,6 @@ h1#accessories-title strong {
 
 .card-heading.productcards-container {
   padding-bottom: 50px;
-  width: 83.333%;
   margin: 0 auto;
 }
 
@@ -57,7 +56,8 @@ h1#accessories-title strong {
 }
 
 @media screen and (min-width: 1024px) {
-  .productcards-container {
+  .card-heading.productcards-container {
+    width: 83.333%;
     margin: 0 auto;
   }
 
