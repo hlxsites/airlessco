@@ -8,36 +8,65 @@ const breakpoints = [
   { width: '768' },
 ];
 
-const imagesHtml = (placeholders, images) => {
-  let figureHtml = '';
-  let thumbnailHtml = '';
-
-  for (let i = 0; i < images.length; i += 1) {
-    const image = images[i];
-    let eager = false;
-    if (i === 0) {
-      eager = true;
-    }
-    figureHtml += `
-    <figure class="zoom ${i === 0 ? 'active' : ''}" data-figure="figure-${i}">
-      ${createOptimizedPicture(image, placeholders.productImageAltLabel, eager, breakpoints).outerHTML}
-    </figure>
-    `;
-
-    const dom = createOptimizedPicture(image, placeholders.productImageAltLabel, false, [{ width: 200 }]);
-    thumbnailHtml += `<a href="#" class="product-thumbnail ${i === 0 ? 'active' : ''}" data-figure="figure-${i}">${dom.outerHTML}</a>`;
+/**
+ * @returns {Promise<NodeList>}
+ */
+const fetchImages = async () => {
+  const name = document.location.pathname.replace(/^.*\/([^/]*)$/, '$1');
+  const resp = await fetch(`/images/products/${name}.plain.html`);
+  if (resp.ok) {
+    const tmp = document.createElement('div');
+    tmp.innerHTML = await resp.text();
+    return tmp.querySelectorAll('picture');
   }
+  return undefined;
+};
 
-  const thumbnails = images.length > 1 ? `<div class="thumbnails">${thumbnailHtml}</div>` : '';
+/**
+ * @param {NodeList} images
+ */
+const imagesHtml = async () => {
+  const images = await fetchImages();
+  const wrapper = document.createElement('div');
+  wrapper.classList.add('images-wrapper');
 
-  return `
-    <div class="images-wrapper">
-      <div class="figures">
-        ${figureHtml}
-      </div>
-      ${thumbnails}
-    </div>
-  `;
+  const figures = document.createElement('div');
+  figures.classList.add('figures');
+  wrapper.append(figures);
+
+  const thumbnails = document.createElement('div');
+  thumbnails.classList.add('thumbnails');
+  wrapper.append(thumbnails);
+
+  let i = 0;
+  Object.values(images).forEach((picture) => {
+    const img = picture.querySelector('img');
+
+    const fig = document.createElement('figure');
+    fig.classList.add('zoom');
+    if (i === 0) {
+      fig.classList.add('active');
+      img.setAttribute('loading', 'eager');
+    } else {
+      img.setAttribute('loading', 'lazy');
+    }
+    fig.setAttribute('data-figure', `figure-${i}`);
+    fig.append(picture);
+    figures.append(fig);
+
+    const thumb = document.createElement('a');
+    thumb.setAttribute('href', '#');
+    thumb.setAttribute('data-figure', `figure-${i}`);
+    thumb.classList.add('product-thumbnail');
+    if (i === 0) {
+      thumb.classList.add('active');
+    }
+    thumb.append(createOptimizedPicture(img.getAttribute('src'), img.getAttribute('alt'), false, [{ width: 200 }]));
+    thumbnails.append(thumb);
+    i += 1;
+  });
+
+  return wrapper.outerHTML;
 };
 
 const detailsHtml = (placeholders, productInfo) => {
@@ -100,38 +129,46 @@ const detailsHtml = (placeholders, productInfo) => {
   return details.outerHTML;
 };
 
-const modalHtml = (placeholders, images) => {
-  let html = '';
-  for (let i = 0; i < images.length; i += 1) {
-    const dom = createOptimizedPicture(images[i], placeholders.productImageAltLabel, false, breakpoints);
-    if (i === 0) {
-      dom.classList.add('active');
-    }
-    dom.setAttribute('data-figure', `figure-${i}`);
-    html += dom.outerHTML;
-  }
+const modalHtml = async (placeholders) => {
+  const images = await fetchImages();
 
-  return `
-    <div class="modal-wrapper">
-      <div class="modal-carousel">
-        <a href="#" class="previous">${placeholders.previous}</a>
-          ${html}
-        <a href="#" class="next">${placeholders.next}</a>
-      </div>
-    </div>
-  `;
+  const wrapper = document.createElement('div');
+  wrapper.classList.add('modal-wrapper');
+
+  const carousel = document.createElement('div');
+  carousel.classList.add('modal-carousel');
+  wrapper.append(carousel);
+
+  let a = document.createElement('a');
+  a.setAttribute('href', '#');
+  a.classList.add('previous');
+  a.textContent = placeholders.previous;
+  carousel.append(a);
+
+  let i = 0;
+  Object.values(images).forEach((picture) => {
+    if (i === 0) {
+      picture.classList.add('active');
+    }
+    picture.setAttribute('data-figure', `figure-${i}`);
+    carousel.append(picture);
+    i += 1;
+  });
+
+  a = document.createElement('a');
+  a.setAttribute('href', '#');
+  a.classList.add('next');
+  a.textContent = placeholders.next;
+  carousel.append(a);
+
+  return wrapper.outerHTML;
 };
 
-const html = (placeholders, productInfo) => {
-  const tmp = document.createElement('div');
-  tmp.innerHTML = productInfo.Images;
-  const images = [];
-  tmp.querySelectorAll('a').forEach((a) => images.push(a.getAttribute('href')));
-
+const html = async (placeholders, productInfo) => {
   return `
-    ${imagesHtml(placeholders, images)}
+    ${await imagesHtml()}
     ${detailsHtml(placeholders, productInfo)}
-    ${modalHtml(placeholders, images)}
+    ${await modalHtml(placeholders)}
   `;
 };
 
@@ -158,7 +195,7 @@ export default async function decorate(block) {
   // Make a call to the  product datasheet  and get the json for all fields for the product
   const productInfo = await lookupProductData(productFamilyData, productName);
 
-  block.innerHTML = html(placeholders, productInfo);
+  block.innerHTML = await html(placeholders, productInfo);
 
   const zooms = block.querySelectorAll('.zoom');
 

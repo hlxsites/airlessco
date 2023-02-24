@@ -124,10 +124,6 @@ main .product-details-container.section {
   list-style-type: disc;
 }
 
-.product-details .details-wrapper .details-item.resources a {
-  display: block;
-}
-
 .product-details .details-wrapper .details-item.resources a > i {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome, sans-serif;
