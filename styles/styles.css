@@ -102,7 +102,6 @@ h1 {
 h1 b, h1 strong {
   text-transform: uppercase;
   padding-right: 5px;
-  word-wrap: break-word;
 }
 
 h1 a {
