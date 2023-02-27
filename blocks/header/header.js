@@ -117,6 +117,10 @@ export default async function decorate(block) {
 
   // fetch nav content
   const navPath = getMetadata('locale') || '/na/en';
+  const logo = document.createElement('div');
+  logo.setAttribute('id', 'header-logo');
+  logo.innerHTML = `<div class="logo1"><a href="${navPath}"><img src="/images/airlessco-a-header-logo.jpg" alt="Airlessco logo"/></a></div>`;
+
   const resp = await fetch(`${navPath}/nav.plain.html`);
   if (resp.ok) {
     const html = await resp.text();
@@ -130,6 +134,7 @@ export default async function decorate(block) {
     navbar.setAttribute('id', 'navbar');
     navbar.classList.add('navbar');
     nav.append(navbar);
+    navbar.append(logo);
 
     const locale = getMetadata('locale') || '/na/en';
     navbar.append(await buildMobileButton(locale));
