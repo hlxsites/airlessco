@@ -42,11 +42,8 @@ const buildSpecTable = (placeholders, productName, specData) => {
   `;
 };
 
-const buildComparisonTable = (placeholders, title, productInfo, specData, compareTo) => {
+const buildComparisonTable = (image, placeholders, title, productInfo, specData, compareTo) => {
   const compareSpecs = new Map();
-  const tmp = document.createElement('div');
-  tmp.innerHTML = productInfo.Images;
-  let image = tmp.querySelector('a').getAttribute('href');
 
   // Build the header row.
   let productImages = `
@@ -63,9 +60,7 @@ const buildComparisonTable = (placeholders, title, productInfo, specData, compar
 
   compareTo.forEach((product) => {
     compareSpecs.set(product.Name, buildSpecData(product.Specification));
-    tmp.innerHTML = product.Images;
-    image = tmp.querySelector('a').getAttribute('href');
-    productImages += `<td>${createOptimizedPicture(image, productInfo.Name, false, [{ width: 400 }]).outerHTML}</td>`;
+    productImages += `<td>${createOptimizedPicture(image.replace(/(.*)\/\w+.jpeg/, `$1/${product.id}.jpeg`), product.Name, false, [{ width: 400 }]).outerHTML}</td>`;
     productNames += `<td><strong>${product.Name}</strong></td>`;
   });
   productImages += '</tr>';
@@ -140,6 +135,6 @@ export default async function decorate(block) {
 
   block.innerHTML = `
     ${buildSpecTable(placeholders, productName, specData)}
-    ${buildComparisonTable(placeholders, comparisonTitle, productInfo, specData, comparisonData)}
+    ${buildComparisonTable(getMetadata('og:image'), placeholders, comparisonTitle, productInfo, specData, comparisonData)}
   `;
 }

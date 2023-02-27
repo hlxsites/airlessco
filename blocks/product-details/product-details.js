@@ -6,10 +6,9 @@ let pictures;
 /**
  * @returns {Promise<NodeList>}
  */
-const fetchImages = async () => {
+const fetchImages = async (url) => {
   if (!pictures) {
-    const name = document.location.pathname.replace(/^.*\/([^/]*)$/, '$1');
-    const resp = await fetch(`/images/products/${name}.plain.html`);
+    const resp = await fetch(`${url}.plain.html`);
     if (resp.ok) {
       const tmp = document.createElement('div');
       tmp.innerHTML = await resp.text();
@@ -19,8 +18,8 @@ const fetchImages = async () => {
   return pictures;
 };
 
-const imagesHtml = async () => {
-  const images = await fetchImages();
+const imagesHtml = async (imageUrl) => {
+  const images = await fetchImages(imageUrl);
   const wrapper = document.createElement('div');
   wrapper.classList.add('images-wrapper');
 
@@ -30,7 +29,6 @@ const imagesHtml = async () => {
 
   const thumbnails = document.createElement('div');
   thumbnails.classList.add('thumbnails');
-  wrapper.append(thumbnails);
 
   let i = 0;
   Object.values(images).forEach((picture) => {
@@ -59,6 +57,10 @@ const imagesHtml = async () => {
     thumbnails.append(thumb);
     i += 1;
   });
+
+  if (images.length > 1) {
+    wrapper.append(thumbnails);
+  }
 
   return wrapper.outerHTML;
 };
@@ -123,8 +125,8 @@ const detailsHtml = (placeholders, productInfo) => {
   return details.outerHTML;
 };
 
-const modalHtml = async (placeholders) => {
-  const images = await fetchImages();
+const modalHtml = async (placeholders, imageUrl) => {
+  const images = await fetchImages(imageUrl);
 
   const wrapper = document.createElement('div');
   wrapper.classList.add('modal-wrapper');
@@ -158,10 +160,10 @@ const modalHtml = async (placeholders) => {
   return wrapper.outerHTML;
 };
 
-const html = async (placeholders, productInfo) => `
-    ${await imagesHtml()}
+const html = async (placeholders, productInfo, imageUrl) => `
+    ${await imagesHtml(imageUrl)}
     ${detailsHtml(placeholders, productInfo)}
-    ${await modalHtml(placeholders)}
+    ${await modalHtml(placeholders, imageUrl)}
   `;
 
 const fixModalNav = (modal) => {
@@ -183,11 +185,12 @@ export default async function decorate(block) {
   const placeholders = await fetchPlaceholders(prefix);
   const productFamilyData = new URL(block.querySelector('a').href);
   const productName = block.children[0].children[0].textContent.trim();
+  const imageUrl = block.children[1].children[1].querySelector('a').getAttribute('href');
 
   // Make a call to the  product datasheet  and get the json for all fields for the product
   const productInfo = await lookupProductData(productFamilyData, productName);
 
-  block.innerHTML = await html(placeholders, productInfo);
+  block.innerHTML = await html(placeholders, productInfo, imageUrl);
 
   const zooms = block.querySelectorAll('.zoom');
 
