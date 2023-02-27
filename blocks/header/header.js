@@ -119,9 +119,7 @@ export default async function decorate(block) {
   const navPath = getMetadata('locale') || '/na/en';
   const logo = document.createElement('div');
   logo.setAttribute('id', 'header-logo');
-  logo.innerHTML =
-    '<div class="logo1"><a href="' + navPath +  '/">' +
-    '<img src="/images/airlessco-a-header-logo.jpg"/></a></div>';
+  logo.innerHTML = '<div class="logo1"><a href="' + navPath + '/">' + '<img src="/images/airlessco-a-header-logo.jpg" alt="Airlessco logo"/></a></div>';
 
   const resp = await fetch(`${navPath}/nav.plain.html`);
   if (resp.ok) {
