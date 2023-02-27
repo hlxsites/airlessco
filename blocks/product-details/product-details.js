@@ -1,23 +1,24 @@
 import { createOptimizedPicture, fetchPlaceholders, getMetadata } from '../../scripts/lib-franklin.js';
 import { lookupProductData } from '../../scripts/scripts.js';
 
+let pictures;
+
 /**
  * @returns {Promise<NodeList>}
  */
 const fetchImages = async () => {
-  const name = document.location.pathname.replace(/^.*\/([^/]*)$/, '$1');
-  const resp = await fetch(`/images/products/${name}.plain.html`);
-  if (resp.ok) {
-    const tmp = document.createElement('div');
-    tmp.innerHTML = await resp.text();
-    return tmp.querySelectorAll('picture');
+  if (!pictures) {
+    const name = document.location.pathname.replace(/^.*\/([^/]*)$/, '$1');
+    const resp = await fetch(`/images/products/${name}.plain.html`);
+    if (resp.ok) {
+      const tmp = document.createElement('div');
+      tmp.innerHTML = await resp.text();
+      pictures = tmp.querySelectorAll('picture');
+    }
   }
-  return undefined;
+  return pictures;
 };
 
-/**
- * @param {NodeList} images
- */
 const imagesHtml = async () => {
   const images = await fetchImages();
   const wrapper = document.createElement('div');
