@@ -1,13 +1,6 @@
 import { createOptimizedPicture, fetchPlaceholders, getMetadata } from '../../scripts/lib-franklin.js';
 import { lookupProductData } from '../../scripts/scripts.js';
 
-const breakpoints = [
-  { media: '(min-width: 1600px)', width: '2000' },
-  { media: '(min-width: 1280px)', width: '1280' },
-  { media: '(min-width: 1024px)', width: '1024' },
-  { width: '768' },
-];
-
 /**
  * @returns {Promise<NodeList>}
  */
@@ -164,13 +157,11 @@ const modalHtml = async (placeholders) => {
   return wrapper.outerHTML;
 };
 
-const html = async (placeholders, productInfo) => {
-  return `
+const html = async (placeholders, productInfo) => `
     ${await imagesHtml()}
     ${detailsHtml(placeholders, productInfo)}
     ${await modalHtml(placeholders)}
   `;
-};
 
 const fixModalNav = (modal) => {
   const image = modal.querySelector('picture.active');
