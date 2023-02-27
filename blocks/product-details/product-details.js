@@ -170,13 +170,13 @@ const fixModalNav = (modal) => {
   const image = modal.querySelector('picture.active');
   if (image.previousElementSibling.tagName.toLowerCase() === 'a') {
     modal.querySelector('.previous').classList.add('disabled');
-  } else if (image.nextElementSibling.tagName.toLowerCase() === 'a') {
+  } else if (modal.querySelector('.previous.disabled')) {
+    modal.querySelector('.previous.disabled').classList.remove('disabled');
+  }
+  if (image.nextElementSibling.tagName.toLowerCase() === 'a') {
     modal.querySelector('.next').classList.add('disabled');
-  } else {
-    const disabled = modal.querySelector('.disabled');
-    if (disabled) {
-      disabled.classList.remove('disabled');
-    }
+  } else if (modal.querySelector('.next.disabled')) {
+    modal.querySelector('.next.disabled').classList.remove('disabled');
   }
 };
 
