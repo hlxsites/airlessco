@@ -66,6 +66,7 @@ main .section.productcards-container .productcards-wrapper,
 main .section.product-details-container .product-details-wrapper{
   margin-top: 20px;
 }
+
 main .section.resources-container .resources-wrapper .resources {
   margin: auto;
   width: 83%;
