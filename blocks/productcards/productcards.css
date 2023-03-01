@@ -5,10 +5,6 @@
   grid-gap: 15px;
 }
 
-h1#accessories-title strong {
-  color: var(--airless-blue);
-}
-
 .card-heading.productcards-container {
   padding-bottom: 50px;
   margin: 0 auto;
