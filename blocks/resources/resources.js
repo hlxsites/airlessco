@@ -9,6 +9,7 @@ async function lookupFiles(fileSource, category) {
 
 export default async function decorate(block) {
   const locale = getMetadata('locale');
+  const lang = locale.replace(/^\/\w+\/(\w+)$/, '$1');
   const placeholders = await fetchPlaceholders(locale);
 
   const fileSource = new URL(block.querySelector('a').href);
@@ -42,7 +43,8 @@ export default async function decorate(block) {
     const resources = await lookupFiles(fileSource, category);
     titles.push('titleLabel', 'manualNumberLabel', 'sizeLabel');
 
-    const downloadURL = 'https://www.graco.com/bin.findManual?source=airlessco&manual=';
+    const downloadURL = 'https://www.graco.com/bin/findManual?source=airlessco&manual=';
+    const langParam = '&lang=';
     resources.forEach((obj) => {
       const resource = createTag('tr', { class: 'resource' });
       const manualNumber = obj.Manual_Number;
@@ -50,7 +52,7 @@ export default async function decorate(block) {
         if (key === ('Title') || key === ('Manual_Number')) {
           const resourceData = createTag('td', { class: 'resource-data' });
           const resourceLink = createTag('a', { class: 'resource-link' });
-          resourceLink.setAttribute('href', `${downloadURL}${manualNumber}`);
+          resourceLink.setAttribute('href', `${downloadURL}${manualNumber}${langParam}${lang}`);
           resourceLink.setAttribute('target', 'new');
           resourceLink.innerText = `${value}`;
           resourceData.append(resourceLink);
