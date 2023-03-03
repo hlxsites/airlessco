@@ -264,8 +264,8 @@ main .section.support-links > div > p {
   color: var(--airless-link-dark);
 }
 
-main a.resource-link[href*=".findManual"]::before,
-.resources > .data a[href*=".findManual"]::before {
+main a.resource-link[href*="findManual"]::before,
+.resources > .data a[href*="findManual"]::before {
   content: "\f1c1  ";
   font-family: fontawesome, sans-serif;
 }
