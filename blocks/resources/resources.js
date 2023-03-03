@@ -9,7 +9,7 @@ async function lookupFiles(fileSource, category) {
 
 export default async function decorate(block) {
   const locale = getMetadata('locale');
-  const lang = locale.replace(/\w+\/(\w+)/, '$1');
+  const lang = locale.replace(/^\/\w+\/(\w+)$/, '$1');
   const placeholders = await fetchPlaceholders(locale);
 
   const fileSource = new URL(block.querySelector('a').href);
