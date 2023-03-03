@@ -4,7 +4,7 @@ import { createTag } from '../../scripts/scripts.js';
 async function lookupFiles(fileSource, category) {
   const resp = await fetch(fileSource);
   const json = await resp.json();
-  return json.data.filter((e) => e.Category.toLowerCase() === category.toLowerCase());
+  return json.data.filter((e) => e. Category.toLowerCase() === category.toLowerCase());
 }
 
 export default async function decorate(block) {
