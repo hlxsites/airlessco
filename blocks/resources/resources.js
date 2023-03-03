@@ -43,7 +43,7 @@ export default async function decorate(block) {
     const resources = await lookupFiles(fileSource, category);
     titles.push('titleLabel', 'manualNumberLabel', 'sizeLabel');
 
-    const downloadURL = 'https://www.graco.com/bin.findManual?source=airlessco&manual=';
+    const downloadURL = 'https://www.graco.com/bin/findManual?source=airlessco&manual=';
     const langParam = '&lang=';
     resources.forEach((obj) => {
       const resource = createTag('tr', { class: 'resource' });
