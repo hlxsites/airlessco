@@ -46,7 +46,7 @@ main .section.resources-container {
   content: "";
 }
 
-.resources.block table.resources .resource-data:not(:first-child) .resource-link[href*=".findManual"]::before {
+.resources.block table.resources .resource-data:not(:first-child) .resource-link[href*="findManual"]::before {
   content: "";
 }
 
