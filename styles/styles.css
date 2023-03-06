@@ -37,7 +37,7 @@
   --airless-header-gray: #777;
 
   /* fonts */
-  --body-font-family: eurostile, 'Titillium Web', sans-serif;
+  --body-font-family: eurostile, 'Titillium Web', eurostile-fallback, sans-serif;
   --heading-font-family: var(--body-font-family);
 
   /* body sizes */
@@ -57,6 +57,12 @@
 
   /* Fixed height of nav to maintain CLS */
   --nav-height: 74px;
+}
+
+@font-face {
+  font-family: eurostile-fallback;
+  size-adjust: 95.00%;
+  src: local("Arial");
 }
 
 b, strong {
@@ -405,3 +411,22 @@ main.error h1 {
     padding: 0;
   }
 }
+
+@font-face {
+  font-family: eurostile;
+  src: url("./eurostile.woff2") format("woff2");
+  font-display: block;
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: eurostile;
+  src: url("./eurostile-bold.woff2") format("woff2");
+  font-display: block;
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: normal;
+}
+
