@@ -37,7 +37,7 @@
   --airless-header-gray: #777;
 
   /* fonts */
-  --body-font-family: eurostile, 'Titillium Web', sans-serif;
+  --body-font-family: eurostile, 'Titillium Web', eurostile-fallback, sans-serif;
   --heading-font-family: var(--body-font-family);
 
   /* body sizes */
@@ -57,6 +57,12 @@
 
   /* Fixed height of nav to maintain CLS */
   --nav-height: 74px;
+}
+
+@font-face {
+  font-family: eurostile-fallback;
+  size-adjust: 110.00%;
+  src: local("Arial");
 }
 
 b, strong {
