@@ -1,3 +1,5 @@
+import { getMetadata } from '../../scripts/lib-franklin.js';
+
 const validityKeyMsgMap = {
   typeMismatch: 'ErrorMessageInvalid',
   badInput: 'ErrorMessageRequired',
@@ -174,13 +176,12 @@ function createErrorWrapper() {
 }
 
 async function createForm(formURL) {
-  const { pathname } = new URL(formURL);
-  const resp = await fetch(pathname);
+  const resp = await fetch(formURL);
   const json = await resp.json();
   const form = document.createElement('form');
   form.setAttribute('novalidate', 'true');
   // eslint-disable-next-line prefer-destructuring
-  form.dataset.action = pathname.split('.json')[0];
+  form.dataset.action = formURL.split('.json')[0];
   json.data.forEach((fd) => {
     fd.Type = fd.Type || 'text';
     const fieldWrapper = createFieldWrapper(fd);
@@ -232,6 +233,12 @@ async function createForm(formURL) {
 export default async function decorate(block) {
   const form = block.querySelector("a[href$='.json']");
   if (form) {
-    form.replaceWith(await createForm(form.href));
+    let formURL = form.href;
+    if (formURL?.endsWith('contact-us.json')) {
+      let locale = getMetadata('locale') || '/na/en';
+      locale = locale?.slice(1)?.replace('/', '_');
+      formURL += `?sheet=${locale}`;
+    }
+    form.replaceWith(await createForm(formURL));
   }
 }
