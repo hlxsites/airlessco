@@ -17,6 +17,13 @@ main .form form .field-wrapper {
     margin-top: 20px;
 }
 
+main .form form .field-wrapper[aria-invalid=true] {
+    background: #eb3c360d;
+    border: 0 solid var(--error-color);
+    border-left-width: 4px;
+    padding: 5px;
+ }
+
 main .form h2 {
     padding: var(--spacing-m) 0;
     font-size: var(--type-heading-l-lh);
@@ -36,9 +43,6 @@ main .form h3 {
     color: var(--form-invalid-border-color);
 }
 
-.invalid {
-    border: 2px solid var(--form-invalid-border-color);
-}
 
 main .form input,
 main .form textarea,
@@ -83,7 +87,6 @@ main .form label.required::after {
 }
 
 main .form .form-checkbox-wrapper {
-    display: flex;
     margin: var(--spacing-s) 0;
 }
 
@@ -93,7 +96,7 @@ main .form .form-checkbox-wrapper input[type='checkbox'] {
 
 main .form .form-checkbox-wrapper input[type='checkbox'] + label::before {
     float: left;
-    margin-top: 2px;
+    margin-top: -5px;
     margin-right: 5px;
     height: 30px;
     width: 30px;
@@ -130,6 +133,14 @@ main .form .button {
     font-weight: bold;
     position: relative;
     border: 1px transparent
+}
+
+main form .field-wrapper > p {
+    line-height: 1.4;
+    font-size: .875rem;
+    padding-top: 5px;
+    display: inline-block;
+    color: #666;
 }
 
 @media (min-width: 576px) {
@@ -189,10 +200,6 @@ main .form .button {
     line-height: 1.1;
     color: var(--airless-blue);
     font-size: var(--heading-font-size-l);
-  }
-
-  .form-question {
-    grid-row: 7/10;
   }
 
   main .form form .form-radio-wrapper{
