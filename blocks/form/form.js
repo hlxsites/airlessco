@@ -166,6 +166,12 @@ function createFieldWrapper(fd) {
   fieldWrapper.className = fieldId;
   fieldWrapper.classList.add('field-wrapper');
   fieldWrapper.append(createLabel(fd));
+
+  if (fd.Description) {
+    const descEl = document.createElement('p');
+    descEl.textContent = fd.Description;
+    fieldWrapper.append(descEl);
+  }
   return fieldWrapper;
 }
 
