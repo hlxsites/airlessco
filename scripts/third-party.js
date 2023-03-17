@@ -11,4 +11,6 @@ const fireGTM = (w, d, s, l, i) => {
   f.parentNode.insertBefore(j, f);
 };
 
-fireGTM(window, document, 'script', 'dataLayer', 'GTM-WZ7D96C');
+export default function integrateMartech() {
+  fireGTM(window, document, 'script', 'dataLayer', 'GTM-WZ7D96C');
+}
