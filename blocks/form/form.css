@@ -194,7 +194,7 @@ main form .field-wrapper > p {
     }
   }
 
-  /* eslint-disable-next-line, selector-id-pattern */
+/* stylelint-disable-next-line selector-id-pattern */
   #how-can-we-help, #give-us--a-call {
     font-weight: 700;
     line-height: 1.1;
