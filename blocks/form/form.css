@@ -1,5 +1,6 @@
 :root {
     --form-invalid-border-color: #ff5f3f;
+    --spacing-m: 0px;
 }
 
 main .form {
@@ -26,13 +27,13 @@ main .form form .field-wrapper[aria-invalid=true] {
 
 main .form h2 {
     padding: var(--spacing-m) 0;
-    font-size: var(--type-heading-l-lh);
+    font-size: var(--body-font-size-l);
     font-weight: normal;
 }
 
 main .form h3 {
     padding-top: var(--spacing-m);
-    font-size: var(--type-heading-m-size);
+    font-size: var(--body-font-size-m);
     font-weight: bold;
     text-transform: uppercase;
 }
@@ -72,8 +73,7 @@ main .form select:hover {
 
 main .form label {
     width: 100%;
-    font-size: var(--type-body-s-size);
-    line-height: var(--type-body-s-lh);
+    font-size: var(--body-font-size-s);
     padding-bottom: var(--spacing-xs);
     box-sizing: border-box;
     font-weight: 800;
@@ -112,8 +112,7 @@ main .form .form-checkbox-wrapper input[type='checkbox']:checked +label::before 
 }
 
 main .form .form-checkbox-wrapper label {
-    font-size: var(--type-body-m-size);
-    line-height: var(--type-body-m-lh);
+    font-size: var(--body-font-size-m);
     font-weight: normal;
     text-transform: none;
     display: block;
