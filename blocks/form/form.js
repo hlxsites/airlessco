@@ -1,4 +1,4 @@
-import { getMetadata } from '../../scripts/lib-franklin.js';
+import { getMetadata, sampleRUM } from '../../scripts/lib-franklin.js';
 
 const validityKeyMsgMap = {
   typeMismatch: 'ErrorMessageInvalid',
@@ -109,6 +109,7 @@ async function submitForm(form, payload, redirectTo) {
     body: JSON.stringify({ data: payload }),
   });
   await resp.text();
+  sampleRUM('form:submit');
   window.location.href = redirectTo;
 }
 
