@@ -1,6 +1,6 @@
 :root {
     --form-invalid-border-color: #ff5f3f;
-    --spacing-m: 0px;
+    --spacing-m: 0;
 }
 
 main .form {
