@@ -1,0 +1,212 @@
+:root {
+    --form-invalid-border-color: #ff5f3f;
+    --spacing-m: 0;
+}
+
+main .form {
+    background-color: white;
+    padding: var(--spacing-m);
+}
+
+main .form form {
+    display: grid;
+    grid-template-columns: 1fr;
+    column-gap: 130px;
+}
+
+main .form form .field-wrapper {
+    margin-top: 20px;
+}
+
+main .form form .field-wrapper[aria-invalid=true] {
+    background: #eb3c360d;
+    border: 0 solid var(--error-color);
+    border-left-width: 4px;
+    padding: 5px;
+ }
+
+main .form h2 {
+    padding: var(--spacing-m) 0;
+    font-size: var(--body-font-size-l);
+    font-weight: normal;
+}
+
+main .form h3 {
+    padding-top: var(--spacing-m);
+    font-size: var(--body-font-size-m);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.error {
+    display: inline-block;
+    padding: 5px 0;
+    color: var(--form-invalid-border-color);
+}
+
+
+main .form input,
+main .form textarea,
+main .form select {
+    width: calc(100% - 16px);
+    height: 40px;
+    color: #666;
+    margin-top: 10px;
+    padding-left: 10px;
+    font-size: 1rem;
+}
+
+main .form input[type='checkbox'],
+main .form input[type='radio'] {
+    width: auto;
+    height: auto;
+}
+
+main .form textarea {
+    min-height: 100px;
+}
+
+main .form input:hover,
+main .form select:hover {
+    border-color: rgb(90 92 96);
+}
+
+main .form label {
+    width: 100%;
+    font-size: var(--body-font-size-s);
+    padding-bottom: var(--spacing-xs);
+    box-sizing: border-box;
+    font-weight: 800;
+    color: #666;
+}
+
+main .form label.required::after {
+    content: "*";
+    color: black;
+    padding-left: 5px;
+}
+
+main .form .form-checkbox-wrapper {
+    margin: var(--spacing-s) 0;
+}
+
+main .form .form-checkbox-wrapper input[type='checkbox'] {
+    display: none;
+}
+
+main .form .form-checkbox-wrapper input[type='checkbox'] + label::before {
+    float: left;
+    margin-top: -5px;
+    margin-right: 5px;
+    height: 30px;
+    width: 30px;
+    content: ' ';
+    background: url('./checkbox.svg');
+    background-size: contain;
+}
+
+main .form .form-checkbox-wrapper input[type='checkbox']:checked +label::before {
+    background: url('./checkbox-checked.svg');
+    background-size: contain;
+    content: ' ';
+}
+
+main .form .form-checkbox-wrapper label {
+    font-size: var(--body-font-size-m);
+    font-weight: normal;
+    text-transform: none;
+    display: block;
+}
+
+h1 {
+    font-weight: 700;
+}
+
+main .form .button {
+    color: #fff;
+    cursor: pointer;
+    background: var(--airless-blue);
+    margin-top: 20px;
+    padding: 0 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    position: relative;
+    border: 1px transparent
+}
+
+main form .field-wrapper > p {
+    line-height: 1.4;
+    font-size: .875rem;
+    padding-top: 5px;
+    display: inline-block;
+    color: #666;
+}
+
+@media (min-width: 576px) {
+    .form-container {
+        max-width: 540px;
+    }
+}
+  
+  @media (min-width: 768px) {
+    .form-container {
+        max-width: 720px;
+        margin: 0 auto 10px;
+    }
+  
+     form {
+        width: unset;
+        column-gap: 30px;
+        flex-flow: wrap row;
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .form-container {
+        max-width: 960px;
+        row-gap: 58px;
+    }
+  
+    form {
+       column-gap: 130px;
+   }
+    
+    main .form form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+  
+     h5 {
+        font-size: 20px;
+        line-height: 28px;
+    }
+  }
+  
+  @media (min-width: 1200px) {
+    .form-container {
+        max-width: 1140px;
+    }
+    
+    main .form form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+  }
+
+/* stylelint-disable-next-line selector-id-pattern */
+  #how-can-we-help, #give-us--a-call {
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--airless-blue);
+    font-size: var(--heading-font-size-l);
+  }
+
+  main .form form .form-radio-wrapper{
+    margin: 0;
+  }
+
+.form-submit-wrapper button{
+    padding: 0 20px;
+    line-height: 4em;
+    text-transform: uppercase;
+}
