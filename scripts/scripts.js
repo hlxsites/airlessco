@@ -15,10 +15,23 @@ import {
   getMetadata,
 } from './lib-franklin.js';
 
-import integrateMartech from './third-party.js';
+import {
+  integrateMartech,
+  GEO_REDIRECT_SCRIPT,
+} from './third-party.js';
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
 window.hlx.RUM_GENERATION = 'airlessco'; // add your RUM generation information here
+
+function checkAndRedirect() {
+  if (window.location.pathname !== '/') {
+    return;
+  }
+  const script = document.createElement('script');
+  script.type = 'application/javascript';
+  script.innerHTML = GEO_REDIRECT_SCRIPT;
+  document.head.appendChild(script);
+}
 
 function buildPageTitle(main) {
   const h1 = main.querySelector('h1');
@@ -117,7 +130,6 @@ async function loadEager(doc) {
  * @param {Object} attributes attributes to be added
  * @param {HTMLElement|SVGElement|string} html HTML or SVG to append to/after new element
  */
-
 export function createTag(tag, attributes, html = undefined) {
   const el = document.createElement(tag);
   if (html) {
@@ -239,6 +251,7 @@ export async function load404() {
 }
 
 async function loadPage() {
+  checkAndRedirect();
   await loadEager(document);
   await loadLazy(document);
   loadDelayed();
