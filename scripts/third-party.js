@@ -9,7 +9,7 @@ export const GEO_REDIRECT_SCRIPT = `
 (function(g,e,o,t,a,r,ge,tl,y,s){
   g.getElementsByTagName(o)[0].insertAdjacentHTML('afterbegin','<style id="georedirect1647981865762style">body{opacity:0.0 !important;}</style>');
   s=function(){g.getElementById('georedirect1647981865762style').innerHTML='body{opacity:1.0 !important;}';};
-  t=g.getElementsByTagName(o)[0];y=g.createElement(e);y.async=true;
+  t=g.getElementsByTagName(o)[0];y=g.createElement(e);y.async=true;y.crossOrigin="anonymous";
   y.src='https://geotargetly-api-1.com/gr?id=-MynMufoFUu8XwDj2n_P&refurl='+g.referrer+'&winurl='+encodeURIComponent(window.location);
   t.parentNode.insertBefore(y,t)
   y.onerror=function(){s()};
