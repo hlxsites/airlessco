@@ -1,4 +1,4 @@
-user-agent: *
-allow: /
+User-agent: *
+Allow: /
 
-sitemap: https://www.airlessco.com/sitemap.xml
+Aitemap: https://www.airlessco.com/sitemap.xml
